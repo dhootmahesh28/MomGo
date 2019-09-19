@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<Environments>
+
+    <Environment name="DEV">
+
+        <!-- OQS Url -->
+        <Parameter key="oqsUrl" value="https://xldcrewt03.swacorp.com:13003/oqs-record-keeping-ui/login.do?dept=01"/>
+        <!-- OQS Login User-->
+        <Parameter key="oqsLoginUser" value="63901"/>
+
+        <!-- TRiM Application Path -->
+        <Parameter key="trimAppPath" value="C:\Program Files (x86)\North Orca\TRiM\TRiM.exe"/>
+        <!-- TRiM Login User -->
+        <Parameter key="trimLoginUser" value="admin"/>
+        <!-- TRiM Login Password -->
+        <Parameter key="trimLoginPassword" value="5d758d6fd8ea5344ae07e5bd1a8ca8587f8196f174a2"/>
+
+    </Environment>
+
+</Environments>
