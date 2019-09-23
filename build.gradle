@@ -33,7 +33,7 @@ dependencies {
         exclude(module: 'selenium-java')
     }
     compile group: 'com.google.guava', name: 'guava', version:'17.0'
-    compile group: 'com.swacorp.qmo', name: 'qmo-alm-restconnector', version:'1.0.8'
+    compile group: 'com.swacorp.qmo', name: 'qmo-alm-restconnector', version:'1.0.10'
     compile group: 'com.swacorp.qmo', name: 'qmo-cyberark-connector', version:'1.0.9'
     compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
     compile group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
