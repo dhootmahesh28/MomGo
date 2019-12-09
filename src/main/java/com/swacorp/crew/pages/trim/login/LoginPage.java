@@ -19,6 +19,7 @@ public class LoginPage extends LeanFTBasePage {
     private final String LOGIN_BTN = "btnOK";
     private final String TRiM_TITLE = TRiMHomePage.TRiM_WINDOW;
 
+    protected void loadObjectRepo(){}
 
     public void loginTRiM() throws GeneralLeanFtException, IOException {
         new ProcessBuilder(EnvironmentConstants.TRiMAPPPATH).start();

@@ -1,2 +1,10 @@
 rootProject.name = 'qmo-crew-automation'
+///includeBuild 'C:\\Users\\x257093\\Desktop\\Work\\gitRepo\\AppModel\\appmodels'
+///includeBuild '../AppModel'
+/*
+include ':C:\\Users\\x257093\\Desktop\\Work\\gitRepo\\AppModel\\appmodels'
+project(':AppModel').projectDir = new File("C:\\Users\\x257093\\Desktop\\Work\\gitRepo\\AppModel\\appmodels")
+*/
+include ":AppModel"
+project(":AppModel").projectDir = file("../AppModel")
 

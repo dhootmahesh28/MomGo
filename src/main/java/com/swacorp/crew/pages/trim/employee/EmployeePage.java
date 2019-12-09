@@ -22,4 +22,8 @@ public class EmployeePage extends LeanFTBasePage {
         closeWindow(EMPLOYEE_WINDOW);
     }
 
+    @Override
+    protected void loadObjectRepo() {
+
+    }
 }
