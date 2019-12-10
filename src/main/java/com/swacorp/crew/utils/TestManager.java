@@ -139,13 +139,13 @@ public class TestManager extends DriverSource {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /* The belo code is inherited from the LeanFt BaseTest
+        //The belo code is inherited from the LeanFt BaseTest
         try {
             suiteSetup();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        */
+
         dataProperties = new Properties();
         String dataFileName = "data.properties";
         String dataPath = System.getProperty("user.dir") + "\\src\\test\\resources\\testData\\" + dataFileName;

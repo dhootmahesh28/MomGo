@@ -48,5 +48,11 @@
                 </object>
             </children>
         </object>
+        <object type="CheckBox" technology="WinForms">
+            <name>Use Active Directory</name>
+            <codeName>useActiveDirectoryCheckBox</codeName>
+            <description></description>
+            <identification/>
+        </object>
     </objects>
 </applicationModel>
