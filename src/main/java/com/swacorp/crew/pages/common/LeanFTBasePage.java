@@ -8,7 +8,7 @@ import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 
-public class LeanFTBasePage {
+public abstract class LeanFTBasePage {
 
     ReportUtil report = new ReportUtil();
     public final static Logger LOGGER = Logger.getLogger(LeanFTBasePage.class);
@@ -20,6 +20,8 @@ public class LeanFTBasePage {
         this.homeWindow = object;
         this.windowObject = object;
     }
+
+    protected abstract void loadObjectRepo();
     public void setWindow(Window object) {
         this.windowObject = object;
     }
