@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class LoginPage_am  extends TestManager {
 
-    ReportUtil report = new ReportUtil();
+    //ReportUtil report = new ReportUtil();
     private final Logger LOGGER = Logger.getLogger(LoginPage_am.class);
     private final String TRiM_TITLE = TRiMHomePage.TRiM_WINDOW;
 
