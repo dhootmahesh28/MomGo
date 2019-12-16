@@ -12,7 +12,9 @@ import static com.swacorp.crew.pages.common.CommonFormats.MONTH_DAY_YEAR;
 public class GenericMethods implements IGenericMethods {
 
     public final static Logger LOGGER = Logger.getLogger(GenericMethods.class);
-    public boolean verifyObjectExist(TestObject o){
+
+    @Override
+    public boolean VerifyObjectExist(TestObject o, boolean existance) {
         try {
             if (o.exists()) {
                 System.out.println("Object found: "+o.getDisplayName());
@@ -24,11 +26,6 @@ public class GenericMethods implements IGenericMethods {
             LOGGER.error("Object does not exist: "+o.getDisplayName());
 
         }
-        return false;
-    }
-
-    @Override
-    public boolean VerifyObjectExist(TestObject o, boolean existance) {
         return false;
     }
 

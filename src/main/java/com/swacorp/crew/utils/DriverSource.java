@@ -27,6 +27,7 @@ public class DriverSource extends TestNgUnitTestBase {
     private final int SET_SCRIPT_TIMEOUT_SS = 60;
     private final int SET_PAGE_TIMEOUT_SS = 600;
     public final static Logger LOGGER = Logger.getLogger(DriverSource.class);
+    private String UserDir;
 
     @BeforeMethod(alwaysRun = true)
     public void newDriver() {
@@ -34,10 +35,11 @@ public class DriverSource extends TestNgUnitTestBase {
         int retryCounter = 0;
         int maxRetryCount = 5;
         String browser = System.getProperty("browser");
+        UserDir = System.getProperty("user.dir");
         do {
             try {
                 if(browser.equalsIgnoreCase("chrome")){
-                    System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\chromedriver.exe");
+                    System.setProperty("webdriver.chrome.driver",  UserDir+ "\\src\\main\\resources\\drivers\\chromedriver.exe");
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--start-maximized");
                     options.addArguments("--start-fullscreen");
@@ -46,13 +48,13 @@ public class DriverSource extends TestNgUnitTestBase {
                     //options.addArguments("-incognito");
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
-                    capabilities.setCapability("chrome.binary", System.getProperty("user.dir") + "\\src\\drivers\\chromedriver.exe");
+                    capabilities.setCapability("chrome.binary", UserDir + "\\src\\drivers\\chromedriver.exe");
                     capabilities.setCapability("screen-resolution","1280x1024");
                     capabilities.setCapability(ChromeOptions.CAPABILITY, options);
                     driver = new ChromeDriver(capabilities);
                 }else {
                     //  if (System.getProperty("os.name").contains("Windows 7"))
-                    System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\IEDriverServer.exe");
+                    System.setProperty("webdriver.ie.driver", UserDir + "\\src\\main\\resources\\drivers\\IEDriverServer.exe");
                     //  else
                     //    System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\IEDriverServer64.exe");
                     InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
@@ -120,7 +122,7 @@ public class DriverSource extends TestNgUnitTestBase {
         TestDataReader TestDataReader = new TestDataReader();
         List<String[]> strings = null;
         try {
-            strings = TestDataReader.readFile(System.getProperty("user.dir")+"\\src\\test\\TestData\\"+dataFile);
+            strings = TestDataReader.readFile(UserDir+"\\src\\test\\TestData\\"+dataFile);
         } catch (IOException e) {
             e.printStackTrace();
         }

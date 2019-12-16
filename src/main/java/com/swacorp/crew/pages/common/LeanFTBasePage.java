@@ -21,7 +21,6 @@ public abstract class LeanFTBasePage {
         this.windowObject = object;
     }
 
-    protected abstract void loadObjectRepo();
     public void setWindow(Window object) {
         this.windowObject = object;
     }

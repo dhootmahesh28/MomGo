@@ -113,7 +113,7 @@ dependencies {
             property "sonar.analysis.mode", "publish"
             property 'sonar.exclusions', "$buildDir/**/*"
             property 'sonar.issuesReport.html.enable', 'true'
-        }
+            property 'sonar.exclusions', 'src/main/java/com/swacorp/crew/sharedrepository/**/*.java'        }
 
         gradle.startParameter.continueOnFailure = true
         def xrefDirectory = System.getProperty("user.dir") + "\\target\\jbehave\\view\\"

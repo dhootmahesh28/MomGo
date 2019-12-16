@@ -17,10 +17,6 @@ public class LoginPage_am  extends TestManager {
 
     ReportUtil report = new ReportUtil();
     private final Logger LOGGER = Logger.getLogger(LoginPage_am.class);
-    private final String LOGIN_TO_SOUTHWEST = "Login to Southwest";
-    private final String USERNAME_TXT = "txtUserID";
-    private final String PASSWORD_TXT = "txtPassword";
-    private final String LOGIN_BTN = "btnOK";
     private final String TRiM_TITLE = TRiMHomePage.TRiM_WINDOW;
 
     public static void main(String args[]) throws GeneralLeanFtException, IOException {
@@ -44,8 +40,8 @@ public class LoginPage_am  extends TestManager {
         com.swacorp.crew.genericwrappers.editor.Editor edt = new com.swacorp.crew.genericwrappers.editor.Editor();
         edt.setTextInEditBox(or.loginToSouthwestWindow().txtPasswordEditField(),"1478529");
         //appModel.loginDialog().userNameEditor()
-        edt.setTextInEditBox(or.loginDialog().userNameEditor(),"1478529");
-        edt.setTextInEditBox(or.loginDialog().userNameEditor(),"1478529");
+        edt.setTextInEditBox(or.loginDialog().userNameEditor(),"2345");
+        edt.setTextInEditBox(or.loginDialog().userNameEditor(),"13579");
 
         /*
         isObjectExist(loginWindow);

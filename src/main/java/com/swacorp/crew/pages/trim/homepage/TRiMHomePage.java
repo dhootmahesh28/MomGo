@@ -32,8 +32,4 @@ public class TRiMHomePage extends LeanFTBasePage {
         closeHomeWindow();
     }
 
-    @Override
-    protected void loadObjectRepo() {
-
-    }
 }
