@@ -12,7 +12,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -77,6 +80,8 @@ public class DriverSource extends TestNgUnitTestBase {
             }
         } while (true);
 
+        //Initialize testdata
+        //initializeTestData("testdata.csv");
     }
 
     public void quitDriver() {
@@ -108,5 +113,17 @@ public class DriverSource extends TestNgUnitTestBase {
     @Override
     protected String getTestName() {
         return "LEAN FT";
+    }
+
+    private  HashMap<String, HashMap<Integer, HashMap<String, String>>> initializeTestData(String dataFile) {
+
+        TestDataReader TestDataReader = new TestDataReader();
+        List<String[]> strings = null;
+        try {
+            strings = TestDataReader.readFile(System.getProperty("user.dir")+"\\src\\test\\TestData\\"+dataFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return TestDataReader.readTestDataMaster(strings);
     }
 }
