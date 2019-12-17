@@ -3,12 +3,13 @@ package com.swacorp.crew.pages.common;
 import com.hp.lft.sdk.Desktop;
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.TestObject;
+//import com.hp.lft.sdk.winforms.*;
 import com.hp.lft.sdk.winforms.*;
 import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 
-public class LeanFTBasePage {
+public abstract class LeanFTBasePage {
 
     ReportUtil report = new ReportUtil();
     public final static Logger LOGGER = Logger.getLogger(LeanFTBasePage.class);
@@ -20,6 +21,7 @@ public class LeanFTBasePage {
         this.homeWindow = object;
         this.windowObject = object;
     }
+
     public void setWindow(Window object) {
         this.windowObject = object;
     }
@@ -150,6 +152,7 @@ public class LeanFTBasePage {
     }
 
     public void isWindowExist(Window window, String title) throws GeneralLeanFtException {
+
         if(window.exists(TIMEOUT_SS)) {
             report.reportLeanFT(homeWindow, "pass", window.getWindowTitleRegExp() + " Window Displayed");
         }
@@ -159,6 +162,8 @@ public class LeanFTBasePage {
     }
 
     public void isObjectExist(TestObject object) throws GeneralLeanFtException {
+
+
         if(object.exists(TIMEOUT_SS)==false) {
             report.reportNonWeb("error",/*window.getObjectName() + */" Object does not exist");
         }

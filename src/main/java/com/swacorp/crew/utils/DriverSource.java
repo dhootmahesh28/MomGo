@@ -1,6 +1,8 @@
 package com.swacorp.crew.utils;
 
+import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.unittesting.TestNgUnitTestBase;
+import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -11,10 +13,16 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
-
+import com.swacorp.crew.genericwrappers.editor.Editor;
+import com.swacorp.crew.genericwrappers.editor.Button;
+import com.swacorp.crew.wrappers.GenericMethods;
 /**
  * Created by x219949 on 8/14/2018.
  */
@@ -24,17 +32,38 @@ public class DriverSource extends TestNgUnitTestBase {
     private final int SET_SCRIPT_TIMEOUT_SS = 60;
     private final int SET_PAGE_TIMEOUT_SS = 600;
     public final static Logger LOGGER = Logger.getLogger(DriverSource.class);
+    private String UserDir;
+    protected MainObjectRepoTrim or = null;
+    protected Editor edt = null;
+    protected Button btn = null;
+    protected GenericMethods genericMethods = null;
+    private boolean initialized = false;
 
+    {
+        if(!initialized){
+            edt = new Editor();
+            btn = new Button();
+            genericMethods = new GenericMethods();
+            try {
+                or = new MainObjectRepoTrim();
+            } catch (GeneralLeanFtException e) {
+                e.printStackTrace();
+            }
+            initialized = true;
+        }
+    }
+    
     @BeforeMethod(alwaysRun = true)
     public void newDriver() {
         WebDriver driver = null;
         int retryCounter = 0;
         int maxRetryCount = 5;
         String browser = System.getProperty("browser");
+        UserDir = System.getProperty("user.dir");
         do {
             try {
                 if(browser.equalsIgnoreCase("chrome")){
-                    System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\chromedriver.exe");
+                    System.setProperty("webdriver.chrome.driver",  UserDir+ "\\src\\main\\resources\\drivers\\chromedriver.exe");
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--start-maximized");
                     options.addArguments("--start-fullscreen");
@@ -43,14 +72,14 @@ public class DriverSource extends TestNgUnitTestBase {
                     //options.addArguments("-incognito");
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
-                    capabilities.setCapability("chrome.binary", System.getProperty("user.dir") + "\\src\\drivers\\chromedriver.exe");
+                    capabilities.setCapability("chrome.binary", UserDir + "\\src\\drivers\\chromedriver.exe");
                     capabilities.setCapability("screen-resolution","1280x1024");
                     capabilities.setCapability(ChromeOptions.CAPABILITY, options);
                     driver = new ChromeDriver(capabilities);
                 }else {
-                  //  if (System.getProperty("os.name").contains("Windows 7"))
-                        System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\IEDriverServer.exe");
-                  //  else
+                    //  if (System.getProperty("os.name").contains("Windows 7"))
+                    System.setProperty("webdriver.ie.driver", UserDir + "\\src\\main\\resources\\drivers\\IEDriverServer.exe");
+                    //  else
                     //    System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\IEDriverServer64.exe");
                     InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
                     internetExplorerOptions.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
@@ -77,13 +106,15 @@ public class DriverSource extends TestNgUnitTestBase {
             }
         } while (true);
 
+        //Initialize testdata
+        //initializeTestData("testdata.csv");
     }
 
     public void quitDriver() {
         WebDriver driver = getDriver();
         if (driver != null) {
-           driver.close();
-           driver.quit();
+            driver.close();
+            driver.quit();
         }
     }
 
@@ -108,5 +139,17 @@ public class DriverSource extends TestNgUnitTestBase {
     @Override
     protected String getTestName() {
         return "LEAN FT";
+    }
+
+    private  HashMap<String, HashMap<Integer, HashMap<String, String>>> initializeTestData(String dataFile) {
+
+        TestDataReader TestDataReader = new TestDataReader();
+        List<String[]> strings = null;
+        try {
+            strings = TestDataReader.readFile(UserDir+"\\src\\test\\TestData\\"+dataFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return TestDataReader.readTestDataMaster(strings);
     }
 }
