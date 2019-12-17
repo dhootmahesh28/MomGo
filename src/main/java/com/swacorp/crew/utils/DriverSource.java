@@ -1,6 +1,8 @@
 package com.swacorp.crew.utils;
 
+import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.unittesting.TestNgUnitTestBase;
+import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -11,13 +13,16 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
+import com.swacorp.crew.genericwrappers.editor.Editor;
+import com.swacorp.crew.genericwrappers.editor.Button;
+import com.swacorp.crew.wrappers.GenericMethods;
 /**
  * Created by x219949 on 8/14/2018.
  */
@@ -28,6 +33,34 @@ public class DriverSource extends TestNgUnitTestBase {
     private final int SET_PAGE_TIMEOUT_SS = 600;
     public final static Logger LOGGER = Logger.getLogger(DriverSource.class);
     private String UserDir;
+    protected MainObjectRepoTrim or = null;
+    protected Editor edt = null;
+    protected Button btn = null;
+    protected GenericMethods genericMethods = null;
+    private boolean initialized = false;
+
+    {
+        if(!initialized){
+            edt = new Editor();
+            btn = new Button();
+            genericMethods = new GenericMethods();
+            try {
+                or = new MainObjectRepoTrim();
+            } catch (GeneralLeanFtException e) {
+                e.printStackTrace();
+            }
+            initialized = true;
+        }
+    }
+
+    @BeforeSuite
+    protected void initializeComponents(){
+        try {
+            or = new MainObjectRepoTrim();
+        } catch (GeneralLeanFtException e) {
+            e.printStackTrace();
+        }
+    }
 
     @BeforeMethod(alwaysRun = true)
     public void newDriver() {

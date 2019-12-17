@@ -17,9 +17,13 @@ public class Create_CrewMember_InOQS_Verify_InTRiM_1111 extends TestManager {
 
     @Test(groups = {"1111", "regression"})
     public void create_CrewMember_InOQS_Verify_InTRiM_1111() throws IOException {
+        System.out.println("Test started...........");
         LoginPage_am loginPage_am = new LoginPage_am();
+        System.out.println("Page instanciated...........");
         try {
+            System.out.println("Calling loginTRiM...");
             loginPage_am.loginTRiM();
+            System.out.println("Calling loginTRiM  finished...");
         }catch(Exception e){
 
         }
