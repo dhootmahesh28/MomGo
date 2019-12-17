@@ -52,16 +52,7 @@ public class DriverSource extends TestNgUnitTestBase {
             initialized = true;
         }
     }
-
-    @BeforeSuite
-    protected void initializeComponents(){
-        try {
-            or = new MainObjectRepoTrim();
-        } catch (GeneralLeanFtException e) {
-            e.printStackTrace();
-        }
-    }
-
+    
     @BeforeMethod(alwaysRun = true)
     public void newDriver() {
         WebDriver driver = null;
