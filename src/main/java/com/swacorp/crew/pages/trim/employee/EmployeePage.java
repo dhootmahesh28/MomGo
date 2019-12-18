@@ -1,11 +1,11 @@
 package com.swacorp.crew.pages.trim.employee;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
-import com.swacorp.crew.pages.common.LeanFTBasePage;
+import com.swacorp.crew.pages.common.WinBasePage;
 import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
 
-public class EmployeePage extends LeanFTBasePage {
+public class EmployeePage extends WinBasePage {
     ReportUtil report = new ReportUtil();
     private final Logger LOGGER = Logger.getLogger(EmployeePage.class);
     public static final String EMPLOYEE_WINDOW = "Employee";

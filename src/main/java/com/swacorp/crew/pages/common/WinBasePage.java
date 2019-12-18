@@ -9,10 +9,10 @@ import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 
-public abstract class LeanFTBasePage {
+public abstract class WinBasePage {
 
     ReportUtil report = new ReportUtil();
-    public final static Logger LOGGER = Logger.getLogger(LeanFTBasePage.class);
+    public final static Logger LOGGER = Logger.getLogger(WinBasePage.class);
     private final int TIMEOUT_SS = 60;
     public static Window homeWindow;
     public static Window windowObject;
@@ -21,6 +21,8 @@ public abstract class LeanFTBasePage {
         this.homeWindow = object;
         this.windowObject = object;
     }
+
+
 
     public void setWindow(Window object) {
         this.windowObject = object;

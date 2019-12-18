@@ -1,7 +1,7 @@
 package com.swacorp.crew.pages.trim.login;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
-import com.swacorp.crew.pages.common.LeanFTBasePage;
+import com.swacorp.crew.pages.common.WinBasePage;
 import com.swacorp.crew.pages.trim.homepage.TRiMHomePage;
 import com.swacorp.crew.utils.EnvironmentConstants;
 import com.swacorp.crew.utils.ReportUtil;
@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
-public class LoginPage extends LeanFTBasePage {
+public class LoginPage extends WinBasePage {
 
     ReportUtil report = new ReportUtil();
     private final Logger LOGGER = Logger.getLogger(LoginPage.class);

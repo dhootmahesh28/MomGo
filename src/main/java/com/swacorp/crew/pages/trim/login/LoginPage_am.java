@@ -5,6 +5,7 @@ import com.hp.lft.sdk.TestObject;
 //import com.hp.lft.sdk.internal.winforms.WinFormsWindow;
 import com.hp.lft.sdk.winforms.EditField;
 import com.hp.lft.sdk.winforms.Window;
+import com.swacorp.crew.genericwrappers.editor.Editor1;
 import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
 import com.swacorp.crew.pages.trim.homepage.TRiMHomePage;
 import com.swacorp.crew.utils.ReportUtil;
@@ -14,12 +15,34 @@ import com.swacorp.crew.genericwrappers.editor.Editor;
 
 import java.io.IOException;
 
-public class LoginPage_am  extends TestManager {
+public class LoginPage_am  extends TestManager  {
 
+    public static MainObjectRepoTrim or = null;
     //ReportUtil report = new ReportUtil();
     private final Logger LOGGER = Logger.getLogger(LoginPage_am.class);
     private final String TRiM_TITLE = TRiMHomePage.TRiM_WINDOW;
 
+    public LoginPage_am()  {
+    }
+
+
+    public void loginTRiM() throws  GeneralLeanFtException{
+
+        try {
+            MainObjectRepoTrim tsr = new MainObjectRepoTrim();
+            System.out.println("Test..............");
+            //or = new MainObjectRepoTrim();
+            EditField x = tsr.loginToSouthwestWindow().txtPasswordEditField();
+            Editor1<com.hp.lft.sdk.winforms.EditField> edt = new Editor1<com.hp.lft.sdk.winforms.EditField>();
+            edt.set(x);
+            System.out.println(">>>>>>>>>>>>>>>>>>>>" + edt.get().getClass());
+            System.out.println(">>>>>>>>>>>>>>>>>>>>" + edt.get().getClass().toString());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /*
     public void loginTRiM() {
         try {
             genericMethods.VerifyObjectExist(or.loginToSouthwestWindow().txtUserIDEditField(), true);
@@ -32,36 +55,18 @@ public class LoginPage_am  extends TestManager {
             e.printStackTrace();
         }
     }
-/*
-    public static void print(String s){
-        System.out.println("Test message:>>"+s);
-    }
+    */
 
-
-    public static void isObjectExist(TestObject obj){
-        try {
-            if (obj.exists()) {
-                print("Object found: "+obj.getDisplayName());
-            }
-        }
-        catch (Exception e){
-            print("Object Not found: "+obj.getDisplayName());
-        }
-    }
-
-
-    public static void SetEditBox(EditField obj, String txt){
-        try {
-            if (obj.exists()) {
-                print("Object found: "+obj.getDisplayName());
-                obj.setText(txt);
-            }
-        }
-        catch (Exception e){
-            print("Object Not found: "+obj.getDisplayName());
-        }
-    }
-
-*/
+    /*public static void main(String args[]) throws  GeneralLeanFtException{
+        MainObjectRepoTrim tsr = new MainObjectRepoTrim();
+        System.out.println("Test..............");
+        //or = new MainObjectRepoTrim();
+        EditField x = tsr.loginToSouthwestWindow().txtPasswordEditField();
+        Editor1<com.hp.lft.sdk.winforms.EditField> edt = new Editor1<com.hp.lft.sdk.winforms.EditField>();
+        edt.set(x);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>"+edt.get().getObjectName());
+    }*/
 }
+
+
 

@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 import com.swacorp.crew.genericwrappers.editor.Editor;
 import com.swacorp.crew.genericwrappers.editor.Button;
 import com.swacorp.crew.wrappers.GenericMethods;
+import com.swacorp.crew.pages.common.Constant;
 /**
  * Created by x219949 on 8/14/2018.
  */
@@ -40,7 +41,8 @@ public class DriverSource extends TestNgUnitTestBase {
     private boolean initialized = false;
 
     {
-        if(!initialized){
+        if(!Constant.INSTIALIZED){
+            System.out.println("Initializing wrapper instances..");
             edt = new Editor();
             btn = new Button();
             genericMethods = new GenericMethods();
@@ -49,10 +51,10 @@ public class DriverSource extends TestNgUnitTestBase {
             } catch (GeneralLeanFtException e) {
                 e.printStackTrace();
             }
-            initialized = true;
+            Constant.INSTIALIZED = true;
         }
     }
-    
+
     @BeforeMethod(alwaysRun = true)
     public void newDriver() {
         WebDriver driver = null;
