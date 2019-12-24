@@ -76,6 +76,11 @@ dependencies {
     compile group: 'com.hp.lft', name: 'com.hp.lft.report', version: '14.3.0'
     compile group: 'com.hp.lft', name: 'com.hp.lft.unittesting', version: '14.3.0'
     compile group: 'com.hp.lft', name: 'com.hp.lft.verifications', version: '14.3.0'
+    //testImplementation 'org.hamcrest:hamcrest:2.2'
+// https://mvnrepository.com/artifact/org.hamcrest/hamcrest
+    //testCompile group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+
 
 
 

@@ -5,24 +5,38 @@ import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.TestObject;
 //import com.hp.lft.sdk.winforms.*;
 import com.hp.lft.sdk.winforms.*;
+import com.swacorp.crew.genericwrappers.editor.IEditor;
+import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
 import com.swacorp.crew.utils.ReportUtil;
+import com.swacorp.crew.wrappers.GenericMethods;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import com.swacorp.crew.genericwrappers.editor.IButton;
 
-public abstract class WinBasePage {
+public abstract class WinBasePage implements IEditor,GenericMethods, IButton{
 
     ReportUtil report = new ReportUtil();
     public final static Logger LOGGER = Logger.getLogger(WinBasePage.class);
     private final int TIMEOUT_SS = 60;
     public static Window homeWindow;
     public static Window windowObject;
+    public MainObjectRepoTrim or = null;
 
     public void setParent(Window object) {
         this.homeWindow = object;
         this.windowObject = object;
     }
 
-
+    {
+        if(or == null){
+            LOGGER.info("Initializing wrapper instances..");
+            try {
+                or = new MainObjectRepoTrim();
+            } catch (GeneralLeanFtException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public void setWindow(Window object) {
         this.windowObject = object;
@@ -72,9 +86,9 @@ public abstract class WinBasePage {
         }
     }
     public void buttonClick(String objectName) {
-        try {
+        /*try {
             LOGGER.info("Before buttonClick in buttonClick::" + objectName);
-            Button button = windowObject.describe(Button.class, new ButtonDescription.Builder()
+            IButton button = windowObject.describe(Button.class, new ButtonDescription.Builder()
                     .objectName(objectName).build());
             isObjectExist(button);
             report.reportLeanFT(homeWindow, "INFO", " Window state before button click");
@@ -84,7 +98,7 @@ public abstract class WinBasePage {
             LOGGER.info("Exception in buttonClick ::" + objectName);
             e.printStackTrace();
             Assert.fail("Exception occurred while clicking on btn "+objectName+" & exception is "+e.getMessage());
-        }
+        }*/
     }
 
     public void enterText(String objectName, String text) {
@@ -170,4 +184,20 @@ public abstract class WinBasePage {
             report.reportNonWeb("error",/*window.getObjectName() + */" Object does not exist");
         }
     }
+
+/*    public boolean Highlight(TestObject o) {
+        try {
+            o.highlight();
+            System.out.println("Object highlighted: "+o.getDisplayName());
+            LOGGER.info("Object highlighted, "+o.getDisplayName());
+
+            return true;
+
+        }
+        catch (Exception e){
+            LOGGER.error("Object does not exist: "+o.getDisplayName());
+
+        }
+        return false;
+    }*/
 }

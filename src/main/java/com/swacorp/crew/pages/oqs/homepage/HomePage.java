@@ -36,6 +36,8 @@ public class HomePage extends BasePage {
     private final By RATING_TEXT = By.id("addCrewMemberRatingType");
     private final By SAVE_TO_CREWMEMBER_LIST_BUTTON = By.id("addToCrewListButton");
     private final By IMPORT_BUTTON = By.id("importButton");
+    private final By SAVE_PARTIAL_LIST_BUTTON = By.id("savePartialListButton");
+    private final By CREW_LIST_TABLE_FIRST_ROW = By.xpath("//*[@tabindex = '0']");
     private final By IMPORT_SUCCESS_MSG = By.xpath("//*[contains(text(),'Class list sucessfully imported.')]");
     private final By OK_BUTTON = By.xpath("//*[contains(text(),'OK')]");
     private final By EMP_NUM_ID_TEXT = By.id("empNoId");
@@ -115,6 +117,9 @@ public class HomePage extends BasePage {
         buttonClick(SAVE_TO_CREWMEMBER_LIST_BUTTON);
         waitByTime(3000);
         //waitUntilElementClickable(By.xpath("//*[@class='yui-dt0-col-lastname yui-dt-col-lastname' and text()='Larry']"));
+        buttonClick(CREW_LIST_TABLE_FIRST_ROW);
+        buttonClick(SAVE_PARTIAL_LIST_BUTTON);
+        buttonClick(OK_BUTTON);
         report.reportSelenium("INFO", "Crew Member: "+ empNum +" added to the Crewmember Import List and proceeding to click on Import button");
         buttonClick(IMPORT_BUTTON);
         waitUntilElementClickable(IMPORT_SUCCESS_MSG);

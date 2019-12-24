@@ -7,8 +7,11 @@ import org.testng.annotations.DataProvider;
  */
 public class TestDataProvider {
 
-    @DataProvider(name = "number")
+    @DataProvider(name = "crew_14499_TC03_OQS_RK_TRiM_CA_Upgrade_FO_to_CA")
     public static Object[][] serialNumber() {
-        return new Object[][]{{"1"}, {"2"},{"3"}};
+
+        return new Object[][]{
+                {"FIRST OFFICER - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "05/01/2018", "BOEING 737 PIC" }
+        };
     }
 }

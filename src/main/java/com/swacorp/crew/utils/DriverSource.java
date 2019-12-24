@@ -13,47 +13,30 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import com.swacorp.crew.genericwrappers.editor.Editor;
-import com.swacorp.crew.genericwrappers.editor.Button;
+import com.swacorp.crew.genericwrappers.editor.IEditor;
+import com.swacorp.crew.genericwrappers.editor.IButton;
 import com.swacorp.crew.wrappers.GenericMethods;
 import com.swacorp.crew.pages.common.Constant;
 /**
  * Created by x219949 on 8/14/2018.
  */
-public class DriverSource extends TestNgUnitTestBase {
+public class DriverSource extends TestNgUnitTestBase implements  GenericMethods {
 
     private final int SET_IMPLICIT_TIMEOUT_MS = 500;
     private final int SET_SCRIPT_TIMEOUT_SS = 60;
     private final int SET_PAGE_TIMEOUT_SS = 600;
     public final static Logger LOGGER = Logger.getLogger(DriverSource.class);
     private String UserDir;
-    protected MainObjectRepoTrim or = null;
-    protected Editor edt = null;
-    protected Button btn = null;
-    protected GenericMethods genericMethods = null;
-    private boolean initialized = false;
 
-    {
-        if(!Constant.INSTIALIZED){
-            System.out.println("Initializing wrapper instances..");
-            edt = new Editor();
-            btn = new Button();
-            genericMethods = new GenericMethods();
-            try {
-                or = new MainObjectRepoTrim();
-            } catch (GeneralLeanFtException e) {
-                e.printStackTrace();
-            }
-            Constant.INSTIALIZED = true;
-        }
-    }
+    protected IEditor edt = null;
+    protected IButton btn = null;
+    //protected GenericMethods genericMethods = null;
 
     @BeforeMethod(alwaysRun = true)
     public void newDriver() {
@@ -107,9 +90,6 @@ public class DriverSource extends TestNgUnitTestBase {
                 }
             }
         } while (true);
-
-        //Initialize testdata
-        //initializeTestData("testdata.csv");
     }
 
     public void quitDriver() {
