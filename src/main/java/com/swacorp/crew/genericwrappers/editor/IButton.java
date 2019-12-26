@@ -1,6 +1,7 @@
 package com.swacorp.crew.genericwrappers.editor;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
+import com.hp.lft.sdk.MouseButton;
 import org.apache.log4j.Logger;
 
 public interface IButton<T extends com.hp.lft.sdk.winforms.Button> {
@@ -12,7 +13,7 @@ public interface IButton<T extends com.hp.lft.sdk.winforms.Button> {
 
     default void btnClick(T obj) throws GeneralLeanFtException {
         try {
-            obj.click();
+            obj.click(MouseButton.LEFT);
 
             logger.info(SuccessfullyClicked +obj.getObjectName()+ objectType +obj.getClass());
         }catch(Exception e){

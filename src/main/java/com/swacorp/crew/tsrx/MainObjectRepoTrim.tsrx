@@ -141,5 +141,110 @@
                 </object>
             </children>
         </object>
+        <object type="Window" technology="WinForms">
+            <name>TRiM - Training Resource Manager:  Southwest</name>
+            <codeName>tRiMTrainingResourceManagerSouthwestWindow</codeName>
+            <description></description>
+            <identification>
+                <properties>
+                    <property name="IsChildWindow" type="boolean" isRegExp="false">false</property>
+                    <property name="IsOwnedWindow" type="boolean" isRegExp="false">false</property>
+                    <property name="ObjectName" type="string" isRegExp="false">frmMain</property>
+                    <property name="WindowTitleRegExp" type="string" isRegExp="false">TRiM</property>
+                </properties>
+            </identification>
+            <children>
+                <object type="UiObject" technology="WinForms">
+                    <name>Main Menu</name>
+                    <codeName>mainMenuUiObject</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="ObjectName" type="string" isRegExp="false">barMainMenu</property>
+                        </properties>
+                    </identification>
+                </object>
+                <object type="Window" technology="WinForms">
+                    <name>Find Employee</name>
+                    <codeName>findEmployeeWindow</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="IsChildWindow" type="boolean" isRegExp="false">true</property>
+                            <property name="IsOwnedWindow" type="boolean" isRegExp="false">false</property>
+                            <property name="ObjectName" type="string" isRegExp="false">frmFindEmployee</property>
+                            <property name="WindowTitleRegExp" type="string" isRegExp="false">Find Employee</property>
+                        </properties>
+                    </identification>
+                    <children>
+                        <object type="EditField" technology="WinForms">
+                            <name>txtSearchEmpNumber</name>
+                            <codeName>txtSearchEmpNumberEditField</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ObjectName" type="string" isRegExp="false">txtSearchEmpNumber</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Button" technology="WinForms">
+                            <name>Show Employee Details</name>
+                            <codeName>showEmployeeDetailsButton</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ObjectName" type="string" isRegExp="false">btnShowEmployeeDetails</property>
+                                </properties>
+                            </identification>
+                        </object>
+                    </children>
+                </object>
+                <object type="Window" technology="WinForms">
+                    <name>Employee</name>
+                    <codeName>employeeWindow</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="IsChildWindow" type="boolean" isRegExp="false">true</property>
+                            <property name="IsOwnedWindow" type="boolean" isRegExp="false">false</property>
+                            <property name="ObjectName" type="string" isRegExp="false">frmQualEmployee</property>
+                            <property name="WindowTitleRegExp" type="string" isRegExp="false">Employee</property>
+                        </properties>
+                    </identification>
+                    <children>
+                        <object type="EditField" technology="WinForms">
+                            <name>txtEmployeeNumber</name>
+                            <codeName>txtEmployeeNumberEditField</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ObjectName" type="string" isRegExp="false">txtEmployeeNumber</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="EditField" technology="WinForms">
+                            <name>txtFirstName</name>
+                            <codeName>txtFirstNameEditField</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ObjectName" type="string" isRegExp="false">txtFirstName</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Calendar" technology="WinForms">
+                            <name>dtpDateOfBirth</name>
+                            <codeName>dtpDateOfBirthCalendar</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ObjectName" type="string" isRegExp="false">dtpDateOfBirth</property>
+                                </properties>
+                            </identification>
+                        </object>
+                    </children>
+                </object>
+            </children>
+        </object>
     </objects>
 </applicationModel>

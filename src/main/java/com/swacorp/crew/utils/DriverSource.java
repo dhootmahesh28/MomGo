@@ -36,9 +36,33 @@ public class DriverSource extends TestNgUnitTestBase implements  GenericMethods 
 
     protected IEditor edt = null;
     protected IButton btn = null;
+    protected Constant runtimeData = null;
     //protected GenericMethods genericMethods = null;
 
     @BeforeMethod(alwaysRun = true)
+    public void initTest(){
+        newDriver();
+        initRunTimeData();
+    }
+
+    private void initRunTimeData(){
+        try {
+            if (runtimeData == null) {
+                LOGGER.info("Instantiating runtimeData..");
+                runtimeData = new Constant();
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        try {
+            LOGGER.info("Clearing runtimeData map");
+            runtimeData.RunTimeDataFromApp.clear();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void newDriver() {
         WebDriver driver = null;
         int retryCounter = 0;

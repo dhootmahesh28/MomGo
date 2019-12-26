@@ -2,7 +2,11 @@ package com.swacorp.crew.pages.trim.login;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
 //import com.hp.lft.sdk.internal.winforms.WinFormsWindow;
+import com.hp.lft.sdk.winforms.UiObject;
+import com.hp.lft.sdk.winforms.Window;
 import com.swacorp.crew.pages.common.WinBasePage;
+import com.swacorp.crew.pages.oqs.homepage.HomePageAM;
+import com.swacorp.crew.pages.trim.homepage.TrimHomePageAM;
 import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
 import com.swacorp.crew.pages.trim.homepage.TRiMHomePage;
 import com.swacorp.crew.utils.EnvironmentConstants;
@@ -23,41 +27,42 @@ public class LoginPage_am  extends WinBasePage  {
         or = super.or;
     }
 
-    public int loginTRiM(String user, String pass) throws  GeneralLeanFtException{
-        int returnInt = 1;
+    public TrimHomePageAM loginTRiM(String user, String pass) throws  GeneralLeanFtException {
+        Window mainWindow = or.tRiMTrainingResourceManagerSouthwestWindow();
         try {
-            MainObjectRepoTrim tsr = new MainObjectRepoTrim();
-            System.out.println("Test..............");
-            new ProcessBuilder(EnvironmentConstants.TRiMAPPPATH).start();
-            Highlight(or.loginToSouthwestWindow());
-            setTextInEditBox(or.loginToSouthwestWindow().txtUserIDEditField(),dataProperties.getProperty("trimUserName"));
-            setTextInEditBox(or.loginToSouthwestWindow().txtPasswordEditField(),dataProperties.getProperty("trimUserPassword"));
-            btnClick(or.loginToSouthwestWindow().btnLoginButton());
-           // or.loginToSouthwestWindow().btnLoginButton().click();
-            WaitProperty(or.loginToSouthwestWindow().btnLoginButton(),"visible", "false", 5);
-            return 0;
+                mainWindow.maximize();
+                mainWindow.activate();
+        }catch(GeneralLeanFtException e){
+            int x =3;
+            try {
 
-        }catch(Exception e){
-            e.printStackTrace();
+                new LoginPage_am().loginToTrim(user, pass);
+            }catch(Exception e1){
+                e1.printStackTrace();
+                return  null;
+            }
         }
-        return returnInt;
+        return new TrimHomePageAM();
     }
 
-    public int navigateMainMenu(String user, String pass) throws  GeneralLeanFtException{
+    private int loginToTrim (String user, String pass)throws  GeneralLeanFtException {
         int returnInt = 1;
         try {
-            MainObjectRepoTrim tsr = new MainObjectRepoTrim();
-            System.out.println("Test..............");
+            //MainObjectRepoTrim tsr = new MainObjectRepoTrim();
+
+            EditField UserField = or.loginToSouthwestWindow().txtUserIDEditField();
+            EditField PaswordField = or.loginToSouthwestWindow().txtPasswordEditField();
+            Button loginButton = or.loginToSouthwestWindow().btnLoginButton();
+
             new ProcessBuilder(EnvironmentConstants.TRiMAPPPATH).start();
             Highlight(or.loginToSouthwestWindow());
-            setTextInEditBox(or.loginToSouthwestWindow().txtUserIDEditField(),dataProperties.getProperty("trimUserName"));
-            setTextInEditBox(or.loginToSouthwestWindow().txtPasswordEditField(),dataProperties.getProperty("trimUserPassword"));
-            btnClick(or.loginToSouthwestWindow().btnLoginButton());
-            // or.loginToSouthwestWindow().btnLoginButton().click();
-            WaitProperty(or.loginToSouthwestWindow().btnLoginButton(),"visible", "false", 5);
-            return 0;
+            setTextInEditBox(UserField, dataProperties.getProperty("trimUserName"));
+            setTextInEditBox(PaswordField, dataProperties.getProperty("trimUserPassword"));
+            loginButton.click();
+            returnInt = 0;
+            return returnInt;
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return returnInt;

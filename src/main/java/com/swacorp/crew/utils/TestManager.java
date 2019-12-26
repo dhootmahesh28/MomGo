@@ -32,6 +32,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * Created by x219949 on 8/14/2018.
  */
+
+// TaskManager class implements following TestNg Methods
+// @AfterMethod, @AfterClass, @AfterSuite
 public class TestManager extends DriverSource {
 
     ExtentAppend ext = new ExtentAppend();

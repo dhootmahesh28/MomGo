@@ -48,7 +48,7 @@ public class CREW_14477_Send_New_Crew_Member_data_to_TRiM extends TestManager {
             empWindow.closeEmployeeWindow();
 
             findEmployeeWindow.closeFindEmployeeWindow();
-            trimWindow.closeTRiMWindow();
+            //trimWindow.closeTRiMWindow();
         }
         catch(Exception ex){
             ex.printStackTrace();

@@ -16,15 +16,22 @@ public interface  GenericMethods extends IGenericMethods {
 
     @Override
     default boolean VerifyObjectExist(TestObject o, boolean existance) {
+        boolean objExist;
         try {
-            if (o.exists()) {
+            /*if (o.exists()) {
                 LOGGER.info("Object exists on application, "+o.getDisplayName());
-                return true;
-            }
+                objExist = true;
+            }else{
+                objExist = false;
+            }*/
+
+            objExist = o.exists() ? true: false;
+
+            return (objExist && existance) ? true : false;
+
         }
         catch (Exception e){
             LOGGER.error("Object does not exist: "+o.getDisplayName());
-
         }
         return false;
     }

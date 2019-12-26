@@ -7,7 +7,7 @@ import org.testng.annotations.DataProvider;
  */
 public class TestDataProvider {
 
-    @DataProvider(name = "crew_14499_TC03_OQS_RK_TRiM_CA_Upgrade_FO_to_CA")
+    @DataProvider(name = "TC03_Crew_14499_OQS_RK_TRiM_CA_Upgrade_FO_to_CA")
     public static Object[][] serialNumber() {
 
         return new Object[][]{

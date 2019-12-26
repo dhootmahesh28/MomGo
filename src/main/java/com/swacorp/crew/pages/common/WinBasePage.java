@@ -38,6 +38,10 @@ public abstract class WinBasePage implements IEditor,GenericMethods, IButton{
         }
     }
 
+    protected void FlushObjects() throws  GeneralLeanFtException{
+        or.tRiMTrainingResourceManagerSouthwestWindow().close();
+    }
+
     public void setWindow(Window object) {
         this.windowObject = object;
     }
@@ -184,6 +188,7 @@ public abstract class WinBasePage implements IEditor,GenericMethods, IButton{
             report.reportNonWeb("error",/*window.getObjectName() + */" Object does not exist");
         }
     }
+
 
 /*    public boolean Highlight(TestObject o) {
         try {
