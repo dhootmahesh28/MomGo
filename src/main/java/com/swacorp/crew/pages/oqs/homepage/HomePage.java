@@ -2,6 +2,7 @@ package com.swacorp.crew.pages.oqs.homepage;
 import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.utils.ReportUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -93,41 +94,54 @@ public class HomePage extends BasePage {
         buttonClick(SUBMENU_SEARCH);
         return empNum;
     }
-    public void addCrewMember(String empPosition, String startDate, String classYear, String classNumber, String crewNumber, String baseLocation,
+    public int addCrewMember(String empPosition, String startDate, String classYear, String classNumber, String crewNumber, String baseLocation,
                               String empNum, String lastName, String firstName, String dateOfBirth, String gender, String usCitizenFlag, String type,
                               String certificate, String dateIssued, String rating) {
-        getDriver().switchTo().frame("compArea");
-        selectOption(POSITION_TEXT, empPosition);
-        enterText(CLASS_YEAR_TEXT, classYear);
-        enterText(CLASS_NUM_TEXT, classNumber);
-        enterText(CREW_INDEX_TEXT, crewNumber);
-        enterText(START_DATE_TEXT, startDate);
-        selectOption(BASE_TEXT, baseLocation);
-        enterText(EMP_NUM_TEXT, empNum);
-        enterText(LAST_TEXT, lastName);
-        enterText(FIRST_TEXT, firstName);
-        enterText(DOB_TEXT, dateOfBirth);
-        selectOption(GENDER_TEXT, gender);
-        selectOption(US_CITIZEN_TEXT, usCitizenFlag);
-        selectOption(TYPE_TEXT, type);
-        enterText(CERTIFICATE_TEXT, certificate);
-        enterText(ISSUED_TEXT, dateIssued);
-        selectOption(RATING_TEXT, rating);
-        report.reportSelenium("INFO", "Entered CREW details and proceeding to click on Save to CrewMember List button");
+       // try {
+            getDriver().switchTo().frame("compArea");
+            selectOption(POSITION_TEXT, empPosition);
+            enterText(CLASS_YEAR_TEXT, classYear);
+            enterText(CLASS_NUM_TEXT, classNumber);
+            enterText(CREW_INDEX_TEXT, crewNumber);
+            enterText(START_DATE_TEXT, startDate);
+            selectOption(BASE_TEXT, baseLocation);
+            enterText(EMP_NUM_TEXT, empNum);
+            enterText(LAST_TEXT, lastName);
+            enterText(FIRST_TEXT, firstName);
+            enterText(DOB_TEXT, dateOfBirth);
+            selectOption(GENDER_TEXT, gender);
+            selectOption(US_CITIZEN_TEXT, usCitizenFlag);
+            waitByTime(1000);
+            if (!empPosition.equalsIgnoreCase("FAA - All All")) {
+                selectOption(TYPE_TEXT, type);
+                enterText(CERTIFICATE_TEXT, certificate);
+                enterText(ISSUED_TEXT, dateIssued);
+                selectOption(RATING_TEXT, rating);
+                report.reportSelenium("INFO", "Entered CREW details and proceeding to click on Save to CrewMember List button");
+
+            }
         buttonClick(SAVE_TO_CREWMEMBER_LIST_BUTTON);
         waitByTime(3000);
-        //waitUntilElementClickable(By.xpath("//*[@class='yui-dt0-col-lastname yui-dt-col-lastname' and text()='Larry']"));
-        buttonClick(CREW_LIST_TABLE_FIRST_ROW);
-        buttonClick(SAVE_PARTIAL_LIST_BUTTON);
-        buttonClick(OK_BUTTON);
-        report.reportSelenium("INFO", "Crew Member: "+ empNum +" added to the Crewmember Import List and proceeding to click on Import button");
-        buttonClick(IMPORT_BUTTON);
-        waitUntilElementClickable(IMPORT_SUCCESS_MSG);
-        report.reportSelenium("INFO", "Class list successfully imported and proceeding to click on OK button" );
-        buttonClick(OK_BUTTON);
-        if(verifyValueFromEditbox(EMP_NUM_ID_TEXT, empNum))
-            report.reportSelenium("INFO", "Crew Member: "+empNum+" created successfully");
-        else
-            report.reportSelenium("FAIL", "Crew Member creation with: "+ empNum +" Failed");
+            //waitUntilElementClickable(By.xpath("//*[@class='yui-dt0-col-lastname yui-dt-col-lastname' and text()='Larry']"));
+            if (getDriver().findElements(CREW_LIST_TABLE_FIRST_ROW).size() < 1){
+                //throw new Exception(); //ElementNotVisibleException("Table is not reflected");
+                return 1;
+            }
+            buttonClick(CREW_LIST_TABLE_FIRST_ROW);
+            buttonClick(SAVE_PARTIAL_LIST_BUTTON);
+            buttonClick(OK_BUTTON);
+            report.reportSelenium("INFO", "Crew Member: " + empNum + " added to the Crewmember Import List and proceeding to click on Import button");
+            buttonClick(IMPORT_BUTTON);
+            waitUntilElementClickable(IMPORT_SUCCESS_MSG);
+            report.reportSelenium("INFO", "Class list successfully imported and proceeding to click on OK button");
+            buttonClick(OK_BUTTON);
+            if (verifyValueFromEditbox(EMP_NUM_ID_TEXT, empNum))
+                report.reportSelenium("INFO", "Crew Member: " + empNum + " created successfully");
+            else
+                report.reportSelenium("FAIL", "Crew Member creation with: " + empNum + " Failed");
+        //}catch(Exception e){
+           // e.printStackTrace();
+        return 0;
+
     }
 }

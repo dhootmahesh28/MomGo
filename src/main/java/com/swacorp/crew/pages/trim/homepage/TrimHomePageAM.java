@@ -8,18 +8,20 @@ import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
 import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
 import com.swacorp.crew.wrappers.GenericMethods;
+import com.swacorp.crew.utils.ReportStatus;
 
 import java.util.HashMap;
 
 public class TrimHomePageAM extends WinBasePage{
     ReportUtil report = new ReportUtil();
+    //ReportUtil report = null;
     private final Logger LOGGER = Logger.getLogger(TrimHomePageAM.class);
     MainObjectRepoTrim or =null;
     public HashMap<String, String> pgMap = new HashMap<>();
 
     public TrimHomePageAM()  {
         or = super.or;
-    }
+       }
 
     private int VerifyWindowExist(Window o) throws  GeneralLeanFtException{
         int retVal = 1;
@@ -33,7 +35,7 @@ public class TrimHomePageAM extends WinBasePage{
 
     public int NavigateMenu(String NavigationString) throws  GeneralLeanFtException{
         int returnInt = 1;
-        System.out.println("NavigateMenu.........");
+        ReportUtil report = new ReportUtil();
         Window mainWin = or.tRiMTrainingResourceManagerSouthwestWindow();
         UiObject topMenuStrip = or.tRiMTrainingResourceManagerSouthwestWindow().mainMenuUiObject();
         String[] arrMenuItems = NavigationString.split("-->");
@@ -51,53 +53,55 @@ public class TrimHomePageAM extends WinBasePage{
         return returnInt;
     }
 
-    public int SearchEmployeesDetails(String empNumber) throws  GeneralLeanFtException{
+    public int SearchEmployeesDetails(String empNumber) throws  GeneralLeanFtException {
         int retVal = 1;
+        ReportStatus.reset();
         String empNumberFromApp;
         String fldFirstNamefromApp;
-
         Window winFindEmployee = or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
         EditField fldEmpSearch = or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow().txtSearchEmpNumberEditField();
         Button btnShowEmpDetails = or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow().showEmployeeDetailsButton();
-
         Window winFindEmployeeSearch = or.tRiMTrainingResourceManagerSouthwestWindow().employeeWindow();
         EditField fldEmpNumber = or.tRiMTrainingResourceManagerSouthwestWindow().employeeWindow().txtEmployeeNumberEditField();
         EditField fldFirstName = or.tRiMTrainingResourceManagerSouthwestWindow().employeeWindow().txtFirstNameEditField();
-        //EditField empNumber = or.tRiMTrainingResourceManagerSouthwestWindow().employeeWindow().
 
-
+        try {
+            //if (winFindEmployee.exists(5)){
+            Highlight(winFindEmployee);
+            //fldEmpSearch.setText(empNumber);
+            setTextInEditBox(fldEmpSearch, empNumber);
+            //btnShowEmpDetails.click();
             try {
-                if (winFindEmployee.exists(5)){
-                    fldEmpSearch.setText(empNumber);
-                    btnShowEmpDetails.click();
-                }else{
-                    throw new GeneralLeanFtException("winFindEmployee does not exist.");
-                }
-
-                if (winFindEmployeeSearch.exists()){
-                 empNumberFromApp = fldEmpNumber.getText();
-                    fldFirstNamefromApp = fldFirstName.getText();
-                    }else{
-                    throw  new GeneralLeanFtException("winFindEmployeeSearch does not exist.");
-                }try{
-                    pgMap.put("TRIM_EMP_NO", empNumberFromApp);
-                    pgMap.put("TRIM_EMP_FIRSTNAME", fldFirstNamefromApp);
-
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-
-                winFindEmployeeSearch.close();
-                winFindEmployee.close();
-
+                btnClick(btnShowEmpDetails);
             }catch(Exception e){
-                e.printStackTrace();
+                report.report("Fail","Error occured while clicking on button. - btnShowEmpDetails");
             }
-            return 0;
-        }
 
+            if (Highlight(winFindEmployeeSearch)) {
+                empNumberFromApp = fldEmpNumber.getText();
+                fldFirstNamefromApp = fldFirstName.getText();
+
+                pgMap.put("TRIM_EMP_NO", empNumberFromApp);
+                pgMap.put("TRIM_EMP_FIRSTNAME", fldFirstNamefromApp);
+                retVal = 0;
+            }else{
+                retVal = 1;
+            }
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "info", "Search result after clicking on Search button.");
+        }catch( Exception  e){
+            e.printStackTrace();
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occured while searching the employee number on Find Employee window of Trim pplication.");
+        }finally {
+            {
+                //winFindEmployeeSearch.close();
+                //winFindEmployee.close();
+            }
+        }
+        return retVal;
+    }
 
     public void CloseApplication() throws  GeneralLeanFtException {
+
         FlushObjects();
     }
 }

@@ -74,8 +74,10 @@ public interface  GenericMethods extends IGenericMethods {
         }
         catch (Exception e){
             LOGGER.error("Object does not exist: "+o.getDisplayName());
+            //e.printStackTrace();
+            return false;
         }
-        return false;
+
     }
 
 }

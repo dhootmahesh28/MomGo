@@ -2,6 +2,7 @@ package com.swacorp.crew.genericwrappers.editor;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.MouseButton;
+import com.swacorp.crew.utils.ReportStatus;
 import org.apache.log4j.Logger;
 
 public interface IButton<T extends com.hp.lft.sdk.winforms.Button> {
@@ -14,10 +15,11 @@ public interface IButton<T extends com.hp.lft.sdk.winforms.Button> {
     default void btnClick(T obj) throws GeneralLeanFtException {
         try {
             obj.click(MouseButton.LEFT);
-
             logger.info(SuccessfullyClicked +obj.getObjectName()+ objectType +obj.getClass());
         }catch(Exception e){
             logger.error(ClickUnsuccessful +obj.getObjectName()+ objectType +obj.getClass(), e);
+            ReportStatus.setReportMsg("Button: "+ obj.getDisplayName() + "is non clickable.");
+            e.printStackTrace();
         }
     }
 
@@ -28,6 +30,7 @@ public interface IButton<T extends com.hp.lft.sdk.winforms.Button> {
             logger.info(SuccessfullyClicked +obj.getObjectName()+ objectType +obj.getClass());
         }catch(Exception e){
             logger.error(ClickUnsuccessful +obj.getObjectName()+ objectType +obj.getClass(), e);
+            ReportStatus.setReportMsg("Button: "+ obj.getDisplayName() + "is not clickable..");
         }
     }
 

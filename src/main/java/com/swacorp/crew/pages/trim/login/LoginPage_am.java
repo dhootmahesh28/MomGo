@@ -10,6 +10,7 @@ import com.swacorp.crew.pages.trim.homepage.TrimHomePageAM;
 import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
 import com.swacorp.crew.pages.trim.homepage.TRiMHomePage;
 import com.swacorp.crew.utils.EnvironmentConstants;
+import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
 import com.hp.lft.sdk.winforms.EditField;
 import com.hp.lft.sdk.winforms.Button;
@@ -19,23 +20,23 @@ import java.lang.reflect.Method;
 import static com.swacorp.crew.utils.TestManager.dataProperties;
 
 public class LoginPage_am  extends WinBasePage  {
-
+    ReportUtil report = new ReportUtil();
     private final Logger LOGGER = Logger.getLogger(LoginPage_am.class);
     private final String TRiM_TITLE = TRiMHomePage.TRiM_WINDOW;
     MainObjectRepoTrim or =null;
+    Window mainWindow = null;
     public LoginPage_am()  {
         or = super.or;
+        //this.report = report;
     }
 
     public TrimHomePageAM loginTRiM(String user, String pass) throws  GeneralLeanFtException {
-        Window mainWindow = or.tRiMTrainingResourceManagerSouthwestWindow();
+        mainWindow = or.tRiMTrainingResourceManagerSouthwestWindow();
         try {
                 mainWindow.maximize();
                 mainWindow.activate();
         }catch(GeneralLeanFtException e){
-            int x =3;
             try {
-
                 new LoginPage_am().loginToTrim(user, pass);
             }catch(Exception e1){
                 e1.printStackTrace();
@@ -58,6 +59,8 @@ public class LoginPage_am  extends WinBasePage  {
             Highlight(or.loginToSouthwestWindow());
             setTextInEditBox(UserField, dataProperties.getProperty("trimUserName"));
             setTextInEditBox(PaswordField, dataProperties.getProperty("trimUserPassword"));
+
+            report.reportLeanFT(or.loginToSouthwestWindow(),"pass", "Login to Trim is successful" );
             loginButton.click();
             returnInt = 0;
             return returnInt;

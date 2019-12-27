@@ -39,7 +39,9 @@ public abstract class WinBasePage implements IEditor,GenericMethods, IButton{
     }
 
     protected void FlushObjects() throws  GeneralLeanFtException{
-        or.tRiMTrainingResourceManagerSouthwestWindow().close();
+        if (or.tRiMTrainingResourceManagerSouthwestWindow().exists()) {
+            or.tRiMTrainingResourceManagerSouthwestWindow().close();
+        }
     }
 
     public void setWindow(Window object) {
