@@ -5,14 +5,10 @@ import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.winforms.Window;
 import com.swacorp.crew.pages.common.WinBasePage;
 import com.swacorp.crew.pages.trim.FindEmployee.FindEmployeePage;
-import com.swacorp.crew.pages.trim.login.LoginPage_am;
 import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
 //import com.lftrepo.repo.SharedRepository.trim
-import com.swacorp.crew.utils.EnvironmentConstants;
 import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
-
-import static com.swacorp.crew.utils.TestManager.dataProperties;
 
 
 public class TRiMHomePage extends WinBasePage {
@@ -24,7 +20,7 @@ public class TRiMHomePage extends WinBasePage {
 
     MainObjectRepoTrim or =null;
     public TRiMHomePage()  {
-        or = super.or;
+        or = super.lftObjectRepo;
     }
     Window mainWin = or.loginToSouthwestWindow();
 
@@ -35,11 +31,11 @@ public class TRiMHomePage extends WinBasePage {
 
             Highlight(mainWin);
             System.out.println(" Highlight(mainWin); ");
-/*            setTextInEditBox(or.loginToSouthwestWindow().txtUserIDEditField(),dataProperties.getProperty("trimUserName"));
-            setTextInEditBox(or.loginToSouthwestWindow().txtPasswordEditField(),dataProperties.getProperty("trimUserPassword"));
-            btnClick(or.loginToSouthwestWindow().btnLoginButton());
-            // or.loginToSouthwestWindow().btnLoginButton().click();
-            WaitProperty(or.loginToSouthwestWindow().btnLoginButton(),"visible", "false", 5);*/
+/*            setTextInEditBox(lftObjectRepo.loginToSouthwestWindow().txtUserIDEditField(),dataProperties.getProperty("trimUserName"));
+            setTextInEditBox(lftObjectRepo.loginToSouthwestWindow().txtPasswordEditField(),dataProperties.getProperty("trimUserPassword"));
+            btnClick(lftObjectRepo.loginToSouthwestWindow().btnLoginButton());
+            // lftObjectRepo.loginToSouthwestWindow().btnLoginButton().click();
+            WaitProperty(lftObjectRepo.loginToSouthwestWindow().btnLoginButton(),"visible", "false", 5);*/
             return 0;
 
         }catch(Exception e){

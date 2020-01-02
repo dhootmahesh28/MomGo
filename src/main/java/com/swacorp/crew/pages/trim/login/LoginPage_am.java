@@ -2,10 +2,8 @@ package com.swacorp.crew.pages.trim.login;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
 //import com.hp.lft.sdk.internal.winforms.WinFormsWindow;
-import com.hp.lft.sdk.winforms.UiObject;
 import com.hp.lft.sdk.winforms.Window;
 import com.swacorp.crew.pages.common.WinBasePage;
-import com.swacorp.crew.pages.oqs.homepage.HomePageAM;
 import com.swacorp.crew.pages.trim.homepage.TrimHomePageAM;
 import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
 import com.swacorp.crew.pages.trim.homepage.TRiMHomePage;
@@ -14,8 +12,6 @@ import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
 import com.hp.lft.sdk.winforms.EditField;
 import com.hp.lft.sdk.winforms.Button;
-
-import java.lang.reflect.Method;
 
 import static com.swacorp.crew.utils.TestManager.dataProperties;
 
@@ -26,7 +22,7 @@ public class LoginPage_am  extends WinBasePage  {
     MainObjectRepoTrim or =null;
     Window mainWindow = null;
     public LoginPage_am()  {
-        or = super.or;
+        or = super.lftObjectRepo;
         //this.report = report;
     }
 

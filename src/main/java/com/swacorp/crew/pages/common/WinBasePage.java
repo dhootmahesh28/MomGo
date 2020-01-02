@@ -20,7 +20,7 @@ public abstract class WinBasePage implements IEditor,GenericMethods, IButton{
     private final int TIMEOUT_SS = 60;
     public static Window homeWindow;
     public static Window windowObject;
-    public MainObjectRepoTrim or = null;
+    public MainObjectRepoTrim lftObjectRepo = null;
 
     public void setParent(Window object) {
         this.homeWindow = object;
@@ -28,10 +28,10 @@ public abstract class WinBasePage implements IEditor,GenericMethods, IButton{
     }
 
     {
-        if(or == null){
+        if(lftObjectRepo == null){
             LOGGER.info("Initializing wrapper instances..");
             try {
-                or = new MainObjectRepoTrim();
+                lftObjectRepo = new MainObjectRepoTrim();
             } catch (GeneralLeanFtException e) {
                 e.printStackTrace();
             }
@@ -39,8 +39,8 @@ public abstract class WinBasePage implements IEditor,GenericMethods, IButton{
     }
 
     protected void FlushObjects() throws  GeneralLeanFtException{
-        if (or.tRiMTrainingResourceManagerSouthwestWindow().exists()) {
-            or.tRiMTrainingResourceManagerSouthwestWindow().close();
+        if (lftObjectRepo.tRiMTrainingResourceManagerSouthwestWindow().exists()) {
+            lftObjectRepo.tRiMTrainingResourceManagerSouthwestWindow().close();
         }
     }
 

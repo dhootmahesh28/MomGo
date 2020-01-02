@@ -3,11 +3,9 @@ package com.swacorp.crew.pages.trim.homepage;
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.winforms.*;
 import com.swacorp.crew.pages.common.WinBasePage;
-import com.swacorp.crew.pages.trim.FindEmployee.FindEmployeePage;
 import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
 import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
-import com.swacorp.crew.wrappers.GenericMethods;
 import com.swacorp.crew.utils.ReportStatus;
 
 import java.util.HashMap;
@@ -20,7 +18,7 @@ public class TrimHomePageAM extends WinBasePage{
     public HashMap<String, String> pgMap = new HashMap<>();
 
     public TrimHomePageAM()  {
-        or = super.or;
+        or = super.lftObjectRepo;
        }
 
     private int VerifyWindowExist(Window o) throws  GeneralLeanFtException{
