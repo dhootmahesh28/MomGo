@@ -18,12 +18,10 @@ import java.util.Map;
  * Created by x227377 on 08/25/2019.
  */
 public class TC08_CREW_14499_OQS_RK_TRiM_FAA_Add_FAA_to_OQS_RK_And_verify_In_TRiM extends TestManager {
-    ReportUtil report = new ReportUtil();
     private final Logger LOGGER = Logger.getLogger(TC08_CREW_14499_OQS_RK_TRiM_FAA_Add_FAA_to_OQS_RK_And_verify_In_TRiM.class);
-    LoginPage_am trimLoginPage = null;
-    Constant commonVars = null;
+    LoginPage_am trimLoginPage ;
     TrimHomePageAM trimHomePageAM = null;
-    OQSLoginPage oqsLoginPage = null;
+    OQSLoginPage oqsLoginPage ;
     Map<String, String> hmAppData = new HashMap<String, String>();
 
     TC08_CREW_14499_OQS_RK_TRiM_FAA_Add_FAA_to_OQS_RK_And_verify_In_TRiM(){
@@ -57,30 +55,27 @@ public class TC08_CREW_14499_OQS_RK_TRiM_FAA_Add_FAA_to_OQS_RK_And_verify_In_TRi
                 }
                 hmAppData.put("EmpId", empNum);
                 String emp = hmAppData.get("EmpId");
-                LOGGER.info("Crew_14499_TC03_OQS_RK_TRiM_CA_Upgrade_FO_to_CA.."+emp);
+                LOGGER.info("Employee number: "+emp);
 
-
-                //String empNum = "55669";
                 //Login to Trim
                 trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
-
 
                 trimHomePageAM.NavigateMenu("^E-->^F");
                 try {
                     retVal = trimHomePageAM.SearchEmployeesDetails(empNum);
                 }catch(Exception e){
-                    report.report("FAIL", "Error occured while searchig for the employee '"+empNum+"'"+ReportStatus.getReportMsg());
+                    e.printStackTrace();
                 }
 
-                if (retVal ==1){
-                    report.report("Pass", "Employee number: "+empNum+"'"+" not found in Trim as expected for position "+testData[0]);
+                if (retVal ==1) {
+                    trimHomePageAM.ValidateSearchResults(1, "Pass", "Search Result does not reflected on 'Find Employee' window.");
                 }else{
-                    report.report("fail", "Employee number: "+empNum+"'"+" found in Trim for position "+testData[0]);
+                    trimHomePageAM.ValidateSearchResults(1, "Fail", "Search Result reflected on 'Find Employee' window.");
                 }
+
             }
             catch(Exception e) {
-                report.report("FAIL", "Error occured during adding crewmember.");
-                throw e;
+               e.printStackTrace();
             }
         }
         catch(Exception ex){

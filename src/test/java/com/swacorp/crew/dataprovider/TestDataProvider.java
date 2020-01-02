@@ -19,10 +19,9 @@ public class TestDataProvider {
     public static Object[][] TC08_CREW_14499_OQS_RK_TRiM_FAA_Add_FAA_to_OQS_RK_And_verify_In_TRiM() {
 
         return new Object[][]{
-                {"FAA - All All","22", "2", "TRN","FName", "SName", "07/01/1987", "MALE", "Y", "ATP", "99988822", "05/01/2018", "BOEING 737 PIC" }
+                {"FAA - All All","22", "2", "TRN","FName", "SName", "07/01/1987", "MALE", "Y", "ATP", "99988822", "05/01/2018", "BOEING 737 PIC" },
+               {"SIM. INSTRUCTOR - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "05/01/2018", "BOEING 737 PIC" },
+               {"AIRCREW PGM MGR - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "05/01/2018", "BOEING 737 PIC" }
         };
     }
 }
-//FAA - All All  --not visible
-//FIRST OFFICER - 737 All
-// "SIM. INSTRUCTOR - 737 All" visible

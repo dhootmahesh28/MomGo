@@ -104,6 +104,17 @@ public class TrimHomePageAM extends WinBasePage{
 
         FlushObjects();
     }
+
+    public void ValidateSearchResults(int intStatus, String status, String Msg){
+        if (intStatus == 0 && status.equalsIgnoreCase("Pass") ){
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", Msg);
+        }else if(intStatus == 1 && status.equalsIgnoreCase("Pass")){
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", Msg);
+        }else{
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "FAILED: "+Msg);
+        }
+
+    }
 }
 
 
