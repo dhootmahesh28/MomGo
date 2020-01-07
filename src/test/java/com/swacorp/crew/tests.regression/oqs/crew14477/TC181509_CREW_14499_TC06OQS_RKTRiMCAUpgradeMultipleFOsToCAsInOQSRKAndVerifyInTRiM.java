@@ -24,10 +24,12 @@ public class TC181509_CREW_14499_TC06OQS_RKTRiMCAUpgradeMultipleFOsToCAsInOQSRKA
     LoginPage_am trimLoginPage ;
     TrimHomePageAM trimHomePageAM;
     OQSLoginPage oqsLoginPage ;
+    HomePage oqsHomePage;
 
     TC181509_CREW_14499_TC06OQS_RKTRiMCAUpgradeMultipleFOsToCAsInOQSRKAndVerifyInTRiM(){
         oqsLoginPage = new OQSLoginPage();
         trimLoginPage = new LoginPage_am();
+        oqsHomePage = new HomePage();
     }
 
     @Test(groups = {"14477", "regression"}, dataProvider = "TC181509_CREW_14499_TC06OQS_RKTRiMCAUpgradeMultipleFOsToCAsInOQSRKAndVerifyInTRiM", dataProviderClass = TestDataProvider.class)
@@ -39,7 +41,6 @@ public class TC181509_CREW_14499_TC06OQS_RKTRiMCAUpgradeMultipleFOsToCAsInOQSRKA
 
         //Verify that the login to OQS is successful
         oqsLoginPage.VerifyLoginSuccessful(true);
-        HomePage oqsHomePage = new HomePage();
 
         //Add Crew Member
         String empNr = oqsHomePage.addCrewMember(testData);
@@ -77,7 +78,6 @@ public class TC181509_CREW_14499_TC06OQS_RKTRiMCAUpgradeMultipleFOsToCAsInOQSRKA
 
         //Verify that the login to OQS is successful
         oqsLoginPage.VerifyLoginSuccessful(true);
-        HomePage oqsHomePage = new HomePage();
 
         //Add Crew Member
         String empNr = oqsHomePage.addCrewMember(testData);
