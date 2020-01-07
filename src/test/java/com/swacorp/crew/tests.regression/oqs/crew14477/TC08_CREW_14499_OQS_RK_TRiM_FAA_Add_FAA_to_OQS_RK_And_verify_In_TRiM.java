@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by x227377 on 08/25/2019.
+ * Created by x257093.
  */
 public class TC08_CREW_14499_OQS_RK_TRiM_FAA_Add_FAA_to_OQS_RK_And_verify_In_TRiM extends TestManager {
     private final Logger LOGGER = Logger.getLogger(TC08_CREW_14499_OQS_RK_TRiM_FAA_Add_FAA_to_OQS_RK_And_verify_In_TRiM.class);
@@ -29,7 +29,7 @@ public class TC08_CREW_14499_OQS_RK_TRiM_FAA_Add_FAA_to_OQS_RK_And_verify_In_TRi
         trimLoginPage = new LoginPage_am();
     }
 
-    @Test(groups = {"14477", "regression"}, dataProvider = "TC08_CREW_14499_OQS_RK_TRiM_FAA_Add_FAA_to_OQS_RK_And_verify_In_TRiM", dataProviderClass = TestDataProvider.class)
+    @Test(groups = {"9914477", "regression"}, dataProvider = "TC08_CREW_14499_OQS_RK_TRiM_FAA_Add_FAA_to_OQS_RK_And_verify_In_TRiM", dataProviderClass = TestDataProvider.class)
     public void crew_14499_TC03_OQS_RK_TRiM_CA_Upgrade_FO_to_CA(String[] testData) throws GeneralLeanFtException {
         int retVal = -1;
         int oqsCreate = -1;
@@ -68,9 +68,9 @@ public class TC08_CREW_14499_OQS_RK_TRiM_FAA_Add_FAA_to_OQS_RK_And_verify_In_TRi
                 }
 
                 if (retVal ==1) {
-                    trimHomePageAM.ValidateSearchResults(1, "Pass", "Search Result does not reflected on 'Find Employee' window.");
+                    //trimHomePageAM.ValidateSearchResults(1, "Pass", "Search Result does not reflected on 'Find Employee' window.");
                 }else{
-                    trimHomePageAM.ValidateSearchResults(1, "Fail", "Search Result reflected on 'Find Employee' window.");
+                    //trimHomePageAM.ValidateSearchResults(1, "Fail", "Search Result reflected on 'Find Employee' window.");
                 }
 
             }

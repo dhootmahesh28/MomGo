@@ -31,4 +31,8 @@ public class OQSLoginPage extends BasePage {
             LOGGER.info("Search Button NOT exists on Loginpage..");
         }
     }
+
+    public void VerifyLoginSuccessful(boolean status){
+
+    }
 }

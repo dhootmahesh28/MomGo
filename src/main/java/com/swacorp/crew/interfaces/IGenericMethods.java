@@ -11,6 +11,4 @@ public interface IGenericMethods {
     public boolean WaitProperty(TestObject o,int timeOut, String timeUnit );
     public boolean WaitProperty(TestObject o,String propName, String propValue, int timeOut ) throws GeneralLeanFtException, InterruptedException;
     public boolean Highlight(TestObject o);
-
-
 }

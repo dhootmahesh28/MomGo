@@ -25,16 +25,19 @@ public class LoginPage_am  extends WinBasePage  {
         or = super.lftObjectRepo;
         //this.report = report;
     }
-
+    private boolean loginSuccessful;
     public TrimHomePageAM loginTRiM(String user, String pass) throws  GeneralLeanFtException {
         mainWindow = or.tRiMTrainingResourceManagerSouthwestWindow();
         try {
                 mainWindow.maximize();
                 mainWindow.activate();
+            loginSuccessful = true;
         }catch(GeneralLeanFtException e){
             try {
                 new LoginPage_am().loginToTrim(user, pass);
+                loginSuccessful = true;
             }catch(Exception e1){
+                loginSuccessful = false;
                 e1.printStackTrace();
                 return  null;
             }
@@ -45,8 +48,6 @@ public class LoginPage_am  extends WinBasePage  {
     private int loginToTrim (String user, String pass)throws  GeneralLeanFtException {
         int returnInt = 1;
         try {
-            //MainObjectRepoTrim tsr = new MainObjectRepoTrim();
-
             EditField UserField = or.loginToSouthwestWindow().txtUserIDEditField();
             EditField PaswordField = or.loginToSouthwestWindow().txtPasswordEditField();
             Button loginButton = or.loginToSouthwestWindow().btnLoginButton();
@@ -56,15 +57,31 @@ public class LoginPage_am  extends WinBasePage  {
             setTextInEditBox(UserField, dataProperties.getProperty("trimUserName"));
             setTextInEditBox(PaswordField, dataProperties.getProperty("trimUserPassword"));
 
-            report.reportLeanFT(or.loginToSouthwestWindow(),"pass", "Login to Trim is successful" );
+           report.reportLeanFT(or.loginToSouthwestWindow(),"pass", "Login to Trim is successful" );
             loginButton.click();
-            returnInt = 0;
-            return returnInt;
+//            mainWindow.wait(5);
+            Thread.sleep(5000);
+            mainWindow = or.tRiMTrainingResourceManagerSouthwestWindow();
+            if (mainWindow.exists()){
+                returnInt = 0;
+                loginSuccessful = true;
+            }else {
+                returnInt = 1;
+                loginSuccessful = false;
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return returnInt;
+    }
+
+    public void VerifyLoginSuccessful(boolean status) {
+        if (loginSuccessful && status){
+            report.reportLeanFT(mainWindow,"pass", "Login to Trim is successful.." );
+        }else{
+            report.reportLeanFT(or.loginToSouthwestWindow(),"Fail", "Login to Trim is NOT successful." );
+        }
     }
 }
 

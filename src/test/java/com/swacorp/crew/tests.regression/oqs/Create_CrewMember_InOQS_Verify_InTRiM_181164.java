@@ -1,4 +1,4 @@
-package tsr.smoke;
+package com.swacorp.crew.tests.regression.oqs;
 
 import com.swacorp.crew.pages.oqs.homepage.HomePage;
 import com.swacorp.crew.pages.oqs.login.OQSLoginPage;
@@ -13,9 +13,9 @@ import org.testng.annotations.Test;
 /**
  * Created by x227377 on 08/25/2019.
  */
-public class CREW_14477_Send_New_Crew_Member_data_to_TRiM extends TestManager {
+public class Create_CrewMember_InOQS_Verify_InTRiM_181164 extends TestManager {
 
-    @Test(groups = {"14499", "regression"})
+    @Test(groups = {"181164", "regression"})
 
     public void create_CrewMember_InOQS_Verify_InTRiM_181164() {
         setScenarioName("TC181164_Create CrewMember in OQS and verify CREW info in TRiM");
@@ -48,7 +48,7 @@ public class CREW_14477_Send_New_Crew_Member_data_to_TRiM extends TestManager {
             empWindow.closeEmployeeWindow();
 
             findEmployeeWindow.closeFindEmployeeWindow();
-            //trimWindow.closeTRiMWindow();
+           // trimWindow.closeTRiMWindow();
         }
         catch(Exception ex){
             ex.printStackTrace();

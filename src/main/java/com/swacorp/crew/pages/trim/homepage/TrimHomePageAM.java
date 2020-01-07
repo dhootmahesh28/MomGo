@@ -9,14 +9,19 @@ import org.apache.log4j.Logger;
 import com.swacorp.crew.utils.ReportStatus;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class TrimHomePageAM extends WinBasePage{
     ReportUtil report = new ReportUtil();
-    //ReportUtil report = null;
     private final Logger LOGGER = Logger.getLogger(TrimHomePageAM.class);
     MainObjectRepoTrim or =null;
     public HashMap<String, String> pgMap = new HashMap<>();
+    private String empNumberFromApp = "";
+    private String fldFirstNameFromApp = "";
+    private boolean searchFound;
 
+
+    //Window winFindEmployee = or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
     public TrimHomePageAM()  {
         or = super.lftObjectRepo;
        }
@@ -54,8 +59,6 @@ public class TrimHomePageAM extends WinBasePage{
     public int SearchEmployeesDetails(String empNumber) throws  GeneralLeanFtException {
         int retVal = 1;
         ReportStatus.reset();
-        String empNumberFromApp;
-        String fldFirstNamefromApp;
         Window winFindEmployee = or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
         EditField fldEmpSearch = or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow().txtSearchEmpNumberEditField();
         Button btnShowEmpDetails = or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow().showEmployeeDetailsButton();
@@ -64,11 +67,8 @@ public class TrimHomePageAM extends WinBasePage{
         EditField fldFirstName = or.tRiMTrainingResourceManagerSouthwestWindow().employeeWindow().txtFirstNameEditField();
 
         try {
-            //if (winFindEmployee.exists(5)){
             Highlight(winFindEmployee);
-            //fldEmpSearch.setText(empNumber);
             setTextInEditBox(fldEmpSearch, empNumber);
-            //btnShowEmpDetails.click();
             try {
                 btnClick(btnShowEmpDetails);
             }catch(Exception e){
@@ -77,41 +77,54 @@ public class TrimHomePageAM extends WinBasePage{
 
             if (Highlight(winFindEmployeeSearch)) {
                 empNumberFromApp = fldEmpNumber.getText();
-                fldFirstNamefromApp = fldFirstName.getText();
+                fldFirstNameFromApp = fldFirstName.getText();
 
                 pgMap.put("TRIM_EMP_NO", empNumberFromApp);
-                pgMap.put("TRIM_EMP_FIRSTNAME", fldFirstNamefromApp);
+                pgMap.put("TRIM_EMP_FIRSTNAME", fldFirstNameFromApp);
                 retVal = 0;
+                searchFound = true;
             }else{
+                searchFound = false;
                 retVal = 1;
             }
             report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "info", "Search result after clicking on Search button.");
         }catch( Exception  e){
             e.printStackTrace();
             report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occured while searching the employee number on Find Employee window of Trim pplication.");
-        }finally {
-            {
-                //winFindEmployeeSearch.close();
-                //winFindEmployee.close();
-            }
         }
         return retVal;
     }
 
     public void CloseApplication() throws  GeneralLeanFtException {
-
         FlushObjects();
     }
 
-    public void ValidateSearchResults(int intStatus, String status, String Msg){
-        if (intStatus == 0 && status.equalsIgnoreCase("Pass") ){
-            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", Msg);
-        }else if(intStatus == 1 && status.equalsIgnoreCase("Pass")){
-            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", Msg);
+   public void ValidateSearchResults(Map<String, String> runtimeData , String[] testData){
+        if (empNumberFromApp.equalsIgnoreCase(runtimeData.get("CrewEmployeeNumber"))){
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Employee number matched.");
         }else{
-            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "FAILED: "+Msg);
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Employee number not matched.");
         }
 
+        if (fldFirstNameFromApp.equalsIgnoreCase(testData[4])){
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Employee first name matched.");
+        }else{
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Employee first name  not matched.");
+        }
+    }
+
+    public void ValidateSearchResults(boolean status) throws GeneralLeanFtException{
+        if ((status && searchFound) || (!status && !searchFound)){
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "CREW employee details found on Trim.");
+        }else{
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "CREW employee details found on Trim.\"");
+        }
+        flushAllChileWindowsExceptMain();
+    }
+
+    private void flushAllChileWindowsExceptMain() throws  GeneralLeanFtException{
+        CloseWindowIfExist(or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow(),  5);
+        CloseWindowIfExist(or.tRiMTrainingResourceManagerSouthwestWindow().employeeWindow(),  5);
     }
 }
 

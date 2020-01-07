@@ -6,6 +6,7 @@ import com.hp.lft.sdk.TestObject;
 //import com.hp.lft.sdk.winforms.*;
 import com.hp.lft.sdk.winforms.*;
 import com.swacorp.crew.genericwrappers.editor.IEditor;
+import com.swacorp.crew.genericwrappers.editor.IWindow;
 import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
 import com.swacorp.crew.utils.ReportUtil;
 import com.swacorp.crew.wrappers.GenericMethods;
@@ -13,7 +14,7 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import com.swacorp.crew.genericwrappers.editor.IButton;
 
-public abstract class WinBasePage implements IEditor,GenericMethods, IButton{
+public class WinBasePage implements IEditor,GenericMethods, IButton, IWindow{
 
     ReportUtil report = new ReportUtil();
     public final static Logger LOGGER = Logger.getLogger(WinBasePage.class);
@@ -38,7 +39,7 @@ public abstract class WinBasePage implements IEditor,GenericMethods, IButton{
         }
     }
 
-    protected void FlushObjects() throws  GeneralLeanFtException{
+    public void FlushObjects() throws  GeneralLeanFtException{
         if (lftObjectRepo.tRiMTrainingResourceManagerSouthwestWindow().exists()) {
             lftObjectRepo.tRiMTrainingResourceManagerSouthwestWindow().close();
         }

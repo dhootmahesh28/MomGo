@@ -11,8 +11,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.hp.lft.sdk.GeneralLeanFtException;
 import com.opencsv.CSVWriter;
 import com.swacorp.crew.pages.common.BasePage;
+import com.swacorp.crew.pages.common.WinBasePage;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
@@ -172,6 +174,10 @@ public class TestManager extends DriverSource {
     }
 
     @AfterSuite(alwaysRun = true)
+    public void AfterSuite() throws GeneralLeanFtException{
+        clearExtentTest();
+        new WinBasePage().FlushObjects();
+    }
     public void clearExtentTest() {
         try {
             extent.flush();

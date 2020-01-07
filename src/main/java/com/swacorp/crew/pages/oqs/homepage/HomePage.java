@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 
 import java.util.concurrent.ThreadLocalRandom;
+import com.swacorp.crew.utils.DateUtil;
 
 public class HomePage extends BasePage {
 
@@ -42,6 +43,11 @@ public class HomePage extends BasePage {
     private final By IMPORT_SUCCESS_MSG = By.xpath("//*[contains(text(),'Class list sucessfully imported.')]");
     private final By OK_BUTTON = By.xpath("//*[contains(text(),'OK')]");
     private final By EMP_NUM_ID_TEXT = By.id("empNoId");
+    private final By OQS_SEARCH_CLOSE_BTN = By.id("crewmemberCloseButtonId");
+    private final By CREATE_CREW_CLOSE_BTN = By.id("closeButton");
+
+    private boolean CrewAddedSuccessfully;
+    String empNum;
 
     public void selectMenuHome() {
         buttonClick(MAIN_MENU_SEARCH);
@@ -139,9 +145,41 @@ public class HomePage extends BasePage {
                 report.reportSelenium("INFO", "Crew Member: " + empNum + " created successfully");
             else
                 report.reportSelenium("FAIL", "Crew Member creation with: " + empNum + " Failed");
-        //}catch(Exception e){
-           // e.printStackTrace();
+
         return 0;
+
+    }
+
+
+    public String addCrewMember(String[] data){
+        int retVal = -1;
+
+        empNum = searchCrew();
+        DateUtil dateUtil = new DateUtil();
+
+        try {
+            String startDate = dateUtil.getCurrentDate();
+            String classYear = dateUtil.getCurrentYear();
+            retVal = addCrewMember(data[0], startDate, classYear, data[1], data[2], data[3], empNum, data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12]);
+            retVal =0;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        if (retVal == 0){
+            CrewAddedSuccessfully = true;
+        }else{
+            CrewAddedSuccessfully = false;
+        }
+        return empNum;
+    }
+
+    public void VerifyCrewAddedSuccessfully(boolean status){
+        if (status && CrewAddedSuccessfully){
+            report.reportSelenium("Pass", "Crew Member: " + empNum + " created successfully");
+        }else{
+            report.reportSelenium("Fail", "Error occured while creating CREW member.");
+        }
 
     }
 }
