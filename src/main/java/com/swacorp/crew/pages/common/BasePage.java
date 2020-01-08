@@ -223,4 +223,14 @@ public class BasePage {
         }
         return obj;
     }
+
+    public void setDynamicData(String varName, String value) {
+        Long id = Thread.currentThread().getId();
+        TestUtil.dynamicDataMap.put(varName + "-" + id, value);
+    }
+
+    public String getDynamicData(String varName) {
+        Long id = Thread.currentThread().getId();
+        return TestUtil.dynamicDataMap.get(varName + "-" + id);
+    }
 }

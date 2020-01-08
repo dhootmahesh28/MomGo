@@ -13,7 +13,7 @@ import com.swacorp.crew.wrappers.GenericMethods;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import com.swacorp.crew.genericwrappers.editor.IButton;
-
+import com.swacorp.crew.utils.*;
 public class WinBasePage implements IEditor,GenericMethods, IButton, IWindow{
 
     ReportUtil report = new ReportUtil();
@@ -191,7 +191,15 @@ public class WinBasePage implements IEditor,GenericMethods, IButton, IWindow{
             report.reportNonWeb("error",/*window.getObjectName() + */" Object does not exist");
         }
     }
+    public void setDynamicData(String varName, String value) {
+        Long id = Thread.currentThread().getId();
+        TestUtil.dynamicDataMap.put(varName + "-" + id, value);
+    }
 
+    public String getDynamicData(String varName) {
+        Long id = Thread.currentThread().getId();
+        return TestUtil.dynamicDataMap.get(varName + "-" + id);
+    }
 
 /*    public boolean Highlight(TestObject o) {
         try {

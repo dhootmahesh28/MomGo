@@ -67,6 +67,8 @@ public class TrimHomePageAM extends WinBasePage{
         EditField fldFirstName = or.tRiMTrainingResourceManagerSouthwestWindow().employeeWindow().txtFirstNameEditField();
 
         try {
+            //getDynamicData("EmployeeNumber");
+            System.out.println("getDynamicData EmployeeNumber" + getDynamicData("EmployeeNumber"));
             Highlight(winFindEmployee);
             setTextInEditBox(fldEmpSearch, empNumber);
             try {
@@ -114,10 +116,11 @@ public class TrimHomePageAM extends WinBasePage{
     }
 
     public void ValidateSearchResults(boolean status) throws GeneralLeanFtException{
+        String visible = status ? "visible": "not visible";
         if ((status && searchFound) || (!status && !searchFound)){
-            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "CREW employee details found on Trim.");
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "CREW employee details "+visible+" on Trim.");
         }else{
-            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "CREW employee details found on Trim.\"");
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "CREW employee details "+visible+" on Trim.\"");
         }
         flushAllChileWindowsExceptMain();
     }

@@ -171,7 +171,9 @@ public class HomePage extends BasePage {
         }else{
             CrewAddedSuccessfully = false;
         }
+        setDynamicData("EmployeeNumber",empNum);
         return empNum;
+
     }
 
     public void VerifyCrewAddedSuccessfully(boolean status){

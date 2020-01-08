@@ -19,10 +19,10 @@ import java.util.Date;
 import com.swacorp.crew.pages.common.Constant;
 
 // This class will be a wrapper to ReportUtil.
-public class callReportUtil {
+public class CallReportUtil {
     private ReportUtil report;
 
-    callReportUtil(){
+    CallReportUtil(){
         createNewReportInstance();
     }
 
