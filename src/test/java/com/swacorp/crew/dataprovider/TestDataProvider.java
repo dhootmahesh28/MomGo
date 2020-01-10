@@ -7,6 +7,9 @@ import org.testng.annotations.DataProvider;
  */
 public class TestDataProvider {
 
+
+//    addCrewMember( empPosition,  classNumber,  crewNumber,  baseLocation, empNum,  lastName,  firstName,  dateOfBirth,
+                    // gender,  usCitizenFlag,  type, certificate,  dateIssued,  rating)
     @DataProvider(name = "TC181510_CREW_14499_TC07")
     public static Object[][] TC181510_CREW_14499_TC07() {
         return new Object[][]{{"SIM. INSTRUCTOR - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "05/01/2018", "BOEING 737 PIC" }};
@@ -22,5 +25,18 @@ public class TestDataProvider {
         return new Object[][]{{"AIRCREW PGM MGR - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "05/01/2018", "BOEING 737 PIC" }};
     }
 
+    @DataProvider(name = "TC181553")
+    public static Object[][] TC181553() {
+        return new Object[][]{{"FIRST OFFICER - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "01/05/2020", "BOEING 737 PIC", "Updated message.", "Add message.", "FIRST OFFICER-717 ALL" }};
+    }
 
+    @DataProvider(name = "TC181554")
+    public static Object[][] TC181554() {
+        return new Object[][]{{"CAPTAIN-737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "01/05/2020", "BOEING 737 PIC", "Updated message.", "Add message.", "FIRST OFFICER-717 ALL" }};
+    }
+
+    @DataProvider(name = "TC181391")
+    public static Object[][] TC181359() {
+        return new Object[][]{{"FIRST OFFICER - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "05/01/2018", "BOEING 737 PIC" }};
+    }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <applicationModel>
     <name>Application Model</name>
-    <className>ObjectRepo_Trim</className>
+    <className>MainObjectRepoTrim</className>
     <objects>
         <object type="Window" technology="WinForms">
             <name>Login to Southwest</name>
@@ -197,6 +197,17 @@
                                 </properties>
                             </identification>
                         </object>
+                        <object type="ListBox" technology="WinForms">
+                            <name>lstSearch</name>
+                            <codeName>lstSearchListBox1</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="FullNamePath" type="string" isRegExp="false">lstSearch;GroupBox1;frmFindEmployee;;frmMain</property>
+                                    <property name="ObjectName" type="string" isRegExp="false">lstSearch</property>
+                                </properties>
+                            </identification>
+                        </object>
                     </children>
                 </object>
                 <object type="Window" technology="WinForms">
@@ -239,6 +250,16 @@
                             <identification>
                                 <properties>
                                     <property name="ObjectName" type="string" isRegExp="false">dtpDateOfBirth</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="CheckBox" technology="WinForms">
+                            <name>Active</name>
+                            <codeName>activeCheckBox</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ObjectName" type="string" isRegExp="false">chkActive</property>
                                 </properties>
                             </identification>
                         </object>

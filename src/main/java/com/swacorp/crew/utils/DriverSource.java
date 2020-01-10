@@ -1,8 +1,6 @@
 package com.swacorp.crew.utils;
 
-import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.unittesting.TestNgUnitTestBase;
-import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;

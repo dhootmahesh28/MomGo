@@ -19,4 +19,28 @@ public interface IWindow<T extends com.hp.lft.sdk.winforms.Window> {
         }
     }
 
+    default void  MinimiseWindowIfExist(T obj) throws GeneralLeanFtException {
+        try {
+            if (obj.exists()) {
+                obj.minimize();
+            }
+            logger.info("Window minimized successfully..");
+        }catch(GeneralLeanFtException e){
+            logger.error("Error while minimizing the window");
+            e.printStackTrace();
+        }
+    }
+
+    default void  MaximizeWindowIfExist(T obj) throws GeneralLeanFtException {
+        try {
+            if (obj.exists()) {
+                obj.maximize();
+            }
+            logger.info("Window maximized successfully..");
+        }catch(GeneralLeanFtException e){
+            logger.error("Error while maximizing the window");
+            e.printStackTrace();
+        }
+    }
+
 }

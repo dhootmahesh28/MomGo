@@ -1,5 +1,6 @@
 package com.swacorp.crew.pages.trim.homepage;
 
+import com.hp.lft.sdk.CheckedState;
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.winforms.*;
 import com.swacorp.crew.pages.common.WinBasePage;
@@ -9,6 +10,7 @@ import org.apache.log4j.Logger;
 import com.swacorp.crew.utils.ReportStatus;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TrimHomePageAM extends WinBasePage{
@@ -71,8 +73,10 @@ public class TrimHomePageAM extends WinBasePage{
             System.out.println("getDynamicData EmployeeNumber" + getDynamicData("EmployeeNumber"));
             Highlight(winFindEmployee);
             setTextInEditBox(fldEmpSearch, empNumber);
+            VerifyNoDuplicate();
             try {
                 btnClick(btnShowEmpDetails);
+                VerifyActive();
             }catch(Exception e){
                 report.report("Fail","Error occured while clicking on button. - btnShowEmpDetails");
             }
@@ -125,10 +129,42 @@ public class TrimHomePageAM extends WinBasePage{
         flushAllChileWindowsExceptMain();
     }
 
-    private void flushAllChileWindowsExceptMain() throws  GeneralLeanFtException{
+
+    public void VerifyNoDuplicate()  throws GeneralLeanFtException{
+
+        or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
+        List<ListItem> lst = or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow().lstSearchListBox1().getItems();
+        if (lst.size() ==1 ){
+                report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "No duplicate record");
+        }else{
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Duplicate record");
+        }
+    }
+
+    public void VerifyActive() throws GeneralLeanFtException{
+        CheckedState state = or.tRiMTrainingResourceManagerSouthwestWindow().employeeWindow().activeCheckBox().getState();
+        if (state.toString().equalsIgnoreCase("checked")){
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Checkbox enabled");
+        }else{
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "fail", "Checkbox disabled");
+        }
+    }
+
+
+    public void flushAllChileWindowsExceptMain() throws  GeneralLeanFtException{
         CloseWindowIfExist(or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow(),  5);
         CloseWindowIfExist(or.tRiMTrainingResourceManagerSouthwestWindow().employeeWindow(),  5);
     }
+
+    public void MinimizeMainWindow() throws  GeneralLeanFtException{
+        MinimiseWindowIfExist(or.tRiMTrainingResourceManagerSouthwestWindow());
+    }
+
+    public void MaximizeMainWindow() throws  GeneralLeanFtException{
+        MaximizeWindowIfExist(or.tRiMTrainingResourceManagerSouthwestWindow());
+    }
+
+
 }
 
 

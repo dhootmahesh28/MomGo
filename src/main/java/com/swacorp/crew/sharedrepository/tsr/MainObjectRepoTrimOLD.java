@@ -516,14 +516,12 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 		
 			private txtSearchEmpNumberEditField txtSearchEmpNumberEditField;
 	private showEmployeeDetailsButton showEmployeeDetailsButton;
-	private lstSearchListBox1 lstSearchListBox1;
 						public findEmployeeWindow(AppModelBase applicationModel) throws GeneralLeanFtException
 		{
 			super(applicationModel);
 
 					txtSearchEmpNumberEditField = new txtSearchEmpNumberEditField(this, applicationModel);
 		showEmployeeDetailsButton = new showEmployeeDetailsButton(this, applicationModel);
-		lstSearchListBox1 = new lstSearchListBox1(this, applicationModel);
 			
 			setDisplayName("Find Employee");
 		}
@@ -533,7 +531,6 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 
 					txtSearchEmpNumberEditField = new txtSearchEmpNumberEditField(this, applicationModel);
 		showEmployeeDetailsButton = new showEmployeeDetailsButton(this, applicationModel);
-		lstSearchListBox1 = new lstSearchListBox1(this, applicationModel);
 
 			setDisplayName("Find Employee");
 		}
@@ -551,7 +548,6 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 
 				public txtSearchEmpNumberEditField txtSearchEmpNumberEditField() { return txtSearchEmpNumberEditField; }
 		public showEmployeeDetailsButton showEmployeeDetailsButton() { return showEmployeeDetailsButton; }
-		public lstSearchListBox1 lstSearchListBox1() { return lstSearchListBox1; }
 		
 			public class txtSearchEmpNumberEditField extends WinFormsEditFieldNodeBase
 	{
@@ -605,32 +601,6 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 				
 			}
 
-	public class lstSearchListBox1 extends WinFormsListBoxNodeBase
-	{
-
-		
-								public lstSearchListBox1(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
-		{
-			super(parent, applicationModel);
-
-			
-			setDisplayName("lstSearch");
-		}
-
-		@Override
-		protected com.hp.lft.sdk.winforms.ListBoxDescription createDescription() throws GeneralLeanFtException{
-			com.hp.lft.sdk.winforms.ListBoxDescription description = null; 
-			try{
-				description = new com.hp.lft.sdk.winforms.ListBoxDescription.Builder().fullNamePath("lstSearch;GroupBox1;frmFindEmployee;;frmMain").objectName("lstSearch").build();
-			}catch(Exception e){
-				throw new GeneralLeanFtException(e.getMessage(), e);
-			}
-			return description;
-		}
-
-				
-			}
-
 	}
 
 	public class employeeWindow extends WinFormsWindowNodeBase
@@ -640,7 +610,6 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 			private txtEmployeeNumberEditField txtEmployeeNumberEditField;
 	private txtFirstNameEditField txtFirstNameEditField;
 	private dtpDateOfBirthCalendar dtpDateOfBirthCalendar;
-	private activeCheckBox activeCheckBox;
 						public employeeWindow(AppModelBase applicationModel) throws GeneralLeanFtException
 		{
 			super(applicationModel);
@@ -648,7 +617,6 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 					txtEmployeeNumberEditField = new txtEmployeeNumberEditField(this, applicationModel);
 		txtFirstNameEditField = new txtFirstNameEditField(this, applicationModel);
 		dtpDateOfBirthCalendar = new dtpDateOfBirthCalendar(this, applicationModel);
-		activeCheckBox = new activeCheckBox(this, applicationModel);
 			
 			setDisplayName("Employee");
 		}
@@ -659,7 +627,6 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 					txtEmployeeNumberEditField = new txtEmployeeNumberEditField(this, applicationModel);
 		txtFirstNameEditField = new txtFirstNameEditField(this, applicationModel);
 		dtpDateOfBirthCalendar = new dtpDateOfBirthCalendar(this, applicationModel);
-		activeCheckBox = new activeCheckBox(this, applicationModel);
 
 			setDisplayName("Employee");
 		}
@@ -678,7 +645,6 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 				public txtEmployeeNumberEditField txtEmployeeNumberEditField() { return txtEmployeeNumberEditField; }
 		public txtFirstNameEditField txtFirstNameEditField() { return txtFirstNameEditField; }
 		public dtpDateOfBirthCalendar dtpDateOfBirthCalendar() { return dtpDateOfBirthCalendar; }
-		public activeCheckBox activeCheckBox() { return activeCheckBox; }
 		
 			public class txtEmployeeNumberEditField extends WinFormsEditFieldNodeBase
 	{
@@ -749,32 +715,6 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 			com.hp.lft.sdk.winforms.CalendarDescription description = null; 
 			try{
 				description = new com.hp.lft.sdk.winforms.CalendarDescription.Builder().objectName("dtpDateOfBirth").build();
-			}catch(Exception e){
-				throw new GeneralLeanFtException(e.getMessage(), e);
-			}
-			return description;
-		}
-
-				
-			}
-
-	public class activeCheckBox extends WinFormsCheckBoxNodeBase
-	{
-
-		
-								public activeCheckBox(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
-		{
-			super(parent, applicationModel);
-
-			
-			setDisplayName("Active");
-		}
-
-		@Override
-		protected com.hp.lft.sdk.winforms.CheckBoxDescription createDescription() throws GeneralLeanFtException{
-			com.hp.lft.sdk.winforms.CheckBoxDescription description = null; 
-			try{
-				description = new com.hp.lft.sdk.winforms.CheckBoxDescription.Builder().objectName("chkActive").build();
 			}catch(Exception e){
 				throw new GeneralLeanFtException(e.getMessage(), e);
 			}
@@ -3567,431 +3507,6 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 		public void scroll(com.hp.lft.sdk.ScrollOrientation arg0, com.hp.lft.sdk.ScrollType arg1, int arg2) throws com.hp.lft.sdk.GeneralLeanFtException 
 		{
 			getConcrete().scroll(arg0, arg1, arg2);
-		}
-
-		@Override 
-		public void sendKeys(java.lang.String arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().sendKeys(arg0);
-		}
-
-		@Override 
-		public void sendKeys(java.lang.String arg0, java.util.EnumSet<com.hp.lft.sdk.KeyModifier> arg1) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().sendKeys(arg0, arg1);
-		}
-
-		@Override 
-		public void setDisplayName(java.lang.String arg0)  
-		{
-			getConcrete().setDisplayName(arg0);
-		}
-
-		@Override 
-		public java.awt.Point verifyImageExists(java.awt.image.RenderedImage arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().verifyImageExists(arg0);
-		}
-
-		@Override 
-		public java.awt.Point verifyImageExists(java.awt.image.RenderedImage arg0, byte arg1) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().verifyImageExists(arg0, arg1);
-		}
-
-		@Override 
-		public boolean verifyImageMatch(java.awt.image.RenderedImage arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().verifyImageMatch(arg0);
-		}
-
-		@Override 
-		public boolean verifyImageMatch(java.awt.image.RenderedImage arg0, byte arg1) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().verifyImageMatch(arg0, arg1);
-		}
-
-		@Override 
-		public boolean verifyImageMatch(java.awt.image.RenderedImage arg0, com.hp.lft.sdk.ImageMaskArea arg1) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().verifyImageMatch(arg0, arg1);
-		}
-
-		@Override 
-		public boolean verifyImageMatch(java.awt.image.RenderedImage arg0, byte arg1, byte arg2) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().verifyImageMatch(arg0, arg1, arg2);
-		}
-
-		@Override 
-		public boolean verifyImageMatch(java.awt.image.RenderedImage arg0, com.hp.lft.sdk.ImageMaskArea arg1, byte arg2) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().verifyImageMatch(arg0, arg1, arg2);
-		}
-
-		@Override 
-		public boolean verifyImageMatch(java.awt.image.RenderedImage arg0, com.hp.lft.sdk.ImageMaskArea arg1, byte arg2, byte arg3) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().verifyImageMatch(arg0, arg1, arg2, arg3);
-		}
-	}
-	
-	public abstract class WinFormsListBoxNodeBase extends AppModelNodeBase<com.hp.lft.sdk.winforms.ListBox, com.hp.lft.sdk.winforms.ListBoxDescription> implements com.hp.lft.sdk.winforms.ListBox
-	{		
-		public WinFormsListBoxNodeBase(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
-		{
-			super(parent, applicationModel);
-		}
-
-		
-
-
-		@Override 
-		public void activateItem(int arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().activateItem(arg0);
-		}
-
-		@Override 
-		public void activateItem(com.hp.lft.sdk.winforms.ListItem arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().activateItem(arg0);
-		}
-
-		@Override 
-		public void activateItem(java.lang.String arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().activateItem(arg0);
-		}
-
-		@Override 
-		public void activateItem(int arg0, com.hp.lft.sdk.MouseButton arg1) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().activateItem(arg0, arg1);
-		}
-
-		@Override 
-		public void activateItem(com.hp.lft.sdk.winforms.ListItem arg0, com.hp.lft.sdk.MouseButton arg1) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().activateItem(arg0, arg1);
-		}
-
-		@Override 
-		public void activateItem(java.lang.String arg0, com.hp.lft.sdk.MouseButton arg1) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().activateItem(arg0, arg1);
-		}
-
-		@Override 
-		public void click() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().click();
-		}
-
-		@Override 
-		public void click(com.hp.lft.sdk.ClickArgs arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().click(arg0);
-		}
-
-		@Override 
-		public void click(com.hp.lft.sdk.MouseButton arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().click(arg0);
-		}
-
-		@Override 
-		public <TChild extends TestObject> TChild describe(java.lang.Class<TChild> arg0, com.hp.lft.sdk.Description arg1) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().describe(arg0, arg1);
-		}
-
-		@Override 
-		public void deselect(int... arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().deselect(arg0);
-		}
-
-		@Override 
-		public void deselect(com.hp.lft.sdk.winforms.ListItem... arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().deselect(arg0);
-		}
-
-		@Override 
-		public void deselect(java.lang.String... arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().deselect(arg0);
-		}
-
-		@Override 
-		public void doubleClick() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().doubleClick();
-		}
-
-		@Override 
-		public void doubleClick(com.hp.lft.sdk.ClickArgs arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().doubleClick(arg0);
-		}
-
-		@Override 
-		public void doubleClick(com.hp.lft.sdk.MouseButton arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().doubleClick(arg0);
-		}
-
-		@Override 
-		public void dragAndDropOn(com.hp.lft.sdk.SupportDragAndDrop arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().dragAndDropOn(arg0);
-		}
-
-		@Override 
-		public void dragAndDropOn(com.hp.lft.sdk.SupportDragAndDrop arg0, com.hp.lft.sdk.DragAndDropArgs arg1) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().dragAndDropOn(arg0, arg1);
-		}
-
-		@Override 
-		public boolean exists() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().exists();
-		}
-
-		@Override 
-		public boolean exists(java.lang.Integer arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().exists(arg0);
-		}
-
-		@Override 
-		public <TChild extends TestObject> TChild[] findChildren(java.lang.Class<TChild> arg0, com.hp.lft.sdk.Description arg1) throws com.hp.lft.sdk.GeneralLeanFtException, java.lang.CloneNotSupportedException 
-		{
-			return getConcrete().findChildren(arg0, arg1);
-		}
-
-		@Override 
-		public void fireEvent(java.lang.String arg0, java.lang.Object... arg1) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().fireEvent(arg0, arg1);
-		}
-
-		@Override 
-		public java.awt.Point getAbsoluteLocation() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getAbsoluteLocation();
-		}
-
-		@Override 
-		public java.lang.String getDisplayName()  
-		{
-			return getConcrete().getDisplayName();
-		}
-
-		@Override 
-		public java.lang.String getErrorText() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getErrorText();
-		}
-
-		@Override 
-		public java.lang.String getFullNamePath() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getFullNamePath();
-		}
-
-		@Override 
-		public java.lang.String getFullType() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getFullType();
-		}
-
-		@Override 
-		public int getHandle() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getHandle();
-		}
-
-		@Override 
-		public com.hp.lft.sdk.winforms.ListItem getItem(java.lang.String arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getItem(arg0);
-		}
-
-		@Override 
-		public java.util.List<com.hp.lft.sdk.winforms.ListItem> getItems() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getItems();
-		}
-
-		@Override 
-		public java.awt.Point getLocation() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getLocation();
-		}
-
-		@Override 
-		public java.lang.String getNativeClass() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getNativeClass();
-		}
-
-		@Override 
-		public com.hp.lft.sdk.NativeObject getNativeObject() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getNativeObject();
-		}
-
-		@Override 
-		public java.lang.String getObjectName() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getObjectName();
-		}
-
-		@Override 
-		public <TValue> TValue getObjectProperty(java.lang.String arg0, java.lang.Class<TValue> arg1) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getObjectProperty(arg0, arg1);
-		}
-
-		@Override 
-		public java.util.List<com.hp.lft.sdk.winforms.ListItem> getSelectedItems() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getSelectedItems();
-		}
-
-		@Override 
-		public java.awt.Dimension getSize() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getSize();
-		}
-
-		@Override 
-		public java.awt.image.RenderedImage getSnapshot() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getSnapshot();
-		}
-
-		@Override 
-		public java.lang.String getText() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getText();
-		}
-
-		@Override 
-		public java.awt.Rectangle[] getTextLocations(java.lang.String arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getTextLocations(arg0);
-		}
-
-		@Override 
-		public java.awt.Rectangle[] getTextLocations(java.lang.String arg0, java.awt.Rectangle arg1) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getTextLocations(arg0, arg1);
-		}
-
-		@Override 
-		public java.lang.String getVisibleText() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getVisibleText();
-		}
-
-		@Override 
-		public java.lang.String getVisibleText(java.awt.Rectangle arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getVisibleText(arg0);
-		}
-
-		@Override 
-		public java.lang.String getWindowClassRegExp() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getWindowClassRegExp();
-		}
-
-		@Override 
-		public int getWindowId() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getWindowId();
-		}
-
-		@Override 
-		public java.lang.String getWindowTitleRegExp() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().getWindowTitleRegExp();
-		}
-
-		@Override 
-		public void highlight() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().highlight();
-		}
-
-		@Override 
-		public <TChild extends TestObject> int highlightMatches(java.lang.Class<TChild> arg0, com.hp.lft.sdk.Description arg1) throws com.hp.lft.sdk.GeneralLeanFtException, java.lang.CloneNotSupportedException 
-		{
-			return getConcrete().highlightMatches(arg0, arg1);
-		}
-
-		@Override 
-		public boolean isChildWindow() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().isChildWindow();
-		}
-
-		@Override 
-		public boolean isEnabled() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().isEnabled();
-		}
-
-		@Override 
-		public boolean isFocused() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().isFocused();
-		}
-
-		@Override 
-		public boolean isOwnedWindow() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().isOwnedWindow();
-		}
-
-		@Override 
-		public boolean isVisible() throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			return getConcrete().isVisible();
-		}
-
-		@Override 
-		public void mouseMove(com.hp.lft.sdk.Location arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().mouseMove(arg0);
-		}
-
-		@Override 
-		public void select(int... arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().select(arg0);
-		}
-
-		@Override 
-		public void select(com.hp.lft.sdk.winforms.ListItem... arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().select(arg0);
-		}
-
-		@Override 
-		public void select(java.lang.String... arg0) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().select(arg0);
-		}
-
-		@Override 
-		public void selectRange(int arg0, int arg1) throws com.hp.lft.sdk.GeneralLeanFtException 
-		{
-			getConcrete().selectRange(arg0, arg1);
 		}
 
 		@Override 
