@@ -14,7 +14,8 @@ public interface IButton<T extends com.hp.lft.sdk.winforms.Button> {
 
     default void btnClick(T obj) throws GeneralLeanFtException {
         try {
-            obj.click(MouseButton.LEFT);
+            obj.click();
+            //obj.click(MouseButton.LEFT);
             logger.info(SuccessfullyClicked +obj.getObjectName()+ objectType +obj.getClass());
         }catch(Exception e){
             logger.error(ClickUnsuccessful +obj.getObjectName()+ objectType +obj.getClass(), e);

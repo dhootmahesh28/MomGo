@@ -84,6 +84,22 @@ public class BasePage {
         LOGGER.info("After buttonClick::" + locator);
     }
 
+    public void buttonClickIfExist(By locator) {
+        try {
+            LOGGER.info("BeforeWaitForElement in buttonClick::" + locator);
+            webDriverFluentWait().until(ExpectedConditions.elementToBeClickable(locator));
+        } catch (Exception e) {
+            LOGGER.info("Exception in buttonClick ::" + locator);
+            e.printStackTrace();
+        }
+        List<WebElement> elm = getDriver().findElements(locator);
+        if (elm.size() > 0) {
+            scrollToElement(elm.get(0));
+            elm.get(0).click();
+            LOGGER.info("After buttonClick::" + locator);
+        }
+    }
+
     public boolean isElementPresent(By locator) {
         WebElement element;
         try {

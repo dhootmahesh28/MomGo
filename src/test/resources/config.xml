@@ -7,7 +7,7 @@
         <!-- OQS Url -->
         <Parameter key="oqsUrl" value="https://xldcrewt03.swacorp.com:13003/oqs-record-keeping-ui/login.do?dept=01"/>
         <!-- OQS Login User-->
-        <Parameter key="oqsLoginUser" value="63901"/>
+        <Parameter key="oqsLoginUser" value="72451"/>
 
         <!-- TRiM Application Path -->
         <Parameter key="trimAppPath" value="C:\Program Files (x86)\North Orca\TRiM\TRiM.exe"/>

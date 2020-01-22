@@ -31,21 +31,33 @@ public class TC181510_181551_181552 extends TestManager {
     }
 
 
-    @Test(groups = {"181510", "9914477", "regression"}, dataProvider = "TC181510_CREW_14499_TC07", dataProviderClass = TestDataProvider.class)
+    @Test(priority=1,groups = {"181510", "14477", "regression"}, dataProvider = "TC181510_CREW_14499_TC07", dataProviderClass = TestDataProvider.class)
     public void TC181510_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM(String[] testData) throws GeneralLeanFtException {
         setScenarioName("TC181510_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM");
-        wrapper.WrapperMethod(testData, false);
+        wrapper.WrapperMethod(testData, false, false, true);
     }
 
-    @Test(groups = {"181551", "9914477", "regression"}, dataProvider = "TC181551_CREW_14499_TC08", dataProviderClass = TestDataProvider.class)
+    @Test(priority=2, groups = {"181551", "14477", "regression"}, dataProvider = "TC181551_CREW_14499_TC08", dataProviderClass = TestDataProvider.class)
     public void TC181551_OQS_RK_TRiM_FAA_Add_a_FAA_to_OQS_RK_and_verify_in_TRiM(String[] testData) throws GeneralLeanFtException {
         setScenarioName("TC181551_CREW_14499_TC08_OQS_RK_TRiM_FAA_Add_a_FAA_to_OQS_RK_and_verify_in_TRiM");
-        wrapper.WrapperMethod(testData, false);
+        wrapper.WrapperMethod(testData, false, false, true);
     }
 
-    @Test(groups = {"181552", "9914477", "regression"}, dataProvider = "TC181552_CREW_14499_TC09", dataProviderClass = TestDataProvider.class)
+    @Test(priority=3, groups = {"181552", "14477", "regression"}, dataProvider = "TC181552_CREW_14499_TC09", dataProviderClass = TestDataProvider.class)
     public void TC181552_OQS_RK_TRiM_APM_Add_a_APM_to_OQS_RK_and_verify_in_TRiM(String[] testData) throws GeneralLeanFtException {
         setScenarioName("TC181552_OQS_RK_TRiM_APM_Add_a_APM_to_OQS_RK_and_verify_in_TRiM");
-        wrapper.WrapperMethod(testData, false);
+        wrapper.WrapperMethod(testData, false, false, true);
+    }
+
+    @Test(priority=4, groups = {"181359", "14477", "regression"}, dataProvider = "TC181359", dataProviderClass = TestDataProvider.class)
+    public void TC181359_OQS_RK_TRiM_FO_Add_a_FO_to_OQS_RK_and_verify_in_TRiM(String[] testData) throws GeneralLeanFtException {
+        setScenarioName("TC181359_OQS_RK_TRiM_FO_Add_a_FO_to_OQS_RK_and_verify_in_TRiM");
+        wrapper.WrapperMethod(testData, true, false, true);
+    }
+
+    @Test(priority=5, groups = {"181508", "14477", "regression"}, dataProvider = "TC181508", dataProviderClass = TestDataProvider.class)
+    public void TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM(String[] testData) throws GeneralLeanFtException {
+        setScenarioName("CREW_14499_TC05_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM");
+        wrapper.WrapperMethod(testData, true, false, true);
     }
 }

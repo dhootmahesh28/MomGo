@@ -22,6 +22,10 @@ public class TrimHomePageAM extends WinBasePage{
     private String fldFirstNameFromApp = "";
     private boolean searchFound;
 
+    public String getDynamicDataFromPage(String key){
+        return pgMap.get(key);
+    }
+
 
     //Window winFindEmployee = or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
     public TrimHomePageAM()  {
@@ -58,7 +62,7 @@ public class TrimHomePageAM extends WinBasePage{
         return returnInt;
     }
 
-    public int SearchEmployeesDetails(String empNumber) throws  GeneralLeanFtException {
+    public int SearchEmployeesDetails(String empNumber, boolean verifyActive) throws  GeneralLeanFtException {
         int retVal = 1;
         ReportStatus.reset();
         Window winFindEmployee = or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
@@ -70,13 +74,15 @@ public class TrimHomePageAM extends WinBasePage{
 
         try {
             //getDynamicData("EmployeeNumber");
-            System.out.println("getDynamicData EmployeeNumber" + getDynamicData("EmployeeNumber"));
+            //System.out.println("getDynamicData EmployeeNumber" + getDynamicData("EmployeeNumber"));
             Highlight(winFindEmployee);
             setTextInEditBox(fldEmpSearch, empNumber);
             VerifyNoDuplicate();
             try {
                 btnClick(btnShowEmpDetails);
-                VerifyActive();
+                if(verifyActive) {
+                    VerifyActive();
+                }
             }catch(Exception e){
                 report.report("Fail","Error occured while clicking on button. - btnShowEmpDetails");
             }
@@ -88,11 +94,13 @@ public class TrimHomePageAM extends WinBasePage{
                 pgMap.put("TRIM_EMP_NO", empNumberFromApp);
                 pgMap.put("TRIM_EMP_FIRSTNAME", fldFirstNameFromApp);
                 retVal = 0;
+                winFindEmployeeSearch.close();
                 searchFound = true;
             }else{
                 searchFound = false;
                 retVal = 1;
             }
+            winFindEmployee.close();
             report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "info", "Search result after clicking on Search button.");
         }catch( Exception  e){
             e.printStackTrace();
@@ -124,7 +132,7 @@ public class TrimHomePageAM extends WinBasePage{
         if ((status && searchFound) || (!status && !searchFound)){
             report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "CREW employee details "+visible+" on Trim.");
         }else{
-            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "CREW employee details "+visible+" on Trim.\"");
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "CREW employee details not "+visible+" on Trim.");
         }
         flushAllChileWindowsExceptMain();
     }
@@ -134,10 +142,10 @@ public class TrimHomePageAM extends WinBasePage{
 
         or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
         List<ListItem> lst = or.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow().lstSearchListBox1().getItems();
-        if (lst.size() ==1 ){
-                report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "No duplicate record");
+        if (lst.size() < 2 ){ // less than 2 means no duplicate
+                report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "No duplicate record is found");
         }else{
-            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Duplicate record");
+            report.reportLeanFT(or.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Duplicate record found.");
         }
     }
 

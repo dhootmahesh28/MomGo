@@ -31,12 +31,19 @@ public class TestDataProvider {
     }
 
     @DataProvider(name = "TC181554")
-    public static Object[][] TC181554() {
-        return new Object[][]{{"CAPTAIN-737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "01/05/2020", "BOEING 737 PIC", "Updated message.", "Add message.", "FIRST OFFICER-717 ALL" }};
+    public static Object[][] TC181554() {//FIRST OFFICER-717 ALL
+        return new Object[][]{{"FIRST OFFICER - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "01/05/2020", "BOEING 737 PIC", "Updated message.", "Add message.", "CAPTAIN-737 All" }};
     }
 
-    @DataProvider(name = "TC181391")
+    @DataProvider(name = "TC181359")
     public static Object[][] TC181359() {
         return new Object[][]{{"FIRST OFFICER - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "05/01/2018", "BOEING 737 PIC" }};
+    }
+
+    @DataProvider(name = "TC181508")
+    public static Object[][] TC181508() {
+        return new Object[][]{{"FIRST OFFICER - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "05/01/2018", "BOEING 737 PIC" },
+                {"FIRST OFFICER - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "05/01/2018", "BOEING 737 PIC" },
+                {"FIRST OFFICER - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "05/01/2018", "BOEING 737 PIC" }};
     }
 }

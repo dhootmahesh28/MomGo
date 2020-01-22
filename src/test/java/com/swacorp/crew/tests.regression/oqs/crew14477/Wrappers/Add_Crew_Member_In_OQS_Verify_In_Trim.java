@@ -29,15 +29,12 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         oqsHomePage = new HomePage();
     }
 
-    public void WrapperMethod(String[] testData, boolean visibility) throws GeneralLeanFtException{
+    public void WrapperMethod(String[] testData, boolean visibility, boolean verifyActivechkbox, boolean createFreshCrew) throws GeneralLeanFtException{
         //Login to OQS
         oqsLoginPage.loginOQS();
 
         //Add Crew Member
-        String empNr = oqsHomePage.addCrewMember(testData);
-
-        //Store employee number in global hashmap
-        //runtimeData.RunTimeDataFromApp.put("CrewEmployeeNumber" , empNr);
+        String empNr = oqsHomePage.addCrewMember(testData, createFreshCrew);
 
         //Verify that Crew member is successfully added.
         oqsHomePage.VerifyCrewAddedSuccessfully(true);
@@ -52,7 +49,34 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         trimHomePageAM.NavigateMenu("^E-->^F");
 
         //Search the employee details in Trim.
-        trimHomePageAM.SearchEmployeesDetails(empNr);
+        trimHomePageAM.SearchEmployeesDetails(empNr, verifyActivechkbox);
+
+        //Verify that the details are not visible in Trim
+        trimHomePageAM.ValidateSearchResults(visibility );
+
+        trimHomePageAM.MinimizeMainWindow();
+
+    }
+
+    public void WrapperMethodToAddDuplicateEmployeeNrOQS(String[] testData, boolean visibility, boolean verifyActivechkbox) throws GeneralLeanFtException{
+
+        //Add Crew Member
+        String empNr = oqsHomePage.addCrewMember(testData, false); // False because we are adding duplicate emp
+
+        //Verify that Crew member is successfully added.
+        oqsHomePage.VerifyCrewAddedSuccessfully(false);
+
+        ////Login to Trim
+        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
+
+        //Verify login is successful.
+        trimLoginPage.VerifyLoginSuccessful(true);
+
+        //Navigate Main Menu on Trim
+        trimHomePageAM.NavigateMenu("^E-->^F");
+
+        //Search the employee details in Trim.
+        trimHomePageAM.SearchEmployeesDetails(oqsHomePage.getEmployeeNumber(), verifyActivechkbox);
 
         //Verify that the details are not visible in Trim
         trimHomePageAM.ValidateSearchResults(visibility );
@@ -60,16 +84,17 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         trimHomePageAM.MinimizeMainWindow();
     }
 
-
     public void AddNewPositionInOQSVerifyInTrim (String[] testData, boolean visibility) throws Exception{
         //Login to OQS
         oqsLoginPage.loginOQS();
 
         //Add Crew Member
-        String empNr = oqsHomePage.addCrewMember(testData);
+        String empNr = oqsHomePage.addCrewMember(testData, true);
+
 
         //Verify that Crew member is successfully added.
         oqsHomePage.VerifyCrewAddedSuccessfully(true);
+
 
         oqsHomePage.EditPosition();
 
@@ -83,7 +108,7 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         trimHomePageAM.NavigateMenu("^E-->^F");
 
         //Search the employee details in Trim.
-        trimHomePageAM.SearchEmployeesDetails(empNr);
+        trimHomePageAM.SearchEmployeesDetails(empNr, false);
 
         //Verify that the details are not visible in Trim
         trimHomePageAM.ValidateSearchResults(visibility );
@@ -91,7 +116,9 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         trimHomePageAM.MinimizeMainWindow();
 
 
-        oqsHomePage.addPosition();
+        //oqsHomePage.addPosition();
+
+
 
         ////Login to Trim
         trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
@@ -103,7 +130,7 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         trimHomePageAM.NavigateMenu("^E-->^F");
 
         //Search the employee details in Trim.
-        trimHomePageAM.SearchEmployeesDetails(empNr);
+        trimHomePageAM.SearchEmployeesDetails(empNr, false);
 
         //Verify that the details are not visible in Trim
         trimHomePageAM.ValidateSearchResults(visibility );
@@ -112,10 +139,21 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
 
     }
 
+    public void EditPositionToCReateCA () throws Exception{
+        //Login to OQS
+
+        oqsHomePage.EditPosition();
+    }
+
     public void VerifyDueEmployee() throws GeneralLeanFtException {
 
         trimHomePageAM.flushAllChileWindowsExceptMain();
         //Navigate Main Menu on Trim
         trimHomePageAM.NavigateMenu("^E-->^F");
+    }
+
+    public void addDuplicateCrewMember(String[] data, boolean status){
+        boolean res = oqsHomePage.addDuplicateCrewMember(data, status);
+
     }
 }

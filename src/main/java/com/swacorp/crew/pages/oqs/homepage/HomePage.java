@@ -69,6 +69,7 @@ public class HomePage extends BasePage {
 
 
     public void addPosition() throws Exception{
+        waitByTime(5000);
         waitUntilElementClickable(POSITION_ADD_BTN);
         buttonClick(POSITION_ADD_BTN);
         waitUntilElementClickable(POSITION_START_TXT);
@@ -76,13 +77,14 @@ public class HomePage extends BasePage {
         String hundredDaysPast = dateUtil.getPastDate(100);
 
         enterText(POSITION_START_TXT,startDate );
-        //enterText(POSITION_END_TXT, startDate);
+        enterText(POSITION_END_TXT, startDate);
         enterText(MESSAGE_TXT, testData[14]);
         selectOption(POSITION_DROPDOWN, testData[15]);
         buttonClick(OK_BUTTON);
         buttonClick(YES_BUTTON);
-        buttonClick(OK_BUTTON);
         buttonClick(YES_BUTTON);
+
+        Thread.sleep(4000);
     }
 
     public void EditPosition() throws  Exception {
@@ -91,20 +93,23 @@ public class HomePage extends BasePage {
         String hundredDaysPast = dateUtil.getPastDate(100);
         try {
         waitUntilElementClickable(EDIT_POSITION_BTN);
+        waitByTime(5000);
         waitForElement(EDIT_POSITION_BTN);
         buttonClick(EDIT_POSITION_BTN);
         waitUntilElementClickable(EDIT_POSITION_DIALOG);
+
         enterText(POSITION_START_TXT, startDate);
         enterText(QUAL_DATE_TXT, startDate);
         enterText(POSITION_END_BOX, startDate);
+        waitUntilElementClickable(MESSAGE_TXT);
         enterText(MESSAGE_TXT,testData[13]);
         buttonClick(OK_BUTTON);
-        editPosition = true;
         buttonClick(OK_BUTTON);
+        editPosition = true;
             //ValidateEditPositionSuccessful(editPosition);
     }catch(Exception e){
             editPosition = false;
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -197,7 +202,7 @@ public class HomePage extends BasePage {
     public int addCrewMember(String empPosition, String startDate, String classYear, String classNumber, String crewNumber, String baseLocation,
                               String empNum, String lastName, String firstName, String dateOfBirth, String gender, String usCitizenFlag, String type,
                               String certificate, String dateIssued, String rating) {
-       // try {
+        try {
             getDriver().switchTo().frame("compArea");
             selectOption(POSITION_TEXT, empPosition);
             enterText(CLASS_YEAR_TEXT, classYear);
@@ -220,10 +225,11 @@ public class HomePage extends BasePage {
                 report.reportSelenium("INFO", "Entered CREW details and proceeding to click on Save to CrewMember List button");
 
             }
-        buttonClick(SAVE_TO_CREWMEMBER_LIST_BUTTON);
-        waitByTime(3000);
+            buttonClick(SAVE_TO_CREWMEMBER_LIST_BUTTON);
+            waitByTime(3000);
+            //buttonClickIfExist(OK_BUTTON);
             //waitUntilElementClickable(By.xpath("//*[@class='yui-dt0-col-lastname yui-dt-col-lastname' and text()='Larry']"));
-            if (getDriver().findElements(CREW_LIST_TABLE_FIRST_ROW).size() < 1){
+            if (getDriver().findElements(CREW_LIST_TABLE_FIRST_ROW).size() < 1) {
                 //throw new Exception(); //ElementNotVisibleException("Table is not reflected");
                 return 1;
             }
@@ -233,10 +239,10 @@ public class HomePage extends BasePage {
             report.reportSelenium("INFO", "Crew Member: " + empNum + " added to the Crewmember Import List and proceeding to click on Import button");
             buttonClick(IMPORT_BUTTON);
 
-            //Verify if duplicate error message exist
 
-
+            waitByTime(5000);
             waitUntilElementClickable(IMPORT_SUCCESS_MSG);
+            //buttonClickIfExist(OK_BUTTON);
             report.reportSelenium("INFO", "Class list successfully imported and proceeding to click on OK button");
             buttonClick(OK_BUTTON);
 
@@ -244,33 +250,87 @@ public class HomePage extends BasePage {
                 report.reportSelenium("INFO", "Crew Member: " + empNum + " created successfully");
             else
                 report.reportSelenium("FAIL", "Crew Member creation with: " + empNum + " Failed");
-       // getDriver().switchTo().defaultContent();
-        return 0;
+            return 0;
+        }catch(Exception e){
+            return -1;
+        }
     }
 
 
-    public String addCrewMember(String[] data){
+    public String addCrewMember(String[] data, boolean createFreshCrew){
         int retVal = -1;
+        int crewAdded;
         testData = data;
-        empNum = searchCrew();
+
         DateUtil dateUtil = new DateUtil();
-        setDynamicData("EmpNumber", empNum);
+/*        try {
+
+            empNum = getDynamicData("empNum");
+
+            if (empNum == null){
+                empNum = searchCrew();
+                setDynamicData("EmpNumber", empNum);
+            }
+        }catch(Exception e) {
+            empNum = searchCrew();
+            setDynamicData("EmpNumber", empNum);
+        }*/
+
+        empNum = getDynamicData("EmpNumber");
+        System.out.print("empNum: "+empNum);
+        if (empNum == null | createFreshCrew){
+            empNum = searchCrew();
+            setDynamicData("EmpNumber", empNum);
+        }
+
         try {
             startDate = dateUtil.getCurrentDate();
             String classYear = dateUtil.getCurrentYear();
             retVal = addCrewMember(data[0], startDate, classYear, data[1], data[2], data[3], empNum, data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12]);
-            retVal =0;
+            System.out.print("retVal: "+retVal);
+            retVal = 0;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        //setDynamicData("EmployeeNumber",empNum);
+        if (retVal == 0){
+
+            crewAddedSuccessfully = true;
+            return empNum;
+        }else {
+            crewAddedSuccessfully = false;
+            return "ERROR";
+        }
+    }
+
+    public String getEmployeeNumber(){
+        System.out.print("Returning empNr. "+empNum);
+        return empNum;
+    }
+
+    public boolean addDuplicateCrewMember(String[] data, boolean status){
+        int retVal = -1;
+        int crewAdded;
+        testData = data;
+        empNum = getDynamicData("EmpNumber");
+        System.out.print("empNum  "+empNum);
+        try {
+            //startDate = dateUtil.getCurrentDate();
+            String classYear = dateUtil.getCurrentYear();
+            retVal = addCrewMember(data[0], startDate, classYear, data[1], data[2], data[3], empNum, data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12]);
+
         }catch(Exception e){
             e.printStackTrace();
         }
 
         if (retVal == 0){
-            crewAddedSuccessfully = true;
-        }else{
-            crewAddedSuccessfully = false;
+            report.reportSelenium("FAIL", "duplicate employee number successsfully added. ");
+            return false;
+        }else {
+            report.reportSelenium("Pass", "duplicate employee number not added to OQS. ");
+            return  true;
         }
-        setDynamicData("EmployeeNumber",empNum);
-        return empNum;
 
     }
 

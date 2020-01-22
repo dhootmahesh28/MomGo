@@ -18,17 +18,18 @@ public class TC181391 extends TestManager {
 /*    LoginPage_am trimLoginPage ;
     TrimHomePageAM trimHomePageAM;
     OQSLoginPage oqsLoginPage ;
-    HomePage oqsHomePage;
+    HomePage oqsHomePage;s
 */
     TC181391(){
         wrapper =new  Add_Crew_Member_In_OQS_Verify_In_Trim();
     }
 
-    @Test(groups = {"181391", "14477", "regression"}, dataProvider = "TC181391", dataProviderClass = TestDataProvider.class)
-    public void TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM(String[] testData) throws GeneralLeanFtException {
+    @Test(priority=6, groups = {"181391", "14477", "regression"}, dataProvider = "TC181391", dataProviderClass = TestDataProvider.class)
+    public void TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM(String[] testData) throws GeneralLeanFtException, Exception {
         setScenarioName("TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM");
-        wrapper.WrapperMethod(testData, true);
-
+        wrapper.WrapperMethod(testData, false, false, false);
+        wrapper.EditPositionToCReateCA();
+        wrapper.WrapperMethodToAddDuplicateEmployeeNrOQS(testData, false, false);
 
     }
 }

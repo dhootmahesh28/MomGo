@@ -10,12 +10,15 @@ public class OQSLoginPage extends BasePage {
 
     private final Logger LOGGER = Logger.getLogger(OQSLoginPage.class);
     ReportUtil report = new ReportUtil();
-    private final By USERID_LINK = By.xpath("//*[@class='yui-dt0-col-employeeId yui-dt-col-employeeId yui-dt-sortable yui-dt-first']//*[@class='yui-dt-liner' and text()='" + EnvironmentConstants.OQSLOGINUSER + "']");
+    //private final By USERID_LINK = By.xpath("//*[@class='yui-dt0-col-employeeId yui-dt-col-employeeId yui-dt-sortable yui-dt-first']//*[@class='yui-dt-liner' and text()='" + EnvironmentConstants.OQSLOGINUSER + "']");
+    private final By USERID_LINK = By.xpath("//*[text()='ROSA']");
+    //private final By USERID_LINK = By.ByCssSelector("#yui-rec87 > td.yui-dt0-col-employeeId.yui-dt-col-employeeId.yui-dt-sortable.yui-dt-first > div");
     private final By SEARCH_BUTTON = By.xpath("//*[@id='crewmemberSearchButtonId']");
+
     public String oqsUrl;
 
     public void loginOQS() {
-        getDriver().manage().window().maximize();
+        //getDriver().manage().window().maximize();
         oqsUrl = EnvironmentConstants.OQSURL;
         getDriver().get(oqsUrl);
 
