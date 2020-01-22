@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 
 public interface IEditor<T extends com.hp.lft.sdk.winforms.EditField> {
 
-     final Logger logger = Logger.getLogger(IEditor.class);
+     final Logger log = Logger.getLogger(IEditor.class);
      String objectType = "Type of object: ";
      String dataSuccessfullySet = "Data is successfully set into: ";
      String errorWhileSettingData = "Error occured while setting data ";
@@ -15,9 +15,9 @@ public interface IEditor<T extends com.hp.lft.sdk.winforms.EditField> {
         try {
             obj.setText(data);
 
-            logger.info(dataSuccessfullySet +obj.getObjectName()+ objectType +obj.getClass());
+            log.info(dataSuccessfullySet +obj.getObjectName()+ objectType +obj.getClass());
         }catch(Exception e){
-            logger.error(errorWhileSettingData +obj.getObjectName()+ objectType +obj.getClass(), e);
+            log.error(errorWhileSettingData +obj.getObjectName()+ objectType +obj.getClass(), e);
             e.printStackTrace();
         }
     }

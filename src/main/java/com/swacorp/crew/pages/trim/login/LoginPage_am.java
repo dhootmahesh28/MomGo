@@ -19,15 +19,15 @@ public class LoginPage_am  extends WinBasePage  {
     ReportUtil report = new ReportUtil();
     private final Logger LOGGER = Logger.getLogger(LoginPage_am.class);
     private final String TRiM_TITLE = TRiMHomePage.TRiM_WINDOW;
-    MainObjectRepoTrim or =null;
+    MainObjectRepoTrim lftObjects =null;
     Window mainWindow = null;
     public LoginPage_am()  {
-        or = super.lftObjectRepo;
+        lftObjects = super.lftObjectRepo;
         //this.report = report;
     }
     private boolean loginSuccessful;
     public TrimHomePageAM loginTRiM(String user, String pass) throws  GeneralLeanFtException {
-        mainWindow = or.tRiMTrainingResourceManagerSouthwestWindow();
+        mainWindow = lftObjects.tRiMTrainingResourceManagerSouthwestWindow();
         try {
                 mainWindow.maximize();
                 mainWindow.activate();
@@ -48,20 +48,20 @@ public class LoginPage_am  extends WinBasePage  {
     private int loginToTrim (String user, String pass)throws  GeneralLeanFtException {
         int returnInt = 1;
         try {
-            EditField UserField = or.loginToSouthwestWindow().txtUserIDEditField();
-            EditField PaswordField = or.loginToSouthwestWindow().txtPasswordEditField();
-            Button loginButton = or.loginToSouthwestWindow().btnLoginButton();
+            EditField UserField = lftObjects.loginToSouthwestWindow().txtUserIDEditField();
+            EditField PaswordField = lftObjects.loginToSouthwestWindow().txtPasswordEditField();
+            Button loginButton = lftObjects.loginToSouthwestWindow().btnLoginButton();
 
             new ProcessBuilder(EnvironmentConstants.TRiMAPPPATH).start();
-            Highlight(or.loginToSouthwestWindow());
+            Highlight(lftObjects.loginToSouthwestWindow());
             setTextInEditBox(UserField, dataProperties.getProperty("trimUserName"));
             setTextInEditBox(PaswordField, dataProperties.getProperty("trimUserPassword"));
 
-           report.reportLeanFT(or.loginToSouthwestWindow(),"pass", "Login to Trim is successful" );
+           report.reportLeanFT(lftObjects.loginToSouthwestWindow(),"pass", "Login to Trim is successful" );
             loginButton.click();
 //            mainWindow.wait(5);
             Thread.sleep(5000);
-            mainWindow = or.tRiMTrainingResourceManagerSouthwestWindow();
+            mainWindow = lftObjects.tRiMTrainingResourceManagerSouthwestWindow();
             if (mainWindow.exists()){
                 returnInt = 0;
                 loginSuccessful = true;
@@ -80,7 +80,7 @@ public class LoginPage_am  extends WinBasePage  {
         if (loginSuccessful && status){
             report.reportLeanFT(mainWindow,"pass", "Login to Trim is successful.." );
         }else{
-            report.reportLeanFT(or.loginToSouthwestWindow(),"Fail", "Login to Trim is NOT successful." );
+            report.reportLeanFT(lftObjects.loginToSouthwestWindow(),"Fail", "Login to Trim is NOT successful." );
         }
     }
 }
