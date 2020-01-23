@@ -1,0 +1,51 @@
+{
+  "xref": {
+    "stories": [
+      {
+        "name": "CRW_181510_OQS",
+        "pending": false,
+        "passed": true
+      },
+      {
+        "name": "CRW_181551_CREW",
+        "pending": false,
+        "passed": true
+      },
+      {
+        "name": "CRW_181552_OQS",
+        "pending": false,
+        "passed": true
+      },
+      {
+        "name": "CRW_181359_OQS",
+        "pending": false,
+        "passed": false
+      },
+      {
+        "name": "CRW_EW_14499",
+        "pending": false,
+        "passed": false
+      },
+      {
+        "name": "CRW_EW_14499",
+        "pending": false,
+        "passed": false
+      },
+      {
+        "name": "CRW_EW_14499",
+        "pending": false,
+        "passed": false
+      },
+      {
+        "name": "CRW_181553_TC10 OQS RK TRiM FO End an FO position and add new FO position to the CM to OQS RK and verify in TRiM",
+        "pending": false,
+        "passed": false
+      },
+      {
+        "name": "CRW_181554_TC11 OQS RK TRiM CA End a CA position and add new FO position to the CM to OQS RK and verify in TRiM",
+        "pending": false,
+        "passed": false
+      }
+    ]
+  }
+}

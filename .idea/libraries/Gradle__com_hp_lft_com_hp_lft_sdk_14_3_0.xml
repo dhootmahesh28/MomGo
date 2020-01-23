@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: com.hp.lft:com.hp.lft.sdk:14.3.0">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/hp/lft/com.hp.lft.sdk/14.3.0/com.hp.lft.sdk-14.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

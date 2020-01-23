@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="8" ignored="14" total="25" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Gradle suite" duration-ms="698490" started-at="2020-01-22T01:41:10Z" finished-at="2020-01-22T01:52:48Z">
+    <groups>
+      <group name="181553">
+        <method signature="TC181553_181554.TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:8, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554"/>
+      </group> <!-- 181553 -->
+      <group name="000">
+        <method signature="TC181553_181554.TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:8, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554"/>
+        <method signature="TC181553_181554.TC181554_CREW_14499_TC10_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:9, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="TC181554_CREW_14499_TC10_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554"/>
+      </group> <!-- 000 -->
+      <group name="181552">
+        <method signature="TC181510_181551_181552.TC181552_OQS_RK_TRiM_APM_Add_a_APM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:3, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181552_OQS_RK_TRiM_APM_Add_a_APM_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+      </group> <!-- 181552 -->
+      <group name="181510">
+        <method signature="TC181510_181551_181552.TC181510_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:1, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181510_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+      </group> <!-- 181510 -->
+      <group name="181554">
+        <method signature="TC181553_181554.TC181554_CREW_14499_TC10_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:9, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="TC181554_CREW_14499_TC10_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554"/>
+      </group> <!-- 181554 -->
+      <group name="181359">
+        <method signature="TC181510_181551_181552.TC181359_OQS_RK_TRiM_FO_Add_a_FO_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:4, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181359_OQS_RK_TRiM_FO_Add_a_FO_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+      </group> <!-- 181359 -->
+      <group name="regression">
+        <method signature="TC181391.TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:6, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181391@48ed48c9]" name="TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181391"/>
+        <method signature="TC181507.TC181507_OQS_RK_TRiM_Attempt_to_add_an_existing_CA_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:7, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181507@31fb8728]" name="TC181507_OQS_RK_TRiM_Attempt_to_add_an_existing_CA_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181507"/>
+        <method signature="TC181510_181551_181552.TC181359_OQS_RK_TRiM_FO_Add_a_FO_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:4, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181359_OQS_RK_TRiM_FO_Add_a_FO_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+        <method signature="TC181510_181551_181552.TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:5, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+        <method signature="TC181510_181551_181552.TC181510_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:1, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181510_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+        <method signature="TC181510_181551_181552.TC181551_OQS_RK_TRiM_FAA_Add_a_FAA_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:2, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181551_OQS_RK_TRiM_FAA_Add_a_FAA_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+        <method signature="TC181510_181551_181552.TC181552_OQS_RK_TRiM_APM_Add_a_APM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:3, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181552_OQS_RK_TRiM_APM_Add_a_APM_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+        <method signature="TC181553_181554.TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:8, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554"/>
+        <method signature="TC181553_181554.TC181554_CREW_14499_TC10_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:9, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="TC181554_CREW_14499_TC10_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554"/>
+      </group> <!-- regression -->
+      <group name="181391">
+        <method signature="TC181391.TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:6, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181391@48ed48c9]" name="TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181391"/>
+      </group> <!-- 181391 -->
+      <group name="181508">
+        <method signature="TC181510_181551_181552.TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:5, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+      </group> <!-- 181508 -->
+      <group name="14477">
+        <method signature="TC181391.TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:6, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181391@48ed48c9]" name="TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181391"/>
+        <method signature="TC181507.TC181507_OQS_RK_TRiM_Attempt_to_add_an_existing_CA_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:7, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181507@31fb8728]" name="TC181507_OQS_RK_TRiM_Attempt_to_add_an_existing_CA_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181507"/>
+        <method signature="TC181510_181551_181552.TC181359_OQS_RK_TRiM_FO_Add_a_FO_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:4, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181359_OQS_RK_TRiM_FO_Add_a_FO_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+        <method signature="TC181510_181551_181552.TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:5, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+        <method signature="TC181510_181551_181552.TC181510_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:1, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181510_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+        <method signature="TC181510_181551_181552.TC181551_OQS_RK_TRiM_FAA_Add_a_FAA_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:2, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181551_OQS_RK_TRiM_FAA_Add_a_FAA_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+        <method signature="TC181510_181551_181552.TC181552_OQS_RK_TRiM_APM_Add_a_APM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:3, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181552_OQS_RK_TRiM_APM_Add_a_APM_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+        <method signature="TC181553_181554.TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:8, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554"/>
+        <method signature="TC181553_181554.TC181554_CREW_14499_TC10_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:9, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="TC181554_CREW_14499_TC10_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554"/>
+      </group> <!-- 14477 -->
+      <group name="181507">
+        <method signature="TC181507.TC181507_OQS_RK_TRiM_Attempt_to_add_an_existing_CA_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:7, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181507@31fb8728]" name="TC181507_OQS_RK_TRiM_Attempt_to_add_an_existing_CA_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181507"/>
+      </group> <!-- 181507 -->
+      <group name="181551">
+        <method signature="TC181510_181551_181552.TC181551_OQS_RK_TRiM_FAA_Add_a_FAA_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:2, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181551_OQS_RK_TRiM_FAA_Add_a_FAA_to_OQS_RK_and_verify_in_TRiM" class="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552"/>
+      </group> <!-- 181551 -->
+    </groups>
+    <test name="Gradle test" duration-ms="698490" started-at="2020-01-22T01:41:10Z" finished-at="2020-01-22T01:52:48Z">
+      <class name="com.swacorp.crew.tests.regression.oqs.crew14477.TC181507">
+        <test-method status="PASS" signature="clearStaticData()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181507@31fb8728]" name="clearStaticData" is-config="true" duration-ms="0" started-at="2020-01-22T01:50:18Z" finished-at="2020-01-22T01:50:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clearStaticData -->
+        <test-method status="FAIL" signature="TC181507_OQS_RK_TRiM_Attempt_to_add_an_existing_CA_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:7, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181507@31fb8728]" name="TC181507_OQS_RK_TRiM_Attempt_to_add_an_existing_CA_to_OQS_RK_and_verify_in_TRiM" duration-ms="0" started-at="2020-01-22T01:50:18Z" data-provider="TC181391" finished-at="2020-01-22T01:50:18Z">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Method public void com.swacorp.crew.tests.regression.oqs.crew14477.TC181507.TC181507_OQS_RK_TRiM_Attempt_to_add_an_existing_CA_to_OQS_RK_and_verify_in_TRiM(java.lang.String[]) throws java.lang.Exception requires a @DataProvider named : TC181391 in class com.swacorp.crew.dataprovider.TestDataProvider]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Method public void com.swacorp.crew.tests.regression.oqs.crew14477.TC181507.TC181507_OQS_RK_TRiM_Attempt_to_add_an_existing_CA_to_OQS_RK_and_verify_in_TRiM(java.lang.String[]) throws java.lang.Exception requires a @DataProvider named : TC181391 in class com.swacorp.crew.dataprovider.TestDataProvider
+at org.testng.internal.Parameters.findDataProvider(Parameters.java:513)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:691)
+at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:49)
+at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:37)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:924)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+at java.lang.Thread.run(Thread.java:748)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC181507_OQS_RK_TRiM_Attempt_to_add_an_existing_CA_to_OQS_RK_and_verify_in_TRiM -->
+      </class> <!-- com.swacorp.crew.tests.regression.oqs.crew14477.TC181507 -->
+      <class name="com.swacorp.crew.tests.regression.oqs.crew14477.TC181391">
+        <test-method status="FAIL" signature="TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:6, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181391@48ed48c9]" name="TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM" duration-ms="0" started-at="2020-01-22T01:50:18Z" data-provider="TC181391" finished-at="2020-01-22T01:50:18Z">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Method public void com.swacorp.crew.tests.regression.oqs.crew14477.TC181391.TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM(java.lang.String[]) throws com.hp.lft.sdk.GeneralLeanFtException,java.lang.Exception requires a @DataProvider named : TC181391 in class com.swacorp.crew.dataprovider.TestDataProvider]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Method public void com.swacorp.crew.tests.regression.oqs.crew14477.TC181391.TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM(java.lang.String[]) throws com.hp.lft.sdk.GeneralLeanFtException,java.lang.Exception requires a @DataProvider named : TC181391 in class com.swacorp.crew.dataprovider.TestDataProvider
+at org.testng.internal.Parameters.findDataProvider(Parameters.java:513)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:691)
+at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:49)
+at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:37)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:924)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+at java.lang.Thread.run(Thread.java:748)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM -->
+        <test-method status="PASS" signature="clearStaticData()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181391@48ed48c9]" name="clearStaticData" is-config="true" duration-ms="0" started-at="2020-01-22T01:50:18Z" finished-at="2020-01-22T01:50:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clearStaticData -->
+      </class> <!-- com.swacorp.crew.tests.regression.oqs.crew14477.TC181391 -->
+      <class name="com.swacorp.crew.tests.regression.oqs.Create_CrewMember_InOQS_Verify_InTRiM_181164">
+        <test-method status="PASS" signature="initializeDataProperty()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.Create_CrewMember_InOQS_Verify_InTRiM_181164@48166064]" name="initializeDataProperty" is-config="true" duration-ms="14144" started-at="2020-01-22T01:40:56Z" finished-at="2020-01-22T01:41:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initializeDataProperty -->
+        <test-method status="PASS" signature="AfterSuite()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.Create_CrewMember_InOQS_Verify_InTRiM_181164@48166064]" name="AfterSuite" is-config="true" duration-ms="3595" started-at="2020-01-22T01:52:48Z" finished-at="2020-01-22T01:52:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AfterSuite -->
+      </class> <!-- com.swacorp.crew.tests.regression.oqs.Create_CrewMember_InOQS_Verify_InTRiM_181164 -->
+      <class name="com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554">
+        <test-method status="PASS" signature="initTest()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="initTest" is-config="true" duration-ms="3501" started-at="2020-01-22T01:50:18Z" finished-at="2020-01-22T01:50:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initTest -->
+        <test-method status="FAIL" signature="TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:8, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM" duration-ms="63052" started-at="2020-01-22T01:50:22Z" data-provider="TC181553" finished-at="2020-01-22T01:51:25Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Ljava.lang.String;@22974e99]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[CREW employee details not visible on Trim.]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: CREW employee details not visible on Trim.
+at org.testng.Assert.fail(Assert.java:85)
+at com.swacorp.crew.utils.ReportUtil.reportLeanFT(ReportUtil.java:46)
+at com.swacorp.crew.pages.trim.homepage.TrimHomePageAM.ValidateSearchResults(TrimHomePageAM.java:135)
+at com.swacorp.crew.tests.regression.oqs.crew14477.Wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim.AddNewPositionInOQSVerifyInTrim(Add_Crew_Member_In_OQS_Verify_In_Trim.java:114)
+at com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554.TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM(TC181553_181554.java:37)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.Throwable
+... 17 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="tearDown" is-config="true" duration-ms="3555" started-at="2020-01-22T01:51:25Z" finished-at="2020-01-22T01:51:29Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM status=FAILURE method=TC181553_181554.TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:8, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="initTest()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="initTest" is-config="true" duration-ms="2777" started-at="2020-01-22T01:51:29Z" finished-at="2020-01-22T01:51:31Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initTest -->
+        <test-method status="FAIL" signature="TC181554_CREW_14499_TC10_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:9, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="TC181554_CREW_14499_TC10_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM" duration-ms="74978" started-at="2020-01-22T01:51:31Z" data-provider="TC181554" finished-at="2020-01-22T01:52:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Ljava.lang.String;@6efbc788]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[CREW employee details not visible on Trim.]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: CREW employee details not visible on Trim.
+at org.testng.Assert.fail(Assert.java:85)
+at com.swacorp.crew.utils.ReportUtil.reportLeanFT(ReportUtil.java:46)
+at com.swacorp.crew.pages.trim.homepage.TrimHomePageAM.ValidateSearchResults(TrimHomePageAM.java:135)
+at com.swacorp.crew.tests.regression.oqs.crew14477.Wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim.AddNewPositionInOQSVerifyInTrim(Add_Crew_Member_In_OQS_Verify_In_Trim.java:114)
+at com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554.TC181554_CREW_14499_TC10_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM(TC181553_181554.java:44)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.Throwable
+... 17 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC181554_CREW_14499_TC10_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="tearDown" is-config="true" duration-ms="2105" started-at="2020-01-22T01:52:46Z" finished-at="2020-01-22T01:52:48Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC181554_CREW_14499_TC10_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM status=FAILURE method=TC181553_181554.TC181554_CREW_14499_TC10_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:9, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="clearStaticData()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554@38c2a1a7]" name="clearStaticData" is-config="true" duration-ms="0" started-at="2020-01-22T01:52:48Z" finished-at="2020-01-22T01:52:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clearStaticData -->
+      </class> <!-- com.swacorp.crew.tests.regression.oqs.crew14477.TC181553_181554 -->
+      <class name="com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552">
+        <test-method status="PASS" signature="initTest()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="initTest" is-config="true" duration-ms="6037" started-at="2020-01-22T01:41:10Z" finished-at="2020-01-22T01:41:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initTest -->
+        <test-method status="PASS" signature="TC181510_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:1, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181510_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM" duration-ms="102119" started-at="2020-01-22T01:41:16Z" data-provider="TC181510_CREW_14499_TC07" finished-at="2020-01-22T01:42:58Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Ljava.lang.String;@7eac3f64]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC181510_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="tearDown" is-config="true" duration-ms="4366" started-at="2020-01-22T01:42:58Z" finished-at="2020-01-22T01:43:02Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC181510_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM status=SUCCESS method=TC181510_181551_181552.TC181510_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:1, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="initTest()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="initTest" is-config="true" duration-ms="3323" started-at="2020-01-22T01:43:02Z" finished-at="2020-01-22T01:43:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initTest -->
+        <test-method status="PASS" signature="TC181551_OQS_RK_TRiM_FAA_Add_a_FAA_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:2, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181551_OQS_RK_TRiM_FAA_Add_a_FAA_to_OQS_RK_and_verify_in_TRiM" duration-ms="73211" started-at="2020-01-22T01:43:06Z" data-provider="TC181551_CREW_14499_TC08" finished-at="2020-01-22T01:44:19Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Ljava.lang.String;@51acbf13]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC181551_OQS_RK_TRiM_FAA_Add_a_FAA_to_OQS_RK_and_verify_in_TRiM -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="tearDown" is-config="true" duration-ms="3252" started-at="2020-01-22T01:44:19Z" finished-at="2020-01-22T01:44:22Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC181551_OQS_RK_TRiM_FAA_Add_a_FAA_to_OQS_RK_and_verify_in_TRiM status=SUCCESS method=TC181510_181551_181552.TC181551_OQS_RK_TRiM_FAA_Add_a_FAA_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:2, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="initTest()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="initTest" is-config="true" duration-ms="3003" started-at="2020-01-22T01:44:22Z" finished-at="2020-01-22T01:44:25Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initTest -->
+        <test-method status="PASS" signature="TC181552_OQS_RK_TRiM_APM_Add_a_APM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:3, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181552_OQS_RK_TRiM_APM_Add_a_APM_to_OQS_RK_and_verify_in_TRiM" duration-ms="70596" started-at="2020-01-22T01:44:25Z" data-provider="TC181552_CREW_14499_TC09" finished-at="2020-01-22T01:45:36Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Ljava.lang.String;@44206cfd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC181552_OQS_RK_TRiM_APM_Add_a_APM_to_OQS_RK_and_verify_in_TRiM -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="tearDown" is-config="true" duration-ms="3441" started-at="2020-01-22T01:45:36Z" finished-at="2020-01-22T01:45:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC181552_OQS_RK_TRiM_APM_Add_a_APM_to_OQS_RK_and_verify_in_TRiM status=SUCCESS method=TC181510_181551_181552.TC181552_OQS_RK_TRiM_APM_Add_a_APM_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:3, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="initTest()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="initTest" is-config="true" duration-ms="3009" started-at="2020-01-22T01:45:39Z" finished-at="2020-01-22T01:45:42Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initTest -->
+        <test-method status="FAIL" signature="TC181359_OQS_RK_TRiM_FO_Add_a_FO_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:4, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181359_OQS_RK_TRiM_FO_Add_a_FO_to_OQS_RK_and_verify_in_TRiM" duration-ms="63562" started-at="2020-01-22T01:45:42Z" data-provider="TC181359" finished-at="2020-01-22T01:46:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Ljava.lang.String;@413804ae]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[CREW employee details not visible on Trim.]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: CREW employee details not visible on Trim.
+at org.testng.Assert.fail(Assert.java:85)
+at com.swacorp.crew.utils.ReportUtil.reportLeanFT(ReportUtil.java:46)
+at com.swacorp.crew.pages.trim.homepage.TrimHomePageAM.ValidateSearchResults(TrimHomePageAM.java:135)
+at com.swacorp.crew.tests.regression.oqs.crew14477.Wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim.WrapperMethod(Add_Crew_Member_In_OQS_Verify_In_Trim.java:55)
+at com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552.TC181359_OQS_RK_TRiM_FO_Add_a_FO_to_OQS_RK_and_verify_in_TRiM(TC181510_181551_181552.java:55)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.Throwable
+... 17 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC181359_OQS_RK_TRiM_FO_Add_a_FO_to_OQS_RK_and_verify_in_TRiM -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="tearDown" is-config="true" duration-ms="2400" started-at="2020-01-22T01:46:46Z" finished-at="2020-01-22T01:46:48Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC181359_OQS_RK_TRiM_FO_Add_a_FO_to_OQS_RK_and_verify_in_TRiM status=FAILURE method=TC181510_181551_181552.TC181359_OQS_RK_TRiM_FO_Add_a_FO_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:4, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="initTest()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="initTest" is-config="true" duration-ms="2832" started-at="2020-01-22T01:46:48Z" finished-at="2020-01-22T01:46:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initTest -->
+        <test-method status="FAIL" signature="TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:5, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM" duration-ms="72948" started-at="2020-01-22T01:46:51Z" data-provider="TC181508" finished-at="2020-01-22T01:48:04Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Ljava.lang.String;@1a9deed3]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[CREW employee details not visible on Trim.]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: CREW employee details not visible on Trim.
+at org.testng.Assert.fail(Assert.java:85)
+at com.swacorp.crew.utils.ReportUtil.reportLeanFT(ReportUtil.java:46)
+at com.swacorp.crew.pages.trim.homepage.TrimHomePageAM.ValidateSearchResults(TrimHomePageAM.java:135)
+at com.swacorp.crew.tests.regression.oqs.crew14477.Wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim.WrapperMethod(Add_Crew_Member_In_OQS_Verify_In_Trim.java:55)
+at com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552.TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM(TC181510_181551_181552.java:61)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.Throwable
+... 17 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="tearDown" is-config="true" duration-ms="3484" started-at="2020-01-22T01:48:04Z" finished-at="2020-01-22T01:48:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM status=FAILURE method=TC181510_181551_181552.TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:5, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="initTest()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="initTest" is-config="true" duration-ms="2647" started-at="2020-01-22T01:48:08Z" finished-at="2020-01-22T01:48:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initTest -->
+        <test-method status="FAIL" signature="TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:5, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM" duration-ms="58812" started-at="2020-01-22T01:48:10Z" data-provider="TC181508" finished-at="2020-01-22T01:49:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Ljava.lang.String;@4b1a5b80]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[CREW employee details not visible on Trim.]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: CREW employee details not visible on Trim.
+at org.testng.Assert.fail(Assert.java:85)
+at com.swacorp.crew.utils.ReportUtil.reportLeanFT(ReportUtil.java:46)
+at com.swacorp.crew.pages.trim.homepage.TrimHomePageAM.ValidateSearchResults(TrimHomePageAM.java:135)
+at com.swacorp.crew.tests.regression.oqs.crew14477.Wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim.WrapperMethod(Add_Crew_Member_In_OQS_Verify_In_Trim.java:55)
+at com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552.TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM(TC181510_181551_181552.java:61)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.Throwable
+... 17 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="tearDown" is-config="true" duration-ms="2042" started-at="2020-01-22T01:49:09Z" finished-at="2020-01-22T01:49:11Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM status=FAILURE method=TC181510_181551_181552.TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:5, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="initTest()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="initTest" is-config="true" duration-ms="2775" started-at="2020-01-22T01:49:11Z" finished-at="2020-01-22T01:49:14Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initTest -->
+        <test-method status="FAIL" signature="TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:5, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM" duration-ms="62387" started-at="2020-01-22T01:49:14Z" data-provider="TC181508" finished-at="2020-01-22T01:50:16Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Ljava.lang.String;@55ab6cb6]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[CREW employee details not visible on Trim.]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: CREW employee details not visible on Trim.
+at org.testng.Assert.fail(Assert.java:85)
+at com.swacorp.crew.utils.ReportUtil.reportLeanFT(ReportUtil.java:46)
+at com.swacorp.crew.pages.trim.homepage.TrimHomePageAM.ValidateSearchResults(TrimHomePageAM.java:135)
+at com.swacorp.crew.tests.regression.oqs.crew14477.Wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim.WrapperMethod(Add_Crew_Member_In_OQS_Verify_In_Trim.java:55)
+at com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552.TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM(TC181510_181551_181552.java:61)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.Throwable
+... 17 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="tearDown" is-config="true" duration-ms="2176" started-at="2020-01-22T01:50:16Z" finished-at="2020-01-22T01:50:18Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM status=FAILURE method=TC181510_181551_181552.TC181508_OQS_RK_TRiM_FO_Add_multiple_FOs_to_OQS_RK_and_verify_in_TRiM([Ljava.lang.String;)[pri:5, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="clearStaticData()[pri:0, instance:com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552@1b41543f]" name="clearStaticData" is-config="true" duration-ms="5" started-at="2020-01-22T01:50:18Z" finished-at="2020-01-22T01:50:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clearStaticData -->
+      </class> <!-- com.swacorp.crew.tests.regression.oqs.crew14477.TC181510_181551_181552 -->
+    </test> <!-- Gradle test -->
+  </suite> <!-- Gradle suite -->
+</testng-results>

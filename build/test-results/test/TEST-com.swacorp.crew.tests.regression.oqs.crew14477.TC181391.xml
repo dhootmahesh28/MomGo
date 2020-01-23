@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.swacorp.crew.tests.regression.oqs.crew14477.TC181391" tests="1" skipped="0" failures="1" errors="0" timestamp="2020-01-22T01:50:18" hostname="PDCDW10-VM30051" time="0.0">
+  <properties/>
+  <testcase name="TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM" classname="com.swacorp.crew.tests.regression.oqs.crew14477.TC181391" time="0.0">
+    <failure message="org.testng.TestNGException: &#10;Method public void com.swacorp.crew.tests.regression.oqs.crew14477.TC181391.TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM(java.lang.String[]) throws com.hp.lft.sdk.GeneralLeanFtException,java.lang.Exception requires a @DataProvider named : TC181391 in class com.swacorp.crew.dataprovider.TestDataProvider" type="org.testng.TestNGException">org.testng.TestNGException: 
+Method public void com.swacorp.crew.tests.regression.oqs.crew14477.TC181391.TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM(java.lang.String[]) throws com.hp.lft.sdk.GeneralLeanFtException,java.lang.Exception requires a @DataProvider named : TC181391 in class com.swacorp.crew.dataprovider.TestDataProvider
+	at org.testng.internal.Parameters.findDataProvider(Parameters.java:513)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:691)
+	at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:49)
+	at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:37)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:924)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[[Utils] [ERROR] [Error] org.testng.TestNGException: 
+Method public void com.swacorp.crew.tests.regression.oqs.crew14477.TC181391.TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM(java.lang.String[]) throws com.hp.lft.sdk.GeneralLeanFtException,java.lang.Exception requires a @DataProvider named : TC181391 in class com.swacorp.crew.dataprovider.TestDataProvider
+	at org.testng.internal.Parameters.findDataProvider(Parameters.java:513)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:691)
+	at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:49)
+	at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:37)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:924)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+]]></system-err>
+</testsuite>

@@ -5,7 +5,9 @@ import com.hp.lft.sdk.MouseButton;
 import com.swacorp.crew.utils.ReportStatus;
 import org.apache.log4j.Logger;
 
+
 public interface IButton<T extends com.hp.lft.sdk.winforms.Button> {
+
 
     Logger logger = Logger.getLogger(IEditor.class);
     String objectType = "Type of object: ";

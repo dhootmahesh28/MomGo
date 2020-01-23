@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/qmo-crew-automation.iml" filepath="$PROJECT_DIR$/.idea/qmo-crew-automation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/qmo-crew-automation_main.iml" filepath="$PROJECT_DIR$/.idea/modules/qmo-crew-automation_main.iml" group="qmo-crew-automation" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/qmo-crew-automation_test.iml" filepath="$PROJECT_DIR$/.idea/modules/qmo-crew-automation_test.iml" group="qmo-crew-automation" />
+    </modules>
+  </component>
+</project>
