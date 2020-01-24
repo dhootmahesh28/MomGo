@@ -74,17 +74,13 @@ dependencies {
     compile group: 'com.hp.lft', name: 'com.hp.lft.verifications', version: '14.3.0'*/
 //    compile 'org.robotframework:robotframework-maven-plugin:1.5.1'
 
-    compile group: 'com.hp.lft', name: 'com.hp.lft.sdk', version: '14.3.0'
+
+
+   compile group: 'com.hp.lft', name: 'com.hp.lft.sdk', version: '14.3.0'
     compile group: 'com.hp.lft', name: 'com.hp.lft.report', version: '14.3.0'
     compile group: 'com.hp.lft', name: 'com.hp.lft.unittesting', version: '14.3.0'
     compile group: 'com.hp.lft', name: 'com.hp.lft.verifications', version: '14.3.0'
 
-
-
-/*    compile (name:'com.hp.lft.sdk-standalone', ext:'jar')
-    compile (name:'com.hp.lft.unittesting', ext:'jar')
-    compile (name:'com.hp.lft.verifications', ext:'jar')
-    compile (name:'com.hp.lft.report', ext:'jar')*/
 
 
 /*    compile files("C:/Program Files (x86)/HPE/Unified Functional Testing/SDK/Java/com.hp.lft.unittesting.jar")
