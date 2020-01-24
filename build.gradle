@@ -89,11 +89,17 @@ dependencies {
     compile (name:'com.hp.lft.verifications', ext:'jar')
     compile (name:'com.hp.lft.report', ext:'jar')*/
 
+/*
 
     compile files("C:/Program Files (x86)/HPE/Unified Functional Testing/SDK/Java/com.hp.lft.unittesting.jar")
     compile files("C:/Program Files (x86)/HPE/Unified Functional Testing/SDK/Java/com.hp.lft.verifications.jar")
     compile files("C:/Program Files (x86)/HPE/Unified Functional Testing/SDK/Java/com.hp.lft.report.jar")
+*/
 
+
+    compile files("C:/Program Files (x86)/HPE/LeanFT/SDK/Java/com.hp.lft.unittesting.jar")
+    compile files("C:/Program Files (x86)/HPE/LeanFT/SDK/Java/com.hp.lft.verifications.jar")
+    compile files("C:/Program Files (x86)/HPE/LeanFT/SDK/Java/com.hp.lft.report.jar")
 }
 
  //Sonarqube task to scan the project
