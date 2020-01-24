@@ -9,6 +9,7 @@ buildscript {
     }
 
     dependencies {
+
         classpath "org.ajoberstar.grgit:grgit-gradle:3.1.1"
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.8"
     }
@@ -50,6 +51,7 @@ repositories {
 }
 
 dependencies {
+    compile files('lib/com.hp.lft.common.jar', 'lib/com.hp.lft.report.jar', 'lib/com.hp.lft.reportbuilder-standalone.jar', 'lib/com.hp.lft.sdk-javadoc.jar', 'lib/com.hp.lft.unittesting.jar', 'lib/com.hp.lft.verifications.jar', 'lib/com.hp.lft.sdk-standalone.jar')
     compile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.testng', name: 'testng', version: '6.14.3'
     compile group: 'com.aventstack', name: 'extentreports', version: '3.1.5'
@@ -76,11 +78,6 @@ dependencies {
     compile group: 'com.hp.lft', name: 'com.hp.lft.report', version: '14.3.0'
     compile group: 'com.hp.lft', name: 'com.hp.lft.unittesting', version: '14.3.0'
     compile group: 'com.hp.lft', name: 'com.hp.lft.verifications', version: '14.3.0'
-    //testImplementation 'org.hamcrest:hamcrest:2.2'
-// https://mvnrepository.com/artifact/org.hamcrest/hamcrest
-    //testCompile group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
-    testImplementation 'org.hamcrest:hamcrest:2.2'
-
 
 
 
@@ -89,82 +86,75 @@ dependencies {
     compile (name:'com.hp.lft.verifications', ext:'jar')
     compile (name:'com.hp.lft.report', ext:'jar')*/
 
-/*
 
-    compile files("C:/Program Files (x86)/HPE/Unified Functional Testing/SDK/Java/com.hp.lft.unittesting.jar")
+/*    compile files("C:/Program Files (x86)/HPE/Unified Functional Testing/SDK/Java/com.hp.lft.unittesting.jar")
     compile files("C:/Program Files (x86)/HPE/Unified Functional Testing/SDK/Java/com.hp.lft.verifications.jar")
-    compile files("C:/Program Files (x86)/HPE/Unified Functional Testing/SDK/Java/com.hp.lft.report.jar")
-*/
-
-
-    compile files("C:/Program Files (x86)/HPE/LeanFT/SDK/Java/com.hp.lft.unittesting.jar")
-    compile files("C:/Program Files (x86)/HPE/LeanFT/SDK/Java/com.hp.lft.verifications.jar")
-    compile files("C:/Program Files (x86)/HPE/LeanFT/SDK/Java/com.hp.lft.report.jar")
+    compile files("C:/Program Files (x86)/HPE/Unified Functional Testing/SDK/Java/com.hp.lft.report.jar")*/
 }
 
- //Sonarqube task to scan the project
+//Sonarqube task to scan the project
 
-    sonarqube {
+sonarqube {
 
-        def branchName = System.getProperty("branchName")
-        if (branchName == null) {
-            branchName = grgit.branch.current().name
-        }
-
-        println "branch name :>> " + branchName
-
-        properties {
-
-            property 'sonar.projectName', "qmo-crew-automation"
-            property 'sonar.projectKey', "crew-automation-sonar"
-            property "sonar.branch.name", branchName
-            property 'sonar.host.url', "https://sonar-tools.swacorp.com/QMOAUTO/"
-            property "sonar.sources", "src/main/java"
-            property "sonar.tests", "src/test/java"
-            property "sonar.analysis.mode", "publish"
-            property 'sonar.exclusions', "$buildDir/**/*"
-            property 'sonar.issuesReport.html.enable', 'true'
-            property 'sonar.exclusions', 'src/main/java/com/swacorp/crew/sharedrepository/**/*.java'        }
-
-        gradle.startParameter.continueOnFailure = true
-        def xrefDirectory = System.getProperty("user.dir") + "\\target\\jbehave\\view\\"
-        test {
-            systemProperty 'test.env', System.getProperty('test.env')
-            systemProperty 'browser', System.getProperty('browser')
-            systemProperty "includedGroups", System.getProperty("includedGroups")
-            systemProperty "excludedGroups", System.getProperty("excludedGroups")
-            systemProperty "uploadResultsToALM", System.getProperty("uploadResultsToALM")
-            systemProperty "ALMCycleId", System.getProperty("ALMCycleId")
-            systemProperty "ALMProject", System.getProperty("ALMProject")
-            systemProperty "ALMDomain", System.getProperty("ALMDomain")
-            systemProperty "xrefDirectory", xrefDirectory
-            useTestNG() {
-
-                outputDirectory = file("${buildDir}/test-output")
-                useDefaultListeners = true
-
-
-                excludeGroups << System.getProperty("excludedGroups").toString()
-                includeGroups << System.getProperty("includedGroups").toString()
-                options {
-                    parallel = 'classes'
-                    threadCount = 1
-                }
-            }
-
-            //Modify the test logging
-            testLogging {
-                showStandardStreams = true
-                exceptionFormat "full"
-            }
-
-            //Disable the default groovy html reports since ReportNG is being used
-            reports.html.enabled = true
-
-            ignoreFailures = true
-        }
-
-        clean.doLast {
-            file(xrefDirectory).deleteDir()
-        }
+    def branchName = System.getProperty("branchName")
+    if (branchName == null) {
+        branchName = grgit.branch.current().name
     }
+
+    println "branch name :>> " + branchName
+
+    properties {
+
+        property 'sonar.projectName', "qmo-crew-automation"
+        property 'sonar.projectKey', "crew-automation-sonar"
+        property "sonar.branch.name", branchName
+        property 'sonar.host.url', "https://sonar-tools.swacorp.com/QMOAUTO/"
+        property "sonar.sources", "src/main/java"
+        property "sonar.tests", "src/test/java"
+        property "sonar.analysis.mode", "publish"
+        property 'sonar.exclusions', "$buildDir/**/*"
+        property 'sonar.issuesReport.html.enable', 'true'
+        property 'sonar.exclusions', 'src/main/java/com/swacorp/crew/sharedrepository/**/*.java'        }
+
+    gradle.startParameter.continueOnFailure = true
+    def xrefDirectory = System.getProperty("user.dir") + "\\target\\jbehave\\view\\"
+    test {
+        systemProperty 'test.env', System.getProperty('test.env')
+        systemProperty 'browser', System.getProperty('browser')
+        systemProperty "includedGroups", System.getProperty("includedGroups")
+        systemProperty "excludedGroups", System.getProperty("excludedGroups")
+        systemProperty "uploadResultsToALM", System.getProperty("uploadResultsToALM")
+        systemProperty "ALMCycleId", System.getProperty("ALMCycleId")
+        systemProperty "ALMProject", System.getProperty("ALMProject")
+        systemProperty "ALMDomain", System.getProperty("ALMDomain")
+        systemProperty "xrefDirectory", xrefDirectory
+        useTestNG() {
+
+            outputDirectory = file("${buildDir}/test-output")
+            useDefaultListeners = true
+
+
+            excludeGroups << System.getProperty("excludedGroups").toString()
+            includeGroups << System.getProperty("includedGroups").toString()
+            options {
+                parallel = 'classes'
+                threadCount = 1
+            }
+        }
+
+        //Modify the test logging
+        testLogging {
+            showStandardStreams = true
+            exceptionFormat "full"
+        }
+
+        //Disable the default groovy html reports since ReportNG is being used
+        reports.html.enabled = true
+
+        ignoreFailures = true
+    }
+
+    clean.doLast {
+        file(xrefDirectory).deleteDir()
+    }
+}
