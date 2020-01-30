@@ -78,11 +78,16 @@ public class DriverSource extends TestNgUnitTestBase implements  GenericMethods 
                     options.addArguments("--start-fullscreen");
                     options.addArguments("--disable-extensions");
                     options.addArguments("--test-type");
-                    //options.addArguments("-incognito");
+                    options.addArguments("-incognito");
+                    options.addArguments("--start-maximized");
+                    options.addArguments("--disable-web-security");
+                    options.addArguments("--allow-running-insecure-content");
+
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
                     capabilities.setCapability("chrome.binary", UserDir + "\\src\\drivers\\chromedriver.exe");
-                    capabilities.setCapability("screen-resolution","1280x1024");
+                    //capabilities.setCapability("screen-resolution","1280x1024");
+
                     capabilities.setCapability(ChromeOptions.CAPABILITY, options);
                     driver = new ChromeDriver(capabilities);
                 }else {

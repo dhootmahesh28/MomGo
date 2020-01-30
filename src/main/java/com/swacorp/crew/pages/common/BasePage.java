@@ -249,4 +249,8 @@ public class BasePage {
         Long id = Thread.currentThread().getId();
         return TestUtil.dynamicDataMap.get(varName + "-" + id);
     }
+
+    public void printConsole(String str){
+        System.out.println("printConsole >> "+str);
+    }
 }
