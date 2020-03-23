@@ -54,6 +54,7 @@ repositories {
 dependencies {
     //compile files('lib/com.hp.lft.common.jar', 'lib/com.hp.lft.report.jar', 'lib/com.hp.lft.reportbuilder-standalone.jar', 'lib/com.hp.lft.sdk-javadoc.jar', 'lib/com.hp.lft.unittesting.jar', 'lib/com.hp.lft.verifications.jar', 'lib/com.hp.lft.sdk-standalone.jar')
     compile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
     compile group: 'org.testng', name: 'testng', version: '6.14.3'
     compile group: 'com.aventstack', name: 'extentreports', version: '3.1.5'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.6.0'
@@ -83,6 +84,8 @@ dependencies {
     compile group: 'com.hp.lft', name: 'com.hp.lft.report', version: '14.3.0'
     compile group: 'com.hp.lft', name: 'com.hp.lft.unittesting', version: '14.3.0'
     compile group: 'com.hp.lft', name: 'com.hp.lft.verifications', version: '14.3.0'
+// https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox
+    compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.19'
 
 
 /*    compile files("C:/Program Files (x86)/HPE/Unified Functional Testing/SDK/Java/com.hp.lft.unittesting.jar")
