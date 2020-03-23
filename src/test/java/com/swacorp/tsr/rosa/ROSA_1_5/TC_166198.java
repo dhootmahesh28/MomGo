@@ -1,5 +1,6 @@
 package com.swacorp.tsr.rosa.ROSA_1_5;
 
+import com.swacorp.crew.css.Css;
 import com.swacorp.crew.utils.TestManager;
 import com.swacorp.tsr.rosa.RosaHome;
 import com.swacorp.tsr.rosa.RosaLogin;
@@ -15,7 +16,23 @@ public class ROSA_1_5_PTO extends TestManager {
         setScenarioName("TC164530_ FO Validate that PTO page is displayed the initial dependent parameters - Edge Navigator");
         rosa = new RosaLogin();
         RosaHome rosahome = rosa.loginRosa();
-        rosahome.clickAndVerifyPilotTrainingOptimizer();
-        rosahome.VerifyElementAppear("CONDITIONAL_RADIO_BTN");
+        RosaSolutioQueue solQueus = rosahome.gotoPTOQueus();
+        solQueus.selectFilterOption("Completed");
+        //solQueus.validateCompleteStatus();
+        /*rosahome.clickAndVerifyPilotTrainingOptimizer();
+        rosahome.VerifyElementAppear("CONDITIONAL_RADIO_BTN");*/
+        solQueus.clickDownloadPdf(1);
+        Thread.sleep(1000);
+        Css css  = solQueus.NavigateToCSSForValidation();
+
+        css.loginCss();
+        css.openCMBoard("");
+        css.selectTripOnCMBoard("","","", false, false, false);
+        css.readTransactionReport("C:/Users/x257093/AppData/Local/Temp/JasperRptTemp/");
+        //css.ReadDataFromTripDetails();
+
+
+
+
     }
 }

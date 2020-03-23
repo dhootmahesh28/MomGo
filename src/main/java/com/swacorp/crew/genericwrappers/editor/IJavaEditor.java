@@ -4,9 +4,9 @@ import com.hp.lft.sdk.GeneralLeanFtException;
 import org.apache.log4j.Logger;
 
 
-public interface IEditor<T extends com.hp.lft.sdk.winforms.EditField> {
+public interface IJavaEditor<T extends com.hp.lft.sdk.java.Editor> {
 
-     final Logger log = Logger.getLogger(IEditor.class);
+     final Logger log = Logger.getLogger(IJavaEditor.class);
      String objectType = "Type of object: ";
      String dataSuccessfullySet = "Data is successfully set into: ";
      String errorWhileSettingData = "Error occured while setting data ";
@@ -22,14 +22,13 @@ public interface IEditor<T extends com.hp.lft.sdk.winforms.EditField> {
         }
     }
 
-    default void  WaitEditorTillVisible(T obj,long timeout) throws GeneralLeanFtException {
+    default void  WaitEditorTillVisible(T obj, int timeout) throws GeneralLeanFtException {
         long t=0;
         try {
-
             do {
                 Thread.sleep(1);
                 t++;
-            }while((!obj.isVisible()) && t < timeout);
+            }while((!obj.exists()) && t < timeout);
         }catch(Exception e){
               e.printStackTrace();
         }

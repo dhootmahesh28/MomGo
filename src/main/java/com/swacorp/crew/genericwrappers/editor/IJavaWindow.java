@@ -1,11 +1,13 @@
 package com.swacorp.crew.genericwrappers.editor;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
+import com.hp.lft.sdk.java.Window;
+import com.swacorp.tsr.enums.EnumWaitConstants;
 import org.apache.log4j.Logger;
 
-public interface IWindow<T extends com.hp.lft.sdk.winforms.Window> {
+public interface IJavaWindow<T extends com.hp.lft.sdk.java.Window> {
 
-     final Logger logger = Logger.getLogger(IWindow.class);
+     final Logger logger = Logger.getLogger(IJavaWindow.class);
 
     default void  CloseWindowIfExist(T obj, int timeout) throws GeneralLeanFtException {
         try {
@@ -43,17 +45,15 @@ public interface IWindow<T extends com.hp.lft.sdk.winforms.Window> {
         }
     }
 
-
-    default void  WaitForWindowTillVisible(T obj,long timeout) throws GeneralLeanFtException {
+    default void  WaitForJavaWindowTillVisible(Window obj, int timeout) throws GeneralLeanFtException {
         long t=0;
+        //long x  = (Number)timeout;
         try {
-
             do {
                 Thread.sleep(1);
                 t++;
-            }while((!obj.isVisible()) && t < timeout);
+            }while((!obj.exists()) && t < timeout);
         }catch(Exception e){
-            logger.error("Error while waiting for the window");
             e.printStackTrace();
         }
 
