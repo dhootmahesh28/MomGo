@@ -110,7 +110,7 @@ public class TrimHomePageAM extends WinBasePage{
     }
 
     public void CloseApplication() throws  GeneralLeanFtException {
-        FlushObjects();
+        flushObjects();
     }
 
    public void ValidateSearchResults(Map<String, String> runtimeData , String[] testData){
