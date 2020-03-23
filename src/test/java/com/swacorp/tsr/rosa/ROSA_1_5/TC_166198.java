@@ -7,13 +7,29 @@ import com.swacorp.tsr.rosa.RosaLogin;
 import com.swacorp.tsr.rosa.RosaSolutioQueue;
 import org.testng.annotations.Test;
 
-public class ROSA_1_5_PTO extends TestManager {
+public class TC_166198 extends TestManager {
     RosaLogin rosa;
     RosaSolutioQueue rosaSolutioQueue;
 
-    @Test(groups = {"164530"})
+    @Test(groups = {"166198"})
     public void TC164530_010_FO_Validate_that_PTO_page_is_displayed_the_initial_dependent_parameters_Edge_Navigator() throws Exception{
-        setScenarioName("TC164530_ FO Validate that PTO page is displayed the initial dependent parameters - Edge Navigator");
+        setScenarioName("TC166198_ FO Validate that PTO page is displayed the initial dependent parameters - Edge Navigator");
+        rosa = new RosaLogin();
+        RosaHome rosahome = rosa.loginRosa();
+        RosaSolutioQueue solQueus = rosahome.gotoPTOQueus();
+        solQueus.selectFilterOption("Completed");
+        solQueus.validateCompleteStatus();
+
+        Thread.sleep(1000);
+        Css css  = solQueus.NavigateToCSSForValidation();
+
+        css.loginCss();
+        css.openCMBoard("");
+       css.selectTripOnCMBoard("","","", true, true, false);
+    }
+
+
+    public void RosaLoginNavigateSolQue() throws Exception {
         rosa = new RosaLogin();
         RosaHome rosahome = rosa.loginRosa();
         RosaSolutioQueue solQueus = rosahome.gotoPTOQueus();
@@ -24,15 +40,7 @@ public class ROSA_1_5_PTO extends TestManager {
         solQueus.clickDownloadPdf(1);
         Thread.sleep(1000);
         Css css  = solQueus.NavigateToCSSForValidation();
-
-        css.loginCss();
-        css.openCMBoard("");
-        css.selectTripOnCMBoard("","","", false, false, false);
-        css.readTransactionReport("C:/Users/x257093/AppData/Local/Temp/JasperRptTemp/");
-        //css.ReadDataFromTripDetails();
-
-
-
-
-    }
+        }
 }
+
+
