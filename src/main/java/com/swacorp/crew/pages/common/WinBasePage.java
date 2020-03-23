@@ -5,16 +5,15 @@ import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.TestObject;
 //import com.hp.lft.sdk.winforms.*;
 import com.hp.lft.sdk.winforms.*;
-import com.swacorp.crew.genericwrappers.editor.IEditor;
-import com.swacorp.crew.genericwrappers.editor.IWindow;
+import com.swacorp.crew.genericwrappers.editor.*;
 import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
 import com.swacorp.crew.utils.ReportUtil;
 import com.swacorp.crew.wrappers.GenericMethods;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import com.swacorp.crew.genericwrappers.editor.IButton;
 import com.swacorp.crew.utils.*;
-public class WinBasePage implements IEditor,GenericMethods, IButton, IWindow{
+import com.swacorp.tsr.enums.EnumWaitConstants.WaitDuration;
+public class WinBasePage implements IEditor,GenericMethods, IButton, IWindow, IJavaEditor, IJavaWindow, IJavaButton {
 
     ReportUtil report = new ReportUtil();
     public final static Logger LOGGER = Logger.getLogger(WinBasePage.class);
@@ -39,7 +38,7 @@ public class WinBasePage implements IEditor,GenericMethods, IButton, IWindow{
         }
     }
 
-    public void FlushObjects() throws  GeneralLeanFtException{
+    public void flushObjects() throws  GeneralLeanFtException{
         if (lftObjectRepo.tRiMTrainingResourceManagerSouthwestWindow().exists()) {
             lftObjectRepo.tRiMTrainingResourceManagerSouthwestWindow().close();
         }

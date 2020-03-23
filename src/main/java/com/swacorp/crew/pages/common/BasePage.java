@@ -161,6 +161,14 @@ public class BasePage {
         return editBoxText.contains(expectedText);
     }
 
+    public boolean verifyDefaultValueFromWebElement(By locator, String expectedText) {
+        LOGGER.info("Before verifyValueFromEditbox::" + locator + ", with Text::" + expectedText);
+        WebElement webEditboxText = waitForElement(locator);
+        String editBoxText = webEditboxText.getText();
+        LOGGER.info("After verifyValueFromEditbox::" + locator + ", with Text::" + expectedText);
+        return editBoxText.contains(expectedText);
+    }
+
     public String randomString(int len) {
         LOGGER.info("Before randomString with length::" + len);
         String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
