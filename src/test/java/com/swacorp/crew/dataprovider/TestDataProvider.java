@@ -46,4 +46,24 @@ public class TestDataProvider {
                 {"FIRST OFFICER - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "05/01/2018", "BOEING 737 PIC" },
                 {"FIRST OFFICER - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "05/01/2018", "BOEING 737 PIC" }};
     }
+
+    @DataProvider(name = "TrimRequirementsTest")
+    public static Object[][] TrimRequirementsTest() {
+        return new Object[][]{{
+                "Automation",//0
+                "Recurrent",
+                "Southwest",
+                "description automation",
+                "737",
+                "24",
+                "07/01/1988", //5
+                "MALE",
+                "Y",
+                "ATP",
+                "99988811",
+                "05/01/2018",//10
+                "BOEING 737 PIC"
+        }};
+    }
+
 }
