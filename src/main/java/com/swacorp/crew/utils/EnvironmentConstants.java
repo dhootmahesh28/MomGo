@@ -13,4 +13,9 @@ public final class EnvironmentConstants {
     public static final String ROSAUSERID = EnvironmentFactory.getConfigValue("rosaUserid");
     public static final String ROSAPASSWORD = EnvironmentFactory.getConfigValue("rosaPassword");
 
+    public static final String CSSPATH = EnvironmentFactory.getConfigValue("cssPath");
+    public static final String CSSWINDOWTITLE = EnvironmentFactory.getConfigValue("cssWindowTitle");
+    public static final String CSSUSERID = EnvironmentFactory.getConfigValue("cssUserid");
+    public static final String CSSPASSWORD = EnvironmentFactory.getConfigValue("cssPassword");
+
 }

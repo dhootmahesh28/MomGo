@@ -75,11 +75,10 @@ public class DriverSource extends TestNgUnitTestBase implements  GenericMethods 
                     System.setProperty("webdriver.chrome.driver",  UserDir+ "\\src\\main\\resources\\drivers\\chromedriver.exe");
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--start-maximized");
-                    options.addArguments("--start-fullscreen");
+                    //options.addArguments("--start-fullscreen");
                     options.addArguments("--disable-extensions");
                     options.addArguments("--test-type");
                     options.addArguments("-incognito");
-                    options.addArguments("--start-maximized");
                     options.addArguments("--disable-web-security");
                     options.addArguments("--allow-running-insecure-content");
 
@@ -90,9 +89,20 @@ public class DriverSource extends TestNgUnitTestBase implements  GenericMethods 
 
                     capabilities.setCapability(ChromeOptions.CAPABILITY, options);
                     driver = new ChromeDriver(capabilities);
-                }else {
+                }else {/*
                     //  if (System.getProperty("os.name").contains("Windows 7"))
                     System.setProperty("webdriver.ie.driver", UserDir + "\\src\\main\\resources\\drivers\\IEDriverServer.exe");
+                    //  else
+                    //    System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\IEDriverServer64.exe");
+                    InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
+                    internetExplorerOptions.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+                    internetExplorerOptions.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+                    internetExplorerOptions.setCapability("requireWindowFocus", true);
+                    driver = new InternetExplorerDriver(internetExplorerOptions);
+                    driver.manage().window().maximize();*/
+
+                    //  if (System.getProperty("os.name").contains("Windows 7"))
+                    System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\IEDriverServer.exe");
                     //  else
                     //    System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\IEDriverServer64.exe");
                     InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();

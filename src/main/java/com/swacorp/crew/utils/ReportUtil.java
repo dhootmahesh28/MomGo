@@ -23,6 +23,41 @@ public class ReportUtil {
     public ExtentTest extentTest;
     public ExtentAppend extentAppend = new ExtentAppend();
 
+    public void reportLeanFT(com.hp.lft.sdk.java.Window window, String status, String message){
+
+        boolean retryStatus = false;
+        int retryCounter = 0;
+        int maxRetryCount = 3;
+        ExtentTest extentTest = basePage.getExtentTest();
+        do {
+            try {
+                if (status.equalsIgnoreCase("info")) {
+                    String screenshotPath = captureLeanFTScreenshot(window, "INFO_" + basePage.randomString(5) + "_");
+                    extentTest.log(Status.INFO, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+                } else if (status.equalsIgnoreCase("error")) {
+                    extentTest.log(Status.ERROR, MarkupHelper.createLabel(message, ExtentColor.AMBER));
+                }else if (status.equalsIgnoreCase("pass")) {
+                    String screenshotPath = captureLeanFTScreenshot(window, "PASS_" + basePage.randomString(5) + "_");
+                    extentTest.log(Status.PASS, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+                }
+                else {
+                    String screenshotPath = captureLeanFTScreenshot(window, "FAIL_" + basePage.randomString(5) + "_");
+                    extentTest.log(Status.FAIL, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+                    Assert.fail(message, new Throwable());
+                }
+                retryStatus = false;
+            } catch (Exception e) {
+                e.printStackTrace();
+                retryStatus = true;
+                LOGGER.error("Report method exception : " + e.getMessage());
+                if (++retryCounter > maxRetryCount) {
+                    Assert.assertTrue(false, "Exception while taking screenshot : " + e.getMessage());
+                    break;
+                }
+            }
+        } while (retryStatus);
+    }
+
     public void reportLeanFT(Window window, String status, String message){
 
         boolean retryStatus = false;
@@ -110,6 +145,38 @@ public class ReportUtil {
         }
 
     }
+
+
+    public String captureLeanFTScreenshot(com.hp.lft.sdk.java.Window window, String screenshotName) {
+        String destination = null;
+        String imgPath = null;
+        int maxRetryCount = 5;
+        int retryCounter = 0;
+
+        String dateName = new SimpleDateFormat("yyyyMMddhhmmssSSS").format(new Date());
+        while (retryCounter < maxRetryCount){
+            try {
+                RenderedImage img = window.getSnapshot();
+                imgPath = "LeanFTScreenshots\\" + screenshotName + dateName + ".png";
+                destination = System.getProperty("user.dir") + "\\build\\extent-reports\\" + imgPath;
+                File finalDestination = new File(destination);
+                finalDestination.getParentFile().mkdir();
+                ImageIO.write(img, "png", finalDestination);
+                LOGGER.info("Screenshot destination : " + destination);
+                return imgPath;
+            } catch (Exception e) {
+                LOGGER.error("takeScreenshot Exception : " + e.getMessage());
+                if (++retryCounter > maxRetryCount) {
+                    Assert.fail("Exception while taking screenshot : " + e.getMessage());
+                    break;
+                }
+            }
+        }
+
+        LOGGER.info("Destination after exception: " + destination);
+        return imgPath;
+    }
+
 
     public String captureLeanFTScreenshot(Window window, String screenshotName) {
         String destination = null;

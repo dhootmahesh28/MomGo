@@ -176,7 +176,7 @@ public class TestManager extends DriverSource {
     @AfterSuite(alwaysRun = true)
     public void AfterSuite() throws GeneralLeanFtException{
         clearExtentTest();
-        new WinBasePage().FlushObjects();
+        //new WinBasePage().flushObjects();
     }
     public void clearExtentTest() {
         try {
