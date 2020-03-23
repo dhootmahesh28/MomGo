@@ -26,6 +26,7 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 	private pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule90870CAHOONCLAYINTLWindow pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule90870CAHOONCLAYINTLWindow;
 	private pLTCSSClient36SatSuperUserDefaultDesktopTransactionReportWindow pLTCSSClient36SatSuperUserDefaultDesktopTransactionReportWindow;
 	private pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule76643UHLIGRONINTLWindow pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule76643UHLIGRONINTLWindow;
+	private pLTCSSClient4Sat2SuperUserDefaultDesktopWindow pLTCSSClient4Sat2SuperUserDefaultDesktopWindow;
 
 	public MainObjectRepoTrim() throws GeneralLeanFtException 
 	{
@@ -40,6 +41,7 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 	pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule90870CAHOONCLAYINTLWindow = new pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule90870CAHOONCLAYINTLWindow(this);
 	pLTCSSClient36SatSuperUserDefaultDesktopTransactionReportWindow = new pLTCSSClient36SatSuperUserDefaultDesktopTransactionReportWindow(this);
 	pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule76643UHLIGRONINTLWindow = new pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule76643UHLIGRONINTLWindow(this);
+	pLTCSSClient4Sat2SuperUserDefaultDesktopWindow = new pLTCSSClient4Sat2SuperUserDefaultDesktopWindow(this);
 		rebuildDescriptions();
 	}
 	
@@ -59,6 +61,7 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 		pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule90870CAHOONCLAYINTLWindow = new pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule90870CAHOONCLAYINTLWindow(contextTestObject, this);
 		pLTCSSClient36SatSuperUserDefaultDesktopTransactionReportWindow = new pLTCSSClient36SatSuperUserDefaultDesktopTransactionReportWindow(contextTestObject, this);
 		pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule76643UHLIGRONINTLWindow = new pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule76643UHLIGRONINTLWindow(contextTestObject, this);
+		pLTCSSClient4Sat2SuperUserDefaultDesktopWindow = new pLTCSSClient4Sat2SuperUserDefaultDesktopWindow(contextTestObject, this);
 		rebuildDescriptions();
 	}	
 
@@ -75,6 +78,7 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 		public pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule90870CAHOONCLAYINTLWindow pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule90870CAHOONCLAYINTLWindow() { return pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule90870CAHOONCLAYINTLWindow; }
 		public pLTCSSClient36SatSuperUserDefaultDesktopTransactionReportWindow pLTCSSClient36SatSuperUserDefaultDesktopTransactionReportWindow() { return pLTCSSClient36SatSuperUserDefaultDesktopTransactionReportWindow; }
 		public pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule76643UHLIGRONINTLWindow pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule76643UHLIGRONINTLWindow() { return pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule76643UHLIGRONINTLWindow; }
+		public pLTCSSClient4Sat2SuperUserDefaultDesktopWindow pLTCSSClient4Sat2SuperUserDefaultDesktopWindow() { return pLTCSSClient4Sat2SuperUserDefaultDesktopWindow; }
 
 		public class loginToSouthwestWindow extends WinFormsWindowNodeBase
 	{
@@ -3027,12 +3031,20 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 		
 			private crewMemberCheckBox crewMemberCheckBox;
 	private reasonCheckBox reasonCheckBox;
+	private functionsCheckBox functionsCheckBox;
+	private cSSLoginIDEditor cSSLoginIDEditor;
+	private ReasonTable ReasonTable;
+	private SelectFunctionButton SelectFunctionButton;
 						public transactionReportDialog(AppModelBase applicationModel) throws GeneralLeanFtException
 		{
 			super(applicationModel);
 
 					crewMemberCheckBox = new crewMemberCheckBox(this, applicationModel);
 		reasonCheckBox = new reasonCheckBox(this, applicationModel);
+		functionsCheckBox = new functionsCheckBox(this, applicationModel);
+		cSSLoginIDEditor = new cSSLoginIDEditor(this, applicationModel);
+		ReasonTable = new ReasonTable(this, applicationModel);
+		SelectFunctionButton = new SelectFunctionButton(this, applicationModel);
 			
 			setDisplayName("Transaction Report Dialog");
 		}
@@ -3042,6 +3054,10 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 
 					crewMemberCheckBox = new crewMemberCheckBox(this, applicationModel);
 		reasonCheckBox = new reasonCheckBox(this, applicationModel);
+		functionsCheckBox = new functionsCheckBox(this, applicationModel);
+		cSSLoginIDEditor = new cSSLoginIDEditor(this, applicationModel);
+		ReasonTable = new ReasonTable(this, applicationModel);
+		SelectFunctionButton = new SelectFunctionButton(this, applicationModel);
 
 			setDisplayName("Transaction Report Dialog");
 		}
@@ -3059,6 +3075,10 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 
 				public crewMemberCheckBox crewMemberCheckBox() { return crewMemberCheckBox; }
 		public reasonCheckBox reasonCheckBox() { return reasonCheckBox; }
+		public functionsCheckBox functionsCheckBox() { return functionsCheckBox; }
+		public cSSLoginIDEditor cSSLoginIDEditor() { return cSSLoginIDEditor; }
+		public ReasonTable ReasonTable() { return ReasonTable; }
+		public SelectFunctionButton SelectFunctionButton() { return SelectFunctionButton; }
 		
 			public class crewMemberCheckBox extends JavaCheckBoxNodeBase
 	{
@@ -3103,6 +3123,110 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 			com.hp.lft.sdk.java.CheckBoxDescription description = null; 
 			try{
 				description = new com.hp.lft.sdk.java.CheckBoxDescription.Builder().attachedText("Reason:").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class functionsCheckBox extends JavaCheckBoxNodeBase
+	{
+
+		
+								public functionsCheckBox(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("Functions:");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.CheckBoxDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.CheckBoxDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.CheckBoxDescription.Builder().attachedText("Functions:").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class cSSLoginIDEditor extends JavaEditorNodeBase
+	{
+
+		
+								public cSSLoginIDEditor(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("(CSS Login ID)");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.EditorDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.EditorDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.EditorDescription.Builder().attachedText("(CSS Login ID)").nativeClass("javax.swing.plaf.basic.BasicComboBoxEditor$BorderlessTextField").index(2).build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class ReasonTable extends JavaTableNodeBase
+	{
+
+		
+								public ReasonTable(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("ReasonTable");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.TableDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.TableDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.TableDescription();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class SelectFunctionButton extends JavaButtonNodeBase
+	{
+
+		
+								public SelectFunctionButton(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("SelectFunctionButton");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.ButtonDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.ButtonDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.ButtonDescription.Builder().attachedText("Ending Date").label("").nativeClass("com.incors.plaf.alloy.dw").index(0).build();
 			}catch(Exception e){
 				throw new GeneralLeanFtException(e.getMessage(), e);
 			}
@@ -3715,6 +3839,196 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 			com.hp.lft.sdk.java.CheckBoxDescription description = null; 
 			try{
 				description = new com.hp.lft.sdk.java.CheckBoxDescription.Builder().attachedText("Reason:").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	}
+
+	}
+
+	public class pLTCSSClient4Sat2SuperUserDefaultDesktopWindow extends JavaWindowNodeBase
+	{
+
+		
+			private transactionReportDialog transactionReportDialog;
+						public pLTCSSClient4Sat2SuperUserDefaultDesktopWindow(AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(applicationModel);
+
+					transactionReportDialog = new transactionReportDialog(this, applicationModel);
+			
+			setDisplayName("(PLT)CSS Client 4 sat2 - Super User - Default Desktop");
+		}
+				public pLTCSSClient4Sat2SuperUserDefaultDesktopWindow(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+					transactionReportDialog = new transactionReportDialog(this, applicationModel);
+
+			setDisplayName("(PLT)CSS Client 4 sat2 - Super User - Default Desktop");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.WindowDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.WindowDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.WindowDescription.Builder().title("(PLT)CSS Client 4 sat2 - Super User - Default Desktop").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				public transactionReportDialog transactionReportDialog() { return transactionReportDialog; }
+		
+			public class transactionReportDialog extends JavaDialogNodeBase
+	{
+
+		
+			private functionsCheckBox functionsCheckBox;
+	private cSSLoginIDEditor cSSLoginIDEditor;
+	private employeeNameOrIDTable employeeNameOrIDTable;
+	private endingDateButton endingDateButton;
+						public transactionReportDialog(AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(applicationModel);
+
+					functionsCheckBox = new functionsCheckBox(this, applicationModel);
+		cSSLoginIDEditor = new cSSLoginIDEditor(this, applicationModel);
+		employeeNameOrIDTable = new employeeNameOrIDTable(this, applicationModel);
+		endingDateButton = new endingDateButton(this, applicationModel);
+			
+			setDisplayName("Transaction Report Dialog");
+		}
+				public transactionReportDialog(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+					functionsCheckBox = new functionsCheckBox(this, applicationModel);
+		cSSLoginIDEditor = new cSSLoginIDEditor(this, applicationModel);
+		employeeNameOrIDTable = new employeeNameOrIDTable(this, applicationModel);
+		endingDateButton = new endingDateButton(this, applicationModel);
+
+			setDisplayName("Transaction Report Dialog");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.DialogDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.DialogDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.DialogDescription.Builder().title("Transaction Report Dialog").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				public functionsCheckBox functionsCheckBox() { return functionsCheckBox; }
+		public cSSLoginIDEditor cSSLoginIDEditor() { return cSSLoginIDEditor; }
+		public employeeNameOrIDTable employeeNameOrIDTable() { return employeeNameOrIDTable; }
+		public endingDateButton endingDateButton() { return endingDateButton; }
+		
+			public class functionsCheckBox extends JavaCheckBoxNodeBase
+	{
+
+		
+								public functionsCheckBox(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("Functions:");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.CheckBoxDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.CheckBoxDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.CheckBoxDescription.Builder().attachedText("Functions:").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class cSSLoginIDEditor extends JavaEditorNodeBase
+	{
+
+		
+								public cSSLoginIDEditor(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("(CSS Login ID)");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.EditorDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.EditorDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.EditorDescription.Builder().attachedText("(CSS Login ID)").nativeClass("javax.swing.plaf.basic.BasicComboBoxEditor$BorderlessTextField").index(2).build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class employeeNameOrIDTable extends JavaTableNodeBase
+	{
+
+		
+								public employeeNameOrIDTable(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("Employee Name or ID");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.TableDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.TableDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.TableDescription();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class endingDateButton extends JavaButtonNodeBase
+	{
+
+		
+								public endingDateButton(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("Ending Date");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.ButtonDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.ButtonDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.ButtonDescription.Builder().attachedText("Ending Date").label("").nativeClass("com.incors.plaf.alloy.dw").index(0).build();
 			}catch(Exception e){
 				throw new GeneralLeanFtException(e.getMessage(), e);
 			}

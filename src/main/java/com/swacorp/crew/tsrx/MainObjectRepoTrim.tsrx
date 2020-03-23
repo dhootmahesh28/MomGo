@@ -1043,6 +1043,47 @@
                                 </properties>
                             </identification>
                         </object>
+                        <object type="CheckBox" technology="Java">
+                            <name>Functions:</name>
+                            <codeName>functionsCheckBox</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">Functions:</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Editor" technology="Java">
+                            <name>(CSS Login ID)</name>
+                            <codeName>cSSLoginIDEditor</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">(CSS Login ID)</property>
+                                    <property name="NativeClass" type="string" isRegExp="false">javax.swing.plaf.basic.BasicComboBoxEditor$BorderlessTextField</property>
+                                </properties>
+                                <index>2</index>
+                            </identification>
+                        </object>
+                        <object type="Table" technology="Java">
+                            <name>ReasonTable</name>
+                            <codeName>ReasonTable</codeName>
+                            <description></description>
+                            <identification/>
+                        </object>
+                        <object type="Button" technology="Java">
+                            <name>SelectFunctionButton</name>
+                            <codeName>SelectFunctionButton</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">Ending Date</property>
+                                    <property name="Label" type="string" isRegExp="false"></property>
+                                    <property name="NativeClass" type="string" isRegExp="false">com.incors.plaf.alloy.dw</property>
+                                </properties>
+                                <index>0</index>
+                            </identification>
+                        </object>
                     </children>
                 </object>
             </children>
@@ -1254,6 +1295,71 @@
                                 <properties>
                                     <property name="AttachedText" type="string" isRegExp="false">Reason:</property>
                                 </properties>
+                            </identification>
+                        </object>
+                    </children>
+                </object>
+            </children>
+        </object>
+        <object type="Window" technology="Java">
+            <name>(PLT)CSS Client 4 sat2 - Super User - Default Desktop</name>
+            <codeName>pLTCSSClient4Sat2SuperUserDefaultDesktopWindow</codeName>
+            <description></description>
+            <identification>
+                <properties>
+                    <property name="Title" type="string" isRegExp="false">(PLT)CSS Client 4 sat2 - Super User - Default Desktop</property>
+                </properties>
+            </identification>
+            <children>
+                <object type="Dialog" technology="Java">
+                    <name>Transaction Report Dialog</name>
+                    <codeName>transactionReportDialog</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="Title" type="string" isRegExp="false">Transaction Report Dialog</property>
+                        </properties>
+                    </identification>
+                    <children>
+                        <object type="CheckBox" technology="Java">
+                            <name>Functions:</name>
+                            <codeName>functionsCheckBox</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">Functions:</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Editor" technology="Java">
+                            <name>(CSS Login ID)</name>
+                            <codeName>cSSLoginIDEditor</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">(CSS Login ID)</property>
+                                    <property name="NativeClass" type="string" isRegExp="false">javax.swing.plaf.basic.BasicComboBoxEditor$BorderlessTextField</property>
+                                </properties>
+                                <index>2</index>
+                            </identification>
+                        </object>
+                        <object type="Table" technology="Java">
+                            <name>Employee Name or ID</name>
+                            <codeName>employeeNameOrIDTable</codeName>
+                            <description></description>
+                            <identification/>
+                        </object>
+                        <object type="Button" technology="Java">
+                            <name>Ending Date</name>
+                            <codeName>endingDateButton</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">Ending Date</property>
+                                    <property name="Label" type="string" isRegExp="false"></property>
+                                    <property name="NativeClass" type="string" isRegExp="false">com.incors.plaf.alloy.dw</property>
+                                </properties>
+                                <index>0</index>
                             </identification>
                         </object>
                     </children>

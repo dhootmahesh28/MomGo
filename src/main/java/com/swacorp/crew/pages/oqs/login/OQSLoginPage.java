@@ -17,10 +17,12 @@ public class OQSLoginPage extends BasePage {
 
     public String oqsUrl;
 
+
     public void loginOQS() {
         //getDriver().manage().window().maximize();
         oqsUrl = EnvironmentConstants.OQSURL;
-        getDriver().get(oqsUrl);
+        //getDriver().get("https://xldcrewt03.swacorp.com:13003/oqs-record-keeping-ui/login.do?dept=01");
+        getDriver().navigate().to("https://xldcrewt03.swacorp.com:13003/oqs-record-keeping-ui/login.do?dept=01");
 
         if (isElementVisible(USERID_LINK)) {
             report.reportSelenium("INFO", "Navigation to OQS application is successful");

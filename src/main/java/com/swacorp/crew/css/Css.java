@@ -59,14 +59,62 @@ public class Css extends WinBasePage{
         detailFromROSA = hm;
     }
 
-public void NavigateToTransactionReport() throws GeneralLeanFtException {
+    public void validateTransactioTeportDialog() throws InterruptedException, GeneralLeanFtException {
+        try {
+            CheckedState x = lftObjects.CssMainWindow().transactionReportDialog().functionsCheckBox().getState();
+            if(x.getValue().toString().equalsIgnoreCase("0")){
+                report.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "State of Function checkbox is disabled.");
+            }
+
+
+            lftObjects.CssMainWindow().transactionReportDialog().functionsCheckBox().click();
+
+        } catch (GeneralLeanFtException e) {
+            e.printStackTrace();
+        }
+
+        try {
+
+            lftObjects.CssMainWindow().transactionReportDialog().reasonCheckBox().click();
+
+            Table reasonTable = lftObjects.CssMainWindow().transactionReportDialog().ReasonTable();
+            List<TableRow> rows = reasonTable.getRows();
+            for (int i=0; i < rows.size(); i++) {
+                List<TableCell> cells = rows.get(i).getCells();
+                for(int c = 0; c <  cells.size() ; c++){
+                    //System.out.println("Cell "+i+ cells.get(c).getValue());
+
+                    if (cells.get(c).getValue().toString().contains("ING")){
+                        cells.get(c).click();
+                        report.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "In the reason table. Specified value is found 'ING'");
+                        break;
+                    }
+                }
+            }
+        } catch (GeneralLeanFtException e) {
+            e.printStackTrace();
+        }
+
+        lftObjects.CssMainWindow().transactionReportDialog().close();
+    }
+
+
+public void NavigateToTransactionReport() throws Exception {
     try {
         lftObjects.CssMainWindow().reportsMenu().click();
         lftObjects.CssMainWindow().reportsMenu().transactionReportMenu().click();
-        report.report("pass","Transaction report is navigated successfully.");
+        Thread.sleep(4000);
 
     }catch(Exception e){
-        report.report("fail","Transaction report window didnt open.");
+        //report.report("fail","Transaction report window didnt open.");
+        e.printStackTrace();
+    }
+
+
+    if(lftObjects.CssMainWindow().transactionReportDialog().exists()){
+        report.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction report window exist.");
+    }else{
+        report.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Transaction report window doesn't exist.");
     }
 }
 
