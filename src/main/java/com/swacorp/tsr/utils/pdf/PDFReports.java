@@ -13,13 +13,13 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RosaPTOReports {
+public class PDFReports {
     ArrayList<String> pdfContentLines = new ArrayList<String>();
     String[] pdfLines;
     String[] tags = {"TRIP TO PULL", "SPLIT TRIP","ASSIGNED PORTION","OPEN TIME PORTION","OPEN TIME PORTION" };
 
 
-    public RosaPTOReports(String pdfPath) throws Exception{
+    public PDFReports(String pdfPath) throws Exception{
 
 
         try (PDDocument document = PDDocument.load(new File(pdfPath))) {
@@ -106,21 +106,5 @@ public class RosaPTOReports {
         return pdfContentLines;
     }
 
-
-    /* Get the newest file for a specific extension */
-    public File getTheNewestFile(String filePath, String ext) {
-        File theNewestFile = null;
-        File dir = new File(filePath);
-        FileFilter fileFilter = new WildcardFileFilter("*." + ext);
-        File[] files = dir.listFiles(fileFilter);
-
-        if (files.length > 0) {
-            /** The newest file comes first **/
-            Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
-            theNewestFile = files[0];
-        }
-
-        return theNewestFile;
-    }
 
 }
