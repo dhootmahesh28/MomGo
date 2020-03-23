@@ -20,6 +20,11 @@
         <Parameter key="rosaUserid" value="e56235"/>
         <Parameter key="rosaPassword" value="1Sat1111"/>
 
+        <Parameter key="cssPath" value="C:\\Users\\x257093\\Desktop\\CSSPLT DEV12\\CSSPLT-DEV12.lnk"/>
+        <Parameter key="cssWindowTitle" value="(PLT)CSS Client 21 dev12 - Super User - Default Desktop"/>
+        <Parameter key="cssUserid" value="super"/>
+        <Parameter key="cssPassword" value="test"/>
+
     </Environment>
     <Environment name="QA">
 
@@ -39,6 +44,10 @@
         <Parameter key="rosaUserid" value="e56235"/>
         <Parameter key="rosaPassword" value="1Sat1111"/>
 
+        <Parameter key="cssPath" value="C:\CSSPLT SAT02\CSSPLT-AOS SAT02.lnk"/>
+        <Parameter key="cssWindowTitle" value="(PLT)CSS Client 36 sat - Super User - Default Desktop"/>
+        <Parameter key="cssUserid" value="e117340"/>
+        <Parameter key="cssPassword" value="1Sat1111"/>
     </Environment>
 
 </Environments>
