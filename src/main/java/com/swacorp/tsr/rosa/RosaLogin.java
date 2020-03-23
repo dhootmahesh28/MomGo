@@ -15,6 +15,7 @@ public class RosaLogin extends BasePage {
     private final By SUBMIT_BTN = By.xpath("//input[@name='submit']");
     private final By LOGIN_PAGE_TXT = By.xpath("//h2[text()='Request Optimizer Solution Application']");
 
+
     public RosaHome loginRosa() {
         String url;
         String userid;
