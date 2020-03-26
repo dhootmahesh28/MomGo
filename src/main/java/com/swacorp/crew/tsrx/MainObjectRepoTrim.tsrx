@@ -54,51 +54,6 @@
             <description></description>
             <identification/>
         </object>
-        <object type="Window" technology="WPF">
-            <name>HPE MyFlight Sample Application</name>
-            <codeName>hPEMyFlightSampleApplicationWindow</codeName>
-            <description></description>
-            <identification>
-                <properties>
-                    <property name="FullType" type="string" isRegExp="false">window</property>
-                    <property name="ObjectName" type="string" isRegExp="false">HPE MyFlight Sample Application</property>
-                    <property name="WindowTitleRegExp" type="string" isRegExp="false">HPE MyFlight Sample Application</property>
-                </properties>
-            </identification>
-            <children>
-                <object type="EditField" technology="WPF">
-                    <name>agentName</name>
-                    <codeName>agentNameEditField</codeName>
-                    <description></description>
-                    <identification>
-                        <properties>
-                            <property name="ObjectName" type="string" isRegExp="false">agentName</property>
-                        </properties>
-                    </identification>
-                </object>
-                <object type="EditField" technology="WPF">
-                    <name>password</name>
-                    <codeName>passwordEditField</codeName>
-                    <description></description>
-                    <identification>
-                        <properties>
-                            <property name="ObjectName" type="string" isRegExp="false">password</property>
-                        </properties>
-                    </identification>
-                </object>
-                <object type="Button" technology="WPF">
-                    <name>OK</name>
-                    <codeName>oKButton</codeName>
-                    <description></description>
-                    <identification>
-                        <properties>
-                            <property name="ObjectName" type="string" isRegExp="false">okButton</property>
-                            <property name="Text" type="string" isRegExp="false">OK</property>
-                        </properties>
-                    </identification>
-                </object>
-            </children>
-        </object>
         <object type="Dialog" technology="Java">
             <name>cssLogin</name>
             <codeName>loginDialog</codeName>
@@ -855,6 +810,16 @@
                                 </properties>
                             </identification>
                         </object>
+                        <object type="Menu" technology="Java">
+                            <name>CMBoardripRghtClkMenu</name>
+                            <codeName>cMBoardripRghtClkMenu</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="Label" type="string" isRegExp="false">Transactions</property>
+                                </properties>
+                            </identification>
+                        </object>
                     </children>
                 </object>
                 <object type="InternalFrame" technology="Java">
@@ -1054,8 +1019,8 @@
                             </identification>
                         </object>
                         <object type="Editor" technology="Java">
-                            <name>(CSS Login ID)</name>
-                            <codeName>cSSLoginIDEditor</codeName>
+                            <name>FunctionDropdownList</name>
+                            <codeName>FunctionDropdownList</codeName>
                             <description></description>
                             <identification>
                                 <properties>
@@ -1084,6 +1049,56 @@
                                 <index>0</index>
                             </identification>
                         </object>
+                        <object type="Editor" technology="Java">
+                            <name>BeginningDate</name>
+                            <codeName>beginningDateEditor</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">Beginning Date</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Editor" technology="Java">
+                            <name>EndingDate</name>
+                            <codeName>endingDateEditor</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">Ending Date</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Button" technology="Java">
+                            <name>btnRunReport</name>
+                            <codeName>runReportButton</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="Label" type="string" isRegExp="false">Run Report</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Button" technology="Java">
+                            <name>btnCancel</name>
+                            <codeName>cancel</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="Label" type="string" isRegExp="false">Cancel</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="CheckBox" technology="Java">
+                            <name>Last</name>
+                            <codeName>lastCheckBox</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">Last:</property>
+                                </properties>
+                            </identification>
+                        </object>
                     </children>
                 </object>
             </children>
@@ -1095,219 +1110,12 @@
             <identification/>
         </object>
         <object type="Window" technology="Java">
-            <name>(PLT)CSS Client 36 sat - Super User - Default Desktop - Trip Details-HP38 dated 02Feb20</name>
-            <codeName>pLTCSSClient36SatSuperUserDefaultDesktopTripDetailsHP38Dated02Feb20Window</codeName>
+            <name>(PLT)CSS Client 4 sat2 - Super User - Default Desktop - Crew Member Schedule - 41493 KAISER GREG *INTL*</name>
+            <codeName>pLTCSSClient4Sat2SuperUserDefaultDesktopCrewMemberSchedule41493KAISERGREGINTLWindow</codeName>
             <description></description>
             <identification>
                 <properties>
-                    <property name="Title" type="string" isRegExp="false">(PLT)CSS Client 36 sat - Super User - Default Desktop - Trip Details-HP38 dated 02Feb20</property>
-                </properties>
-            </identification>
-            <children>
-                <object type="InternalFrame" technology="Java">
-                    <name>Trip Details</name>
-                    <codeName>frameTrimDetails</codeName>
-                    <description></description>
-                    <identification>
-                        <properties>
-                            <property name="Path" type="string" isRegExp="false">WnCapturedMDIWindow;WnDesktopMDI$1;WnDesktopMDI;WnDesktopArea;JPanel;JLayeredPane;JRootPane;WnApplicationContainer;</property>
-                        </properties>
-                        <index>0</index>
-                    </identification>
-                    <children>
-                        <object type="Table" technology="Java">
-                            <name>firstTable</name>
-                            <codeName>firstTable</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="AttachedText" type="string" isRegExp="false">ACCL/LPA:</property>
-                                    <property name="NativeClass" type="string" isRegExp="false">com.swacorp.css.screens.trip.TripDetailsTable</property>
-                                </properties>
-                                <index>0</index>
-                            </identification>
-                        </object>
-                        <object type="Table" technology="Java">
-                            <name>SecondTable</name>
-                            <codeName>secondTable</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="AttachedText" type="string" isRegExp="false">ACCL/LPA:</property>
-                                    <property name="NativeClass" type="string" isRegExp="false">com.swacorp.css.screens.trip.TripDetailsTable</property>
-                                </properties>
-                                <index>1</index>
-                            </identification>
-                        </object>
-                        <object type="Table" technology="Java">
-                            <name>ThirdTable</name>
-                            <codeName>thirdTable</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="AttachedText" type="string" isRegExp="false">ACCL/LPA:</property>
-                                    <property name="NativeClass" type="string" isRegExp="false">com.swacorp.css.screens.trip.TripDetailsTable</property>
-                                </properties>
-                                <index>2</index>
-                            </identification>
-                        </object>
-                        <object type="InternalFrame" technology="Java">
-                            <name>Crew Member Schedule - 90870 CAHOON CLAY **INTL**</name>
-                            <codeName>crewMemberSchedule90870CAHOONCLAYINTLInternalFrame</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="Title" type="string" isRegExp="false">Crew Member Schedule - 90870 CAHOON CLAY **INTL**</property>
-                                </properties>
-                            </identification>
-                            <children>
-                                <object type="CheckBox" technology="Java">
-                                    <name>ModifyScheduleArrow</name>
-                                    <codeName>modifyScheduleArrowCheckBox</codeName>
-                                    <description></description>
-                                    <identification>
-                                        <properties>
-                                            <property name="AttachedText" type="string" isRegExp="false">whiteArrow_up</property>
-                                        </properties>
-                                    </identification>
-                                </object>
-                            </children>
-                        </object>
-                    </children>
-                </object>
-            </children>
-        </object>
-        <object type="Window" technology="Java">
-            <name>(PLT)CSS Client 36 sat - Super User - Default Desktop - Crew Member Schedule - 90870 CAHOON CLAY **INTL**</name>
-            <codeName>pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule90870CAHOONCLAYINTLWindow</codeName>
-            <description></description>
-            <identification>
-                <properties>
-                    <property name="Title" type="string" isRegExp="false">(PLT)CSS Client 36 sat - Super User - Default Desktop - Crew Member Schedule - 90870 CAHOON CLAY **INTL**</property>
-                </properties>
-            </identification>
-            <children>
-                <object type="InternalFrame" technology="Java">
-                    <name>Crew Member Schedule - 90870 CAHOON CLAY **INTL**</name>
-                    <codeName>crewMemberSchedule90870CAHOONCLAYINTLInternalFrame</codeName>
-                    <description></description>
-                    <identification>
-                        <properties>
-                            <property name="Title" type="string" isRegExp="false">Crew Member Schedule - 90870 CAHOON CLAY **INTL**</property>
-                        </properties>
-                    </identification>
-                    <children>
-                        <object type="Button" technology="Java">
-                            <name>Run_Transaction_Report</name>
-                            <codeName>runTransactionReportButton</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="Label" type="string" isRegExp="false">Run_Transaction_Report</property>
-                                </properties>
-                            </identification>
-                        </object>
-                    </children>
-                </object>
-            </children>
-        </object>
-        <object type="Window" technology="Java">
-            <name>(PLT)CSS Client 36 sat - Super User - Default Desktop - Transaction Report</name>
-            <codeName>pLTCSSClient36SatSuperUserDefaultDesktopTransactionReportWindow</codeName>
-            <description></description>
-            <identification>
-                <properties>
-                    <property name="Title" type="string" isRegExp="false">(PLT)CSS Client 36 sat - Super User - Default Desktop - Transaction Report</property>
-                </properties>
-            </identification>
-            <children>
-                <object type="InternalFrame" technology="Java">
-                    <name>Transaction Report</name>
-                    <codeName>transactionReportInternalFrame</codeName>
-                    <description></description>
-                    <identification>
-                        <properties>
-                            <property name="Title" type="string" isRegExp="false">Transaction Report</property>
-                        </properties>
-                    </identification>
-                    <children>
-                        <object type="Button" technology="Java">
-                            <name>PDF_Icon</name>
-                            <codeName>pDFIconButton</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="Label" type="string" isRegExp="false">PDF_Icon</property>
-                                </properties>
-                            </identification>
-                        </object>
-                    </children>
-                </object>
-            </children>
-        </object>
-        <object type="Window" technology="Java">
-            <name>(PLT)CSS Client 36 sat - Super User - Default Desktop - Crew Member Schedule - 76643 UHLIG RON **INTL**</name>
-            <codeName>pLTCSSClient36SatSuperUserDefaultDesktopCrewMemberSchedule76643UHLIGRONINTLWindow</codeName>
-            <description></description>
-            <identification>
-                <properties>
-                    <property name="Title" type="string" isRegExp="false">(PLT)CSS Client 36 sat - Super User - Default Desktop - Crew Member Schedule - 76643 UHLIG RON **INTL**</property>
-                </properties>
-            </identification>
-            <children>
-                <object type="Menu" technology="Java">
-                    <name>Reports</name>
-                    <codeName>reportsMenu</codeName>
-                    <description></description>
-                    <identification>
-                        <properties>
-                            <property name="Label" type="string" isRegExp="false">Reports</property>
-                        </properties>
-                    </identification>
-                    <children>
-                        <object type="Menu" technology="Java">
-                            <name>Transaction Report...</name>
-                            <codeName>transactionReportMenu</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="Label" type="string" isRegExp="false">Transaction Report...</property>
-                                </properties>
-                            </identification>
-                        </object>
-                    </children>
-                </object>
-                <object type="Dialog" technology="Java">
-                    <name>Transaction Report Dialog</name>
-                    <codeName>transactionReportDialog</codeName>
-                    <description></description>
-                    <identification>
-                        <properties>
-                            <property name="Title" type="string" isRegExp="false">Transaction Report Dialog</property>
-                        </properties>
-                    </identification>
-                    <children>
-                        <object type="CheckBox" technology="Java">
-                            <name>Reason:</name>
-                            <codeName>reasonCheckBox</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="AttachedText" type="string" isRegExp="false">Reason:</property>
-                                </properties>
-                            </identification>
-                        </object>
-                    </children>
-                </object>
-            </children>
-        </object>
-        <object type="Window" technology="Java">
-            <name>(PLT)CSS Client 4 sat2 - Super User - Default Desktop</name>
-            <codeName>pLTCSSClient4Sat2SuperUserDefaultDesktopWindow</codeName>
-            <description></description>
-            <identification>
-                <properties>
-                    <property name="Title" type="string" isRegExp="false">(PLT)CSS Client 4 sat2 - Super User - Default Desktop</property>
+                    <property name="Title" type="string" isRegExp="false">(PLT)CSS Client 4 sat2 - Super User - Default Desktop - Crew Member Schedule - 41493 KAISER GREG *INTL*</property>
                 </properties>
             </identification>
             <children>
@@ -1321,45 +1129,24 @@
                         </properties>
                     </identification>
                     <children>
-                        <object type="CheckBox" technology="Java">
-                            <name>Functions:</name>
-                            <codeName>functionsCheckBox</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="AttachedText" type="string" isRegExp="false">Functions:</property>
-                                </properties>
-                            </identification>
-                        </object>
                         <object type="Editor" technology="Java">
-                            <name>(CSS Login ID)</name>
-                            <codeName>cSSLoginIDEditor</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="AttachedText" type="string" isRegExp="false">(CSS Login ID)</property>
-                                    <property name="NativeClass" type="string" isRegExp="false">javax.swing.plaf.basic.BasicComboBoxEditor$BorderlessTextField</property>
-                                </properties>
-                                <index>2</index>
-                            </identification>
-                        </object>
-                        <object type="Table" technology="Java">
-                            <name>Employee Name or ID</name>
-                            <codeName>employeeNameOrIDTable</codeName>
-                            <description></description>
-                            <identification/>
-                        </object>
-                        <object type="Button" technology="Java">
                             <name>Ending Date</name>
-                            <codeName>endingDateButton</codeName>
+                            <codeName>endingDateEditor</codeName>
                             <description></description>
                             <identification>
                                 <properties>
                                     <property name="AttachedText" type="string" isRegExp="false">Ending Date</property>
-                                    <property name="Label" type="string" isRegExp="false"></property>
-                                    <property name="NativeClass" type="string" isRegExp="false">com.incors.plaf.alloy.dw</property>
                                 </properties>
-                                <index>0</index>
+                            </identification>
+                        </object>
+                        <object type="Editor" technology="Java">
+                            <name>Beginning Date</name>
+                            <codeName>beginningDateEditor</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">Beginning Date</property>
+                                </properties>
                             </identification>
                         </object>
                     </children>
