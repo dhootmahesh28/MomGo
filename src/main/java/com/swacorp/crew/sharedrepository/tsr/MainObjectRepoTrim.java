@@ -22,6 +22,8 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 	private CssMainWindow CssMainWindow;
 	private cmbEmployeeListDropdown cmbEmployeeListDropdown;
 	private pLTCSSClient4Sat2SuperUserDefaultDesktopCrewMemberSchedule41493KAISERGREGINTLWindow pLTCSSClient4Sat2SuperUserDefaultDesktopCrewMemberSchedule41493KAISERGREGINTLWindow;
+	private pLTCSSClient4Sat2SuperUserDefaultDesktopWindow pLTCSSClient4Sat2SuperUserDefaultDesktopWindow;
+	private pLTCSSClient4Sat2AutomationDefaultDesktopTripDetailsMB9EDated27Mar20Window pLTCSSClient4Sat2AutomationDefaultDesktopTripDetailsMB9EDated27Mar20Window;
 
 	public MainObjectRepoTrim() throws GeneralLeanFtException 
 	{
@@ -32,6 +34,8 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 	pLTCSSClient36SatSuperUserDefaultDesktopWindow = new pLTCSSClient36SatSuperUserDefaultDesktopWindow(this);
 	CssMainWindow = new CssMainWindow(this);
 	pLTCSSClient4Sat2SuperUserDefaultDesktopCrewMemberSchedule41493KAISERGREGINTLWindow = new pLTCSSClient4Sat2SuperUserDefaultDesktopCrewMemberSchedule41493KAISERGREGINTLWindow(this);
+	pLTCSSClient4Sat2SuperUserDefaultDesktopWindow = new pLTCSSClient4Sat2SuperUserDefaultDesktopWindow(this);
+	pLTCSSClient4Sat2AutomationDefaultDesktopTripDetailsMB9EDated27Mar20Window = new pLTCSSClient4Sat2AutomationDefaultDesktopTripDetailsMB9EDated27Mar20Window(this);
 		rebuildDescriptions();
 	}
 	
@@ -47,6 +51,8 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 		CssMainWindow = new CssMainWindow(contextTestObject, this);
 		cmbEmployeeListDropdown = new cmbEmployeeListDropdown(contextTestObject, this);
 		pLTCSSClient4Sat2SuperUserDefaultDesktopCrewMemberSchedule41493KAISERGREGINTLWindow = new pLTCSSClient4Sat2SuperUserDefaultDesktopCrewMemberSchedule41493KAISERGREGINTLWindow(contextTestObject, this);
+		pLTCSSClient4Sat2SuperUserDefaultDesktopWindow = new pLTCSSClient4Sat2SuperUserDefaultDesktopWindow(contextTestObject, this);
+		pLTCSSClient4Sat2AutomationDefaultDesktopTripDetailsMB9EDated27Mar20Window = new pLTCSSClient4Sat2AutomationDefaultDesktopTripDetailsMB9EDated27Mar20Window(contextTestObject, this);
 		rebuildDescriptions();
 	}	
 
@@ -59,6 +65,8 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 		public CssMainWindow CssMainWindow() { return CssMainWindow; }
 		public cmbEmployeeListDropdown cmbEmployeeListDropdown() { return cmbEmployeeListDropdown; }
 		public pLTCSSClient4Sat2SuperUserDefaultDesktopCrewMemberSchedule41493KAISERGREGINTLWindow pLTCSSClient4Sat2SuperUserDefaultDesktopCrewMemberSchedule41493KAISERGREGINTLWindow() { return pLTCSSClient4Sat2SuperUserDefaultDesktopCrewMemberSchedule41493KAISERGREGINTLWindow; }
+		public pLTCSSClient4Sat2SuperUserDefaultDesktopWindow pLTCSSClient4Sat2SuperUserDefaultDesktopWindow() { return pLTCSSClient4Sat2SuperUserDefaultDesktopWindow; }
+		public pLTCSSClient4Sat2AutomationDefaultDesktopTripDetailsMB9EDated27Mar20Window pLTCSSClient4Sat2AutomationDefaultDesktopTripDetailsMB9EDated27Mar20Window() { return pLTCSSClient4Sat2AutomationDefaultDesktopTripDetailsMB9EDated27Mar20Window; }
 
 		public class loginToSouthwestWindow extends WinFormsWindowNodeBase
 	{
@@ -1855,6 +1863,9 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 	private transactionReportInternalFrame transactionReportInternalFrame;
 	private reportsMenu reportsMenu;
 	private transactionReportDialog transactionReportDialog;
+	private openTimeMenu openTimeMenu;
+	private openTimeInternalFrame openTimeInternalFrame;
+	private crewBoardPieceUiObject crewBoardPieceUiObject;
 						public CssMainWindow(AppModelBase applicationModel) throws GeneralLeanFtException
 		{
 			super(applicationModel);
@@ -1871,6 +1882,9 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 		transactionReportInternalFrame = new transactionReportInternalFrame(this, applicationModel);
 		reportsMenu = new reportsMenu(this, applicationModel);
 		transactionReportDialog = new transactionReportDialog(this, applicationModel);
+		openTimeMenu = new openTimeMenu(this, applicationModel);
+		openTimeInternalFrame = new openTimeInternalFrame(this, applicationModel);
+		crewBoardPieceUiObject = new crewBoardPieceUiObject(this, applicationModel);
 			
 			setDisplayName("CssMainWindow");
 		}
@@ -1890,6 +1904,9 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 		transactionReportInternalFrame = new transactionReportInternalFrame(this, applicationModel);
 		reportsMenu = new reportsMenu(this, applicationModel);
 		transactionReportDialog = new transactionReportDialog(this, applicationModel);
+		openTimeMenu = new openTimeMenu(this, applicationModel);
+		openTimeInternalFrame = new openTimeInternalFrame(this, applicationModel);
+		crewBoardPieceUiObject = new crewBoardPieceUiObject(this, applicationModel);
 
 			setDisplayName("CssMainWindow");
 		}
@@ -1917,6 +1934,9 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 		public transactionReportInternalFrame transactionReportInternalFrame() { return transactionReportInternalFrame; }
 		public reportsMenu reportsMenu() { return reportsMenu; }
 		public transactionReportDialog transactionReportDialog() { return transactionReportDialog; }
+		public openTimeMenu openTimeMenu() { return openTimeMenu; }
+		public openTimeInternalFrame openTimeInternalFrame() { return openTimeInternalFrame; }
+		public crewBoardPieceUiObject crewBoardPieceUiObject() { return crewBoardPieceUiObject; }
 		
 			public class crewMemberScheduleButton extends JavaButtonNodeBase
 	{
@@ -2612,6 +2632,7 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 	private secondTable secondTable;
 	private thirdTable thirdTable;
 	private crewMemberSchedule90870CAHOONCLAYINTLInternalFrame crewMemberSchedule90870CAHOONCLAYINTLInternalFrame;
+	private crewMembersTable crewMembersTable;
 						public frameTrimDetails(AppModelBase applicationModel) throws GeneralLeanFtException
 		{
 			super(applicationModel);
@@ -2620,6 +2641,7 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 		secondTable = new secondTable(this, applicationModel);
 		thirdTable = new thirdTable(this, applicationModel);
 		crewMemberSchedule90870CAHOONCLAYINTLInternalFrame = new crewMemberSchedule90870CAHOONCLAYINTLInternalFrame(this, applicationModel);
+		crewMembersTable = new crewMembersTable(this, applicationModel);
 			
 			setDisplayName("Trip Details");
 		}
@@ -2631,6 +2653,7 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 		secondTable = new secondTable(this, applicationModel);
 		thirdTable = new thirdTable(this, applicationModel);
 		crewMemberSchedule90870CAHOONCLAYINTLInternalFrame = new crewMemberSchedule90870CAHOONCLAYINTLInternalFrame(this, applicationModel);
+		crewMembersTable = new crewMembersTable(this, applicationModel);
 
 			setDisplayName("Trip Details");
 		}
@@ -2650,6 +2673,7 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 		public secondTable secondTable() { return secondTable; }
 		public thirdTable thirdTable() { return thirdTable; }
 		public crewMemberSchedule90870CAHOONCLAYINTLInternalFrame crewMemberSchedule90870CAHOONCLAYINTLInternalFrame() { return crewMemberSchedule90870CAHOONCLAYINTLInternalFrame; }
+		public crewMembersTable crewMembersTable() { return crewMembersTable; }
 		
 			public class firstTable extends JavaTableNodeBase
 	{
@@ -2791,6 +2815,32 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 			}
 
 	}
+
+	public class crewMembersTable extends JavaTableNodeBase
+	{
+
+		
+								public crewMembersTable(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("CrewMembers");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.TableDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.TableDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.TableDescription.Builder().nativeClass("javax.swing.JTable").tagName("Crew Members").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
 
 	}
 
@@ -3275,6 +3325,359 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 
 	}
 
+	public class openTimeMenu extends JavaMenuNodeBase
+	{
+
+		
+			private getOpenTripsButton getOpenTripsButton;
+	private viewOpenTimeMenu viewOpenTimeMenu;
+						public openTimeMenu(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+					getOpenTripsButton = new getOpenTripsButton(this, applicationModel);
+		viewOpenTimeMenu = new viewOpenTimeMenu(this, applicationModel);
+
+			setDisplayName("OpenTime");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.MenuDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.MenuDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.MenuDescription.Builder().label("Open Time").nativeClass("javax.swing.JMenu").path("JMenu;JMenuBar;JLayeredPane;JRootPane;WnApplicationContainer;").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				public getOpenTripsButton getOpenTripsButton() { return getOpenTripsButton; }
+		public viewOpenTimeMenu viewOpenTimeMenu() { return viewOpenTimeMenu; }
+		
+			public class getOpenTripsButton extends JavaButtonNodeBase
+	{
+
+		
+								public getOpenTripsButton(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("getOpenTripsButton");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.ButtonDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.ButtonDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.ButtonDescription.Builder().label("Get Open Trips").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class viewOpenTimeMenu extends JavaMenuNodeBase
+	{
+
+		
+								public viewOpenTimeMenu(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("ViewOpenTime...");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.MenuDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.MenuDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.MenuDescription.Builder().label("View Open Time...").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	}
+
+	public class openTimeInternalFrame extends JavaInternalFrameNodeBase
+	{
+
+		
+			private whiteArrowExpandedState whiteArrowExpandedState;
+	private bWICheckBox bWICheckBox;
+	private fromEditor fromEditor;
+	private toEditor toEditor;
+	private BaseCheckbox BaseCheckbox;
+	private captainCheckBox captainCheckBox;
+	private getOpenTripsButton getOpenTripsButton;
+						public openTimeInternalFrame(AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(applicationModel);
+
+					whiteArrowExpandedState = new whiteArrowExpandedState(this, applicationModel);
+		bWICheckBox = new bWICheckBox(this, applicationModel);
+		fromEditor = new fromEditor(this, applicationModel);
+		toEditor = new toEditor(this, applicationModel);
+		BaseCheckbox = new BaseCheckbox(this, applicationModel);
+		captainCheckBox = new captainCheckBox(this, applicationModel);
+		getOpenTripsButton = new getOpenTripsButton(this, applicationModel);
+			
+			setDisplayName("OpenTimeInternalFrame");
+		}
+				public openTimeInternalFrame(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+					whiteArrowExpandedState = new whiteArrowExpandedState(this, applicationModel);
+		bWICheckBox = new bWICheckBox(this, applicationModel);
+		fromEditor = new fromEditor(this, applicationModel);
+		toEditor = new toEditor(this, applicationModel);
+		BaseCheckbox = new BaseCheckbox(this, applicationModel);
+		captainCheckBox = new captainCheckBox(this, applicationModel);
+		getOpenTripsButton = new getOpenTripsButton(this, applicationModel);
+
+			setDisplayName("OpenTimeInternalFrame");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.InternalFrameDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.InternalFrameDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.InternalFrameDescription.Builder().title("Open Time 11Mar20 - 11Mar20").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				public whiteArrowExpandedState whiteArrowExpandedState() { return whiteArrowExpandedState; }
+		public bWICheckBox bWICheckBox() { return bWICheckBox; }
+		public fromEditor fromEditor() { return fromEditor; }
+		public toEditor toEditor() { return toEditor; }
+		public BaseCheckbox BaseCheckbox() { return BaseCheckbox; }
+		public captainCheckBox captainCheckBox() { return captainCheckBox; }
+		public getOpenTripsButton getOpenTripsButton() { return getOpenTripsButton; }
+		
+			public class whiteArrowExpandedState extends JavaCheckBoxNodeBase
+	{
+
+		
+								public whiteArrowExpandedState(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("whiteArrowExpandedState");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.CheckBoxDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.CheckBoxDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.CheckBoxDescription.Builder().attachedText("whiteArrow_up").nativeClass("com.swacorp.css.screens.common.UpDownButton").state(com.hp.lft.sdk.CheckedState.UNCHECKED).index(0).build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class bWICheckBox extends JavaCheckBoxNodeBase
+	{
+
+		
+								public bWICheckBox(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("BWI");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.CheckBoxDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.CheckBoxDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.CheckBoxDescription.Builder().attachedText("BWI").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class fromEditor extends JavaEditorNodeBase
+	{
+
+		
+								public fromEditor(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("From");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.EditorDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.EditorDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.EditorDescription.Builder().attachedText("From").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class toEditor extends JavaEditorNodeBase
+	{
+
+		
+								public toEditor(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("To");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.EditorDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.EditorDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.EditorDescription.Builder().attachedText("To").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class BaseCheckbox extends JavaCheckBoxNodeBase
+	{
+
+		
+								public BaseCheckbox(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("BaseCheckbox");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.CheckBoxDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.CheckBoxDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.CheckBoxDescription.Builder().attachedText("ATL").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class captainCheckBox extends JavaCheckBoxNodeBase
+	{
+
+		
+								public captainCheckBox(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("captainCheckBox");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.CheckBoxDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.CheckBoxDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.CheckBoxDescription.Builder().attachedText("Captain").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class getOpenTripsButton extends JavaButtonNodeBase
+	{
+
+		
+								public getOpenTripsButton(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("getOpenTripsButton");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.ButtonDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.ButtonDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.ButtonDescription.Builder().label("Get Open Trips").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	}
+
+	public class crewBoardPieceUiObject extends JavaUiObjectNodeBase
+	{
+
+		
+								public crewBoardPieceUiObject(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("CrewBoardPiece");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.UiObjectDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.UiObjectDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.UiObjectDescription.Builder().nativeClass("com.swacorp.css.screens.crewboard.CrewBoardPiece").index(1).build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
 	}
 
 	public class cmbEmployeeListDropdown extends JavaListNodeBase
@@ -3420,6 +3823,362 @@ public class MainObjectRepoTrim extends AppModelBase {		private loginToSouthwest
 			com.hp.lft.sdk.java.EditorDescription description = null; 
 			try{
 				description = new com.hp.lft.sdk.java.EditorDescription.Builder().attachedText("Beginning Date").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	}
+
+	}
+
+	public class pLTCSSClient4Sat2SuperUserDefaultDesktopWindow extends JavaWindowNodeBase
+	{
+
+		
+			private openTimeMenu openTimeMenu;
+	private openTime11Mar2011Mar20InternalFrame openTime11Mar2011Mar20InternalFrame;
+	private openTime22Mar2025Mar20InternalFrame openTime22Mar2025Mar20InternalFrame;
+						public pLTCSSClient4Sat2SuperUserDefaultDesktopWindow(AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(applicationModel);
+
+					openTimeMenu = new openTimeMenu(this, applicationModel);
+		openTime11Mar2011Mar20InternalFrame = new openTime11Mar2011Mar20InternalFrame(this, applicationModel);
+		openTime22Mar2025Mar20InternalFrame = new openTime22Mar2025Mar20InternalFrame(this, applicationModel);
+			
+			setDisplayName("(PLT)CSS Client 4 sat2 - Super User - Default Desktop");
+		}
+				public pLTCSSClient4Sat2SuperUserDefaultDesktopWindow(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+					openTimeMenu = new openTimeMenu(this, applicationModel);
+		openTime11Mar2011Mar20InternalFrame = new openTime11Mar2011Mar20InternalFrame(this, applicationModel);
+		openTime22Mar2025Mar20InternalFrame = new openTime22Mar2025Mar20InternalFrame(this, applicationModel);
+
+			setDisplayName("(PLT)CSS Client 4 sat2 - Super User - Default Desktop");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.WindowDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.WindowDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.WindowDescription.Builder().title("(PLT)CSS Client 4 sat2 - Super User - Default Desktop").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				public openTimeMenu openTimeMenu() { return openTimeMenu; }
+		public openTime11Mar2011Mar20InternalFrame openTime11Mar2011Mar20InternalFrame() { return openTime11Mar2011Mar20InternalFrame; }
+		public openTime22Mar2025Mar20InternalFrame openTime22Mar2025Mar20InternalFrame() { return openTime22Mar2025Mar20InternalFrame; }
+		
+			public class openTimeMenu extends JavaMenuNodeBase
+	{
+
+		
+			private viewOpenTimeMenu viewOpenTimeMenu;
+						public openTimeMenu(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+					viewOpenTimeMenu = new viewOpenTimeMenu(this, applicationModel);
+
+			setDisplayName("OpenTime");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.MenuDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.MenuDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.MenuDescription.Builder().label("Open Time").nativeClass("javax.swing.JMenu").path("JMenu;JMenuBar;JLayeredPane;JRootPane;WnApplicationContainer;").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				public viewOpenTimeMenu viewOpenTimeMenu() { return viewOpenTimeMenu; }
+		
+			public class viewOpenTimeMenu extends JavaMenuNodeBase
+	{
+
+		
+								public viewOpenTimeMenu(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("ViewOpenTime...");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.MenuDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.MenuDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.MenuDescription.Builder().label("View Open Time...").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	}
+
+	public class openTime11Mar2011Mar20InternalFrame extends JavaInternalFrameNodeBase
+	{
+
+		
+			private bWICheckBox bWICheckBox;
+	private getOpenTripsButton getOpenTripsButton;
+						public openTime11Mar2011Mar20InternalFrame(AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(applicationModel);
+
+					bWICheckBox = new bWICheckBox(this, applicationModel);
+		getOpenTripsButton = new getOpenTripsButton(this, applicationModel);
+			
+			setDisplayName("Open Time 11Mar20 - 11Mar20");
+		}
+				public openTime11Mar2011Mar20InternalFrame(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+					bWICheckBox = new bWICheckBox(this, applicationModel);
+		getOpenTripsButton = new getOpenTripsButton(this, applicationModel);
+
+			setDisplayName("Open Time 11Mar20 - 11Mar20");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.InternalFrameDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.InternalFrameDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.InternalFrameDescription.Builder().title("Open Time 11Mar20 - 11Mar20").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				public bWICheckBox bWICheckBox() { return bWICheckBox; }
+		public getOpenTripsButton getOpenTripsButton() { return getOpenTripsButton; }
+		
+			public class bWICheckBox extends JavaCheckBoxNodeBase
+	{
+
+		
+								public bWICheckBox(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("BWI");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.CheckBoxDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.CheckBoxDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.CheckBoxDescription.Builder().attachedText("BWI").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class getOpenTripsButton extends JavaButtonNodeBase
+	{
+
+		
+								public getOpenTripsButton(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("Get Open Trips");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.ButtonDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.ButtonDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.ButtonDescription.Builder().label("Get Open Trips").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	}
+
+	public class openTime22Mar2025Mar20InternalFrame extends JavaInternalFrameNodeBase
+	{
+
+		
+			private crewBoardPieceUiObject crewBoardPieceUiObject;
+						public openTime22Mar2025Mar20InternalFrame(AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(applicationModel);
+
+					crewBoardPieceUiObject = new crewBoardPieceUiObject(this, applicationModel);
+			
+			setDisplayName("Open Time 22Mar20 - 25Mar20");
+		}
+				public openTime22Mar2025Mar20InternalFrame(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+					crewBoardPieceUiObject = new crewBoardPieceUiObject(this, applicationModel);
+
+			setDisplayName("Open Time 22Mar20 - 25Mar20");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.InternalFrameDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.InternalFrameDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.InternalFrameDescription.Builder().title("Open Time 22Mar20 - 25Mar20").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				public crewBoardPieceUiObject crewBoardPieceUiObject() { return crewBoardPieceUiObject; }
+		
+			public class crewBoardPieceUiObject extends JavaUiObjectNodeBase
+	{
+
+		
+								public crewBoardPieceUiObject(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("CrewBoardPiece");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.UiObjectDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.UiObjectDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.UiObjectDescription.Builder().nativeClass("com.swacorp.css.screens.crewboard.CrewBoardPiece").index(1).build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	}
+
+	}
+
+	public class pLTCSSClient4Sat2AutomationDefaultDesktopTripDetailsMB9EDated27Mar20Window extends JavaWindowNodeBase
+	{
+
+		
+			private tripDetailsMB9EDated27Mar20InternalFrame tripDetailsMB9EDated27Mar20InternalFrame;
+						public pLTCSSClient4Sat2AutomationDefaultDesktopTripDetailsMB9EDated27Mar20Window(AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(applicationModel);
+
+					tripDetailsMB9EDated27Mar20InternalFrame = new tripDetailsMB9EDated27Mar20InternalFrame(this, applicationModel);
+			
+			setDisplayName("(PLT)CSS Client 4 sat2 - Automation - Default Desktop - Trip Details-MB9E dated 27Mar20");
+		}
+				public pLTCSSClient4Sat2AutomationDefaultDesktopTripDetailsMB9EDated27Mar20Window(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+					tripDetailsMB9EDated27Mar20InternalFrame = new tripDetailsMB9EDated27Mar20InternalFrame(this, applicationModel);
+
+			setDisplayName("(PLT)CSS Client 4 sat2 - Automation - Default Desktop - Trip Details-MB9E dated 27Mar20");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.WindowDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.WindowDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.WindowDescription.Builder().title("(PLT)CSS Client 4 sat2 - Automation - Default Desktop - Trip Details-MB9E dated 27Mar20").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				public tripDetailsMB9EDated27Mar20InternalFrame tripDetailsMB9EDated27Mar20InternalFrame() { return tripDetailsMB9EDated27Mar20InternalFrame; }
+		
+			public class tripDetailsMB9EDated27Mar20InternalFrame extends JavaInternalFrameNodeBase
+	{
+
+		
+			private crewMembersTable crewMembersTable;
+						public tripDetailsMB9EDated27Mar20InternalFrame(AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(applicationModel);
+
+					crewMembersTable = new crewMembersTable(this, applicationModel);
+			
+			setDisplayName("Trip Details-MB9E dated 27Mar20");
+		}
+				public tripDetailsMB9EDated27Mar20InternalFrame(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+					crewMembersTable = new crewMembersTable(this, applicationModel);
+
+			setDisplayName("Trip Details-MB9E dated 27Mar20");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.InternalFrameDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.InternalFrameDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.InternalFrameDescription.Builder().title("Trip Details-MB9E dated 27Mar20").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				public crewMembersTable crewMembersTable() { return crewMembersTable; }
+		
+			public class crewMembersTable extends JavaTableNodeBase
+	{
+
+		
+								public crewMembersTable(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("CrewMembers");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.java.TableDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.java.TableDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.java.TableDescription.Builder().nativeClass("javax.swing.JTable").tagName("Crew Members").build();
 			}catch(Exception e){
 				throw new GeneralLeanFtException(e.getMessage(), e);
 			}

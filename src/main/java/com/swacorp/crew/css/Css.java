@@ -72,6 +72,94 @@ public class Css extends WinBasePage{
         detailFromROSA = hm;
     }
 
+    public void readOTTripDetails() throws GeneralLeanFtException, CloneNotSupportedException{
+        
+        UiObject x = lftObjects.CssMainWindow().crewBoardPieceUiObject();
+        x.highlight();
+
+        //ReadDataFromTripDetails
+        com.hp.lft.sdk.java.UiObjectDescription allUIObj = new com.hp.lft.sdk.java.UiObjectDescription.Builder()
+                .nativeClass("com.swacorp.css.screens.crewboard.CrewBoardPiece").build();
+        com.hp.lft.sdk.java.UiObject[] allObj = lftObjects.CssMainWindow().findChildren(com.hp.lft.sdk.java.UiObject.class, allUIObj);
+
+        for (int index=allObj.length-1 ; index > 0 ; index--){
+            UiObject tripDetails = allObj[index];
+            tripDetails.highlight();
+            tripDetails.doubleClick();
+            SearchTheCorrectTripFromOT("","");
+           }
+    }
+
+    public void SearchTheCorrectTripFromOT(String startdate, String enddate) throws GeneralLeanFtException , CloneNotSupportedException{
+        System.out.println("-------- ");
+        Set<String> rowData = null;
+        HashMap<Integer, HashMap<Integer, String[]>> tripDetalsFromTripDeatilsWindow = new HashMap<Integer, HashMap<Integer, String[]>>();
+        int rows;
+        boolean found = false;
+        HashMap<Integer, String[]> tripDetalsPerRow = new HashMap<Integer, String[]>();
+        int tables = 0;
+
+        com.hp.lft.sdk.java.TableDescription tblDesc = new com.hp.lft.sdk.java.TableDescription.Builder()
+                .nativeClass("com.swacorp.css.screens.trip.TripDetailsTable").build();
+
+        Table[] allTables = lftObjects.CssMainWindow().frameTrimDetails().findChildren(Table.class, tblDesc);
+        LOGGER.info(" All Tables: " + allTables.length);
+
+        String[] split = allTables[0].getRows().get(0).getCells().get(0).getValue().toString().split(",");
+        //String s = split[125];
+        String s = allTables[0].getRows().get(0).getCells().get(0).getValue().toString().split(",")[125];
+        String s1 = allTables[allTables.length-1].getRows().get(0).getCells().get(0).getValue().toString().split(",")[125];
+
+        Table tbl2 = lftObjects.CssMainWindow().frameTrimDetails().crewMembersTable();
+        List<TableRow> allrows = tbl2.getRows();//.get(0).getCells().get(0).getValue().toString();
+        System.out.println("s: "+s);
+        System.out.println("s1: "+s1);
+        System.out.println("tbl2.getVisibleText(): "+tbl2.getVisibleText());
+        lftObjects.CssMainWindow().frameTrimDetails().close();
+    }
+
+    public void selectOTfilters(String from, String to, String filter) throws  GeneralLeanFtException{
+
+        lftObjects.CssMainWindow().openTimeInternalFrame().activate();
+        lftObjects.CssMainWindow().openTimeInternalFrame().fromEditor().sendKeys(from);
+        lftObjects.CssMainWindow().openTimeInternalFrame().toEditor().sendKeys(to);
+
+        do{
+            if (lftObjects.CssMainWindow().openTimeInternalFrame().whiteArrowExpandedState().exists()){
+                lftObjects.CssMainWindow().openTimeInternalFrame().whiteArrowExpandedState().click();
+            }else{
+                break;
+            }
+        }while(lftObjects.CssMainWindow().openTimeInternalFrame().whiteArrowExpandedState().exists());
+
+        List<String> items = Arrays.asList(filter.split(","));
+        for (String item: items){
+            lftObjects.CssMainWindow().openTimeInternalFrame().BaseCheckbox().setDescription(new CheckBoxDescription.Builder().attachedText(item).build());
+            lftObjects.CssMainWindow().openTimeInternalFrame().BaseCheckbox().setState(CheckedState.CHECKED);
+        }
+        lftObjects.CssMainWindow().openTimeInternalFrame().getOpenTripsButton().click();
+    }
+
+    public void NavigateToOT() throws GeneralLeanFtException {
+
+        try {
+            lftObjects.CssMainWindow().openTimeMenu().click();
+            report.reportLeanFT(lftObjects.CssMainWindow(),"pass", "Successfully clicked on the OT menue.");
+            lftObjects.CssMainWindow().openTimeMenu().viewOpenTimeMenu().click();
+        }catch(Exception e){
+            report.reportLeanFT(lftObjects.CssMainWindow(),"fail", "Error occured in selecting the OT from menu bar.");
+         }
+
+         try{
+             if (lftObjects.CssMainWindow().openTimeInternalFrame().fromEditor().exists()){
+                 report.reportLeanFT(lftObjects.CssMainWindow(),"pass", "OT window has appeared.");
+             }
+         }catch(Exception e){
+             report.reportLeanFT(lftObjects.CssMainWindow(),"fail", "OT window didn't appear.");
+         }
+
+    }
+
     public void rightClickCMBoardAndSelectMenu(String rightClickMenu) throws  GeneralLeanFtException{
         try {
             UiObject x = lftObjects.CssMainWindow().frameCMBoard().xUiObject();

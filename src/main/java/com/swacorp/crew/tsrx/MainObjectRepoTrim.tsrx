@@ -932,6 +932,17 @@
                                 </object>
                             </children>
                         </object>
+                        <object type="Table" technology="Java">
+                            <name>CrewMembers</name>
+                            <codeName>crewMembersTable</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="NativeClass" type="string" isRegExp="false">javax.swing.JTable</property>
+                                    <property name="TagName" type="string" isRegExp="false">Crew Members</property>
+                                </properties>
+                            </identification>
+                        </object>
                     </children>
                 </object>
                 <object type="InternalFrame" technology="Java">
@@ -1101,6 +1112,136 @@
                         </object>
                     </children>
                 </object>
+                <object type="Menu" technology="Java">
+                    <name>OpenTime</name>
+                    <codeName>openTimeMenu</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="Label" type="string" isRegExp="false">Open Time</property>
+                            <property name="NativeClass" type="string" isRegExp="false">javax.swing.JMenu</property>
+                            <property name="Path" type="string" isRegExp="false">JMenu;JMenuBar;JLayeredPane;JRootPane;WnApplicationContainer;</property>
+                        </properties>
+                    </identification>
+                    <children>
+                        <object type="Button" technology="Java">
+                            <name>getOpenTripsButton</name>
+                            <codeName>getOpenTripsButton</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="Label" type="string" isRegExp="false">Get Open Trips</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Menu" technology="Java">
+                            <name>ViewOpenTime...</name>
+                            <codeName>viewOpenTimeMenu</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="Label" type="string" isRegExp="false">View Open Time...</property>
+                                </properties>
+                            </identification>
+                        </object>
+                    </children>
+                </object>
+                <object type="InternalFrame" technology="Java">
+                    <name>OpenTimeInternalFrame</name>
+                    <codeName>openTimeInternalFrame</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="Title" type="string" isRegExp="false">Open Time 11Mar20 - 11Mar20</property>
+                        </properties>
+                    </identification>
+                    <children>
+                        <object type="CheckBox" technology="Java">
+                            <name>whiteArrowExpandedState</name>
+                            <codeName>whiteArrowExpandedState</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">whiteArrow_up</property>
+                                    <property name="NativeClass" type="string" isRegExp="false">com.swacorp.css.screens.common.UpDownButton</property>
+                                    <property name="State" type="enum" isRegExp="false">Unchecked</property>
+                                </properties>
+                                <index>0</index>
+                            </identification>
+                        </object>
+                        <object type="CheckBox" technology="Java">
+                            <name>BWI</name>
+                            <codeName>bWICheckBox</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">BWI</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Editor" technology="Java">
+                            <name>From</name>
+                            <codeName>fromEditor</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">From</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Editor" technology="Java">
+                            <name>To</name>
+                            <codeName>toEditor</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">To</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="CheckBox" technology="Java">
+                            <name>BaseCheckbox</name>
+                            <codeName>BaseCheckbox</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">ATL</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="CheckBox" technology="Java">
+                            <name>captainCheckBox</name>
+                            <codeName>captainCheckBox</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">Captain</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Button" technology="Java">
+                            <name>getOpenTripsButton</name>
+                            <codeName>getOpenTripsButton</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="Label" type="string" isRegExp="false">Get Open Trips</property>
+                                </properties>
+                            </identification>
+                        </object>
+                    </children>
+                </object>
+                <object type="UiObject" technology="Java">
+                    <name>CrewBoardPiece</name>
+                    <codeName>crewBoardPieceUiObject</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="NativeClass" type="string" isRegExp="false">com.swacorp.css.screens.crewboard.CrewBoardPiece</property>
+                        </properties>
+                        <index>1</index>
+                    </identification>
+                </object>
             </children>
         </object>
         <object type="List" technology="Java">
@@ -1146,6 +1287,132 @@
                             <identification>
                                 <properties>
                                     <property name="AttachedText" type="string" isRegExp="false">Beginning Date</property>
+                                </properties>
+                            </identification>
+                        </object>
+                    </children>
+                </object>
+            </children>
+        </object>
+        <object type="Window" technology="Java">
+            <name>(PLT)CSS Client 4 sat2 - Super User - Default Desktop</name>
+            <codeName>pLTCSSClient4Sat2SuperUserDefaultDesktopWindow</codeName>
+            <description></description>
+            <identification>
+                <properties>
+                    <property name="Title" type="string" isRegExp="false">(PLT)CSS Client 4 sat2 - Super User - Default Desktop</property>
+                </properties>
+            </identification>
+            <children>
+                <object type="Menu" technology="Java">
+                    <name>OpenTime</name>
+                    <codeName>openTimeMenu</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="Label" type="string" isRegExp="false">Open Time</property>
+                            <property name="NativeClass" type="string" isRegExp="false">javax.swing.JMenu</property>
+                            <property name="Path" type="string" isRegExp="false">JMenu;JMenuBar;JLayeredPane;JRootPane;WnApplicationContainer;</property>
+                        </properties>
+                    </identification>
+                    <children>
+                        <object type="Menu" technology="Java">
+                            <name>ViewOpenTime...</name>
+                            <codeName>viewOpenTimeMenu</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="Label" type="string" isRegExp="false">View Open Time...</property>
+                                </properties>
+                            </identification>
+                        </object>
+                    </children>
+                </object>
+                <object type="InternalFrame" technology="Java">
+                    <name>Open Time 11Mar20 - 11Mar20</name>
+                    <codeName>openTime11Mar2011Mar20InternalFrame</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="Title" type="string" isRegExp="false">Open Time 11Mar20 - 11Mar20</property>
+                        </properties>
+                    </identification>
+                    <children>
+                        <object type="CheckBox" technology="Java">
+                            <name>BWI</name>
+                            <codeName>bWICheckBox</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AttachedText" type="string" isRegExp="false">BWI</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Button" technology="Java">
+                            <name>Get Open Trips</name>
+                            <codeName>getOpenTripsButton</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="Label" type="string" isRegExp="false">Get Open Trips</property>
+                                </properties>
+                            </identification>
+                        </object>
+                    </children>
+                </object>
+                <object type="InternalFrame" technology="Java">
+                    <name>Open Time 22Mar20 - 25Mar20</name>
+                    <codeName>openTime22Mar2025Mar20InternalFrame</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="Title" type="string" isRegExp="false">Open Time 22Mar20 - 25Mar20</property>
+                        </properties>
+                    </identification>
+                    <children>
+                        <object type="UiObject" technology="Java">
+                            <name>CrewBoardPiece</name>
+                            <codeName>crewBoardPieceUiObject</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="NativeClass" type="string" isRegExp="false">com.swacorp.css.screens.crewboard.CrewBoardPiece</property>
+                                </properties>
+                                <index>1</index>
+                            </identification>
+                        </object>
+                    </children>
+                </object>
+            </children>
+        </object>
+        <object type="Window" technology="Java">
+            <name>(PLT)CSS Client 4 sat2 - Automation - Default Desktop - Trip Details-MB9E dated 27Mar20</name>
+            <codeName>pLTCSSClient4Sat2AutomationDefaultDesktopTripDetailsMB9EDated27Mar20Window</codeName>
+            <description></description>
+            <identification>
+                <properties>
+                    <property name="Title" type="string" isRegExp="false">(PLT)CSS Client 4 sat2 - Automation - Default Desktop - Trip Details-MB9E dated 27Mar20</property>
+                </properties>
+            </identification>
+            <children>
+                <object type="InternalFrame" technology="Java">
+                    <name>Trip Details-MB9E dated 27Mar20</name>
+                    <codeName>tripDetailsMB9EDated27Mar20InternalFrame</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="Title" type="string" isRegExp="false">Trip Details-MB9E dated 27Mar20</property>
+                        </properties>
+                    </identification>
+                    <children>
+                        <object type="Table" technology="Java">
+                            <name>CrewMembers</name>
+                            <codeName>crewMembersTable</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="NativeClass" type="string" isRegExp="false">javax.swing.JTable</property>
+                                    <property name="TagName" type="string" isRegExp="false">Crew Members</property>
                                 </properties>
                             </identification>
                         </object>

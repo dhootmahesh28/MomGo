@@ -24,6 +24,9 @@ public class RosaSolutioQueue extends BasePage {
     ReportUtil report = new ReportUtil();
     HashMap<Integer, String[]> hm = new HashMap<Integer, String[]>();
 
+    LinkedHashMap<String, LinkedHashMap<String, String[]>> masterHM = new LinkedHashMap<String, LinkedHashMap<String, String[]>>();
+    LinkedHashMap<String, LinkedHashMap<String, ArrayList<String[]>>> masterHM2 = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<String[]>>>();
+
     private final By SOLUTION_QUEUE_TITLE = By.xpath("//h2[@class='pilot-queue__title']");
     private final By VIEW_QUEUE_PAGE = By.xpath("//div[text()='View Queue page']");
     private final By STATUS_HEADER = By.xpath("//div[text()='STATUS']");
@@ -34,18 +37,105 @@ public class RosaSolutioQueue extends BasePage {
     private final By DATA_DIV = By.xpath("(//div[@class='trip-details__content-block']/div[@class='trip-details__content-block'])[1]/div[1]/div[@class='grid__row']/div[1]/div");
     private final By FILTER_BUTTON = By.xpath("//*[text()=' Filter ']");
     private final By FILTER_STATUS = By.xpath("//*[text()=' Status ']");
-    private final By STATUS_COMMITTED = By.xpath("//*[text()='Committed']");
+    //private final By STATUS_COMMITTED = By.xpath("//*[text()='Committed']");
+    private final String STATUS_COMMITTED = "//*[text()='PLACEHOLDER']";
     private final By APPLY_BTN = By.xpath("//*[text()=' Apply ']");
     private final By SOLUTION_ROWS = By.xpath("//*[@class='cl-data-table-panel']");
     private final By FIRST_EMP_NUMBER_SOL_DETAILS = By.xpath("//div[@class='cl-data-table-column-item']");
     private final By PDF_DOWNLOAD_BUTTON = By.xpath("(//div[@class ='dot-menu' ])[1]");
     private final By DOWNLOAD_BUTTON = By.xpath("//button[text() ='Download' ]");
+    private final String SOLUTION_QUEUE = "//div/cl-data-table-row/cl-data-table-column[PLACEHOLDER]/*[1]";
+    private final By ALL_DETAILS = By.xpath("//*[@class='solution-details-table__row'][1]//div[@class = 'cl-data-table-column-item']");
+    private final By ALL_EMP_ID = By.xpath("//*[@class='cl-data-table-column-item'][1]");
+
+
 
     ArrayList<String> training = null;
     ArrayList<String> TripToPull = null;
     ArrayList<String> empID= null;
     String employeeID;
-;
+
+    public void readSolutionQueueDetails() throws Exception {
+        String training = "(//div[@class='trip-details__content-block']/div[@class='trip-details__content-block'])[PLACEHOLDER]/div[1]/div[@class='grid__row']/div[1]/div";
+        String triptopull = "(//div[@class='trip-details__content-block']/div[@class='trip-details__content-block'])[PLACEHOLDER1]/div[PLACEHOLDER2]//div[@class = 'grid__column-8/12']/div";
+        int x = 1;
+        int rowIndx = 0;
+        ArrayList<String> list = new ArrayList<>();
+        buttonClickIfExist(VIEW_LINK);
+        Thread.sleep(4000);
+        List<WebElement> listCrewIdRows = getDriver().findElements(ALL_DETAILS);
+
+        do {
+            WebElement ele = listCrewIdRows.get(x);
+            list.add(rowIndx, ele.getText());
+            rowIndx++;
+            x = x+7;
+        } while (x < listCrewIdRows.size());
+
+        for (int i = 0; i < list.size() ; i++){
+            LinkedHashMap<String, ArrayList<String[]>> trngHM2= new LinkedHashMap<>();
+
+            ArrayList<String[]> list1 = new ArrayList<>();
+            ArrayList<String[]> list2 = new ArrayList<>();
+
+            String xpathId = "//*[text()='"+list.get(i)+"']";
+            getDriver().findElement(By.xpath(xpathId)).click();
+            Thread.sleep(3000);
+            String fullxpathTraining = training.replace("PLACEHOLDER",""+(2*i+1));
+            String fullxpathTripToPullTemp = triptopull.replace("PLACEHOLDER1",""+(2*i+2));
+            String fullxpathTripToPull1 = fullxpathTripToPullTemp.replace("PLACEHOLDER2",""+2);
+            String fullxpathTripToPull2 = fullxpathTripToPullTemp.replace("PLACEHOLDER2",""+3);
+            List<WebElement> trng = getDriver().findElements(By.xpath(fullxpathTraining));
+
+            int rowNumber = 0;
+            for (int t=0; t<trng.size();t++ ){
+                WebElement eleTrng = trng.get(t);
+
+                List<WebElement> elements = eleTrng.findElements(By.xpath("./*"));
+                for (int j = 0; j < elements.size() - 1; j++) {
+                    WebElement e = elements.get(j);
+                    list1.add(rowNumber,e.getText().toString().split("\n"));
+                    rowNumber++;
+                }
+            }
+
+            List<WebElement> ttp = getDriver().findElements(By.xpath(fullxpathTripToPull1));
+            int rowTripToPull = 0;
+            for (int t=0; t<ttp.size();t++ ){
+                WebElement eleTrng = ttp.get(t);
+                List<WebElement> elements = eleTrng.findElements(By.xpath("./*"));
+                for (int j = 0; j < elements.size() - 1; j++) {
+                    WebElement e = elements.get(j);
+                    list2.add(rowTripToPull,e.getText().toString().split("\n"));
+                    rowTripToPull++;
+                }
+            }
+
+            List<WebElement> ttp2 = getDriver().findElements(By.xpath(fullxpathTripToPull2));
+            if (ttp2.size() > 0){
+                for (int t=0; t<ttp2.size();t++ ){
+                    WebElement eleTrng = ttp2.get(t);
+
+                    List<WebElement> elements = eleTrng.findElements(By.xpath("./*"));
+                    for (int j = 0; j < elements.size() - 1; j++) {
+                        WebElement e = elements.get(j);
+                        list2.add(rowTripToPull,e.getText().toString().split("\n"));
+                        rowTripToPull++;
+                    }
+                }
+            }
+
+            trngHM2.put("trng", list1);
+            trngHM2.put("triptopull", list2);
+            masterHM2.put(list.get(i),trngHM2);
+            getDriver().findElement(By.xpath(xpathId)).click();
+            Thread.sleep(2000);
+        }
+    }
+
+    public void readMasterHM(){
+        System.out.println(masterHM);
+    }
 
     public Css  NavigateToCSSForValidation(){
         try {
@@ -106,7 +196,8 @@ public void latestFile() throws Exception{
             waitForElement(FILTER_BUTTON);
             buttonClick(FILTER_BUTTON);
             buttonClickIfExist(FILTER_STATUS);
-            buttonClickIfExist(STATUS_COMMITTED);
+            //buttonClickIfExist(STATUS_COMMITTED);
+            buttonClickIfExist(By.xpath(STATUS_COMMITTED.replace("PLACEHOLDER",Filter )));
             buttonClickIfExist(APPLY_BTN);
             report.reportSelenium("pass", "Filter button clicked successful .");
         }catch(Exception e){
