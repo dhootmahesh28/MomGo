@@ -1,7 +1,8 @@
 package com.swacorp.tsr.rosa;
 
 import com.swacorp.crew.pages.common.BasePage;
-import com.swacorp.crew.utils.EnvironmentConstants;
+import com.swacorp.crew.pages.common.CommonFormats;
+import com.swacorp.crew.utils.DateUtil;
 import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -14,6 +15,7 @@ public class RosaHome extends BasePage {
 
     private final Logger LOGGER = Logger.getLogger(RosaHome.class);
     ReportUtil report = new ReportUtil();
+    String currentSystemDate;
 
     private final By LOGIN_PAGE_TXT = By.xpath("//h2[text()='Request Optimizer Solution Application']");
     private final By PILOT_TRAINING_BTN = By.xpath("//button[@id='button-1']");
@@ -29,7 +31,7 @@ public class RosaHome extends BasePage {
     private final By START_SUBMIT_BTN = By.xpath("//*[text()='Start']");
     private final By PTO_QUEUE_BTN = By.xpath("(//*[text()='Queue'])[1]");
 
-    private final String EVENT_DROP_VALUE = "//*[text() = ' PLACEHOLDER ']";
+    private final String DROP_VALUE = "//*[contains(text(),'PLACEHOLDER')]";
 
     public void VerifyHomePageAppear() {
         waitForElement(LOGIN_PAGE_TXT);
@@ -71,10 +73,10 @@ public class RosaHome extends BasePage {
         btn.get(1).click();
         if (isElementVisible(PILOT_TRAINING_OPTIMIZER_TXT)){
             report.reportSelenium("Pass", "Training Optimizer page appeared.");
-            printConsole("Training Optimizer page appeared");
+            //printConsole("Training Optimizer page appeared");
         }else{
             report.reportSelenium("Fail", "Training Optimizer page NOT appeared.");
-            printConsole("Training Optimizer page NOT appeared");
+            //printConsole("Training Optimizer page NOT appeared");
         }
     }
 
@@ -88,7 +90,7 @@ public class RosaHome extends BasePage {
 
     public void verifyStartAndResetButtonExist(){
         if (isElementVisible(CONDITIONAL_CORE_RADIO_BTN)) {
-            report.reportSelenium("Fail", "Training Optimizer page NOT appeared.");
+            report.reportSelenium("Pass", "Training Optimizer page appeared.");
         }else{
             report.reportSelenium("Fail", "Training Optimizer page NOT appeared.");
         }
@@ -96,28 +98,81 @@ public class RosaHome extends BasePage {
 
     public void verifyCoreRadioButtonExist(){
         if (isElementVisible(START_BTN)) {
-            report.reportSelenium("Fail", "Start button exists.");
+            report.reportSelenium("Pass", "Start button exists.");
         }else{
             report.reportSelenium("Fail", "Start button does not exists.");
         }
 
         if (isElementVisible(RESET_BTN)) {
-            report.reportSelenium("Fail", "Reset button exists.");
+            report.reportSelenium("Pass", "Reset button exists.");
         }else{
             report.reportSelenium("Fail", "Reset button does not exists.");
         }
     }
 
+    public void test(String dropHeader, String dropValue){
+        String xpathForDropdowns = "//*[contains(text(),'PLACEHOLDER')]/following-sibling::*[position()=1]";
+        String xpathDropdownvalue = "//*[contains(text(),'PLACEHOLDER')]";
+
+        String xpathCategory;
+        try {
+            xpathCategory = xpathForDropdowns.replace("PLACEHOLDER", dropHeader);
+            getDriver().findElement(By.xpath(xpathCategory)).click();
+            getDriver().findElement(By.xpath(xpathDropdownvalue.replace("PLACEHOLDER",dropValue))).click();
+            report.reportSelenium("Pass", "Selected: "+dropHeader+" - "+dropValue);
+
+        }catch(Exception e){
+            report.reportSelenium("Fail", "Failed to select: "+dropHeader+" - "+dropValue);
+            e.printStackTrace();
+        }
+    }
+
+    public RosaSolutioQueue createPTOSolutionRequest(String Category, String Cycle, String Aircraft, String Event, String Month, String Bidline, String CoreConditional) throws Exception{
+        DateUtil du = new DateUtil();
+
+        String xpathCoreConditional = "//*[contains(text(),'PLACEHOLDER')]/preceding-sibling::*[position()=1]";
+        String xpathCategory;
+
+
+        test("CATEGORY",Category);
+        test("CYCLE",Cycle);
+        test("AIRCRAFT",Aircraft);
+        test("EVENT",Event);
+        test("MONTH",Month);
+        test("BID LINE",Bidline);
+
+        try {
+            if(!CoreConditional.isEmpty()) {
+                xpathCategory = xpathCoreConditional.replace("PLACEHOLDER", CoreConditional);
+                getDriver().findElement(By.xpath(xpathCategory)).click();
+                report.reportSelenium("Pass", "Selected: "+CoreConditional);
+            }else{
+                report.reportSelenium("Info", "Not Selected");
+            }
+
+        }catch(Exception e){
+            report.reportSelenium("Fail", "Failed to select: "+CoreConditional);
+            e.printStackTrace();
+        }
+
+        currentSystemDate = du.getCurrentDate(CommonFormats.ROSAFormat);
+        buttonClick(START_BTN);
+
+        return new RosaSolutioQueue(currentSystemDate);
+    }
+
+
     public RosaSolutioQueue selectFromDropDown(String Event) throws Exception{
 
         try {
             buttonClick(EVENT_DROP);
-            String newXpathLocator = EVENT_DROP_VALUE.replace("PLACEHOLDER",Event );
+            String newXpathLocator = DROP_VALUE.replace("PLACEHOLDER",Event );
             printConsole("newXpathLocator: "+newXpathLocator);
-
+            //*[contains(text(),Event)]
             WebElement element = getDriver().findElement(By.xpath(newXpathLocator));
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
-            buttonClick(getDriver().findElement(By.xpath(newXpathLocator)));
+            //buttonClick(getDriver().findElement(By.xpath(newXpathLocator)));
+            element.click();
             getDriver().findElements(BID_LINE_DR0P).get(2).click();
             buttonClick(HARD_LINE_DROP_DOWN_VALUE);
             buttonClick(START_SUBMIT_BTN);

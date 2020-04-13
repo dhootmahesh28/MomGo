@@ -151,7 +151,7 @@ public class RosaSolutioQueue extends BasePage {
         String triptopull = "(//div[@class='trip-details__content-block']/div[@class='trip-details__content-block'])[PLACEHOLDER1]/div[PLACEHOLDER2]//div[@class = 'grid__column-8/12']/div";
         int x = 1;
         int rowIndx = 0;
-        Thread.sleep(2000);
+        waitForElement(VIEW_LINK);
         ArrayList<String> list = new ArrayList<>();
         if (isElementPresent(VIEW_LINK)) {
             buttonClickIfExist(VIEW_LINK);

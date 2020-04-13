@@ -18,6 +18,7 @@ public class CommonFormats {
     public static final String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
     public static final String MDYYYY = "M/d/yyyy";
     public static final String VENDOR_TIMEFORMAT = "uuuuddMMhhmm";
+    public static final String ROSAFormat = "ddMMMyyyy hh:mm";
 
 
 }

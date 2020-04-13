@@ -965,6 +965,16 @@
                                 </properties>
                             </identification>
                         </object>
+                        <object type="Label" technology="Java">
+                            <name>report</name>
+                            <codeName>report</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="Label" type="string" isRegExp="false"></property>
+                                </properties>
+                            </identification>
+                        </object>
                     </children>
                 </object>
                 <object type="Menu" technology="Java">
@@ -1152,7 +1162,7 @@
                     <description></description>
                     <identification>
                         <properties>
-                            <property name="Title" type="string" isRegExp="false">Open Time 11Mar20 - 11Mar20</property>
+                            <property name="Title" type="string" isRegExp="true">Open Time.*</property>
                         </properties>
                     </identification>
                     <children>
@@ -1249,176 +1259,6 @@
             <codeName>cmbEmployeeListDropdown</codeName>
             <description></description>
             <identification/>
-        </object>
-        <object type="Window" technology="Java">
-            <name>(PLT)CSS Client 4 sat2 - Super User - Default Desktop - Crew Member Schedule - 41493 KAISER GREG *INTL*</name>
-            <codeName>pLTCSSClient4Sat2SuperUserDefaultDesktopCrewMemberSchedule41493KAISERGREGINTLWindow</codeName>
-            <description></description>
-            <identification>
-                <properties>
-                    <property name="Title" type="string" isRegExp="false">(PLT)CSS Client 4 sat2 - Super User - Default Desktop - Crew Member Schedule - 41493 KAISER GREG *INTL*</property>
-                </properties>
-            </identification>
-            <children>
-                <object type="Dialog" technology="Java">
-                    <name>Transaction Report Dialog</name>
-                    <codeName>transactionReportDialog</codeName>
-                    <description></description>
-                    <identification>
-                        <properties>
-                            <property name="Title" type="string" isRegExp="false">Transaction Report Dialog</property>
-                        </properties>
-                    </identification>
-                    <children>
-                        <object type="Editor" technology="Java">
-                            <name>Ending Date</name>
-                            <codeName>endingDateEditor</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="AttachedText" type="string" isRegExp="false">Ending Date</property>
-                                </properties>
-                            </identification>
-                        </object>
-                        <object type="Editor" technology="Java">
-                            <name>Beginning Date</name>
-                            <codeName>beginningDateEditor</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="AttachedText" type="string" isRegExp="false">Beginning Date</property>
-                                </properties>
-                            </identification>
-                        </object>
-                    </children>
-                </object>
-            </children>
-        </object>
-        <object type="Window" technology="Java">
-            <name>(PLT)CSS Client 4 sat2 - Super User - Default Desktop</name>
-            <codeName>pLTCSSClient4Sat2SuperUserDefaultDesktopWindow</codeName>
-            <description></description>
-            <identification>
-                <properties>
-                    <property name="Title" type="string" isRegExp="false">(PLT)CSS Client 4 sat2 - Super User - Default Desktop</property>
-                </properties>
-            </identification>
-            <children>
-                <object type="Menu" technology="Java">
-                    <name>OpenTime</name>
-                    <codeName>openTimeMenu</codeName>
-                    <description></description>
-                    <identification>
-                        <properties>
-                            <property name="Label" type="string" isRegExp="false">Open Time</property>
-                            <property name="NativeClass" type="string" isRegExp="false">javax.swing.JMenu</property>
-                            <property name="Path" type="string" isRegExp="false">JMenu;JMenuBar;JLayeredPane;JRootPane;WnApplicationContainer;</property>
-                        </properties>
-                    </identification>
-                    <children>
-                        <object type="Menu" technology="Java">
-                            <name>ViewOpenTime...</name>
-                            <codeName>viewOpenTimeMenu</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="Label" type="string" isRegExp="false">View Open Time...</property>
-                                </properties>
-                            </identification>
-                        </object>
-                    </children>
-                </object>
-                <object type="InternalFrame" technology="Java">
-                    <name>Open Time 11Mar20 - 11Mar20</name>
-                    <codeName>openTime11Mar2011Mar20InternalFrame</codeName>
-                    <description></description>
-                    <identification>
-                        <properties>
-                            <property name="Title" type="string" isRegExp="false">Open Time 11Mar20 - 11Mar20</property>
-                        </properties>
-                    </identification>
-                    <children>
-                        <object type="CheckBox" technology="Java">
-                            <name>BWI</name>
-                            <codeName>bWICheckBox</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="AttachedText" type="string" isRegExp="false">BWI</property>
-                                </properties>
-                            </identification>
-                        </object>
-                        <object type="Button" technology="Java">
-                            <name>Get Open Trips</name>
-                            <codeName>getOpenTripsButton</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="Label" type="string" isRegExp="false">Get Open Trips</property>
-                                </properties>
-                            </identification>
-                        </object>
-                    </children>
-                </object>
-                <object type="InternalFrame" technology="Java">
-                    <name>Open Time 22Mar20 - 25Mar20</name>
-                    <codeName>openTime22Mar2025Mar20InternalFrame</codeName>
-                    <description></description>
-                    <identification>
-                        <properties>
-                            <property name="Title" type="string" isRegExp="false">Open Time 22Mar20 - 25Mar20</property>
-                        </properties>
-                    </identification>
-                    <children>
-                        <object type="UiObject" technology="Java">
-                            <name>CrewBoardPiece</name>
-                            <codeName>crewBoardPieceUiObject</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="NativeClass" type="string" isRegExp="false">com.swacorp.css.screens.crewboard.CrewBoardPiece</property>
-                                </properties>
-                                <index>1</index>
-                            </identification>
-                        </object>
-                    </children>
-                </object>
-            </children>
-        </object>
-        <object type="Window" technology="Java">
-            <name>(PLT)CSS Client 4 sat2 - Automation - Default Desktop - Trip Details-MB9E dated 27Mar20</name>
-            <codeName>pLTCSSClient4Sat2AutomationDefaultDesktopTripDetailsMB9EDated27Mar20Window</codeName>
-            <description></description>
-            <identification>
-                <properties>
-                    <property name="Title" type="string" isRegExp="false">(PLT)CSS Client 4 sat2 - Automation - Default Desktop - Trip Details-MB9E dated 27Mar20</property>
-                </properties>
-            </identification>
-            <children>
-                <object type="InternalFrame" technology="Java">
-                    <name>Trip Details-MB9E dated 27Mar20</name>
-                    <codeName>tripDetailsMB9EDated27Mar20InternalFrame</codeName>
-                    <description></description>
-                    <identification>
-                        <properties>
-                            <property name="Title" type="string" isRegExp="false">Trip Details-MB9E dated 27Mar20</property>
-                        </properties>
-                    </identification>
-                    <children>
-                        <object type="Table" technology="Java">
-                            <name>CrewMembers</name>
-                            <codeName>crewMembersTable</codeName>
-                            <description></description>
-                            <identification>
-                                <properties>
-                                    <property name="NativeClass" type="string" isRegExp="false">javax.swing.JTable</property>
-                                    <property name="TagName" type="string" isRegExp="false">Crew Members</property>
-                                </properties>
-                            </identification>
-                        </object>
-                    </children>
-                </object>
-            </children>
         </object>
     </objects>
 </applicationModel>

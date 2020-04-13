@@ -18,4 +18,6 @@ public final class EnvironmentConstants {
     public static final String CSSUSERID = EnvironmentFactory.getConfigValue("cssUserid");
     public static final String CSSPASSWORD = EnvironmentFactory.getConfigValue("cssPassword");
 
+    public static final String SASIURL = EnvironmentFactory.getConfigValue("sasiUrl");
+
 }

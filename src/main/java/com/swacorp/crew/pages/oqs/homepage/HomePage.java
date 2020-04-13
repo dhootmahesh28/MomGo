@@ -73,8 +73,6 @@ public class HomePage extends BasePage {
         waitUntilElementClickable(POSITION_ADD_BTN);
         buttonClick(POSITION_ADD_BTN);
         waitUntilElementClickable(POSITION_START_TXT);
-        String tenDaysPast = dateUtil.getPastDate(10);
-        String hundredDaysPast = dateUtil.getPastDate(100);
 
         enterText(POSITION_START_TXT,startDate );
         enterText(POSITION_END_TXT, startDate);
@@ -88,9 +86,7 @@ public class HomePage extends BasePage {
     }
 
     public void EditPosition() throws  Exception {
-        String OneDayPast = dateUtil.getPastDate(1);
-        String tenDaysPast = dateUtil.getPastDate(10);
-        String hundredDaysPast = dateUtil.getPastDate(100);
+
         try {
         waitUntilElementClickable(EDIT_POSITION_BTN);
         waitByTime(5000);

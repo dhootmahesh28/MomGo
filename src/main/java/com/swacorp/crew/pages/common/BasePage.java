@@ -79,7 +79,7 @@ public class BasePage {
             e.printStackTrace();
         }
         WebElement elm = waitForElement(locator);
-        //scrollToElement(elm);
+        scrollToElement(elm);
         elm.click();
         LOGGER.info("After buttonClick::" + locator);
     }

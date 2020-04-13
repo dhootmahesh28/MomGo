@@ -106,6 +106,7 @@ public class DriverSource extends TestNgUnitTestBase implements  GenericMethods 
                     //  else
                     //    System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\IEDriverServer64.exe");
                     InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
+                    internetExplorerOptions.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, "");
                     internetExplorerOptions.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
                     internetExplorerOptions.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
                     internetExplorerOptions.setCapability("requireWindowFocus", true);

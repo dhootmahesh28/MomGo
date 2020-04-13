@@ -25,18 +25,4 @@ public class EnumWaitConstants {
         }
     }
 
-/*    public enum WaitUnit{
-        SEC("seconds"),
-        MIN("minutes");
-
-        private String waitunit;
-
-        WaitUnit(String user) {
-            this.waitunit = user;
-        }
-
-        public String WaitUnit() {
-            return waitunit;
-        }
-    }*/
 }
