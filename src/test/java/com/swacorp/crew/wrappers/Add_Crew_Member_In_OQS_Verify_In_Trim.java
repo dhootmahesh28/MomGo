@@ -1,7 +1,6 @@
-package com.swacorp.crew.tests.regression.oqs.crew14477.Wrappers;
+package com.swacorp.crew.wrappers;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
-import com.swacorp.crew.dataprovider.TestDataProvider;
 import com.swacorp.crew.pages.oqs.homepage.HomePage;
 import com.swacorp.crew.pages.oqs.login.OQSLoginPage;
 import com.swacorp.crew.pages.trim.homepage.TrimHomePageAM;
@@ -9,7 +8,6 @@ import com.swacorp.crew.pages.trim.login.LoginPage_am;
 import com.swacorp.crew.utils.EnvironmentConstants;
 import com.swacorp.crew.utils.TestManager;
 import org.apache.log4j.Logger;
-import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,6 +78,10 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
 
         //Verify that the details are not visible in Trim
         trimHomePageAM.ValidateSearchResults(visibility );
+
+        trimHomePageAM.closeEmployeeDetailsWindow();
+
+        trimHomePageAM.closeEmployeeSearchWindow();
 
         trimHomePageAM.MinimizeMainWindow();
 

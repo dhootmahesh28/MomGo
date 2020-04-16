@@ -8,6 +8,11 @@ import org.testng.annotations.DataProvider;
 public class TestDataProvider {
 
 
+    @DataProvider(name = "TC181387")
+    public static Object[][] TC181387() {
+        return new Object[][]{{"FIRST OFFICER - 737 All","22", "1", "TRN","Larry", "Larry", "07/01/1988", "MALE", "Y", "ATP", "99988811", "01/05/2020", "BOEING 737 PIC", "Updated message.", "Add message.", "FIRST OFFICER-717 ALL" }};
+    }
+
 //    addCrewMember( empPosition,  classNumber,  crewNumber,  baseLocation, empNum,  lastName,  firstName,  dateOfBirth,
                     // gender,  usCitizenFlag,  type, certificate,  dateIssued,  rating)
     @DataProvider(name = "TC181510_CREW_14499_TC07")

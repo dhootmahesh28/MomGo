@@ -1,6 +1,7 @@
 package com.swacorp.tsr.rosa.rosa_1_5;
 
 import com.swacorp.crew.css.Css;
+import com.swacorp.crew.utils.DateUtil;
 import com.swacorp.crew.utils.TestManager;
 import com.swacorp.tsr.rosa.RosaLogin;
 import com.swacorp.tsr.rosa.RosaSolutioQueue;
@@ -13,7 +14,8 @@ public class TC_171389_171391 extends TestManager {
     RosaLogin rosa;
     RosaSolutioQueue rosaSolutioQueue;
     Css css;
-    SasiHome sasiHome = new SasiHome();
+    SasiHome sasiHome;
+    SasiLogin sasiLogin;
     WrapperPTOWorkflow ptowrapper = new WrapperPTOWorkflow(rosa, rosaSolutioQueue, css);
 
     //*In Progress*//*
@@ -22,12 +24,22 @@ public class TC_171389_171391 extends TestManager {
         setScenarioName("TC171389_171391_FO_Validate_that_transaction_report_for_Training_Trip_is_displayed_with_the_transactions_with_the_same_transgroups");
         css = ptowrapper.E2EFlow_RosaPTOMODIFIED();
         Thread.sleep(1000);
-        SasiLogin sasiLogin = new SasiLogin();
+
+        // sasiLogin = new SasiLogin(ptowrapper.getMasterHM());
+        sasiLogin = ptowrapper.navigateToSasi();
         sasiHome = sasiLogin.loginSasi();
         sasiHome.clickWorldViewer();
         sasiHome.selectData();
         sasiHome.clickFirstLink();
-        sasiHome.readNonFlyDetails("");
+        sasiHome.readNonFlyDetails();
+    }
+
+
+    @Test(groups = {"19"}, priority=4)
+    public void TC17323231389_TC171391_Validate_nonfly_activity_is_updated_on_SASI_for_each_training_trip_ingested() throws Exception{
+        setScenarioName("TC171389_171391_FO_Validate_that_transaction_report_for_Training_Trip_is_displayed_with_the_transactions_with_the_same_transgroups");
+        DateUtil du = new DateUtil();
+        //System.out.println(du.dateFormat("yyyy-mm-dd","08Mar2020", "ddmmmyyyy"));
     }
 }
 

@@ -5,7 +5,7 @@ import com.swacorp.crew.pages.oqs.homepage.HomePage;
 import com.swacorp.crew.pages.oqs.login.OQSLoginPage;
 import com.swacorp.crew.pages.trim.homepage.TrimHomePageAM;
 import com.swacorp.crew.pages.trim.login.LoginPage_am;
-import com.swacorp.crew.tests.regression.oqs.crew14477.Wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim;
+import com.swacorp.crew.wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim;
 import com.swacorp.crew.utils.EnvironmentConstants;
 import com.swacorp.crew.utils.TestManager;
 import org.apache.log4j.Logger;

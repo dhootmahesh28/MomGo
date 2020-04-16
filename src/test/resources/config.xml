@@ -16,7 +16,7 @@
         <!-- TRiM Login Password -->
         <Parameter key="trimLoginPassword" value="5d758d6fd8ea5344ae07e5bd1a8ca8587f8196f174a2"/>
 
-        <Parameter key="rosaUrl" value="https://rosa-qa.swacorp.com"/>
+        <Parameter key="rosaUrl" value="https://apmlogin.cis.qa.swacorp.com/swa_login.htm"/>
         <Parameter key="rosaUserid" value="e56235"/>
         <Parameter key="rosaPassword" value="1Sat1111"/>
 
@@ -29,7 +29,7 @@
     <Environment name="QA">
 
         <!-- OQS Url -->
-        <Parameter key="oqsUrl" value="https://xldcrewt03.swacorp.com:13003/oqs-record-keeping-ui/login.do?dept=01"/>
+        <Parameter key="oqsUrl" value="https://xlqcrewt03.swacorp.com:13003/oqs-record-keeping-ui/login.do?dept=01"/>
         <!-- OQS Login User-->
         <Parameter key="oqsLoginUser" value="72451"/>
 
@@ -44,10 +44,13 @@
         <Parameter key="rosaUserid" value="e56235"/>
         <Parameter key="rosaPassword" value="1Sat1111"/>
 
-        <Parameter key="cssPath" value="C:\CSSPLT SAT02\CSSPLT-AOS SAT02.lnk"/>
+        <!--<Parameter key="cssPath" value="C:\CSSPLT SAT02\CSSPLT-AOS SAT02.lnk"/>-->
+        <Parameter key="cssPath" value="C:\Users\x257093\Desktop\CSSPLT SAT - Copy\CSSPLT-SAT.lnk"/>
         <Parameter key="cssWindowTitle" value="(PLT)CSS Client 36 sat - Super User - Default Desktop"/>
         <Parameter key="cssUserid" value="e117340"/>
         <Parameter key="cssPassword" value="1Sat1111"/>
+
+        <Parameter key="sasiUrl" value="http://xlqsky01:12216/sasi/sasi-paradise.html"/>
     </Environment>
 
 </Environments>

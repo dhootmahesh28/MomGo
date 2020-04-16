@@ -3,7 +3,7 @@ package com.swacorp.crew.tests.regression.oqs.crew14477;
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.swacorp.crew.dataprovider.TestDataProvider;
 import com.swacorp.crew.pages.oqs.homepage.HomePage;
-import com.swacorp.crew.tests.regression.oqs.crew14477.Wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim;
+import com.swacorp.crew.wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim;
 import com.swacorp.crew.utils.DateUtil;
 import com.swacorp.crew.utils.TestManager;
 import org.apache.log4j.Logger;
