@@ -5,6 +5,8 @@ import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.pages.common.CommonFormats;
 import com.swacorp.crew.utils.DateUtil;
 import com.swacorp.crew.utils.ReportUtil;
+import com.swacorp.tsr.sasi.SasiHome;
+import com.swacorp.tsr.sasi.SasiLogin;
 import com.swacorp.tsr.utils.pdf.PDFReports;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -72,10 +74,9 @@ public class RosaSolutioQueue extends BasePage {
             String queuTime = (rowElems.get(3)).getText();  //getDriver().findElement(By.xpath(xpathSingleElementsInRow.replace("PLACEHOLDER")))
             boolean isTimeDiffWithinpermitiableRange = isTimeWithinAcceptableRange(queuTime, timeOfCreatingRequest);
 
-           /* if (queuEvent.equalsIgnoreCase(Event) & queuBidLine.equalsIgnoreCase(Bidline) & queuBidPeriod.equalsIgnoreCase(Month)) {
+           if (queuEvent.equalsIgnoreCase(Event) & queuBidLine.equalsIgnoreCase(Bidline) & queuBidPeriod.equalsIgnoreCase(Month)) {
                 String xpathstatus = xpathSingleElementsInRow + "//p";
                 String status = getDriver().findElement(By.xpath(xpathstatus)).getText();
-                System.out.println("Ststus: " + status);
 
                 //If the tatus is intermediate then wait for some time
                 if (Arrays.asList(intermediateStatus).contains(status)) {
@@ -93,7 +94,7 @@ public class RosaSolutioQueue extends BasePage {
                 } else if (Arrays.asList(failedStatus).contains(status)) {
                     report.reportSelenium("fail", "The request has reached to a failed status: " + status);
                     break;
-                } else if (Arrays.asList(passedStatus).contains(status)) {*/
+                } else if (Arrays.asList(passedStatus).contains(status)) {
                     //if (true) {
 
                         try {
@@ -108,8 +109,14 @@ public class RosaSolutioQueue extends BasePage {
                     // Reading of all employee done. Hence break the loopm and return
                     //break;
                 }
-            //}
-        //}
+            }
+        }
+
+    public Map<String, Map<String, ArrayList<String[]>>> getHM(){
+        //masterHM
+        return masterHM;
+    }
+
     public void readHM(){
         //masterHM
         for (Map.Entry<String, Map<String, ArrayList<String[]>>> entry : masterHM.entrySet()){
@@ -153,6 +160,7 @@ public class RosaSolutioQueue extends BasePage {
         int rowIndx = 0;
         waitForElement(VIEW_LINK);
         ArrayList<String> list = new ArrayList<>();
+        Thread.sleep(5000);
         if (isElementPresent(VIEW_LINK)) {
             buttonClickIfExist(VIEW_LINK);
         }
@@ -241,6 +249,21 @@ public class RosaSolutioQueue extends BasePage {
             }else{
                 report.reportSelenium("fail", "ROSA part of the flow is completed, but Training or Trip to pull data could not be read");
                 return new Css(masterHM);
+            }
+        }catch(Exception e){
+            report.report("fail", "Navigation to CSS window failed.");
+            return null;
+        }
+    }
+
+    public SasiLogin NavigateToSasiWithMasterDS(){
+        try {
+            if (masterHM.size() > 0) {
+                report.reportSelenium("pass", "ROSA part of the flow is successful, now navigating to SASI. Total number of employeeIDs read from rosa is: "+masterHM.size());
+                return new SasiLogin(masterHM);
+            }else{
+                report.reportSelenium("fail", "ROSA part of the flow is completed, but Training or Trip to pull data could not be read");
+                return new SasiLogin(masterHM);
             }
         }catch(Exception e){
             report.report("fail", "Navigation to CSS window failed.");

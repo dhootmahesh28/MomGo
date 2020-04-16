@@ -32,15 +32,22 @@ public class TrimHomePageAM extends WinBasePage{
         lftObjects = super.lftObjectRepo;
        }
 
-    private int VerifyWindowExist(Window o) throws  GeneralLeanFtException{
-        int retVal = 1;
-        if (o.exists()){
-            retVal =0;
-            return retVal;
-        }
-        return retVal;
-    }
 
+    public void validateTreeNode() throws GeneralLeanFtException {
+        try {
+            TreeView x = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().tvTreeView();
+            x.highlight();
+            x.activateNode("737;MDW");
+            List<TreeViewNode> n = x.getVisibleNodes();
+
+            for (int i=0; i<= n.size()-1;i++){
+                System.out.println(n.get(i).getClass());
+            }
+            x.activateNode("737;MDW;First Officer");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public int NavigateMenu(String NavigationString) throws  GeneralLeanFtException{
         int returnInt = 1;
@@ -138,6 +145,7 @@ public class TrimHomePageAM extends WinBasePage{
     }
 
 
+
     public void VerifyNoDuplicate()  throws GeneralLeanFtException{
 
         lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
@@ -173,6 +181,12 @@ public class TrimHomePageAM extends WinBasePage{
     }
 
 
+    public void closeEmployeeDetailsWindow() {
+
+    }
+
+    public void closeEmployeeSearchWindow() {
+    }
 }
 
 

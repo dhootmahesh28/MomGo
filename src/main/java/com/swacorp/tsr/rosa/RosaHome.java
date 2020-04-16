@@ -122,6 +122,9 @@ public class RosaHome extends BasePage {
             report.reportSelenium("Pass", "Selected: "+dropHeader+" - "+dropValue);
 
         }catch(Exception e){
+            /*getDriver().findElement(By.xpath("//*[text()='Please Select...'][1]")).click();
+            getDriver().findElement(By.xpath("(//ul//li[1])[1]")).click();*/
+
             report.reportSelenium("Fail", "Failed to select: "+dropHeader+" - "+dropValue);
             e.printStackTrace();
         }

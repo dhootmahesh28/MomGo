@@ -22,13 +22,37 @@ public class DateUtil {
         return date.format(dateFormat);
     }
 
-    public String getCurrentDate(String format) throws Exception {
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
-        String strDate = sdf.format(cal.getTime());
-        System.out.println("Current date in String Format: " + strDate);
+    public String changeToSasiDateFormat(String dt) throws ParseException{
+        String finalDate = new String();
+        switch(dt.substring(2,5)) {
+            case "Feb" :
+                finalDate = dt.substring(5,9)+"-"+"02"+"-"+dt.substring(0,2);
+                // Statements
+                break; // optional
+            case "Mar" :
+                finalDate = dt.substring(5,9)+"-"+"03"+"-"+dt.substring(0,2);
+                // Statements
+                break; // optional
 
-        return date.format(dateFormat);
+            case "Apr" :
+                // Statements
+                finalDate = dt.substring(5,9)+"-"+"04"+"-"+dt.substring(0,2);
+                break; // optional
+            case "May" :
+                // Statements
+                finalDate = dt.substring(5,9)+"-"+"05"+"-"+dt.substring(0,2);
+                break; // optional
+
+            // You can have any number of case statements.
+            default : // Optional
+                // Statements
+        }
+        return finalDate;
+    }
+    public String getCurrentDate(String dateFormat) {
+        String currentDate;
+        currentDate =  new SimpleDateFormat(dateFormat).format(new Date());
+        return currentDate;
     }
 
     public String getCurrentYear() throws Exception {

@@ -1,16 +1,24 @@
 package com.swacorp.tsr.sasi;
 
 import com.swacorp.crew.pages.common.BasePage;
+import com.swacorp.crew.utils.DateUtil;
 import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SasiHome extends BasePage {
+
+    private Map<String, Map<String, ArrayList<String[]>>> masterHM;
+    public SasiHome(Map<String, Map<String, ArrayList<String[]>>> rosaMasterHM){
+        masterHM = rosaMasterHM;
+    }
 
     private final Logger LOGGER = Logger.getLogger(SasiHome.class);
     ReportUtil report = new ReportUtil();
@@ -35,9 +43,107 @@ public class SasiHome extends BasePage {
     private final By submit = By.xpath("//*[@id='submitRow']/td/input");
     private final By firstAnchorLinq = By.xpath("//a[@title = 'click for detailed crew view'][1]");
 
+    String rosaempID;
 
-    public void readNonFlyDetails(String sectionToRead){
-        String xpathPortion = "//*[text() = '"+"PLACEHOLDER"+"'][1]";
+    public void readMasterHM(){
+        HashMap<Integer, String[]> hm = new HashMap<>();
+        for (Map.Entry<String, Map<String, ArrayList<String[]>>> entry : masterHM.entrySet()){
+            rosaempID = entry.getKey();
+            Map<String, ArrayList<String[]>> y = entry.getValue();
+            break;
+        }
+    }
+
+    public boolean nonFlyValidate(String[] data) throws ParseException{//}, String header){
+        String countNonFly = "//*[text()='NonflyActivities']//following-sibling::ul";
+        String Airport      = "//*[text()='NonflyActivities']//following-sibling::ul[PLACEHOLDER]//tbody//*[text()='airportID']//following-sibling::td[2]/a[1]";
+        String endDate      = "//*[text()='NonflyActivities']//following-sibling::ul[PLACEHOLDER]//tbody//*[text()='endDateTime']//following-sibling::td[2]"   ;
+        String startDate    = "//*[text()='NonflyActivities']//following-sibling::ul[PLACEHOLDER]//tbody//*[text()='startDateTime']//following-sibling::td[2]" ;
+        String positionID   = "//*[text()='NonflyActivities']//following-sibling::ul[PLACEHOLDER]//tbody//*[text()='positionID']//following-sibling::td[2]/a[1]";
+
+        String tempLocator = new String();
+        List<WebElement> allNonflySections = getDriver().findElements(By.xpath(countNonFly));
+        String tempLocatorAirport;// = new String();
+        String tempLocatorStartDate;// = new String();
+        boolean dateNotFound = false;
+        DateUtil du = new DateUtil();
+
+        for (int i=1; i <= allNonflySections.size();i++){
+            tempLocatorAirport = Airport.replace("PLACEHOLDER", ""+i);
+            tempLocatorStartDate = startDate.replace("PLACEHOLDER", ""+i);
+
+
+            List<WebElement> eles = getDriver().findElements(By.xpath(tempLocatorStartDate));
+
+            if (eles.size() > 0){
+                WebElement ele = eles.get(0);
+                //If date matches go for rest of the validation
+                String startDateSASI = du.changeToSasiDateFormat(data[0]);
+                if (ele.getText().contains(startDateSASI)){
+                    report.reportSelenium("pass", "Nonfly activity in SASI does not contain start date from ROSA "+startDateSASI);
+                    //read the base
+                    WebElement baseEle = getDriver().findElement(By.xpath(tempLocatorAirport));
+                    scrollToElement(baseEle);
+                    if (baseEle.getText().contains(data[2].substring(0,2))){
+                        report.reportSelenium("pass", "Base is found in SASI as per ROSA "+data[2]);
+                    }else{
+                        report.reportSelenium("fail", "Base is NOT found in SASI as per ROSA "+data[2]);
+                    }
+
+                }else if(i == allNonflySections.size()){
+                    scrollToElement(ele);
+                    report.reportSelenium("Fail", "Nonfly activity in SASI does not contain start date from ROSA "+startDateSASI);
+                    dateNotFound = false;
+                }else{
+                    scrollToElement(ele);
+                    report.reportSelenium("info", "Nonfly activity section '"+i+"' in SASI does not contain start date from ROSA "+startDateSASI);
+                }
+
+            }
+        }
+
+        return dateNotFound;
+    }
+
+    public void readNonFlyDetails() throws ParseException {
+        DateUtil du = new DateUtil();
+        ArrayList<String[]> trn = new ArrayList<>();
+        boolean proceedToNextRow = true;
+
+       /* String SasiDate = du.changeToSasiDateFormat(rowData[0]);
+        nonFlyValidate(SasiDate, "startdate");
+        nonFlyValidate(rowData[1].substring(1,3), "base");*/
+
+        for (Map.Entry<String, Map<String, ArrayList<String[]>>> entry : masterHM.entrySet()){
+            String k = entry.getKey();
+            Map<String, ArrayList<String[]>> y = entry.getValue();
+
+            for (Map.Entry<String, ArrayList<String[]>> entry2 : y.entrySet()){
+                //String k2 = entry2.getValue("ss");
+                Map<String, ArrayList<String[]>> y2 = entry.getValue();
+                trn = y2.get("trng");
+                break;
+            }
+            break;
+        }
+
+        for (int j=0; j<= trn.size()-1; j++){
+            String[] rowData = trn.get(j);
+            //String SasiDate = du.changeToSasiDateFormat(rowData[0]);
+            proceedToNextRow = nonFlyValidate(rowData);
+
+            if (!proceedToNextRow){
+                report.reportSelenium("Fail", "Nonfly details from Rosa '"+String.join(",", rowData)+"' Not found in SASI.");
+                break;
+            }else{
+                report.reportSelenium("pass", "Nonfly details from Rosa '"+String.join(",", rowData)+"' found in SASI.");
+            }
+
+            //nonFlyValidate(rowData[1].substring(1,3), "base");
+            //nonFlyValidate(rowData[2], "nonflycode");
+       }
+
+        /*String xpathPortion = "//*[text() = '"+"PLACEHOLDER"+"'][1]";
         String allTd   = "//*[text()='NonflyActivity']/following-sibling::table/tbody/tr";
 
         String airport =   "//*[text()='NonflyActivity']/following-sibling::table/tbody/tr[1]/td[3]/a[1]";
@@ -60,34 +166,44 @@ public class SasiHome extends BasePage {
         scrollToElement(getDriver().findElement(By.xpath(endDate)));
         if (getDriver().findElement(By.xpath(startDate)).getText().contains(expectedStartDate)){
             report.reportSelenium("Pass", "The expected start date is found in SASI: "+expectedStartDate);
-        }
+        }*/
 
     }
 
 public void clickFirstLink(){
-    buttonClick(firstAnchorLinq);
+        try {
+
+            report.reportSelenium("Pass", "Search Result has appeared and clicking on the first link. ");
+            buttonClick(firstAnchorLinq);
+            report.reportSelenium("Pass", "Navigated to the SASi details page to find nonfly information.");
+
+        }catch(Exception e){
+            report.reportSelenium("Fail", "Error while clickng on the search result. ");
+        }
 }
 
     public void selectData() throws Exception{
-        //buttonClick(SELECT_DRP);
-        //selectOption(SELECT_DRP,"Crew");
-        Thread.sleep(5000);
-        getDriver().switchTo().frame(0);
-        selectOption(SELECT_DRP, "Crew ");
-        enterText(EMPLOYEE,"68244");
-        buttonClick(submit);
+        try {
+            Thread.sleep(5000);
+            getDriver().switchTo().frame(0);
+            selectOption(SELECT_DRP, "Crew ");
+            readMasterHM();
+            enterText(EMPLOYEE, rosaempID);
+            report.reportSelenium("Pass", "EmployeeID is entered: "+rosaempID);
+            buttonClick(submit);
+        }catch(Exception e){
+            report.reportSelenium("Fail", "Failed while performing the employee search ");
+            e.printStackTrace();
+        }
     }
 
     public void clickWorldViewer(){
+
         buttonClick(WORLD_VIEWER_PARADISE);
-
-
         if (isElementVisible(WORLD_VIEWER_PARADISE)){
-            report.reportSelenium("Pass", "Training Optimizer page appeared.");
-            printConsole("Training Optimizer page appeared");
+            report.reportSelenium("Pass", "Clicked on world viewer paradise link.");
         }else{
-            report.reportSelenium("Fail", "Training Optimizer page NOT appeared.");
-            printConsole("Training Optimizer page NOT appeared");
+            report.reportSelenium("Fail", "Failed to click on world viewer paradise link.");
         }
     }
 

@@ -495,6 +495,16 @@
                         </object>
                     </children>
                 </object>
+                <object type="TreeView" technology="WinForms">
+                    <name>tv</name>
+                    <codeName>tvTreeView</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="ObjectName" type="string" isRegExp="false">tv</property>
+                        </properties>
+                    </identification>
+                </object>
             </children>
         </object>
         <object type="Window" technology="Java">

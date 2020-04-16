@@ -3,8 +3,10 @@ import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.utils.ReportUtil;
 import org.openqa.selenium.By;
 
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import com.swacorp.crew.utils.DateUtil;
+import org.openqa.selenium.WebElement;
 
 public class HomePage extends BasePage {
 
@@ -56,6 +58,14 @@ public class HomePage extends BasePage {
     private final By QUAL_DATE_TXT = By.id("qualDate");
     private final By YES_BUTTON = By.xpath("//*[contains(text(),'Yes')]");
 
+    private final By AddEvent = By.xpath("//*[@id='trEvtAddButtonId']");
+    private final By TRAINING_EVENT_LOADER = By.xpath("//select[@id='categoryId']");
+    private final By ADD_EVENT = By.xpath("//*[contains(text(),'Add Event...')]");
+    private final By DELETE_EVENT = By.xpath("//*[contains(text(),'Delete Event...)]");
+    String xpathTrainingEvent = "//div[@id= 'addTrainingEvent']//div[contains(@class, 'yui-dt-liner') and text() = '"+"PLACEHOLDER"+"']";
+    private final By Ok_BTN= By.xpath("//*[contains(text(),'Ok')]");
+    private final String xpathDivTextGeneric = "//div[(text() = 'PLACEHOLDER')]";
+
 
     private boolean crewAddedSuccessfully;
     private boolean editPosition;
@@ -67,7 +77,57 @@ public class HomePage extends BasePage {
     DateUtil dateUtil = new DateUtil();
     String duplicateEmployeeError = "";
 
+    public void AddEvent(String event){
+        buttonClickIfExist(AddEvent);
+    }
 
+
+    public void selectEvent(String TrainingEvent){
+
+        String locator;
+        //div[(text() = 'FLIGHT TRAINING')]
+        locator = xpathDivTextGeneric.replace("PLACEHOLDER", TrainingEvent);
+        try{
+            Thread.sleep(7000);
+        }catch(Exception e){
+
+        }
+        List<WebElement> allEvents = getDriver().findElements(By.xpath(locator));
+
+
+        //waitUntilElementClickable(By.xpath(locator));
+       /* allEvents.get(0).click();
+        report.reportSelenium("Pass", "Event selected for deleting: " + TrainingEvent);
+        buttonClick(DELETE_EVENT);*/
+
+        for (int i = 0; i <= allEvents.size() - 1; i++){
+
+            allEvents.get(i).click();
+            report.reportSelenium("Pass", "Event selected for deleting: " + TrainingEvent);
+            buttonClick(DELETE_EVENT);
+        }
+
+    }
+
+    public void AddTrainingEvent(String TrainingEvent){
+        //FLIGHT TRAINING
+
+        String xpatheVENTcHECKBOX = "/preceding::input[@type='checkbox'][1]";
+        String locator;
+
+        locator = xpathTrainingEvent.replace("PLACEHOLDER", TrainingEvent);
+
+        try {
+            if (getDriver().findElement(By.xpath(locator)).isDisplayed()) {
+                getDriver().findElement(By.xpath(locator + xpatheVENTcHECKBOX)).click();
+                report.reportSelenium("Pass", "Event selected " + TrainingEvent);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        buttonClickIfExist(Ok_BTN);
+
+    }
     public void addPosition() throws Exception{
         waitByTime(5000);
         waitUntilElementClickable(POSITION_ADD_BTN);
@@ -280,7 +340,8 @@ public class HomePage extends BasePage {
         }
 
         try {
-            startDate = dateUtil.getCurrentDate();
+            //startDate = dateUtil.getCurrentDate();
+            startDate = dateUtil.getCurrentDate("MM/dd/yyyy");
             String classYear = dateUtil.getCurrentYear();
             retVal = addCrewMember(data[0], startDate, classYear, data[1], data[2], data[3], empNum, data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12]);
             System.out.print("retVal: "+retVal);
@@ -389,4 +450,29 @@ public class HomePage extends BasePage {
         // getDriver().switchTo().defaultContent();
         return 0;
     }
+
+    public void LoadTrainingEventCategory(String event) {
+        try {
+            selectOption(TRAINING_EVENT_LOADER, event);
+            report.reportSelenium("pass", "Event successfully loaded:" + event);
+            //getDriver().findElement(TRAINING_EVENT_LOADER).getText();
+            buttonClickIfExist(ADD_EVENT);
+            report.reportSelenium("pass", "Clicked on Add Event button." + event);
+            printConsole("getDriver().findElement(TRAINING_EVENT_LOADER).getText(): "+getDriver().findElement(TRAINING_EVENT_LOADER).getText());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void HandlePopup(String ok) {
+
+        do {
+            if(isElementVisible(OK_BUTTON)){
+                report.reportSelenium("pass", "Clicking on OK button");
+                buttonClick(OK_BUTTON);
+            }
+        }while(isElementVisible(OK_BUTTON));
+    }
+
+
 }
