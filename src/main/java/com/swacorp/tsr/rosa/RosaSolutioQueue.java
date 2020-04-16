@@ -84,6 +84,7 @@ public class RosaSolutioQueue extends BasePage {
                     rosaOneMinutCounter++;
 
                     if (rosaOneMinutCounter < 1) {
+                        //F5
                         StatusPollingOfPTORequest(Category, Cycle, Aircraft, Event, Month, Bidline, CoreConditional, timeOfCreatingRequest);
                         report.reportSelenium("info", "The request is in intermediate status after " + rosaOneMinutCounter + " minutes of its creation.");
                     } else {
@@ -271,7 +272,8 @@ public class RosaSolutioQueue extends BasePage {
         }
     }
 
-    public Css  NavigateToCSSForValidation(){
+
+     public Css  NavigateToCSSForValidation(){
         try {
             report.reportSelenium("pass", "ROSA part of the flow is successful, now navigating to CSS.");
             return new Css(employeeID, hm);

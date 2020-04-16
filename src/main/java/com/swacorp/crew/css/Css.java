@@ -82,15 +82,6 @@ public class Css extends WinBasePage{
         detailFromROSA = hm;
     }
 
-    public void temp() throws GeneralLeanFtException{
-        UiObject x = lftObjects.CssMainWindow().frameCMBoard().xUiObject();
-       System.out.println("Trip number: "+x.getNativeObject().invokeMethod("getNumber", DynamicObjectProxy.class, null));
-       System.out.println("Trip Date: "+x.getNativeObject().invokeMethod("getStartDate", DynamicObjectProxy.class, null)
-               .invokeMethod("cdate", DynamicObjectProxy.class, null)
-               .invokeMethod("toString", DynamicObjectProxy.class, null));
-
-    }
-
     public void readMasterHM(){
 
         HashMap<Integer, String[]> hm = new HashMap<>();
@@ -118,15 +109,23 @@ public class Css extends WinBasePage{
                 .nativeClass("com.swacorp.css.screens.crewboard.CrewBoardPiece").build();
         com.hp.lft.sdk.java.UiObject[] allObj = lftObjects.CssMainWindow().findChildren(com.hp.lft.sdk.java.UiObject.class, allUIObj);
 
-        for (int index=allObj.length-30 ; index > 0 ; index--){
+        Object startDate;
+        Object EndDate;
+        for (int index=allObj.length-1 ; index > 0 ; index--){
             System.out.println("OT index: "+index);
             UiObject tripDetails = allObj[index];
             tripDetails.highlight();
-            tripDetails.doubleClick();
 
-            if (SearchTheCorrectTripFromOT("","")){
-                break;
-            }
+              startDate = allObj[index].getNativeObject().invokeMethod("getStartDate", DynamicObjectProxy.class).invokeMethod("getCalendarDate", DynamicObjectProxy.class).invokeMethod("toString", DynamicObjectProxy.class);
+              EndDate = allObj[index].getNativeObject().invokeMethod("getEndDate", DynamicObjectProxy.class).invokeMethod("getCalendarDate",DynamicObjectProxy.class).invokeMethod("toString", DynamicObjectProxy.class);
+            System.out.println("startDate.toString()"+startDate.toString());
+            System.out.println("EndDate.toString()"+EndDate.toString());
+              if (startDate.toString().contains("2020-03-10") & EndDate.toString().contains("2020-03-15")) {
+                  tripDetails.doubleClick();
+                  if (SearchTheCorrectTripFromOT("", "")) {
+                      break;
+                  }
+              }
            }
 
         if (lftObjects.CssMainWindow().openTimeInternalFrame().exists()){
@@ -190,9 +189,7 @@ public class Css extends WinBasePage{
                 }
             }
         }
-/*        System.out.println("s: "+s);
-        System.out.println("s1: "+s1);
-        System.out.println("tbl2.getVisibleText(): "+tbl2.getVisibleText());*/
+
         lftObjects.CssMainWindow().frameTrimDetails().close();
         return found;
     }
