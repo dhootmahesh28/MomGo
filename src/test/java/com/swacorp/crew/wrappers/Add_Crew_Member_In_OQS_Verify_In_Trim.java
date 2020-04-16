@@ -11,6 +11,9 @@ import com.swacorp.crew.utils.TestManager;
 import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by x257093 on 03-Jan-2020.
  */
@@ -23,13 +26,37 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
     OQSLoginPage oqsLoginPage ;
     HomePage oqsHomePage;
 
+    public void LoginToTrim() throws GeneralLeanFtException{
+        ////Login to Trim
+        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
+
+        //Verify login is successful.
+        trimLoginPage.VerifyLoginSuccessful(true);
+        trimHomePageAM.validateTreeNode();
+    }
+
     public Add_Crew_Member_In_OQS_Verify_In_Trim(){
         oqsLoginPage = new OQSLoginPage();
         trimLoginPage = new LoginPage_am();
         oqsHomePage = new HomePage();
     }
 
-    public void WrapperMethod(String[] testData, boolean visibility, boolean verifyActivechkbox, boolean createFreshCrew) throws GeneralLeanFtException{
+
+    public void AddEvent(String event) {
+        oqsHomePage.AddEvent(event);
+    }
+
+    public void AddCrewmember(String[] testData, boolean createFreshCrew) throws Exception{
+        //Login to OQS
+        oqsLoginPage.loginOQS();
+
+        //Add Crew Member
+        String empNr = oqsHomePage.addCrewMember(testData, createFreshCrew);
+
+        //Verify that Crew member is successfully added.
+        oqsHomePage.VerifyCrewAddedSuccessfully(true);
+    }
+    public void WrapperMethod(String[] testData, boolean visibility, boolean verifyActivechkbox, boolean createFreshCrew) throws GeneralLeanFtException {
         //Login to OQS
         oqsLoginPage.loginOQS();
 
@@ -155,5 +182,26 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
     public void addDuplicateCrewMember(String[] data, boolean status){
         boolean res = oqsHomePage.addDuplicateCrewMember(data, status);
 
+    }
+
+    public void SelectTrainingEventCategory(String event) {
+        oqsHomePage.LoadTrainingEventCategory(event);
+
+    }
+
+    public void selectTrainingEvent(String events){
+
+        ArrayList<String> allEvents=new ArrayList<String>();
+
+        allEvents.addAll(Arrays.asList(events.split(",")));
+        for(String event: allEvents){
+            oqsHomePage.AddTrainingEvent(event);
+        }
+        oqsHomePage.HandlePopup("OK");
+
+    }
+
+    public void deleteEvent(String s) {
+        oqsHomePage.selectEvent(s);
     }
 }
