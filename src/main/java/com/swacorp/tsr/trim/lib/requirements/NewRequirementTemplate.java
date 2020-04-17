@@ -3,12 +3,12 @@ package com.swacorp.tsr.trim.lib.requirements;
 import com.hp.lft.sdk.CheckedState;
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.swacorp.crew.pages.common.WinBasePage;
-import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
+import com.swacorp.crew.sharedrepository.tsr.ObjectRepoTRiM;
 
 public class NewRequirementTemplate  extends WinBasePage {
 
-    MainObjectRepoTrim lftObjects =null;
-    public NewRequirementTemplate(MainObjectRepoTrim leanftObjects){
+    ObjectRepoTRiM lftObjects =null;
+    public NewRequirementTemplate(ObjectRepoTRiM leanftObjects){
         lftObjects = leanftObjects;
     }
 

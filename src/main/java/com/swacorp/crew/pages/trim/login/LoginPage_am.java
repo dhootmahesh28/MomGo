@@ -5,7 +5,7 @@ import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.winforms.Window;
 import com.swacorp.crew.pages.common.WinBasePage;
 import com.swacorp.crew.pages.trim.homepage.TrimHomePageAM;
-import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
+import com.swacorp.crew.sharedrepository.tsr.ObjectRepoTRiM;
 import com.swacorp.crew.pages.trim.homepage.TRiMHomePage;
 import com.swacorp.crew.utils.EnvironmentConstants;
 import com.swacorp.crew.utils.ReportUtil;
@@ -19,10 +19,10 @@ public class LoginPage_am  extends WinBasePage  {
     ReportUtil report = new ReportUtil();
     private final Logger LOGGER = Logger.getLogger(LoginPage_am.class);
     private final String TRiM_TITLE = TRiMHomePage.TRiM_WINDOW;
-    MainObjectRepoTrim lftObjects =null;
+    ObjectRepoTRiM lftObjects =null;
     Window mainWindow = null;
     public LoginPage_am()  {
-        lftObjects = super.lftObjectRepo;
+        lftObjects = super.trimObjectRepo;
         //this.report = report;
     }
     private boolean loginSuccessful;

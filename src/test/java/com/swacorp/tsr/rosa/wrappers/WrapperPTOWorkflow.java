@@ -1,6 +1,7 @@
 package com.swacorp.tsr.rosa.wrappers;
 
 import com.swacorp.crew.css.Css;
+import com.swacorp.crew.pages.trim.homepage.TrimHomePageAM;
 import com.swacorp.tsr.enums.EnumRosa;
 import com.swacorp.tsr.rosa.RosaHome;
 import com.swacorp.tsr.rosa.RosaLogin;

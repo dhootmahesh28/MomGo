@@ -3,10 +3,10 @@ package com.swacorp.crew.pages.common;
 import com.hp.lft.sdk.Desktop;
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.TestObject;
-//import com.hp.lft.sdk.winforms.*;
 import com.hp.lft.sdk.winforms.*;
 import com.swacorp.crew.genericwrappers.editor.*;
-import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
+import com.swacorp.crew.sharedrepository.tsr.ObjectRepoCSS;
+import com.swacorp.crew.sharedrepository.tsr.ObjectRepoTRiM;
 import com.swacorp.crew.utils.ReportUtil;
 import com.swacorp.crew.wrappers.GenericMethods;
 import org.apache.log4j.Logger;
@@ -20,7 +20,8 @@ public class WinBasePage implements IEditor,GenericMethods, IButton, IWindow, IJ
     private final int TIMEOUT_SS = 60;
     public static Window homeWindow;
     public static Window windowObject;
-    public MainObjectRepoTrim lftObjectRepo = null;
+    public ObjectRepoTRiM trimObjectRepo = null;
+    public ObjectRepoCSS cssObjectRepo = null;
 
     public void setParent(Window object) {
         this.homeWindow = object;
@@ -28,10 +29,18 @@ public class WinBasePage implements IEditor,GenericMethods, IButton, IWindow, IJ
     }
 
     {
-        if(lftObjectRepo == null){
-            LOGGER.info("Initializing wrapper instances..");
+        if(cssObjectRepo == null){
+            LOGGER.info("Initializing 'TRiM Application Model' wrapper instances..");
             try {
-                lftObjectRepo = new MainObjectRepoTrim();
+                cssObjectRepo = new ObjectRepoCSS();
+            } catch (GeneralLeanFtException e) {
+                e.printStackTrace();
+            }
+        }
+        if(trimObjectRepo == null){
+            LOGGER.info("Initializing 'CSS Application Model' wrapper instances..");
+            try {
+                trimObjectRepo = new ObjectRepoTRiM();
             } catch (GeneralLeanFtException e) {
                 e.printStackTrace();
             }
@@ -39,8 +48,8 @@ public class WinBasePage implements IEditor,GenericMethods, IButton, IWindow, IJ
     }
 
     public void flushObjects() throws  GeneralLeanFtException{
-        if (lftObjectRepo.tRiMTrainingResourceManagerSouthwestWindow().exists()) {
-            lftObjectRepo.tRiMTrainingResourceManagerSouthwestWindow().close();
+        if (trimObjectRepo.tRiMTrainingResourceManagerSouthwestWindow().exists()) {
+            trimObjectRepo.tRiMTrainingResourceManagerSouthwestWindow().close();
         }
     }
 

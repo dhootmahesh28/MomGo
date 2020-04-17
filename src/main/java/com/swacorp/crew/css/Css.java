@@ -5,7 +5,7 @@ import com.hp.lft.sdk.internal.DynamicObjectProxy;
 import com.hp.lft.sdk.internal.common.MessageFieldNames;
 import com.hp.lft.sdk.java.*;
 import com.swacorp.crew.pages.common.WinBasePage;
-import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
+import com.swacorp.crew.sharedrepository.tsr.ObjectRepoCSS;
 import com.swacorp.crew.utils.EnvironmentConstants;
 import com.swacorp.crew.utils.ReportUtil;
 import com.swacorp.tsr.enums.EnumWaitConstants;
@@ -43,7 +43,7 @@ public class Css extends WinBasePage{
     }
     ReportUtil report = new ReportUtil();
     private final Logger LOGGER = Logger.getLogger(Css.class);
-    MainObjectRepoTrim lftObjects =null;
+    ObjectRepoCSS lftObjects =null;
     public HashMap<String, String> pgMap = new HashMap<>();
     private String empNumberFromApp = "";
     private String fldFirstNameFromApp = "";
@@ -73,7 +73,7 @@ public class Css extends WinBasePage{
     }
 
     public Css()  {
-        lftObjects = super.lftObjectRepo;
+        lftObjects = super.cssObjectRepo;
     }
 
     public Css(String empID, HashMap<Integer, String[]> hm) {

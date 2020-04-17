@@ -2,6 +2,8 @@ package com.swacorp.crew.utils;
 
 import com.swacorp.crew.pages.common.CommonFormats;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -65,6 +67,18 @@ public class DateUtil {
         System.out.println("date.minusDays(amount).format(dateFormat);" +date.minusDays(amount).format(dateFormat));
         return date.minusDays(amount).format(dateFormat);
         //return pastDate.toString();
+    }
+
+    public void changeLocalDate(int months) throws IOException {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, months);
+        SimpleDateFormat s = new SimpleDateFormat("MM-dd-yy");
+        String strExpectedDate = s.format(new Date(cal.getTimeInMillis()));
+        FileWriter writer = new FileWriter("C:\\Utility\\ChangeDate.vbs");
+        writer.write("CreateObject(\"Shell.Application\").ShellExecute \"cmd.exe\", \"/c date "+ strExpectedDate + "\", , \"runas\", 1");
+        writer.close();
+        Runtime.getRuntime().exec("C:\\Windows\\System32\\schtasks.exe /run /tn RunVBS");
+        System.out.println("New Date: " + date);
     }
 
     public long getTimeDiff(String tripStartDate, String searchStartDate, String datePattern) throws ParseException {

@@ -35,7 +35,7 @@ public class TC_166214 extends TestManager {
     public void TC17138911_171391_FO_Validate_in_OT_that_domestic_trip_was_pulled_after_ingest_process(String[] testData) throws Exception{
         setScenarioName("TC171389_171391_FO_Validate_in_OT_that_domestic_trip_was_pulled_after_ingest_process");
         Css css = new Css();
-        css.temp();
+        //css.temp();
     }
 
 

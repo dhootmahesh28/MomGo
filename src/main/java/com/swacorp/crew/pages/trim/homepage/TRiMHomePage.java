@@ -5,7 +5,7 @@ import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.winforms.Window;
 import com.swacorp.crew.pages.common.WinBasePage;
 import com.swacorp.crew.pages.trim.FindEmployee.FindEmployeePage;
-import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
+import com.swacorp.crew.sharedrepository.tsr.ObjectRepoTRiM;
 //import com.lftrepo.repo.SharedRepository.trim
 import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
@@ -18,9 +18,9 @@ public class TRiMHomePage extends WinBasePage {
     private final String MAIN_MENU_NAME = "barMainMenu";
     private final String FIND_EMPLOYEE_WINDOW = FindEmployeePage.FIND_EMPLOYEE_WINDOW;
 
-    MainObjectRepoTrim or =null;
+    ObjectRepoTRiM or =null;
     public TRiMHomePage()  {
-        or = super.lftObjectRepo;
+        or = super.trimObjectRepo;
     }
     Window mainWin = or.loginToSouthwestWindow();
 

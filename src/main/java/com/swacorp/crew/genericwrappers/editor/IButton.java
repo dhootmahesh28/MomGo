@@ -18,7 +18,7 @@ public interface IButton<T extends com.hp.lft.sdk.winforms.Button> {
         try {
             obj.click();
             //obj.click(MouseButton.LEFT);
-            logger.info(SuccessfullyClicked +obj.getObjectName()+ objectType +obj.getClass());
+            logger.info(SuccessfullyClicked +obj.getDisplayName()+ objectType +obj.getClass());
         }catch(Exception e){
             logger.error(ClickUnsuccessful +obj.getObjectName()+ objectType +obj.getClass(), e);
             ReportStatus.setReportMsg("Button: "+ obj.getDisplayName() + "is non clickable.");
