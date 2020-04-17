@@ -206,6 +206,8 @@ public class ObjectRepoTRiM extends AppModelBase {		private loginToSouthwestWind
 	private tvTreeView tvTreeView;
 	private finishedDialog finishedDialog;
 	private instructorEmployeeScheduleWindow instructorEmployeeScheduleWindow;
+	private EmployeeDetails EmployeeDetails;
+	private cbSubFilterComboBox cbSubFilterComboBox;
 						public tRiMTrainingResourceManagerSouthwestWindow(AppModelBase applicationModel) throws GeneralLeanFtException
 		{
 			super(applicationModel);
@@ -221,6 +223,8 @@ public class ObjectRepoTRiM extends AppModelBase {		private loginToSouthwestWind
 		tvTreeView = new tvTreeView(this, applicationModel);
 		finishedDialog = new finishedDialog(this, applicationModel);
 		instructorEmployeeScheduleWindow = new instructorEmployeeScheduleWindow(this, applicationModel);
+		EmployeeDetails = new EmployeeDetails(this, applicationModel);
+		cbSubFilterComboBox = new cbSubFilterComboBox(this, applicationModel);
 			
 			setDisplayName("TRiM - Training Resource Manager:  Southwest");
 		}
@@ -239,6 +243,8 @@ public class ObjectRepoTRiM extends AppModelBase {		private loginToSouthwestWind
 		tvTreeView = new tvTreeView(this, applicationModel);
 		finishedDialog = new finishedDialog(this, applicationModel);
 		instructorEmployeeScheduleWindow = new instructorEmployeeScheduleWindow(this, applicationModel);
+		EmployeeDetails = new EmployeeDetails(this, applicationModel);
+		cbSubFilterComboBox = new cbSubFilterComboBox(this, applicationModel);
 
 			setDisplayName("TRiM - Training Resource Manager:  Southwest");
 		}
@@ -265,6 +271,8 @@ public class ObjectRepoTRiM extends AppModelBase {		private loginToSouthwestWind
 		public tvTreeView tvTreeView() { return tvTreeView; }
 		public finishedDialog finishedDialog() { return finishedDialog; }
 		public instructorEmployeeScheduleWindow instructorEmployeeScheduleWindow() { return instructorEmployeeScheduleWindow; }
+		public EmployeeDetails EmployeeDetails() { return EmployeeDetails; }
+		public cbSubFilterComboBox cbSubFilterComboBox() { return cbSubFilterComboBox; }
 		
 			public class mainMenuUiObject extends WinFormsUiObjectNodeBase
 	{
@@ -1987,6 +1995,245 @@ public class ObjectRepoTRiM extends AppModelBase {		private loginToSouthwestWind
 			}
 
 	}
+
+	public class EmployeeDetails extends WinFormsWindowNodeBase
+	{
+
+		
+			private cboPrimaryEquipIDComboBox cboPrimaryEquipIDComboBox;
+	private cboPrimaryCrewStatusIDComboBox cboPrimaryCrewStatusIDComboBox;
+	private txtEmployeeNumberEditField txtEmployeeNumberEditField;
+	private txtFNameEditField txtFNameEditField;
+	private saveButton saveButton;
+	private saveAndCloseButton saveAndCloseButton;
+						public EmployeeDetails(AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(applicationModel);
+
+					cboPrimaryEquipIDComboBox = new cboPrimaryEquipIDComboBox(this, applicationModel);
+		cboPrimaryCrewStatusIDComboBox = new cboPrimaryCrewStatusIDComboBox(this, applicationModel);
+		txtEmployeeNumberEditField = new txtEmployeeNumberEditField(this, applicationModel);
+		txtFNameEditField = new txtFNameEditField(this, applicationModel);
+		saveButton = new saveButton(this, applicationModel);
+		saveAndCloseButton = new saveAndCloseButton(this, applicationModel);
+			
+			setDisplayName("EmployeeDetailsWindow");
+		}
+				public EmployeeDetails(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+					cboPrimaryEquipIDComboBox = new cboPrimaryEquipIDComboBox(this, applicationModel);
+		cboPrimaryCrewStatusIDComboBox = new cboPrimaryCrewStatusIDComboBox(this, applicationModel);
+		txtEmployeeNumberEditField = new txtEmployeeNumberEditField(this, applicationModel);
+		txtFNameEditField = new txtFNameEditField(this, applicationModel);
+		saveButton = new saveButton(this, applicationModel);
+		saveAndCloseButton = new saveAndCloseButton(this, applicationModel);
+
+			setDisplayName("EmployeeDetailsWindow");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.winforms.WindowDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.winforms.WindowDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.winforms.WindowDescription.Builder().childWindow(true).ownedWindow(false).objectName("frmEmployees").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				public cboPrimaryEquipIDComboBox cboPrimaryEquipIDComboBox() { return cboPrimaryEquipIDComboBox; }
+		public cboPrimaryCrewStatusIDComboBox cboPrimaryCrewStatusIDComboBox() { return cboPrimaryCrewStatusIDComboBox; }
+		public txtEmployeeNumberEditField txtEmployeeNumberEditField() { return txtEmployeeNumberEditField; }
+		public txtFNameEditField txtFNameEditField() { return txtFNameEditField; }
+		public saveButton saveButton() { return saveButton; }
+		public saveAndCloseButton saveAndCloseButton() { return saveAndCloseButton; }
+		
+			public class cboPrimaryEquipIDComboBox extends WinFormsComboBoxNodeBase
+	{
+
+		
+								public cboPrimaryEquipIDComboBox(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("cboPrimaryEquipID");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.winforms.ComboBoxDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.winforms.ComboBoxDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.winforms.ComboBoxDescription.Builder().objectName("cboPrimaryEquipID").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class cboPrimaryCrewStatusIDComboBox extends WinFormsComboBoxNodeBase
+	{
+
+		
+								public cboPrimaryCrewStatusIDComboBox(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("cboPrimaryCrewStatusID");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.winforms.ComboBoxDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.winforms.ComboBoxDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.winforms.ComboBoxDescription.Builder().objectName("cboPrimaryCrewStatusID").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class txtEmployeeNumberEditField extends WinFormsEditFieldNodeBase
+	{
+
+		
+								public txtEmployeeNumberEditField(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("txtEmployeeNumber");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.winforms.EditFieldDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.winforms.EditFieldDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.winforms.EditFieldDescription.Builder().objectName("txtEmployeeNumber").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class txtFNameEditField extends WinFormsEditFieldNodeBase
+	{
+
+		
+								public txtFNameEditField(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("txtFName");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.winforms.EditFieldDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.winforms.EditFieldDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.winforms.EditFieldDescription.Builder().objectName("txtFName").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class saveButton extends WinFormsButtonNodeBase
+	{
+
+		
+								public saveButton(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("Save");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.winforms.ButtonDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.winforms.ButtonDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.winforms.ButtonDescription.Builder().objectName("btnSave").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	public class saveAndCloseButton extends WinFormsButtonNodeBase
+	{
+
+		
+								public saveAndCloseButton(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("Save and Close");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.winforms.ButtonDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.winforms.ButtonDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.winforms.ButtonDescription.Builder().objectName("btnSaveClose").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	}
+
+	public class cbSubFilterComboBox extends WinFormsComboBoxNodeBase
+	{
+
+		
+								public cbSubFilterComboBox(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("cmbSchedulePlanner");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.winforms.ComboBoxDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.winforms.ComboBoxDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.winforms.ComboBoxDescription.Builder().objectName("cbSubFilter").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
 
 	}
 

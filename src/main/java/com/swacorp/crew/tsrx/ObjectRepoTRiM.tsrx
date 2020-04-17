@@ -680,6 +680,90 @@
                         </object>
                     </children>
                 </object>
+                <object type="Window" technology="WinForms">
+                    <name>EmployeeDetailsWindow</name>
+                    <codeName>EmployeeDetails</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="IsChildWindow" type="boolean" isRegExp="false">true</property>
+                            <property name="IsOwnedWindow" type="boolean" isRegExp="false">false</property>
+                            <property name="ObjectName" type="string" isRegExp="false">frmEmployees</property>
+                        </properties>
+                    </identification>
+                    <children>
+                        <object type="ComboBox" technology="WinForms">
+                            <name>cboPrimaryEquipID</name>
+                            <codeName>cboPrimaryEquipIDComboBox</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ObjectName" type="string" isRegExp="false">cboPrimaryEquipID</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="ComboBox" technology="WinForms">
+                            <name>cboPrimaryCrewStatusID</name>
+                            <codeName>cboPrimaryCrewStatusIDComboBox</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ObjectName" type="string" isRegExp="false">cboPrimaryCrewStatusID</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="EditField" technology="WinForms">
+                            <name>txtEmployeeNumber</name>
+                            <codeName>txtEmployeeNumberEditField</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ObjectName" type="string" isRegExp="false">txtEmployeeNumber</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="EditField" technology="WinForms">
+                            <name>txtFName</name>
+                            <codeName>txtFNameEditField</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ObjectName" type="string" isRegExp="false">txtFName</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Button" technology="WinForms">
+                            <name>Save</name>
+                            <codeName>saveButton</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ObjectName" type="string" isRegExp="false">btnSave</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Button" technology="WinForms">
+                            <name>Save and Close</name>
+                            <codeName>saveAndCloseButton</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ObjectName" type="string" isRegExp="false">btnSaveClose</property>
+                                </properties>
+                            </identification>
+                        </object>
+                    </children>
+                </object>
+                <object type="ComboBox" technology="WinForms">
+                    <name>cmbSchedulePlanner</name>
+                    <codeName>cbSubFilterComboBox</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="ObjectName" type="string" isRegExp="false">cbSubFilter</property>
+                        </properties>
+                    </identification>
+                </object>
             </children>
         </object>
         <object type="Window" technology="WinForms">
