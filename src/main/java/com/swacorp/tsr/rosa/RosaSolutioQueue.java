@@ -24,7 +24,7 @@ public class RosaSolutioQueue extends BasePage {
     ReportUtil report = new ReportUtil();
     HashMap<Integer, String[]> hm = new HashMap<>();
     //LinkedHashMap<String, LinkedHashMap<String, ArrayList<String[]>>> masterHM = new LinkedHashMap<>();
-    Map<String, Map<String, ArrayList<String[]>>> masterHM = new LinkedHashMap<String, Map<String, ArrayList<String[]>>>();
+    public static Map<String, Map<String, ArrayList<String[]>>> masterHM = new LinkedHashMap<String, Map<String, ArrayList<String[]>>>();
     String timeOfCreatingRequest;
 
     public RosaSolutioQueue() {
