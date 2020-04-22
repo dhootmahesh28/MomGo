@@ -1,12 +1,20 @@
 package com.swacorp.crew.pages.oqs.homepage;
+import com.hp.lft.sdk.Keyboard;
 import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.utils.ReportUtil;
+import com.swacorp.tsr.rosa.RosaSolutioQueue;
 import org.openqa.selenium.By;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 import com.swacorp.crew.utils.DateUtil;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 public class HomePage extends BasePage {
 
@@ -61,10 +69,11 @@ public class HomePage extends BasePage {
     private final By AddEvent = By.xpath("//*[@id='trEvtAddButtonId']");
     private final By TRAINING_EVENT_LOADER = By.xpath("//select[@id='categoryId']");
     private final By ADD_EVENT = By.xpath("//*[contains(text(),'Add Event...')]");
-    private final By DELETE_EVENT = By.xpath("//*[contains(text(),'Delete Event...)]");
+    private final By DELETE_EVENT = By.xpath("//*[(text()='Delete Event...')]");
     String xpathTrainingEvent = "//div[@id= 'addTrainingEvent']//div[contains(@class, 'yui-dt-liner') and text() = '"+"PLACEHOLDER"+"']";
     private final By Ok_BTN= By.xpath("//*[contains(text(),'Ok')]");
     private final String xpathDivTextGeneric = "//div[(text() = 'PLACEHOLDER')]";
+    private  final By DATE_CAL = By.id("dateCalText");
 
 
     private boolean crewAddedSuccessfully;
@@ -77,7 +86,7 @@ public class HomePage extends BasePage {
     DateUtil dateUtil = new DateUtil();
     String duplicateEmployeeError = "";
 
-    public void AddEvent(String event){
+       public void AddEvent(String event){
         buttonClickIfExist(AddEvent);
     }
 
@@ -88,23 +97,25 @@ public class HomePage extends BasePage {
         //div[(text() = 'FLIGHT TRAINING')]
         locator = xpathDivTextGeneric.replace("PLACEHOLDER", TrainingEvent);
         try{
-            Thread.sleep(7000);
+            //Thread.sleep(7000);
         }catch(Exception e){
 
         }
-        List<WebElement> allEvents = getDriver().findElements(By.xpath(locator));
 
+        int i = 1;
+        try {
+            do {
+                List<WebElement> allEvents = getDriver().findElements(By.xpath(locator));
+                allEvents.get(0).click();
+                report.reportSelenium("Pass", "Event selected for deleting: " + TrainingEvent + ", occurance: "+i);
+                i++;
+                waitUntilElementClickable(DELETE_EVENT);
+                buttonClick(DELETE_EVENT);
+                HandlePopup("");
+                //waitUntilDomLoad();
+            } while (getDriver().findElements(By.xpath(locator)).size() > 0);
+        }catch(Exception e){
 
-        //waitUntilElementClickable(By.xpath(locator));
-       /* allEvents.get(0).click();
-        report.reportSelenium("Pass", "Event selected for deleting: " + TrainingEvent);
-        buttonClick(DELETE_EVENT);*/
-
-        for (int i = 0; i <= allEvents.size() - 1; i++){
-
-            allEvents.get(i).click();
-            report.reportSelenium("Pass", "Event selected for deleting: " + TrainingEvent);
-            buttonClick(DELETE_EVENT);
         }
 
     }
@@ -114,12 +125,52 @@ public class HomePage extends BasePage {
 
         String xpatheVENTcHECKBOX = "/preceding::input[@type='checkbox'][1]";
         String locator;
+        String eventDate;
+        eventDate = "05/2020";
 
         locator = xpathTrainingEvent.replace("PLACEHOLDER", TrainingEvent);
-
+        String xpathDateSelectTdForAnEvent = "/preceding::td[1]/following::td[3]";
+        int counter = 1;
         try {
+
             if (getDriver().findElement(By.xpath(locator)).isDisplayed()) {
                 getDriver().findElement(By.xpath(locator + xpatheVENTcHECKBOX)).click();
+                if(TrainingEvent.equalsIgnoreCase("MANEUVERS OBSERVATION")){
+                    do {
+                        /*WebElement locatorDateSelectTdForAnEvent = getDriver().findElement(By.xpath(locator + xpathDateSelectTdForAnEvent));
+                        locatorDateSelectTdForAnEvent.click();
+                        //enterText(DATE_CAL, eventDate);
+                        //Keyboard.pressKey(Keyboard.Keys.ENTER);
+
+
+                        WebElement element = getDriver().findElement(DATE_CAL);
+                        JavascriptExecutor jse = (JavascriptExecutor)getDriver();
+                        jse.executeScript("arguments[0].value='05/2020';", element);
+
+                        Keyboard.pressKey(Keyboard.Keys.ENTER);*/
+                        System.out.println("Clicking through Action");
+                        /*Actions actions = new Actions(getDriver());
+                        actions.moveToElement(getDriver().findElement(OK_BUTTON)).click().build().perform();
+
+                        try {
+                            System.out.println("Clicking through JS");
+                            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                            js.executeScript("arguments[0].click();", OK_BUTTON);
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }*/
+                        //buttonClick(OK_BUTTON);
+                        WebElement locatorEventDate = getDriver().findElement(By.xpath(locator + xpathDateSelectTdForAnEvent + "/div"));
+                        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                        js.executeScript("document.getElementByXPath("+locator + xpathDateSelectTdForAnEvent + "/div"+").value='05/2020'");
+
+                        if (locatorEventDate.getText().contains(eventDate)) {
+                            break;
+                        }
+                        counter++;
+                    }while(counter <5);
+
+                }
                 report.reportSelenium("Pass", "Event selected " + TrainingEvent);
             }
         }catch(Exception e){
@@ -129,7 +180,7 @@ public class HomePage extends BasePage {
 
     }
     public void addPosition() throws Exception{
-        waitByTime(5000);
+        waitByTime(4000);
         waitUntilElementClickable(POSITION_ADD_BTN);
         buttonClick(POSITION_ADD_BTN);
         waitUntilElementClickable(POSITION_START_TXT);
@@ -141,12 +192,12 @@ public class HomePage extends BasePage {
         buttonClick(OK_BUTTON);
         buttonClick(YES_BUTTON);
         buttonClick(YES_BUTTON);
-
+        report.reportSelenium("Pass", "Position edited successfully to CA. ");
         Thread.sleep(4000);
     }
 
     public void EditPosition() throws  Exception {
-
+        //setCompatibilityMode();
         try {
         waitUntilElementClickable(EDIT_POSITION_BTN);
         waitByTime(5000);
@@ -156,14 +207,22 @@ public class HomePage extends BasePage {
 
         enterText(POSITION_START_TXT, startDate);
         enterText(QUAL_DATE_TXT, startDate);
-        enterText(POSITION_END_BOX, startDate);
+        //enterText(POSITION_END_BOX, startDate);
         waitUntilElementClickable(MESSAGE_TXT);
         enterText(MESSAGE_TXT,testData[13]);
-        buttonClick(OK_BUTTON);
-        buttonClick(OK_BUTTON);
+        //buttonClick(OK_BUTTON);
+        //buttonClick(OK_BUTTON);
+        //---
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", getDriver().findElement(OK_BUTTON));
+
+
+       //----
+        Thread.sleep(30000);
         editPosition = true;
+            report.reportSelenium("Pass", "Edit position is successfully to CA. ");
             //ValidateEditPositionSuccessful(editPosition);
     }catch(Exception e){
+            report.reportSelenium("Fail", "Error occured during Edit position.");
             editPosition = false;
             //e.printStackTrace();
         }
@@ -272,7 +331,7 @@ public class HomePage extends BasePage {
             enterText(DOB_TEXT, dateOfBirth);
             selectOption(GENDER_TEXT, gender);
             selectOption(US_CITIZEN_TEXT, usCitizenFlag);
-            waitByTime(1000);
+            //waitByTime(1000);
             if (!empPosition.equalsIgnoreCase("FAA - All All")) {
                 selectOption(TYPE_TEXT, type);
                 enterText(CERTIFICATE_TEXT, certificate);
@@ -282,7 +341,7 @@ public class HomePage extends BasePage {
 
             }
             buttonClick(SAVE_TO_CREWMEMBER_LIST_BUTTON);
-            waitByTime(3000);
+            //waitByTime(1000);
             //buttonClickIfExist(OK_BUTTON);
             //waitUntilElementClickable(By.xpath("//*[@class='yui-dt0-col-lastname yui-dt-col-lastname' and text()='Larry']"));
             if (getDriver().findElements(CREW_LIST_TABLE_FIRST_ROW).size() < 1) {
@@ -296,7 +355,7 @@ public class HomePage extends BasePage {
             buttonClick(IMPORT_BUTTON);
 
 
-            waitByTime(5000);
+            //waitByTime(1000);
             waitUntilElementClickable(IMPORT_SUCCESS_MSG);
             //buttonClickIfExist(OK_BUTTON);
             report.reportSelenium("INFO", "Class list successfully imported and proceeding to click on OK button");
@@ -319,18 +378,6 @@ public class HomePage extends BasePage {
         testData = data;
 
         DateUtil dateUtil = new DateUtil();
-/*        try {
-
-            empNum = getDynamicData("empNum");
-
-            if (empNum == null){
-                empNum = searchCrew();
-                setDynamicData("EmpNumber", empNum);
-            }
-        }catch(Exception e) {
-            empNum = searchCrew();
-            setDynamicData("EmpNumber", empNum);
-        }*/
 
         empNum = getDynamicData("EmpNumber");
         System.out.print("empNum: "+empNum);
@@ -453,6 +500,7 @@ public class HomePage extends BasePage {
 
     public void LoadTrainingEventCategory(String event) {
         try {
+
             selectOption(TRAINING_EVENT_LOADER, event);
             report.reportSelenium("pass", "Event successfully loaded:" + event);
             //getDriver().findElement(TRAINING_EVENT_LOADER).getText();

@@ -1,10 +1,15 @@
 package com.swacorp.crew.pages.oqs.login;
 
+import com.hp.lft.sdk.GeneralLeanFtException;
+import com.hp.lft.sdk.Keyboard;
 import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.utils.EnvironmentConstants;
 import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class OQSLoginPage extends BasePage {
 
@@ -18,20 +23,51 @@ public class OQSLoginPage extends BasePage {
     public String oqsUrl;
 
 
+    public void setCompatibilityMode() throws InterruptedException, AWTException {
+
+        Thread.sleep(5000);
+
+        Robot rob = new Robot();
+
+        rob.keyPress(KeyEvent.VK_ALT);
+        Thread.sleep(1000);
+        rob.keyPress(KeyEvent.VK_T);
+        Thread.sleep(1000);
+        rob.keyRelease(KeyEvent.VK_T);
+        Thread.sleep(1000);
+        rob.keyRelease(KeyEvent.VK_ALT);
+        Thread.sleep(1000);
+        rob.keyPress(KeyEvent.VK_R);
+        Thread.sleep(1000);
+        rob.keyRelease(KeyEvent.VK_R);
+        /*for (int i = 1; i <= 9; i++) {
+            rob.keyPress(KeyEvent.VK_DOWN);
+            rob.keyRelease(KeyEvent.VK_DOWN);
+        }*/
+
+        rob.keyPress(KeyEvent.VK_ENTER);
+        Thread.sleep(1000);
+        rob.keyRelease(KeyEvent.VK_ENTER);
+        Thread.sleep(1000);
+
+    }
+
     public void loginOQS() {
         try {
             getDriver().manage().window().maximize();
+            System.out.println("Waiting for enterprise mode...");
+
             oqsUrl = EnvironmentConstants.OQSURL;
             getDriver().get(oqsUrl);
-
+            setCompatibilityMode();
             //waitUntilDomLoad();
             //waitUntilElementClickable(USERID_LINK);
             waitForElement(USERID_LINK);
 
             if (isElementVisible(USERID_LINK)) {
-                report.reportSelenium("INFO", "Navigation to OQS application is successful");
+                report.reportSelenium("INFO", "Navigation to OQS application is successful. URL: "+oqsUrl);
             } else {
-                report.report("ERROR", "Failed to navigate to OQS application");
+                report.report("ERROR", "Failed to navigate to OQS application URL: "+oqsUrl);
             }
 
             buttonClick(USERID_LINK);
