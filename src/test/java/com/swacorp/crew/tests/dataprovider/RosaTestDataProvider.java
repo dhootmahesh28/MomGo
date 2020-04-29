@@ -1,4 +1,4 @@
-package com.swacorp.crew.dataprovider;
+package com.swacorp.crew.tests.dataprovider;
 
 import org.testng.annotations.DataProvider;
 

@@ -1,12 +1,12 @@
-package com.swacorp.crew.pages.rosa.rosa_1_5;
+package com.swacorp.crew.tests.rosa.pto;
 
 import com.swacorp.crew.pages.css.CssHome;
-import com.swacorp.crew.dataprovider.RosaTestDataProvider;
+import com.swacorp.crew.tests.dataprovider.RosaTestDataProvider;
 import com.swacorp.crew.utils.TestManager;
 import com.swacorp.crew.pages.constants.EnumCssTransactionReport;
 import com.swacorp.crew.pages.rosa.RosaLogin;
 import com.swacorp.crew.pages.rosa.RosaSolutionQueue;
-import com.swacorp.crew.pages.rosa.wrappers.WrapperPTOWorkflow;
+import com.swacorp.crew.test.wrappers.WrapperPTOWorkflow;
 import org.testng.annotations.Test;
 
 public class TC_167609 extends TestManager {

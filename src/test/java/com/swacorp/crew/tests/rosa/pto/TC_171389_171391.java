@@ -1,9 +1,9 @@
-package com.swacorp.crew.pages.rosa.rosa_1_5;
+package com.swacorp.crew.tests.rosa.pto;
 
 import com.swacorp.crew.pages.css.CssHome;
 import com.swacorp.crew.pages.rosa.RosaLogin;
 import com.swacorp.crew.pages.rosa.RosaSolutionQueue;
-import com.swacorp.crew.pages.rosa.wrappers.WrapperPTOWorkflow;
+import com.swacorp.crew.test.wrappers.WrapperPTOWorkflow;
 import com.swacorp.crew.utils.DateUtil;
 import com.swacorp.crew.utils.TestManager;
 import com.swacorp.crew.pages.sasi.SasiHome;

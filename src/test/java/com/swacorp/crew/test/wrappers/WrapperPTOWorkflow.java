@@ -1,4 +1,4 @@
-package com.swacorp.crew.pages.rosa.wrappers;
+package com.swacorp.crew.test.wrappers;
 
 import com.swacorp.crew.pages.css.CssHome;
 import com.swacorp.crew.pages.rosa.RosaHome;

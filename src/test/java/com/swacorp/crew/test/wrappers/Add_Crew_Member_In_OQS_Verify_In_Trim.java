@@ -1,10 +1,10 @@
-package com.swacorp.crew.wrappers;
+package com.swacorp.crew.test.wrappers;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
-import com.swacorp.crew.pages.oqs.HomePage;
-import com.swacorp.crew.pages.oqs.OQSLogin;
-import com.swacorp.crew.pages.trim.TrimHomePageAM;
-import com.swacorp.crew.pages.trim.LoginPageAM;
+import com.swacorp.crew.pages.oqs.OqsHome;
+import com.swacorp.crew.pages.oqs.OqsLogin;
+import com.swacorp.crew.pages.trim.TrimHome;
+import com.swacorp.crew.pages.trim.TrimLogin;
 import com.swacorp.crew.utils.EnvironmentConstants;
 import com.swacorp.crew.utils.TestManager;
 import org.apache.log4j.Logger;
@@ -18,16 +18,16 @@ import java.util.Arrays;
 
 public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
     private final Logger LOGGER = Logger.getLogger(Add_Crew_Member_In_OQS_Verify_In_Trim.class);
-    LoginPageAM trimLoginPage ;
-    TrimHomePageAM trimHomePageAM;
-    OQSLogin oqsLoginPage ;
-    HomePage oqsHomePage;
+    TrimLogin trimLoginPage ;
+    TrimHome trimHomePageAM;
+    OqsLogin oqsLoginPage ;
+    OqsHome oqsHomePage;
     String empNr;
 
     public Add_Crew_Member_In_OQS_Verify_In_Trim(){
-        oqsLoginPage = new OQSLogin();
-        trimLoginPage = new LoginPageAM();
-        oqsHomePage = new HomePage();
+        oqsLoginPage = new OqsLogin();
+        trimLoginPage = new TrimLogin();
+        oqsHomePage = new OqsHome();
     }
 
     public void AddCrewmember(String[] testData, boolean createFreshCrew, boolean applyEnterpriseMode) throws Exception{
@@ -184,7 +184,6 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
             oqsHomePage.AddTrainingEvent(event, enterpriseMode);
         }
         oqsHomePage.HandlePopup("OK");
-
     }
 
     public void deleteEvent(String s) {

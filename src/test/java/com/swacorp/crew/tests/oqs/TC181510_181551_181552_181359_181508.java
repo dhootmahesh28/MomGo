@@ -1,7 +1,7 @@
-package com.swacorp.crew.tests.regression.oqs.crew14477;
+package com.swacorp.crew.tests.oqs;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
-import com.swacorp.crew.dataprovider.TestDataProvider;
+import com.swacorp.crew.tests.dataprovider.TestDataProvider;
 import com.swacorp.crew.utils.TestManager;
 import org.apache.log4j.Logger;
 import org.testng.annotations.Test;

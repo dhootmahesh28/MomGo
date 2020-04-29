@@ -1,6 +1,6 @@
-package com.swacorp.crew.tests.regression.oqs.crew14477;
+package com.swacorp.crew.tests.oqs;
 
-import com.swacorp.crew.dataprovider.TestDataProvider;
+import com.swacorp.crew.tests.dataprovider.TestDataProvider;
 import com.swacorp.crew.pages.oqs.OqsHome;
 import com.swacorp.crew.pages.oqs.OqsLogin;
 import com.swacorp.crew.pages.trim.TrimHome;

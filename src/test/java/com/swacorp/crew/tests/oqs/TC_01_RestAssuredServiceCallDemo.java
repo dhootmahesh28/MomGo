@@ -1,4 +1,4 @@
-package com.swacorp.crew.tests.regression.oqs.crew14477;
+package com.swacorp.crew.tests.oqs;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.swacorp.crew.utils.RestassuredUtil;
