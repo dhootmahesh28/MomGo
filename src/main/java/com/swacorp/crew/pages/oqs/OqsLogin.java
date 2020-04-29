@@ -1,4 +1,4 @@
-package com.swacorp.crew.pages.oqs.homepage;
+package com.swacorp.crew.pages.oqs;
 
 import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.utils.EnvironmentConstants;
@@ -9,9 +9,9 @@ import org.openqa.selenium.By;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class OQSLoginPage extends BasePage {
+public class OqsLogin extends BasePage {
 
-    private final Logger LOGGER = Logger.getLogger(OQSLoginPage.class);
+    private final Logger LOGGER = Logger.getLogger(OqsLogin.class);
     ReportUtil report = new ReportUtil();
     //private final By USERID_LINK = By.xpath("//*[@class='yui-dt0-col-employeeId yui-dt-col-employeeId yui-dt-sortable yui-dt-first']//*[@class='yui-dt-liner' and text()='" + EnvironmentConstants.OQSLOGINUSER + "']");
     private final By USERID_LINK = By.xpath("//*[text()='ROSA']");

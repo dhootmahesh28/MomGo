@@ -1,4 +1,4 @@
-package com.swacorp.tsr.rosa;
+package com.swacorp.crew.pages.rosa;
 
 import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.utils.EnvironmentConstants;

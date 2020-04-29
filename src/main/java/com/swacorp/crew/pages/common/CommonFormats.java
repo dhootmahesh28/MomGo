@@ -2,6 +2,9 @@ package com.swacorp.crew.pages.common;
 
 public class CommonFormats {
 
+    private CommonFormats(){
+    }
+
     public static final String MONTH_DAY_YEAR = "MM/dd/yyyy";
     public static final String MONTH_DAY_YEAR_ABBREVIATED = "MMM d, yyyy";
     public static final String MONTH_DAY_YEAR_EXPANDED = "MMMM dd, yyyy";
@@ -18,7 +21,7 @@ public class CommonFormats {
     public static final String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
     public static final String MDYYYY = "M/d/yyyy";
     public static final String VENDOR_TIMEFORMAT = "uuuuddMMhhmm";
-    public static final String ROSAFormat = "ddMMMyyyy hh:mm";
+    public static final String ROSA_FORMAT = "ddMMMyyyy hh:mm";
 
 
 }

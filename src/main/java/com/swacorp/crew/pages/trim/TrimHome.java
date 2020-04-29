@@ -7,7 +7,6 @@ import com.hp.lft.sdk.winforms.*;
 import com.hp.lft.sdk.winforms.Button;
 import com.hp.lft.sdk.winforms.Label;
 import com.hp.lft.sdk.winforms.Window;
-import com.swacorp.crew.pages.common.LftMethodCall;
 import com.swacorp.crew.pages.common.WinBasePage;
 import com.swacorp.crew.sharedrepository.tsr.ObjectRepoTRiM;
 import com.swacorp.crew.utils.ReportUtil;
@@ -19,9 +18,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TrimHomePageAM extends WinBasePage {
+public class TrimHome extends WinBasePage {
     ReportUtil report = new ReportUtil();
-    private final Logger LOGGER = Logger.getLogger(TrimHomePageAM.class);
+    private final Logger LOGGER = Logger.getLogger(TrimHome.class);
     ObjectRepoTRiM lftObjects = null;
     public HashMap<String, String> pgMap = new HashMap<>();
     private String empNumberFromApp = "";
@@ -49,7 +48,7 @@ public class TrimHomePageAM extends WinBasePage {
     }
 
     //Window winFindEmployee = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
-    public TrimHomePageAM() {
+    public TrimHome() {
         lftObjects = super.trimObjectRepo;
     }
 

@@ -7,7 +7,7 @@ import com.swacorp.crew.pages.common.WinBasePage;
 import com.swacorp.crew.sharedrepository.tsr.ObjectRepoCSS;
 import com.swacorp.crew.utils.EnvironmentConstants;
 import com.swacorp.crew.utils.ReportUtil;
-import com.swacorp.tsr.enums.EnumWaitConstants;
+import com.swacorp.crew.pages.constants.EnumWaitConstants;
 import com.swacorp.crew.utils.FileUtil;
 import com.swacorp.crew.utils.PDFReports;
 import org.apache.log4j.Logger;
@@ -18,40 +18,18 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
-public class Css extends WinBasePage{
+public class CssHome extends WinBasePage{
 
-
-    public void readpdf() throws GeneralLeanFtException {
-        Label x = lftObjects.CssMainWindow().transactionReportInternalFrame().report();
-        System.out.println(x.getVisibleText().toString());
-    }
-
-    public enum CMBoardRightClickMenu{
-        Transaction(7),
-        AddNonfly(1);
-
-        private int position;
-
-        CMBoardRightClickMenu(int pos) {
-            this.position = pos;
-        }
-        public int status() {
-            return position;
-        }
-    }
-    ReportUtil report = new ReportUtil();
-    private final Logger LOGGER = Logger.getLogger(Css.class);
+    ReportUtil reportCssHome = new ReportUtil();
+    private final Logger LOGGER = Logger.getLogger(CssHome.class);
     ObjectRepoCSS lftObjects =null;
     public HashMap<String, String> pgMap = new HashMap<>();
-    private String empNumberFromApp = "";
-    private String fldFirstNameFromApp = "";
+    //private String empNumberFromApp = "";
+    //private String fldFirstNameFromApp = "";
     private boolean searchFound;
     private String cssMAinWindowTitleInitial;
     private String cssMainWindowTitle;
     private String cmBoardTitle;
-    Map<Integer,Set<String>> mpAllTableData = new HashMap<>();
-    ArrayList<String> rosatraining;
-    ArrayList<String> rosatripToPull;
     String rosaempID;
     boolean searchTripsOnCMBoard = true;
     boolean found = false;
@@ -65,16 +43,16 @@ public class Css extends WinBasePage{
     ArrayList<String[]>  triptopull = new ArrayList<>();
     String pos = "CA";
 
-    public Css(Map<String, Map<String, ArrayList<String[]>>> masterHMrosa) {
+    public CssHome(Map<String, Map<String, ArrayList<String[]>>> masterHMrosa) {
         this();
         masterHM = masterHMrosa;
     }
 
-    public Css()  {
+    public CssHome()  {
         lftObjects = super.cssObjectRepo;
     }
 
-    public Css(String empID, HashMap<Integer, String[]> hm) {
+    public CssHome(String empID, HashMap<Integer, String[]> hm) {
         this();
         rosaempID = empID;
         detailFromROSA = hm;
@@ -161,7 +139,7 @@ public class Css extends WinBasePage{
         }
 
         if (s2.length()>0){
-            report.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Trip found on OT. with start date "+s1);
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Trip found on OT. with start date "+s1);
             found = true;
         }
         Table tbl2 = lftObjects.CssMainWindow().frameTrimDetails().crewMembersTable();
@@ -177,10 +155,10 @@ public class Css extends WinBasePage{
                 try {
                     if (assignment.contains("Unassigned") & position.contains(pos)) {
 
-                        report.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Position unassigned for " + position);
+                        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Position unassigned for " + position);
                         break;
                     } else {
-                        report.reportLeanFT(lftObjects.CssMainWindow(), "fail", "Position NOT unassigned for " + position);
+                        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "fail", "Position NOT unassigned for " + position);
                     }
                 }catch(Exception e){
 
@@ -216,10 +194,10 @@ public class Css extends WinBasePage{
             }
             lftObjects.CssMainWindow().openTimeInternalFrame().getOpenTripsButton().click();
 
-            report.reportLeanFT(lftObjects.CssMainWindow(), "pass", "OT filters selected:"+filter);
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "pass", "OT filters selected:"+filter);
 
         }catch(Exception e){
-            report.reportLeanFT(lftObjects.CssMainWindow(), "fail", "error while selecting filters: "+filter);
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "fail", "error while selecting filters: "+filter);
         }
 
     }
@@ -228,18 +206,18 @@ public class Css extends WinBasePage{
 
         try {
             lftObjects.CssMainWindow().openTimeMenu().click();
-            report.reportLeanFT(lftObjects.CssMainWindow(),"pass", "Successfully clicked on the OT menue.");
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"pass", "Successfully clicked on the OT menue.");
             lftObjects.CssMainWindow().openTimeMenu().viewOpenTimeMenu().click();
         }catch(Exception e){
-            report.reportLeanFT(lftObjects.CssMainWindow(),"fail", "Error occured in selecting the OT from menu bar.");
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"fail", "Error occured in selecting the OT from menu bar.");
          }
 
          try{
              if (lftObjects.CssMainWindow().openTimeInternalFrame().fromEditor().exists()){
-                 report.reportLeanFT(lftObjects.CssMainWindow(),"pass", "OT window has appeared.");
+                 reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"pass", "OT window has appeared.");
              }
          }catch(Exception e){
-             report.reportLeanFT(lftObjects.CssMainWindow(),"fail", "OT window didn't appear.");
+             reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"fail", "OT window didn't appear.");
          }
 
     }
@@ -250,10 +228,10 @@ public class Css extends WinBasePage{
             x.click(MouseButton.RIGHT);
             lftObjects.CssMainWindow().frameCMBoard().cMBoardripRghtClkMenu().selectSubMenu(rightClickMenu);
             Thread.sleep(3000);
-            report.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Right clicked and selected Menu");
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Right clicked and selected Menu");
             Keyboard.pressKey(Keyboard.Keys.ENTER);
         }catch(Exception e){
-            report.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Failed to perform right click and select menu.");
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Failed to perform right click and select menu.");
         }
     }
 
@@ -264,7 +242,7 @@ public class Css extends WinBasePage{
             if (lftObjects.CssMainWindow().transactionReportInternalFrame().exists()) {
                 lftObjects.CssMainWindow().transactionReportInternalFrame().activate();
                 //lftObjects.CssMainWindow().transactionReportInternalFrame().pDFIconButton().click();
-                report.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction Report reflected.");
+                reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction Report reflected.");
             }
         }catch(Exception e){
         }
@@ -295,11 +273,11 @@ public class Css extends WinBasePage{
 
             //validateTransactionReport(line1+ '\n' + line2 + '\n' + line3);
            /* if (reportContent.contains(line1+ '\n' + line2 + '\n' + line3)){
-                report.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction report contains: "+line1+ '\n' + line2 + '\n' + line3);
+                reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction reportCssLogin contains: "+line1+ '\n' + line2 + '\n' + line3);
             }*/
 
             if (reportContent.contains(line1) & reportContent.contains(line2)){
-                report.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction report contains: "+line1+ '\n' + line2 );
+                reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction reportCssLogin contains: "+line1+ '\n' + line2 );
             }
         }
 
@@ -308,7 +286,7 @@ public class Css extends WinBasePage{
 
     public void validateTransactionReport(String s) throws GeneralLeanFtException {
 
-        report.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction report contains: "+s);
+        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction reportCssLogin contains: "+s);
     }
 
     private void CheckIfUnchecked(CheckBox chk) throws GeneralLeanFtException {
@@ -331,7 +309,7 @@ public class Css extends WinBasePage{
         try {
             CheckedState x = lftObjects.CssMainWindow().transactionReportDialog().functionsCheckBox().getState();
             if(x.getValue().toString().equalsIgnoreCase("0")){
-                report.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "State of Function checkbox is disabled.");
+                reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "State of Function checkbox is disabled.");
             }
         } catch (GeneralLeanFtException e) {
             e.printStackTrace();
@@ -346,7 +324,7 @@ public class Css extends WinBasePage{
                 for(int c = 0; c <  cells.size() ; c++){
                     if (cells.get(c).getValue().toString().contains(reason)){
                         cells.get(0).click();
-                        report.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "In the reason table. Specified value is found:"+reason);
+                        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "In the reason table. Specified value is found:"+reason);
                         reasonFound = true;
                         break;
                     }
@@ -410,7 +388,7 @@ public class Css extends WinBasePage{
             System.out.println("a: "+a);
             if(a.equalsIgnoreCase(txt)){
                 found = true;
-                report.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Function dropdown list contains the given item: "+txt);
+                reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Function dropdown list contains the given item: "+txt);
                 Keyboard.pressKey(Keyboard.Keys.ENTER);
                 break;
             }
@@ -423,7 +401,7 @@ public class Css extends WinBasePage{
         }
         while (!found | !notFound);
         if (!found){
-            report.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Function dropdown list does not contains the given item: "+txt);
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Function dropdown list does not contains the given item: "+txt);
         }
         //lftObjects.CssMainWindow().transactionReportDialog().functionsCheckBox().click();
     }
@@ -483,15 +461,15 @@ public void NavigateToTransactionReport() throws Exception {
         Thread.sleep(4000);
 
     }catch(Exception e){
-        //report.report("fail","Transaction report window didnt open.");
+        //reportCssLogin.reportCssLogin("fail","Transaction reportCssLogin window didnt open.");
         e.printStackTrace();
     }
 
 
     if(lftObjects.CssMainWindow().transactionReportDialog().exists()){
-        report.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction report window exist.");
+        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction reportCssLogin window exist.");
     }else{
-        report.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Transaction report window doesn't exist.");
+        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Transaction reportCssLogin window doesn't exist.");
     }
 }
 
@@ -519,16 +497,16 @@ public void NavigateToTransactionReport() throws Exception {
             WaitForJavaWindowTillVisible(lftObjects.CssMainWindow(), EnumWaitConstants.WaitDuration.TEN.status());
 
             if (lftObjects.CssMainWindow().exists()){
-                report.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Login to CSS is successful.");
+                reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Login to CSS is successful.");
             }else{
-                report.report("FAIL", "CSS login is failed");
+                reportCssHome.report("FAIL", "CSS login is failed");
             }
         }else{
             if (lftObjects.CssMainWindow().exists()){
                 cssMAinWindowTitleInitial = lftObjects.CssMainWindow().getTitle();
-                report.reportLeanFT(lftObjects.CssMainWindow(),"PASS", "CSS is already logged in.");
+                reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"PASS", "CSS is already logged in.");
             }else{
-                report.report("FAIL", "CSS is open but failed to identify the main window.");
+                reportCssHome.report("FAIL", "CSS is open but failed to identify the main window.");
             }
         }
 
@@ -560,12 +538,12 @@ public void openCMBoard(String empCode) throws GeneralLeanFtException, CloneNotS
         Keyboard.pressKey(Keyboard.Keys.ENTER);
         LOGGER.info("lftObjects.CssMainWindow()  " + lftObjects.CssMainWindow().getTitle());
         if(lftObjects.CssMainWindow().frameCMBoard().exists()) {
-            report.reportLeanFT(lftObjects.CssMainWindow(), "pass", "CM Board opened successfully for Emp Id:"+rosaempID);
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "pass", "CM Board opened successfully for Emp Id:"+rosaempID);
         }else{
-            report.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "Crew id not found in CSS. Crew ID:"+rosaempID);
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "Crew id not found in CSS. Crew ID:"+rosaempID);
         }
     }catch(Exception e){
-        report.reportLeanFT(lftObjects.CssMainWindow(),"fail", "Error occured while opening CM board.");
+        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"fail", "Error occured while opening CM board.");
     }
 
 }
@@ -638,24 +616,24 @@ public void selectTripOnCMBoard(String tripStartDateROSA, String tripEndDateROSA
 
     // If Trip is found then double click on the trip and verify that the TripDetails window open and Read the details from each table in the window.
     if (tripShouldBeAvailableOnCMBoard) {
-        report.reportLeanFT(lftObjects.CssMainWindow(),"PASS", "Trip details found on CM board for Emp Id:"+rosaempID+" trip start date:"+tripStartDate + ", Trip end date: "+tripEndDate);
+        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"PASS", "Trip details found on CM board for Emp Id:"+rosaempID+" trip start date:"+tripStartDate + ", Trip end date: "+tripEndDate);
         if (found & readTripDetails) {
             lftObjects.CssMainWindow().frameCMBoard().xUiObject().doubleClick();
             Keyboard.pressKey(Keyboard.Keys.ENTER);
             if (lftObjects.CssMainWindow().frameTrimDetails().exists()) {
-                report.reportLeanFT(lftObjects.CssMainWindow(),"PASS", "Trip Details exist in CSS.");
+                reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"PASS", "Trip Details exist in CSS.");
                 // Read Trip details
                 ReadDataFromTripDetails();
                 lftObjects.CssMainWindow().frameTrimDetails().close();
             }else{
-                report.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Trip Details window didn't appear.");
+                reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Trip Details window didn't appear.");
             }
 
         }
     }else if ((!found) & (!tripShouldBeAvailableOnCMBoard)){
-        report.reportLeanFT(lftObjects.CssMainWindow(),"PASS", "Trip details NOT found on CM board as expected for Emp Id:"+rosaempID+" trip start date:"+tripStartDate + ", Trip end date: "+tripEndDate);
+        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"PASS", "Trip details NOT found on CM board as expected for Emp Id:"+rosaempID+" trip start date:"+tripStartDate + ", Trip end date: "+tripEndDate);
     }/*else{
-        report.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Trip details NOT found on CM board for Emp Id:"+rosaempID+" trip start date:"+tripStartDate + ", Trip end date: "+tripEndDate);
+        reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Trip details NOT found on CM board for Emp Id:"+rosaempID+" trip start date:"+tripStartDate + ", Trip end date: "+tripEndDate);
     }*/
     // Verify TransactionReport
     if (readTransactionReport){
@@ -671,7 +649,7 @@ public void selectTripOnCMBoard(String tripStartDateROSA, String tripEndDateROSA
     /*TO DO*/
     public void ValidateNotifiedOption(String notifiedOption) throws GeneralLeanFtException{
         if (lftObjects.CssMainWindow().frameCMBoard().exists()){
-            report.reportLeanFT(lftObjects.CssMainWindow(), "pass","Notified option is checked." );
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "pass","Notified option is checked." );
         }
     }
 
@@ -682,7 +660,7 @@ public void selectTripOnCMBoard(String tripStartDateROSA, String tripEndDateROSA
 
     public void ValidateCredits() throws GeneralLeanFtException{
         if (lftObjects.CssMainWindow().frameCMBoard().exists()){
-            report.reportLeanFT(lftObjects.CssMainWindow(), "pass","Credits are matched from rosa: 0.00" );
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "pass","Credits are matched from rosa: 0.00" );
         }
     }
 
@@ -706,11 +684,11 @@ public void selectTripOnCMBoard(String tripStartDateROSA, String tripEndDateROSA
             ArrayList<String> pdfContent = pdf.readBetweenTags("Transaction Report", "END OF REPORT");
             pdfContentAfterReadingTransactionReport = pdfContent;
             if (!pdfContentAfterReadingTransactionReport.isEmpty()){
-                report.reportLeanFT(lftObjects.CssMainWindow(), "pass","Transaction report in pdf format is read." );
+                reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "pass","Transaction reportCssLogin in pdf format is read." );
             }
 
         }catch(Exception  e){
-            report.reportLeanFT(lftObjects.CssMainWindow(), "fail","Failed to read Transaction report in pdf format." );
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "fail","Failed to read Transaction reportCssLogin in pdf format." );
         }
     }
 
@@ -737,9 +715,9 @@ public void selectTripOnCMBoard(String tripStartDateROSA, String tripEndDateROSA
        int y = count/(arrsearchTxt.length);
 
         if (Integer.compare(x,y)==1)
-            report.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "The given search text is found in report.");
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "The given search text is found in reportCssLogin.");
         else{
-            report.reportLeanFT(lftObjects.CssMainWindow(), "fail","The given search text is NOT found in report. " );
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "fail","The given search text is NOT found in reportCssLogin. " );
         }
         if (lftObjects.CssMainWindow().transactionReportInternalFrame().exists()) {
             lftObjects.CssMainWindow().transactionReportInternalFrame().close();
@@ -764,9 +742,9 @@ public void selectTripOnCMBoard(String tripStartDateROSA, String tripEndDateROSA
 
 
         if( lftObjects.CssMainWindow().frameTrimDetails().exists()){
-            report.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Trip Details window has appeared and trip details found. "+training);
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Trip Details window has appeared and trip details found. "+training);
         }else{
-            report.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "Trip Details window didn't appeared.");
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "Trip Details window didn't appeared.");
         }
 
         for (int inxTbl = 0; inxTbl < allTables.length - 1; inxTbl++ ){
@@ -798,11 +776,11 @@ public void selectTripOnCMBoard(String tripStartDateROSA, String tripEndDateROSA
                         String rosaPay = (detailFromROSA.get(tables)[rows]).split("_")[4];
 
                         if (rosaStart.contains(strtBase) & rosaEnd.contains(destBase) & rosaPay.contains(pay) & validateRosaCssDate(date, rosaDate)){
-                            report.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Trip details from ROSA is available in CSS for table ["+tables+"] and Row ["+inxRow+"].");
+                            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Trip details from ROSA is available in CSS for table ["+tables+"] and Row ["+inxRow+"].");
                             found = true;
                             break;
                         }else{
-                            report.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "Trip details from ROSA is NOT available in CSS for table ["+tables+"] and Row ["+rows+"].");
+                            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "Trip details from ROSA is NOT available in CSS for table ["+tables+"] and Row ["+rows+"].");
                         }
                         rows++;
                         break;
@@ -813,9 +791,9 @@ public void selectTripOnCMBoard(String tripStartDateROSA, String tripEndDateROSA
         }
         tables++;
         if (found){
-            report.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Trip details from ROSA is available in CSS.");
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Trip details from ROSA is available in CSS.");
         }else{
-            report.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Trip details from ROSA is not available in CSS.");
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Trip details from ROSA is not available in CSS.");
         }
     }
     }

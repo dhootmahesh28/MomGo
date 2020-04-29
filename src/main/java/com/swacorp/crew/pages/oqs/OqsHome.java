@@ -16,7 +16,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import com.swacorp.crew.utils.DateUtil;
 import org.openqa.selenium.WebElement;
 
-public class HomePage extends BasePage {
+public class OqsHome extends BasePage {
 
     ReportUtil report = new ReportUtil();
 

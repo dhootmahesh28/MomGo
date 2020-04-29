@@ -1,4 +1,4 @@
-package com.swacorp.tsr.sasi;
+package com.swacorp.crew.pages.sasi;
 
 import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.utils.DateUtil;

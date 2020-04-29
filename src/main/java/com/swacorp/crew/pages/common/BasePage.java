@@ -18,8 +18,8 @@ import java.util.regex.Pattern;
  */
 public class BasePage {
 
-    public final static Logger LOGGER = Logger.getLogger(BasePage.class);
-
+    public  static final Logger loggerBasePage = Logger.getLogger(BasePage.class);
+    static final String MSG_WITH_TEXT = ", with Text::";
     public WebDriver getDriver() {
         Long threadId = Thread.currentThread().getId();
         return TestUtil.driverMap.get(threadId);
@@ -32,7 +32,7 @@ public class BasePage {
 
     public FluentWait<WebDriver> webDriverFluentWait() {
         return new FluentWait(getDriver())
-                .withTimeout(60, TimeUnit.SECONDS)
+                .withTimeout(25, TimeUnit.SECONDS)
                 .pollingEvery(3, TimeUnit.SECONDS)
                 .ignoring(NoSuchElementException.class, NoSuchFrameException.class);
     }
@@ -41,76 +41,77 @@ public class BasePage {
 
         WebElement element;
         try {
-            LOGGER.info("BeforeWaitForElement::" + byElement);
+            loggerBasePage.info("BeforeWaitForElement::" + byElement);
             waitUntilDomLoad();
             webDriverFluentWait().until(ExpectedConditions.presenceOfAllElementsLocatedBy(byElement));
             element = getDriver().findElement(byElement);
         } catch (WebDriverException e) {
-            LOGGER.info("Exception in waitForElement::" + byElement);
+            loggerBasePage.info("Exception in waitForElement::" + byElement);
             throw new WebDriverException(e.getMessage());
         }
-        LOGGER.info("AfterWaitForElement::" + byElement);
+        loggerBasePage.info("AfterWaitForElement::" + byElement);
         return element;
     }
 
     public void scrollToElement(WebElement webelement) {
         JavascriptExecutor jse = (JavascriptExecutor) getDriver();
         jse.executeScript("arguments[0].scrollIntoView(true);", webelement);
-        LOGGER.info("ScrollToElement::" + webelement + "Done");
+        loggerBasePage.info("ScrollToElement::" + webelement + "Done");
         waitUntilDomLoad();
         jse.executeScript("window.scrollBy(0,-100)", "");
-        LOGGER.info("ScrollToElement::" + webelement + "Done");
+        loggerBasePage.info("ScrollToElement::" + webelement + "Done");
     }
 
     public void waitByTime(int time) {
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            loggerBasePage.error(e.getMessage());
+            Thread.currentThread().interrupt();
         }
     }
 
     public void buttonClick(By locator) {
         try {
-            LOGGER.info("BeforeWaitForElement in buttonClick::" + locator);
+            loggerBasePage.info("BeforeWaitForElement in buttonClick::" + locator);
             webDriverFluentWait().until(ExpectedConditions.elementToBeClickable(locator));
         } catch (Exception e) {
-            LOGGER.info("Exception in buttonClick ::" + locator);
-            e.printStackTrace();
+            loggerBasePage.info("Exception in buttonClick ::" + locator);
+            loggerBasePage.error(e.getMessage());
         }
         WebElement elm = waitForElement(locator);
         scrollToElement(elm);
         elm.click();
-        LOGGER.info("After buttonClick::" + locator);
+        loggerBasePage.info("After buttonClick::" + locator);
     }
 
     public void buttonClickIfExist(By locator) {
         try {
-            LOGGER.info("BeforeWaitForElement in buttonClick::" + locator);
+            loggerBasePage.info("BeforeWaitForElement in buttonClick::" + locator);
             webDriverFluentWait().until(ExpectedConditions.elementToBeClickable(locator));
         } catch (Exception e) {
-            LOGGER.info("Exception in buttonClick ::" + locator);
-            e.printStackTrace();
+            loggerBasePage.info("Exception in buttonClick ::" + locator);
+            loggerBasePage.error(e.getMessage());
         }
         List<WebElement> elm = getDriver().findElements(locator);
         if (elm.size() > 0) {
             scrollToElement(elm.get(0));
             elm.get(0).click();
-            LOGGER.info("After buttonClick::" + locator);
+            loggerBasePage.info("After buttonClick::" + locator);
         }
     }
 
     public boolean isElementPresent(By locator) {
         WebElement element;
         try {
-            LOGGER.info("Before isElementPresent::" + locator);
+            loggerBasePage.info("Before isElementPresent::" + locator);
             waitUntilDomLoad();
             getDriver().findElement(locator);
-            LOGGER.info("After isElementPresent::" + locator);
+            loggerBasePage.info("After isElementPresent::" + locator);
             return true;
 
         } catch (Exception e) {
-            LOGGER.info("Exception isElementPresent::" + locator);
+            loggerBasePage.info("Exception isElementPresent::" + locator);
             return false;
         }
     }
@@ -121,68 +122,68 @@ public class BasePage {
             webDriverFluentWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
             return true;
         } catch (Exception e) {
-            LOGGER.info("Exception isElementPresent::" + locator);
+            loggerBasePage.info("Exception isElementPresent::" + locator);
             return false;
         }
     }
 
     public void enterText(By locator, String text) {
-        LOGGER.info("Before enterText::" + locator + ", with text::" + text);
+        loggerBasePage.info("Before enterText::" + locator + ", with text::" + text);
         WebElement webElementEnter = waitForElement(locator);
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("arguments[0].value='" + text + "'", webElementEnter);
-        LOGGER.info("After enterText::" + locator + ", with text::" + text);
+        loggerBasePage.info("After enterText::" + locator + ", with text::" + text);
     }
 
     public void waitUntilElementClickable(By locator) {
-        LOGGER.info("Before waitUntilElementVisible::" + locator);
+        loggerBasePage.info("Before waitUntilElementVisible::" + locator);
         int seconds = 180;
         waitUntilDomLoad();
         WebDriverWait expWait = new WebDriverWait(getDriver(), seconds);
         expWait.until(ExpectedConditions.elementToBeClickable(locator));
-        LOGGER.info("After waitUntilElementVisible::" + locator);
+        loggerBasePage.info("After waitUntilElementVisible::" + locator);
     }
 
     public void selectOption(By locator, String opt) {
-        LOGGER.info("Before selectOption::" + locator + ", with Select Option::" + opt);
+        loggerBasePage.info("Before selectOption::" + locator + ", with Select Option::" + opt);
         WebElement element = waitForElement(locator);
         webDriverFluentWait().until(ExpectedConditions.elementToBeClickable(locator));
         Select select = new Select(element);
         select.selectByVisibleText(opt);
         waitUntilDomLoad();
-        LOGGER.info("After selectOption::" + locator + ", with Select Option::" + opt);
+        loggerBasePage.info("After selectOption::" + locator + ", with Select Option::" + opt);
     }
 
     public boolean verifyValueFromEditbox(By locator, String expectedText) {
-        LOGGER.info("Before verifyValueFromEditbox::" + locator + ", with Text::" + expectedText);
+        loggerBasePage.info("Before verifyValueFromEditbox::" + locator + MSG_WITH_TEXT + expectedText);
         WebElement webEditboxText = waitForElement(locator);
         String editBoxText = webEditboxText.getAttribute("value");
-        LOGGER.info("After verifyValueFromEditbox::" + locator + ", with Text::" + expectedText);
+        loggerBasePage.info("After verifyValueFromEditbox::" + locator + MSG_WITH_TEXT + expectedText);
         return editBoxText.contains(expectedText);
     }
 
     public boolean verifyDefaultValueFromWebElement(By locator, String expectedText) {
-        LOGGER.info("Before verifyValueFromEditbox::" + locator + ", with Text::" + expectedText);
+        loggerBasePage.info("Before verifyValueFromEditbox::" + locator + MSG_WITH_TEXT + expectedText);
         WebElement webEditboxText = waitForElement(locator);
         String editBoxText = webEditboxText.getText();
-        LOGGER.info("After verifyValueFromEditbox::" + locator + ", with Text::" + expectedText);
+        loggerBasePage.info("After verifyValueFromEditbox::" + locator + MSG_WITH_TEXT + expectedText);
         return editBoxText.contains(expectedText);
     }
 
     public String randomString(int len) {
-        LOGGER.info("Before randomString with length::" + len);
+        loggerBasePage.info("Before randomString with length::" + len);
         String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         SecureRandom rnd = new SecureRandom();
         StringBuilder sb = new StringBuilder(len);
         for (int i = 0; i < len; i++) {
             sb.append(AB.charAt(rnd.nextInt(AB.length())));
         }
-        LOGGER.info("After randomString with length::" + len);
+        loggerBasePage.info("After randomString with length::" + len);
         return sb.toString();
     }
 
     public void waitUntilDomLoad() {
-        LOGGER.info("Inside waitUntilDomLoad");
+        loggerBasePage.info("Inside waitUntilDomLoad");
         WebDriver driver = getDriver();
         FluentWait fluentWait = readyStateWait(driver);
         if(driver.getTitle().contains("/maintenix/")) {
@@ -202,7 +203,7 @@ public class BasePage {
         }catch (Exception e){
             e.printStackTrace();
         }
-        LOGGER.info("Dom load completed");
+        loggerBasePage.info("Dom load completed");
     }
 
     public FluentWait<WebDriver> readyStateWait(WebDriver driver) {
@@ -259,6 +260,6 @@ public class BasePage {
     }
 
     public void printConsole(String str){
-        System.out.println("printConsole >> "+str);
+        loggerBasePage.info("printConsole >> "+str);
     }
 }

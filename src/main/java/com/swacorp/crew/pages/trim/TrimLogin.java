@@ -12,17 +12,17 @@ import com.hp.lft.sdk.winforms.Button;
 
 import static com.swacorp.crew.utils.TestManager.dataProperties;
 
-public class LoginPageAM extends WinBasePage  {
+public class TrimLogin extends WinBasePage  {
     ReportUtil reportLoginPageAM = new ReportUtil();
-    private final Logger loggerLoginPage = Logger.getLogger(LoginPageAM.class);
+    private final Logger loggerLoginPage = Logger.getLogger(TrimLogin.class);
     ObjectRepoTRiM lftObjects =null;
     Window mainWindow = null;
-    public LoginPageAM()  {
+    public TrimLogin()  {
         lftObjects = super.trimObjectRepo;
     }
     private boolean loginSuccessful;
     private boolean alreadyLogin;
-    public TrimHomePageAM loginTRiM(String user, String pass) throws  GeneralLeanFtException {
+    public TrimHome loginTRiM(String user, String pass) throws  GeneralLeanFtException {
         mainWindow = lftObjects.tRiMTrainingResourceManagerSouthwestWindow();
         try {
                 mainWindow.maximize();
@@ -33,7 +33,7 @@ public class LoginPageAM extends WinBasePage  {
                 loginSuccessful = false;
         }catch(GeneralLeanFtException e){
             try {
-                new LoginPageAM().loginToTrim(user, pass);
+                new TrimLogin().loginToTrim(user, pass);
                 reportLoginPageAM.reportLeanFT(mainWindow,"pass", "Login to Trim is successful for the user name: "+user );
                 loginSuccessful = true;
             }catch(Exception e1){
@@ -43,7 +43,7 @@ public class LoginPageAM extends WinBasePage  {
                 return  null;
             }
         }
-        return new TrimHomePageAM();
+        return new TrimHome();
     }
 
     private int loginToTrim (String user, String pass)throws  GeneralLeanFtException {

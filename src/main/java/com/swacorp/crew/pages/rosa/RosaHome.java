@@ -1,4 +1,4 @@
-package com.swacorp.tsr.rosa;
+package com.swacorp.crew.pages.rosa;
 
 import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.pages.common.CommonFormats;
@@ -130,7 +130,7 @@ public class RosaHome extends BasePage {
         }
     }
 
-    public RosaSolutioQueue createPTOSolutionRequest(String Category, String Cycle, String Aircraft, String Event, String Month, String Bidline, String CoreConditional) throws Exception{
+    public RosaSolutionQueue createPTOSolutionRequest(String Category, String Cycle, String Aircraft, String Event, String Month, String Bidline, String CoreConditional) throws Exception{
         DateUtil du = new DateUtil();
 
         String xpathCoreConditional = "//*[contains(text(),'PLACEHOLDER')]/preceding-sibling::*[position()=1]";
@@ -158,14 +158,14 @@ public class RosaHome extends BasePage {
             e.printStackTrace();
         }
 
-        currentSystemDate = du.getCurrentDate(CommonFormats.ROSAFormat);
+        currentSystemDate = du.getCurrentDate(CommonFormats.ROSA_FORMAT);
         buttonClick(START_BTN);
 
-        return new RosaSolutioQueue(currentSystemDate);
+        return new RosaSolutionQueue(currentSystemDate);
     }
 
 
-    public RosaSolutioQueue selectFromDropDown(String Event) throws Exception{
+    public RosaSolutionQueue selectFromDropDown(String Event) throws Exception{
 
         try {
             buttonClick(EVENT_DROP);
@@ -179,18 +179,18 @@ public class RosaHome extends BasePage {
             getDriver().findElements(BID_LINE_DR0P).get(2).click();
             buttonClick(HARD_LINE_DROP_DOWN_VALUE);
             buttonClick(START_SUBMIT_BTN);
-            return new RosaSolutioQueue();
+            return new RosaSolutionQueue();
         }catch(Exception e){
             e.printStackTrace();
         }
         return null;
     }
 
-    public RosaSolutioQueue gotoPTOQueus(){
+    public RosaSolutionQueue gotoPTOQueus(){
         try {
             buttonClick(PTO_QUEUE_BTN);
             report.reportSelenium("Pass", "Navigation to PTO queus is successful.");
-            return new RosaSolutioQueue();
+            return new RosaSolutionQueue();
         }
         catch(Exception e){
             report.reportSelenium("Fail", "Failed to navigate to PTO queus.");

@@ -1,4 +1,4 @@
-package com.swacorp.tsr.enums;
+package com.swacorp.crew.pages.constants;
 
 public class EnumCssTransactionReport {
 

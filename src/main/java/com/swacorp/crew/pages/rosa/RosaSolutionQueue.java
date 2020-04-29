@@ -17,19 +17,19 @@ import java.util.*;
 import com.swacorp.crew.utils.FileUtil;
 import org.openqa.selenium.interactions.Actions;
 
-public class RosaSolutioQueue extends BasePage {
+public class RosaSolutionQueue extends BasePage {
 
-    private final Logger LOGGER = Logger.getLogger(RosaSolutioQueue.class);
+    private final Logger LOGGER = Logger.getLogger(RosaSolutionQueue.class);
     ReportUtil report = new ReportUtil();
     HashMap<Integer, String[]> hm = new HashMap<>();
     //LinkedHashMap<String, LinkedHashMap<String, ArrayList<String[]>>> masterHM = new LinkedHashMap<>();
     public static Map<String, Map<String, ArrayList<String[]>>> masterHM = new LinkedHashMap<String, Map<String, ArrayList<String[]>>>();
     String timeOfCreatingRequest;
 
-    public RosaSolutioQueue() {
+    public RosaSolutionQueue() {
     }
 
-    public RosaSolutioQueue(String currentDate){
+    public RosaSolutionQueue(String currentDate){
         timeOfCreatingRequest = currentDate;
     }
 
@@ -140,7 +140,7 @@ public class RosaSolutioQueue extends BasePage {
     public boolean isTimeWithinAcceptableRange(String qTime, String sysTime) throws ParseException{
        long diffSecs, diffMins;
        try {
-           diffSecs = new DateUtil().getTimeDiff(qTime, sysTime, CommonFormats.ROSAFormat);
+           diffSecs = new DateUtil().getTimeDiff(qTime, sysTime, CommonFormats.ROSA_FORMAT);
            diffMins = diffSecs / 60;
            if (diffMins > 1) {
                return false;
