@@ -37,32 +37,32 @@ public class TC181506 extends TestManager {
         String equipment = testData[21]; //737
         String primaryStatusTrimEmpDetailsWnd =  testData[22];
 
-        wrapper.AddCrewmember(testData, true, true);
+        wrapper.addCrewmember(testData, true, true);
 
-        wrapper.EditPositionToCreateCA("CAPTAIN-737 All");
+        wrapper.editPositionToCreateCA();
 
 
         System.out.println("sdsds");
-        /*wrapper.SelectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
+        /*wrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
 
-        wrapper.ExpandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, false);
+        wrapper.expandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, false);
 
-        wrapper.SelectTrainingEventCategory(oqsTrainingEventType);
+        wrapper.selectTrainingEventCategory(oqsTrainingEventType);
 
         wrapper.selectTrainingEvent(event);
 
-        wrapper.SelectEquipmentAndPrimaryStatus(equipment,primaryStatusTrimEmpDetailsWnd);
-        wrapper.SelectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
+        wrapper.selectEquipmentAndPrimaryStatus(equipment,primaryStatusTrimEmpDetailsWnd);
+        wrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
 
-        wrapper.ExpandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, true);
+        wrapper.expandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, true);
 
         wrapper.deleteEvent(event);
         Thread.sleep(EnumWaitConstants.WaitDuration.TEN.status());
 
-        wrapper.SelectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerRandomDropdownValueToRefreshTVData);
+        wrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerRandomDropdownValueToRefreshTVData);
 
-        wrapper.SelectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
+        wrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
 
-        wrapper.ExpandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, false);*/
+        wrapper.expandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, false);*/
     }
 }

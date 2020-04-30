@@ -26,8 +26,8 @@ public class TC181507 extends TestManager {
     @Test(priority=7, groups = {"181507", "14477", "regression"}, dataProvider = "TC181391", dataProviderClass = TestDataProvider.class)
     public void TC181507_OQS_RK_TRiM_Attempt_to_add_an_existing_CA_to_OQS_RK_and_verify_in_TRiM(String[] data) throws Exception {
         setScenarioName("TC181507_TC04 OQS RK TRiM Attempt to add an existing CA to OQS RK and verify in TRiM");
-        wrapper.WrapperMethod(data, false, false, false);
+        wrapper.wrapperMethod(data, false, false, false);
 
-        wrapper.WrapperMethodToAddDuplicateEmployeeNrOQS(data, false, false);
+        wrapper.wrapperMethodToAddDuplicateEmployeeNrOQS(data, false, false);
     }
 }

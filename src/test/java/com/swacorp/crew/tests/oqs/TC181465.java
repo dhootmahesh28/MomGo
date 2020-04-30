@@ -1,5 +1,8 @@
 package com.swacorp.crew.tests.oqs;
 
+import com.hp.lft.sdk.GeneralLeanFtException;
+import com.swacorp.crew.test.wrappers.OqsWrapper;
+import com.swacorp.crew.test.wrappers.TrimWrapper;
 import com.swacorp.crew.tests.dataprovider.TestDataProvider;
 import com.swacorp.crew.utils.TestManager;
 import com.swacorp.crew.test.wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim;
@@ -13,19 +16,16 @@ import org.testng.annotations.Test;
 // TC181510_181551_181552_
 public class TC181465 extends TestManager {
     private final Logger LOGGER = Logger.getLogger(TC181465.class);
-    Add_Crew_Member_In_OQS_Verify_In_Trim wrapper;
-/*    LoginPage_am trimLoginPage ;
-    TrimHomePageAM trimHomePageAM;
-    OQSLoginPage oqsLoginPage ;
-    HomePage oqsHomePage;
-*/
+    OqsWrapper oqsWrapper;
+    TrimWrapper trimWrapper;
     TC181465(){
-        wrapper =new  Add_Crew_Member_In_OQS_Verify_In_Trim();
+        oqsWrapper = new OqsWrapper();
+        trimWrapper = new TrimWrapper();
     }
 
 
     @Test(priority=1,groups = {"181465", "regression"}, dataProvider = "TC181465", dataProviderClass = TestDataProvider.class)
-    public void TC181506(String[] testData) throws Exception {
+    public void tc181506(String[] testData) throws GeneralLeanFtException {
         setScenarioName("TC181506_OQS_RK-TRiM-FO-Add_Flight_Training_event_under_Initial_to_an_FO");
         boolean applyenterpriseMode = true;
         String domicile = testData[3];
@@ -37,33 +37,20 @@ public class TC181465 extends TestManager {
         String equipment = testData[21]; //737
         String primaryStatusTrimEmpDetailsWnd =  testData[22];
 
-        wrapper.AddCrewmember(testData, true, applyenterpriseMode);
-
-        wrapper.EditPositionToCreateCA("CAPTAIN-737 All");
-        wrapper.AddPosition("CAPTAIN-737 All");
-
-        wrapper.SelectTrainingEventCategory(oqsTrainingEventType);
-
-        //  NOT NEEDED wrapper.selectTrainingEvent(oqsTrainingEventType, event);
-        wrapper.selectTrainingEvent(oqsTrainingEventType, event, applyenterpriseMode);
-
-        wrapper.SelectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerRandomDropdownValueToRefreshTVData);
-
-        wrapper.SelectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
-
-        wrapper.ExpandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, true);
-
-        wrapper.SelectEquipmentAndPrimaryStatus(equipment,primaryStatusTrimEmpDetailsWnd);
-        //wrapper.SelectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
-
-        //wrapper.ExpandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, true);
-
-        wrapper.deleteEvent(event);
-
-        wrapper.SelectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerRandomDropdownValueToRefreshTVData);
-
-        wrapper.SelectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
-
-        wrapper.ExpandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, false);
+        LOGGER.info("Starting execution..");
+        oqsWrapper.addCrewmember(testData, true, applyenterpriseMode);
+        oqsWrapper.editPositionToCreateCA();
+        oqsWrapper.addPosition("CAPTAIN-737 All");
+        oqsWrapper.selectTrainingEventCategory(oqsTrainingEventType);
+        oqsWrapper.selectTrainingEvent(oqsTrainingEventType, event, applyenterpriseMode);
+        trimWrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerRandomDropdownValueToRefreshTVData);
+        trimWrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
+        trimWrapper.expandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, true);
+        trimWrapper.selectEquipmentAndPrimaryStatus(equipment,primaryStatusTrimEmpDetailsWnd);
+        oqsWrapper.deleteEvent(event);
+        trimWrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerRandomDropdownValueToRefreshTVData);
+        trimWrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
+        trimWrapper.expandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, false);
+        LOGGER.info("Starting finished..");
     }
 }

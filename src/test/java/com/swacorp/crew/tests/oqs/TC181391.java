@@ -27,9 +27,9 @@ public class TC181391 extends TestManager {
     @Test(priority=6, groups = {"181391", "14477", "regression"}, dataProvider = "TC181391", dataProviderClass = TestDataProvider.class)
     public void TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM(String[] testData) throws GeneralLeanFtException, Exception {
         setScenarioName("TC181391_OQS_RK_TRiM_Sim_Instructor_Add_a_Sim_Instructor_to_OQS_RK_and_verify_in_TRiM");
-        wrapper.WrapperMethod(testData, false, false, false);
-        wrapper.EditPositionToCreateCA("CAPTAIN-737 All");
-        wrapper.WrapperMethodToAddDuplicateEmployeeNrOQS(testData, false, false);
+        wrapper.wrapperMethod(testData, false, false, false);
+        wrapper.editPositionToCreateCA();
+        wrapper.wrapperMethodToAddDuplicateEmployeeNrOQS(testData, false, false);
 
     }
 }
