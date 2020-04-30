@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 /**
  * Created by x17212 on 5/2/2016.
  */
-public class BasePage {
+public class BasePage extends  TestUtil {
 
     public  static final Logger loggerBasePage = Logger.getLogger(BasePage.class);
     static final String MSG_WITH_TEXT = ", with Text::";
@@ -249,15 +249,6 @@ public class BasePage {
         return obj;
     }
 
-    public void setDynamicData(String varName, String value) {
-        Long id = Thread.currentThread().getId();
-        TestUtil.dynamicDataMap.put(varName + "-" + id, value);
-    }
-
-    public String getDynamicData(String varName) {
-        Long id = Thread.currentThread().getId();
-        return TestUtil.dynamicDataMap.get(varName + "-" + id);
-    }
 
     public void printConsole(String str){
         loggerBasePage.info("printConsole >> "+str);

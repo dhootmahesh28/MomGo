@@ -14,7 +14,6 @@ import com.google.gson.JsonObject;
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.opencsv.CSVWriter;
 import com.swacorp.crew.pages.common.BasePage;
-import com.swacorp.crew.pages.common.WinBasePage;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
@@ -46,12 +45,15 @@ public class TestManager extends DriverSource {
     BasePage basePage = new BasePage();
     ReportUtil report = new ReportUtil();
     public static String jbehavePath;
-    public static final String jsonFile = "xref.json";
+    public static final String JSON_FILE = "xref.json";
+    public static final String FAILED =     "Failed";
+    public static final String PASSED =     "Passed";
     public static List<String[]> testResults = new CopyOnWriteArrayList<String[]>() {
         {
             add(new String[]{"TC ID", "TEST NAME", "STATUS", "TEST TYPE", "E2E TCID", "FAILURE REASON"});
         }
     };
+
 
     public ExtentTest getExtentTest() {
         Long key = Thread.currentThread().getId();
@@ -100,7 +102,7 @@ public class TestManager extends DriverSource {
         String status = null;
         try {
             if (result.getStatus() == ITestResult.FAILURE) {
-                status = "Failed";
+                status =FAILED;
                 failureReason = result.getThrowable().getMessage();
                 String screenshotPath = ext.takeScreenshot(getDriver(), result.getName());
                 test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() +
@@ -109,8 +111,8 @@ public class TestManager extends DriverSource {
                 test.log(Status.FAIL, "Snapshot when exception occur: ",
                         MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
             } else if (result.getStatus() == ITestResult.SUCCESS) {
-                status = "Passed";
-                test.pass("Passed");
+                status = PASSED;
+                test.pass(PASSED);
             } else if (result.getStatus() == ITestResult.SKIP) {
                 status = "Skipped";
                 failureReason = result.getThrowable().getMessage();
@@ -121,7 +123,7 @@ public class TestManager extends DriverSource {
                 test.error(result.getThrowable());
             }
         } catch (Exception e) {
-            status = "Failed";
+            status = FAILED;
             failureReason = e.getMessage();
             test.log(Status.FAIL, "Exception in Tear down : " + e.getMessage());
         } finally {
@@ -247,9 +249,9 @@ public class TestManager extends DriverSource {
                 if (childTestIDName.toUpperCase().startsWith("TC")) {
                     ChildTestCaseID = childTestIDName.substring(2).trim();
                     if (childTestStatus.equalsIgnoreCase("pass")) {
-                        testResults.add(new String[]{ChildTestCaseID, childTestName, "Passed", "Individual", parentTestID, ""});
+                        testResults.add(new String[]{ChildTestCaseID, childTestName, PASSED, "Individual", parentTestID, ""});
                     } else {
-                        testResults.add(new String[]{ChildTestCaseID, childTestName, "Failed", "Individual", parentTestID, failureReason});
+                        testResults.add(new String[]{ChildTestCaseID, childTestName, FAILED, "Individual", parentTestID, failureReason});
                     }
                 }
             }
@@ -275,13 +277,13 @@ public class TestManager extends DriverSource {
     void createXREFJson() {
         JsonArray testCasesArray = new JsonArray();
         for (String[] testcase : testResults) {
-            if (testcase[2] == "Passed") {
+            if (testcase[2] == PASSED) {
                 JsonObject testCaseObject = new JsonObject();
                 testCaseObject.addProperty("name", "CRW_" + testcase[0] + "_" + testcase[1].split("_")[1]);
                 testCaseObject.addProperty("pending", false);
                 testCaseObject.addProperty("passed", true);
                 testCasesArray.add(testCaseObject);
-            } else if(testcase[2] == "Failed"){
+            } else if(testcase[2] == FAILED){
                 JsonObject testCaseObject = new JsonObject();
                 testCaseObject.addProperty("name", "CRW_" + testcase[0] + "_" + testcase[1].split("_")[1]);
                 testCaseObject.addProperty("pending", false);
@@ -300,7 +302,7 @@ public class TestManager extends DriverSource {
             dir.mkdirs();
             FileWriter fileWriter = null;
             try {
-                fileWriter = new FileWriter(jbehavePath + jsonFile);
+                fileWriter = new FileWriter(jbehavePath + JSON_FILE);
                 gsonXref.toJson(xrefJsonObject, fileWriter);
                 fileWriter.close();
             } catch (IOException e) {

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import com.swacorp.crew.genericwrappers.editor.IEditor;
 import com.swacorp.crew.genericwrappers.editor.IButton;
-import com.swacorp.crew.wrappers.GenericMethods;
+import com.swacorp.crew.test.wrappers.GenericMethods;
 import com.swacorp.crew.pages.common.Constant;
 /**
  * Created by x219949 on 8/14/2018.
@@ -102,15 +102,20 @@ public class DriverSource extends TestNgUnitTestBase implements  GenericMethods 
                     driver.manage().window().maximize();*/
 
                     //  if (System.getProperty("os.name").contains("Windows 7"))
-                    System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\IEDriverServer.exe");
+                    System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\IEDriverServer64.exe");
                     //  else
-                    //    System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\IEDriverServer64.exe");
+                    System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\IEDriverServer64.exe");
                     InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
                     internetExplorerOptions.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, "");
                     internetExplorerOptions.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
                     internetExplorerOptions.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-                    internetExplorerOptions.setCapability("requireWindowFocus", true);
+                    //internetExplorerOptions.setCapability("requireWindowFocus", true);
+                    //internetExplorerOptions.setCapability("ignoreProtectedModeSettings", true);
+                    internetExplorerOptions.setCapability("nativeEvents", false);
+                    //internetExplorerOptions.setCapability("enablePersistentHover", true);
+
                     driver = new InternetExplorerDriver(internetExplorerOptions);
+
                     driver.manage().window().maximize();
                 }
                 driver.manage().timeouts().implicitlyWait(SET_IMPLICIT_TIMEOUT_MS, TimeUnit.MILLISECONDS);

@@ -1,28 +1,25 @@
 package com.swacorp.crew.genericwrappers.editor;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
+import com.swacorp.crew.pages.common.MessageConstants;
 import org.apache.log4j.Logger;
+import com.hp.lft.sdk.winforms.EditField;
 
-
-public interface IEditor<T extends com.hp.lft.sdk.winforms.EditField> {
-
-     final Logger log = Logger.getLogger(IEditor.class);
-     String objectType = "Type of object: ";
-     String dataSuccessfullySet = "Data is successfully set into: ";
-     String errorWhileSettingData = "Error occured while setting data ";
+public interface IEditor<T extends EditField> {
+    Logger log = Logger.getLogger(IEditor.class);
 
     default void  setTextInEditBox(T obj, String data) throws GeneralLeanFtException {
         try {
             obj.setText(data);
 
-            log.info(dataSuccessfullySet +obj.getObjectName()+ objectType +obj.getClass());
+            log.info(MessageConstants.DATA_IS_SUCCESSFULLY_SET_INTO +obj.getObjectName()+ MessageConstants.OBJECT_TYPE +obj.getClass());
         }catch(Exception e){
-            log.error(errorWhileSettingData +obj.getObjectName()+ objectType +obj.getClass(), e);
-            e.printStackTrace();
+            log.error(MessageConstants.ERROR_WHILE_SETTING_DATA +obj.getObjectName()+ MessageConstants.OBJECT_TYPE  +obj.getClass(), e);
+            log.error(e.getMessage());
         }
     }
 
-    default void  WaitEditorTillVisible(T obj,long timeout) throws GeneralLeanFtException {
+    default void  waitEditorTillVisible(T obj,long timeout) throws GeneralLeanFtException {
         long t=0;
         try {
 
@@ -31,9 +28,7 @@ public interface IEditor<T extends com.hp.lft.sdk.winforms.EditField> {
                 t++;
             }while((!obj.isVisible()) && t < timeout);
         }catch(Exception e){
-              e.printStackTrace();
+            log.error(e.getMessage());
         }
-
     }
-
 }

@@ -808,5 +808,56 @@
             <description></description>
             <identification/>
         </object>
+        <object type="Page" technology="Web">
+            <name>OQS - Record Keeping</name>
+            <codeName>oQSRecordKeepingPage</codeName>
+            <description></description>
+            <identification/>
+            <children>
+                <object type="WebElement" technology="Web">
+                    <name>ROSA</name>
+                    <codeName>rOSAWebElement</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="InnerHTML" type="string" isRegExp="false">ROSA</property>
+                            <property name="InnerText" type="string" isRegExp="false">ROSA</property>
+                        </properties>
+                    </identification>
+                </object>
+            </children>
+        </object>
+        <object type="Page" technology="Web">
+            <name>OQS - Flight Operations</name>
+            <codeName>oQSFlightOperationsPage</codeName>
+            <description></description>
+            <identification/>
+            <children>
+                <object type="EditField" technology="Web">
+                    <name>crewSearchValue</name>
+                    <codeName>crewSearchValueEditField</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="Name" type="string" isRegExp="false">crewSearchValue</property>
+                            <property name="TagName" type="string" isRegExp="false">INPUT</property>
+                            <property name="Type" type="string" isRegExp="false">text</property>
+                        </properties>
+                    </identification>
+                </object>
+                <object type="Button" technology="Web">
+                    <name>Search</name>
+                    <codeName>searchButton</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="ButtonType" type="string" isRegExp="false">button</property>
+                            <property name="Name" type="string" isRegExp="false">Search</property>
+                            <property name="TagName" type="string" isRegExp="false">BUTTON</property>
+                        </properties>
+                    </identification>
+                </object>
+            </children>
+        </object>
     </objects>
 </applicationModel>

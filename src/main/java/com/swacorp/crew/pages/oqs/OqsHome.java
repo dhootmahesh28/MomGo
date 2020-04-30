@@ -266,7 +266,7 @@ public class OqsHome extends BasePage {
         HandlePopup("ok");
     }
 
-    public void selectTextThroughXpath(String textLocation) throws Exception{
+    public void selectTextThroughXpath(String textLocation){
            String locator;
 
         try {
@@ -304,7 +304,7 @@ public class OqsHome extends BasePage {
         Thread.sleep(100);
 
     }
-    public void addPosition(String position) throws Exception{
+    public void addPosition(String position){
            try {
                report.reportSelenium("info", "Starting Add position... ");
                waitForElement(POSITION_ADD_BTN);
@@ -327,7 +327,7 @@ public class OqsHome extends BasePage {
            }
        }
 
-    public void EditPosition() throws  Exception {
+    public void EditPosition() {
 
         report.reportSelenium("info", "Starting Edit position... ");
         try {

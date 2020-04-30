@@ -2,7 +2,6 @@ package com.swacorp.crew.genericwrappers.editor;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.java.Window;
-import com.swacorp.tsr.enums.EnumWaitConstants;
 import org.apache.log4j.Logger;
 
 public interface IJavaWindow<T extends com.hp.lft.sdk.java.Window> {

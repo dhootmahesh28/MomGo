@@ -1,40 +1,21 @@
 package com.swacorp.crew.genericwrappers.editor;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
-import com.hp.lft.sdk.MouseButton;
 import com.swacorp.crew.utils.ReportStatus;
 import org.apache.log4j.Logger;
-
+import com.swacorp.crew.pages.common.MessageConstants;
 
 public interface IButton<T extends com.hp.lft.sdk.winforms.Button> {
 
-
-    Logger logger = Logger.getLogger(IEditor.class);
-    String objectType = "Type of object: ";
-    String SuccessfullyClicked = "btnClick successful: ";
-    String ClickUnsuccessful = "btnClick unsuccessful ";
+    public static final Logger LOGGER = Logger.getLogger(IEditor.class);
 
     default void btnClick(T obj) throws GeneralLeanFtException {
         try {
             obj.click();
-            //obj.click(MouseButton.LEFT);
-            logger.info(SuccessfullyClicked +obj.getDisplayName()+ objectType +obj.getClass());
+            LOGGER.info(MessageConstants.MSG_CLICKED_SUCCESSFULLY +obj.getDisplayName()+ MessageConstants.OBJECT_TYPE +obj.getClass());
         }catch(Exception e){
-            logger.error(ClickUnsuccessful +obj.getObjectName()+ objectType +obj.getClass(), e);
-            ReportStatus.setReportMsg("Button: "+ obj.getDisplayName() + "is non clickable.");
-            e.printStackTrace();
+            ReportStatus.setReportMsg(MessageConstants.MSG_CLICKED_UNSUCCESSFUL +obj.getObjectName()+ MessageConstants.OBJECT_TYPE +obj.getClass()+"Error: "+e.getMessage());
+            LOGGER.error(e);
         }
     }
-
-    default void VerifyButtonEnabled(T obj) throws GeneralLeanFtException {
-        try {
-            obj.click();
-
-            logger.info(SuccessfullyClicked +obj.getObjectName()+ objectType +obj.getClass());
-        }catch(Exception e){
-            logger.error(ClickUnsuccessful +obj.getObjectName()+ objectType +obj.getClass(), e);
-            ReportStatus.setReportMsg("Button: "+ obj.getDisplayName() + "is not clickable..");
-        }
-    }
-
 }

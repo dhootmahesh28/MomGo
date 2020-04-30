@@ -1,4 +1,4 @@
-package com.swacorp.crew.restassured;
+package com.swacorp.crew.utils;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

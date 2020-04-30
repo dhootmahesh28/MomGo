@@ -752,6 +752,26 @@
                                 </properties>
                             </identification>
                         </object>
+                        <object type="EditField" technology="WinForms">
+                            <name>txtLName</name>
+                            <codeName>txtLNameEditField</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ObjectName" type="string" isRegExp="false">txtLName</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="CheckBox" technology="WinForms">
+                            <name>Inactive</name>
+                            <codeName>inactiveCheckBox</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ObjectName" type="string" isRegExp="false">chkHide</property>
+                                </properties>
+                            </identification>
+                        </object>
                     </children>
                 </object>
                 <object type="ComboBox" technology="WinForms">
@@ -761,6 +781,19 @@
                     <identification>
                         <properties>
                             <property name="ObjectName" type="string" isRegExp="false">cbSubFilter</property>
+                        </properties>
+                    </identification>
+                </object>
+                <object type="Window" technology="WinForms">
+                    <name>WEST, WAS (4545)</name>
+                    <codeName>wESTWAS4545Window</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="IsChildWindow" type="boolean" isRegExp="false">true</property>
+                            <property name="IsOwnedWindow" type="boolean" isRegExp="false">false</property>
+                            <property name="ObjectName" type="string" isRegExp="false">frmEmployees</property>
+                            <property name="WindowTitleRegExp" type="string" isRegExp="false">WEST, WAS (4545)</property>
                         </properties>
                     </identification>
                 </object>
@@ -789,6 +822,65 @@
                             <property name="Text" type="string" isRegExp="false">Populate Complete.</property>
                         </properties>
                     </identification>
+                </object>
+            </children>
+        </object>
+        <object type="Page" technology="Web">
+            <name>OQS - Flight Operations</name>
+            <codeName>oQSFlightOperationsPage</codeName>
+            <description></description>
+            <identification/>
+            <children>
+                <object type="Frame" technology="Web">
+                    <name>compArea</name>
+                    <codeName>compAreaFrame</codeName>
+                    <description></description>
+                    <identification>
+                        <properties>
+                            <property name="Name" type="string" isRegExp="false">compArea</property>
+                        </properties>
+                    </identification>
+                    <children>
+                        <object type="EditField" technology="Web">
+                            <name>WebEdit</name>
+                            <codeName>webEditEditField</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="Name" type="string" isRegExp="false">WebEdit</property>
+                                    <property name="TagName" type="string" isRegExp="false">INPUT</property>
+                                    <property name="Type" type="string" isRegExp="false">text</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="Button" technology="Web">
+                            <name>OK</name>
+                            <codeName>oKButton</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="ButtonType" type="string" isRegExp="false">submit</property>
+                                    <property name="Name" type="string" isRegExp="false">OK</property>
+                                    <property name="TagName" type="string" isRegExp="false">BUTTON</property>
+                                </properties>
+                            </identification>
+                        </object>
+                        <object type="CheckBox" technology="Web">
+                            <name>WebCheckBox</name>
+                            <codeName>webCheckBox</codeName>
+                            <description></description>
+                            <identification>
+                                <properties>
+                                    <property name="AccessibilityName" type="string" isRegExp="false"></property>
+                                    <property name="Name" type="string" isRegExp="false"></property>
+                                    <property name="Role" type="string" isRegExp="false"></property>
+                                    <property name="TagName" type="string" isRegExp="false">INPUT</property>
+                                    <property name="Type" type="string" isRegExp="false">checkbox</property>
+                                </properties>
+                                <index>7</index>
+                            </identification>
+                        </object>
+                    </children>
                 </object>
             </children>
         </object>

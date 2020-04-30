@@ -1,4 +1,4 @@
-package com.swacorp.crew.wrappers;
+package com.swacorp.crew.test.wrappers;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.TestObject;

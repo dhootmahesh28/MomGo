@@ -2,14 +2,11 @@ package com.swacorp.crew.genericwrappers.editor;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
 import org.apache.log4j.Logger;
-
+import com.swacorp.crew.pages.common.MessageConstants;
 
 public interface IJavaButton<T extends com.hp.lft.sdk.java.Button> {
 
      final Logger log = Logger.getLogger(IJavaButton.class);
-     String objectType = "Type of object: ";
-     String dataSuccessfullySet = "Data is successfully set into: ";
-     String errorWhileSettingData = "Error occured while setting data ";
 
     default void  WaitForButtonToVisible(T obj, int timeout) throws GeneralLeanFtException {
         long t=0;
