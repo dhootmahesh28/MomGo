@@ -1,7 +1,7 @@
 package com.swacorp.crew.genericwrappers.editor;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
-import com.swacorp.crew.pages.common.MessageConstants;
+import com.swacorp.crew.pages.constants.MessageConstants;
 import org.apache.log4j.Logger;
 import com.hp.lft.sdk.winforms.EditField;
 

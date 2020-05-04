@@ -1,9 +1,9 @@
-package com.swacorp.crew.test.wrappers;
+package com.swacorp.crew.tests.wrappers;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.TestObject;
 import org.apache.log4j.Logger;
-import com.swacorp.crew.interfaces.IGenericMethods;
+import com.swacorp.crew.genericwrappers.editor.IGenericMethods;
 
 
 public interface  GenericMethods extends IGenericMethods {
