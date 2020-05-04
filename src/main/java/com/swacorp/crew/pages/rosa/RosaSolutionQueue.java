@@ -1,12 +1,10 @@
 package com.swacorp.crew.pages.rosa;
 
-import com.swacorp.crew.pages.css.CssHome;
+//import com.swacorp.crew.pages.css.CssHome;
 import com.swacorp.crew.pages.common.BasePage;
-import com.swacorp.crew.pages.common.CommonFormats;
-import com.swacorp.crew.utils.DateUtil;
-import com.swacorp.crew.utils.ReportUtil;
+import com.swacorp.crew.pages.constants.CommonFormats;
+import com.swacorp.crew.utils.*;
 import com.swacorp.crew.pages.sasi.SasiLogin;
-import com.swacorp.crew.utils.PDFReports;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import java.text.ParseException;
 import java.util.*;
 
-import com.swacorp.crew.utils.FileUtil;
 import org.openqa.selenium.interactions.Actions;
 
 public class RosaSolutionQueue extends BasePage {
@@ -153,14 +150,15 @@ public class RosaSolutionQueue extends BasePage {
            }
     }
 
-    public void readSolutionQueueDetails() throws Exception {
+    public void readSolutionQueueDetails()  {
+        try{
         String training = "(//div[@class='trip-details__content-block']/div[@class='trip-details__content-block'])[PLACEHOLDER]/div[1]/div[@class='grid__row']/div[1]/div";
         String triptopull = "(//div[@class='trip-details__content-block']/div[@class='trip-details__content-block'])[PLACEHOLDER1]/div[PLACEHOLDER2]//div[@class = 'grid__column-8/12']/div";
         int x = 1;
         int rowIndx = 0;
         waitForElement(VIEW_LINK);
         ArrayList<String> list = new ArrayList<>();
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         if (isElementPresent(VIEW_LINK)) {
             buttonClickIfExist(VIEW_LINK);
         }
@@ -169,12 +167,13 @@ public class RosaSolutionQueue extends BasePage {
 
         do {
             WebElement ele = listCrewIdRows.get(x);
+            webDriverFluentWait();
             list.add(rowIndx, ele.getText());
             rowIndx++;
             x = x+7;
         } while (x < listCrewIdRows.size());
 
-        try{
+
             for (int i = 0; i < list.size() ; i++){
             LinkedHashMap<String, ArrayList<String[]>> trngHM2= new LinkedHashMap<>();
 
@@ -184,7 +183,7 @@ public class RosaSolutionQueue extends BasePage {
             String xpathId = "//*[text()='"+list.get(i)+"']";
             getDriver().findElement(By.xpath(xpathId)).click();
             report.reportSelenium("info","Reading row number: "+i);
-            Thread.sleep(3000);
+            Thread.sleep(1000);
             String fullxpathTraining = training.replace("PLACEHOLDER",""+(2*i+1));
             String fullxpathTripToPullTemp = triptopull.replace("PLACEHOLDER1",""+(2*i+2));
             String fullxpathTripToPull1 = fullxpathTripToPullTemp.replace("PLACEHOLDER2",""+2);
@@ -232,53 +231,13 @@ public class RosaSolutionQueue extends BasePage {
             trngHM2.put("trng", list1);
             trngHM2.put("triptopull", list2);
             masterHM.put(list.get(i),trngHM2);
+            TestUtil.setRosaMasterHM(masterHM);
             getDriver().findElement(By.xpath(xpathId)).click();
             Thread.sleep(4000);
         }
         }catch(Exception e){
             report.reportSelenium("Fail", "Error occured while reading the row.");
             e.printStackTrace();
-        }
-    }
-
-    public CssHome NavigateToCSSWithMasterDS(){
-        try {
-            if (masterHM.size() > 0) {
-                report.reportSelenium("pass", "ROSA part of the flow is successful, now navigating to CSS. Total number of employeeIDs read from rosa is: "+masterHM.size());
-                return new CssHome(masterHM);
-            }else{
-                report.reportSelenium("fail", "ROSA part of the flow is completed, but Training or Trip to pull data could not be read");
-                return new CssHome(masterHM);
-            }
-        }catch(Exception e){
-            report.report("fail", "Navigation to CSS window failed.");
-            return null;
-        }
-    }
-
-    public SasiLogin NavigateToSasiWithMasterDS(){
-        try {
-            if (masterHM.size() > 0) {
-                report.reportSelenium("pass", "ROSA part of the flow is successful, now navigating to SASI. Total number of employeeIDs read from rosa is: "+masterHM.size());
-                return new SasiLogin(masterHM);
-            }else{
-                report.reportSelenium("fail", "ROSA part of the flow is completed, but Training or Trip to pull data could not be read");
-                return new SasiLogin(masterHM);
-            }
-        }catch(Exception e){
-            report.report("fail", "Navigation to CSS window failed.");
-            return null;
-        }
-    }
-
-
-     public CssHome NavigateToCSSForValidation(){
-        try {
-            report.reportSelenium("pass", "ROSA part of the flow is successful, now navigating to CSS.");
-            return new CssHome(employeeID, hm);
-        }catch(Exception e){
-            report.report("fail", "Navigation to CSS window failed.");
-            return null;
         }
     }
 

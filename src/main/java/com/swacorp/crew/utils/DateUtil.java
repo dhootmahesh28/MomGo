@@ -1,20 +1,13 @@
 package com.swacorp.crew.utils;
 
-import com.swacorp.crew.pages.common.CommonFormats;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
-
-import static com.swacorp.crew.pages.common.CommonFormats.MONTH_DAY_YEAR;
 
 public class DateUtil {
     private final LocalDate date = LocalDate.now();

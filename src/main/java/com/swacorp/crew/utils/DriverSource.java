@@ -17,14 +17,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import com.swacorp.crew.genericwrappers.editor.IEditor;
-import com.swacorp.crew.genericwrappers.editor.IButton;
-import com.swacorp.crew.test.wrappers.GenericMethods;
-import com.swacorp.crew.pages.common.Constant;
+import com.swacorp.crew.genericwrappers.editor.IWinformEditor;
+import com.swacorp.crew.genericwrappers.editor.IWinformButton;
+import com.swacorp.crew.pages.common.LeanftGenericMethods;
+//import com.swacorp.crew.pages.common.Constant;
 /**
  * Created by x219949 on 8/14/2018.
  */
-public class DriverSource extends TestNgUnitTestBase implements  GenericMethods {
+public class DriverSource extends TestNgUnitTestBase implements LeanftGenericMethods {
 
     private final int SET_IMPLICIT_TIMEOUT_MS = 500;
     private final int SET_SCRIPT_TIMEOUT_SS = 60;
@@ -32,20 +32,20 @@ public class DriverSource extends TestNgUnitTestBase implements  GenericMethods 
     public final static Logger LOGGER = Logger.getLogger(DriverSource.class);
     private String UserDir;
 
-    protected IEditor edt = null;
-    protected IButton btn = null;
-    protected Constant runtimeData = null;
+    protected IWinformEditor edt = null;
+    protected IWinformButton btn = null;
+    //protected Constant runtimeData = null;
     //protected GenericMethods genericMethods = null;
 
     @BeforeMethod(alwaysRun = true)
     public void initTest(){
         newDriver();
-        initRunTimeData();
+        //initRunTimeData();
 
     }
 
 
-    private void initRunTimeData(){
+/*    private void initRunTimeData(){
         try {
             if (runtimeData == null) {
                 LOGGER.info("Instantiating runtimeData..");
@@ -57,11 +57,11 @@ public class DriverSource extends TestNgUnitTestBase implements  GenericMethods 
 
         try {
             LOGGER.info("Clearing runtimeData map");
-            runtimeData.RunTimeDataFromApp.clear();
+            //runtimeData.RunTimeDataFromApp.clear();
         }catch(Exception e){
             e.printStackTrace();
         }
-    }
+    }*/
 
     public void newDriver() {
         WebDriver driver = null;

@@ -22,7 +22,9 @@ public class SasiLogin extends BasePage {
     public SasiLogin(Map<String, Map<String, ArrayList<String[]>>> hm) {
         masterHM = hm;
     }
+    public SasiLogin(){
 
+    }
 
     public SasiHome loginSasi() {
         String url;
@@ -36,5 +38,17 @@ public class SasiLogin extends BasePage {
             report.reportSelenium("Failed", "Login to SASI is failed.");
             return null;
         }
+    }
+
+    public void loginSasi(String username, String password) {
+        String url;
+        url = EnvironmentConstants.SASIURL;
+        getDriver().get(url);
+        readyStateWait(getDriver());
+        if (getDriver().getTitle().contains("SASI")) {
+            report.reportSelenium("Pass", "Login to SASI is successful.");
+        } else {
+            report.reportSelenium("Failed", "Login to SASI is failed.");
+         }
     }
 }

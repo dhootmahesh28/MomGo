@@ -17,11 +17,13 @@ public class TrimLogin extends WinBasePage  {
     private final Logger loggerLoginPage = Logger.getLogger(TrimLogin.class);
     ObjectRepoTRiM lftObjects =null;
     Window mainWindow = null;
+
     public TrimLogin()  {
         lftObjects = super.trimObjectRepo;
     }
     private boolean loginSuccessful;
     private boolean alreadyLogin;
+
     public TrimHome loginTRiM(String user, String pass) throws  GeneralLeanFtException {
         mainWindow = lftObjects.tRiMTrainingResourceManagerSouthwestWindow();
         try {

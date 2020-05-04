@@ -8,11 +8,10 @@ import com.swacorp.crew.genericwrappers.editor.*;
 import com.swacorp.crew.sharedrepository.tsr.ObjectRepoCSS;
 import com.swacorp.crew.sharedrepository.tsr.ObjectRepoTRiM;
 import com.swacorp.crew.utils.ReportUtil;
-import com.swacorp.crew.test.wrappers.GenericMethods;
 import org.apache.log4j.Logger;
 import com.swacorp.crew.utils.*;
 
-public class WinBasePage implements IEditor,IWinformComboBox,GenericMethods, IButton, IWindow, IJavaEditor, IJavaWindow, IJavaButton {
+public class WinBasePage implements IWinformEditor,IWinformComboBox,LeanftGenericMethods, IWinformButton, IWinformWindow, IJavaEditor, IJavaWindow, IJavaButton {
 
     ReportUtil report = new ReportUtil();
     public final static Logger loggerWinBasePage = Logger.getLogger(WinBasePage.class);

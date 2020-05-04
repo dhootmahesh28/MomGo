@@ -5,11 +5,8 @@ import com.hp.lft.sdk.internal.DynamicObjectProxy;
 import com.hp.lft.sdk.java.*;
 import com.swacorp.crew.pages.common.WinBasePage;
 import com.swacorp.crew.sharedrepository.tsr.ObjectRepoCSS;
-import com.swacorp.crew.utils.EnvironmentConstants;
-import com.swacorp.crew.utils.ReportUtil;
+import com.swacorp.crew.utils.*;
 import com.swacorp.crew.pages.constants.EnumWaitConstants;
-import com.swacorp.crew.utils.FileUtil;
-import com.swacorp.crew.utils.PDFReports;
 import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CssHome extends WinBasePage{
 
@@ -24,13 +22,11 @@ public class CssHome extends WinBasePage{
     private final Logger LOGGER = Logger.getLogger(CssHome.class);
     ObjectRepoCSS lftObjects =null;
     public HashMap<String, String> pgMap = new HashMap<>();
-    //private String empNumberFromApp = "";
-    //private String fldFirstNameFromApp = "";
+
     private boolean searchFound;
     private String cssMAinWindowTitleInitial;
     private String cssMainWindowTitle;
     private String cmBoardTitle;
-    String rosaempID;
     boolean searchTripsOnCMBoard = true;
     boolean found = false;
     HashMap<Integer, String[]> detailFromROSA = new HashMap<Integer, String[]>();
@@ -39,9 +35,12 @@ public class CssHome extends WinBasePage{
     String tripStartDate;
     String tripEndDate;
     Map<String, Map<String, ArrayList<String[]>>> masterHM = new LinkedHashMap<>();
+    String rosaempID;
     ArrayList<String[]> training = new ArrayList<>();
     ArrayList<String[]>  triptopull = new ArrayList<>();
-    String pos = "CA";
+    private static final String POS = "CA";
+    private static final String from = "10Mar20";
+    private static final String to = "14Mar20";
 
     public CssHome(Map<String, Map<String, ArrayList<String[]>>> masterHMrosa) {
         this();
@@ -58,54 +57,73 @@ public class CssHome extends WinBasePage{
         detailFromROSA = hm;
     }
 
-    public void readMasterHM(){
+    private void readMasterHM(){
 
-        HashMap<Integer, String[]> hm = new HashMap<>();
-        //masterHM
-        for (Map.Entry<String, Map<String, ArrayList<String[]>>> entry : masterHM.entrySet()){
-            rosaempID = entry.getKey();
-            Map<String, ArrayList<String[]>> y = entry.getValue();
+        try{
+            if((rosaempID == null)){
+                //masterHM
+                masterHM = TestUtil.getRosaMasterHM();
+                if (masterHM == null){
+                    reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "masterHM is null.");
+                }else {
 
-            for (Map.Entry<String, ArrayList<String[]>> entry2 : y.entrySet()){
-                //String k2 = entry2.getValue("ss");
-                Map<String, ArrayList<String[]>> y2 = entry.getValue();
-                training = y2.get("trng");
-                triptopull = y2.get("triptopull");
+                    for (Map.Entry<String, Map<String, ArrayList<String[]>>> entry : masterHM.entrySet()) {
+                        rosaempID = entry.getKey();
+                        Map<String, ArrayList<String[]>> y = entry.getValue();
+
+                        for (Map.Entry<String, ArrayList<String[]>> entry2 : y.entrySet()) {
+                            //String k2 = entry2.getValue("ss");
+                            Map<String, ArrayList<String[]>> y2 = entry.getValue();
+                            training = y2.get("trng");
+                            triptopull = y2.get("triptopull");
+                        }
+                        break;
+                    }
+                    if ((rosaempID == null)) {
+                        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "Error occured while reading trip details from ROSA in CSS page. rosaempID is null.");
+                    } else {
+                        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "info", "ROSA employee details are read in CSS. HashMap size:"+masterHM.size());
+                    }
+                }
             }
-            break;
+        }catch(Exception e){
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Error occured while reading trip details from ROSA in CSS page."+e.getMessage());
         }
+
     }
-    public void readOTTripDetails() throws GeneralLeanFtException, CloneNotSupportedException, Exception{
-        
-        UiObject x = lftObjects.CssMainWindow().crewBoardPieceUiObject();
-        x.highlight();
+    public void readOTTripDetails() {
+        try {
+            UiObject x = lftObjects.CssMainWindow().crewBoardPieceUiObject();
+            x.highlight();
 
-        //ReadDataFromTripDetails
-        com.hp.lft.sdk.java.UiObjectDescription allUIObj = new com.hp.lft.sdk.java.UiObjectDescription.Builder()
-                .nativeClass("com.swacorp.css.screens.crewboard.CrewBoardPiece").build();
-        com.hp.lft.sdk.java.UiObject[] allObj = lftObjects.CssMainWindow().findChildren(com.hp.lft.sdk.java.UiObject.class, allUIObj);
+            //ReadDataFromTripDetails
+            com.hp.lft.sdk.java.UiObjectDescription allUIObj = new com.hp.lft.sdk.java.UiObjectDescription.Builder()
+                    .nativeClass("com.swacorp.css.screens.crewboard.CrewBoardPiece").build();
+            com.hp.lft.sdk.java.UiObject[] allObj = lftObjects.CssMainWindow().findChildren(com.hp.lft.sdk.java.UiObject.class, allUIObj);
 
-        Object startDate;
-        Object EndDate;
-        for (int index=allObj.length-1 ; index > 0 ; index--){
-            System.out.println("OT index: "+index);
-            UiObject tripDetails = allObj[index];
-            tripDetails.highlight();
+            Object startDate;
+            Object EndDate;
+            for (int index = allObj.length - 1; index > 0; index--) {
+                System.out.println("OT index: " + index);
+                UiObject tripDetails = allObj[index];
+                tripDetails.highlight();
 
-              startDate = allObj[index].getNativeObject().invokeMethod("getStartDate", DynamicObjectProxy.class).invokeMethod("getCalendarDate", DynamicObjectProxy.class).invokeMethod("toString", DynamicObjectProxy.class);
-              EndDate = allObj[index].getNativeObject().invokeMethod("getEndDate", DynamicObjectProxy.class).invokeMethod("getCalendarDate",DynamicObjectProxy.class).invokeMethod("toString", DynamicObjectProxy.class);
-            System.out.println("startDate.toString()"+startDate.toString());
-            System.out.println("EndDate.toString()"+EndDate.toString());
-              if (startDate.toString().contains("2020-03-10") & EndDate.toString().contains("2020-03-15")) {
-                  tripDetails.doubleClick();
-                  if (SearchTheCorrectTripFromOT("", "")) {
-                      break;
-                  }
-              }
-           }
-
-        if (lftObjects.CssMainWindow().openTimeInternalFrame().exists()){
-            lftObjects.CssMainWindow().openTimeInternalFrame().close();
+                startDate = allObj[index].getNativeObject().invokeMethod("getStartDate", DynamicObjectProxy.class).invokeMethod("getCalendarDate", DynamicObjectProxy.class).invokeMethod("toString", DynamicObjectProxy.class);
+                EndDate = allObj[index].getNativeObject().invokeMethod("getEndDate", DynamicObjectProxy.class).invokeMethod("getCalendarDate", DynamicObjectProxy.class).invokeMethod("toString", DynamicObjectProxy.class);
+                System.out.println("startDate.toString()" + startDate.toString());
+                System.out.println("EndDate.toString()" + EndDate.toString());
+                if (startDate.toString().contains("2020-03-10") & EndDate.toString().contains("2020-03-15")) {
+                    tripDetails.doubleClick();
+                    if (SearchTheCorrectTripFromOT("", "")) {
+                        break;
+                    }
+                }
+            }
+            if (lftObjects.CssMainWindow().openTimeInternalFrame().exists()) {
+                lftObjects.CssMainWindow().openTimeInternalFrame().close();
+            }
+        }catch(Exception e){
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Error occured while reading trip details "+e.getMessage());
         }
 
     }
@@ -153,7 +171,7 @@ public class CssHome extends WinBasePage{
                 String assignment = allrows.get(i).getCells().get(1).getValue().toString();
                 String position = allrows.get(i).getCells().get(2).getValue().toString();
                 try {
-                    if (assignment.contains("Unassigned") & position.contains(pos)) {
+                    if (assignment.contains("Unassigned") & position.contains(POS)) {
 
                         reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Position unassigned for " + position);
                         break;
@@ -171,9 +189,6 @@ public class CssHome extends WinBasePage{
     }
 
     public void selectOTfilters(String filter) throws  GeneralLeanFtException{
-        String from = "10Mar20";
-        String to = "14Mar20";
-
         try {
             lftObjects.CssMainWindow().openTimeInternalFrame().activate();
             lftObjects.CssMainWindow().openTimeInternalFrame().fromEditor().sendKeys(from);
@@ -222,7 +237,7 @@ public class CssHome extends WinBasePage{
 
     }
 
-    public void rightClickCMBoardAndSelectMenu(String rightClickMenu) throws  GeneralLeanFtException{
+    public void rightClickCMBoardAndSelectMenu(String rightClickMenu){
         try {
             UiObject x = lftObjects.CssMainWindow().frameCMBoard().xUiObject();
             x.click(MouseButton.RIGHT);
@@ -235,18 +250,14 @@ public class CssHome extends WinBasePage{
         }
     }
 
-    public void validateTransactioReportFile() throws Exception {
-        //FileUtils.cleanDirectory(new File("C:\\Users\\x257093\\AppData\\Local\\Temp\\JasperRptTemp"));
-
+    public void validateTransactioReportFile() {
         try {
             if (lftObjects.CssMainWindow().transactionReportInternalFrame().exists()) {
                 lftObjects.CssMainWindow().transactionReportInternalFrame().activate();
-                //lftObjects.CssMainWindow().transactionReportInternalFrame().pDFIconButton().click();
                 reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction Report reflected.");
             }
         }catch(Exception e){
         }
-        //readTransactionReport("C:\\Users\\x257093\\AppData\\Local\\Temp\\JasperRptTemp");
     }
 
     public void buildLogString(int blockSize, String value, String anEnumCssTransactionReport) throws GeneralLeanFtException{
@@ -271,22 +282,12 @@ public class CssHome extends WinBasePage{
             String line2 = line2Data[i]+" "+rosaempID;
             String line3 = line3Data[i];
 
-            //validateTransactionReport(line1+ '\n' + line2 + '\n' + line3);
-           /* if (reportContent.contains(line1+ '\n' + line2 + '\n' + line3)){
-                reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction reportCssLogin contains: "+line1+ '\n' + line2 + '\n' + line3);
-            }*/
-
             if (reportContent.contains(line1) & reportContent.contains(line2)){
                 reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction reportCssLogin contains: "+line1+ '\n' + line2 );
             }
         }
 
         lftObjects.CssMainWindow().transactionReportInternalFrame().close();
-    }
-
-    public void validateTransactionReport(String s) throws GeneralLeanFtException {
-
-        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction reportCssLogin contains: "+s);
     }
 
     private void CheckIfUnchecked(CheckBox chk) throws GeneralLeanFtException {
@@ -297,7 +298,7 @@ public class CssHome extends WinBasePage{
             chk.click();
         }
     }
-    public void validateTransactioTeportDialog(String functionDropdownList, String reason) throws InterruptedException, GeneralLeanFtException {
+    public void validateTransactioTeportDialog(String functionDropdownList, String reason) throws GeneralLeanFtException {
         boolean reasonFound = false;
 
         CheckBox crewMwmbwr = lftObjects.CssMainWindow().transactionReportDialog().crewMemberCheckBox();
@@ -406,55 +407,7 @@ public class CssHome extends WinBasePage{
         //lftObjects.CssMainWindow().transactionReportDialog().functionsCheckBox().click();
     }
 
-   // This function is required to reset the selections on the Report dialog.
-    // css preserves the selections which causes the test to fail in next run.
-    public void resetReportTab(String itemFunctionDropdown) throws InterruptedException, GeneralLeanFtException {
-        boolean reasonFound = false;
-        lftObjects.CssMainWindow().reportsMenu().click();
-        lftObjects.CssMainWindow().reportsMenu().transactionReportMenu().click();
-        try {
-            Table reasonTable = lftObjects.CssMainWindow().transactionReportDialog().ReasonTable();
-            List<TableRow> rows = reasonTable.getRows();
-            for (int i=0; i < rows.size(); i++) {
-                List<TableCell> cells = rows.get(i).getCells();
-                for(int c = 0; c <  cells.size() ; c++){
-                    if (cells.get(c).getValue().toString().contains(itemFunctionDropdown)){
-                        cells.get(0).click();
-                        reasonFound = true;
-                        break;
-                    }
-                    if (reasonFound){
-                        break;
-                    }
-                }
-            }
-        } catch (GeneralLeanFtException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            lftObjects.CssMainWindow().transactionReportDialog().reasonCheckBox().click();
-            lftObjects.CssMainWindow().transactionReportDialog().functionsCheckBox().click();
-
-        } catch (GeneralLeanFtException e) {
-            e.printStackTrace();
-        }
-
-        lftObjects.CssMainWindow().transactionReportDialog().lastCheckBox().click();
-        Thread.sleep(1000);
-        lftObjects.CssMainWindow().transactionReportDialog().lastCheckBox().click();
-        Keyboard.pressKey(Keyboard.Keys.TAB);
-        Keyboard.sendString("");
-
-        Keyboard.pressKey(Keyboard.Keys.TAB);
-        Keyboard.pressKey(Keyboard.Keys.TAB);
-        Keyboard.sendString("");
-        lftObjects.CssMainWindow().transactionReportDialog().cancel().click();
-
-    }
-
-
-public void NavigateToTransactionReport() throws Exception {
+public void NavigateToTransactionReport() throws GeneralLeanFtException {
     try {
         lftObjects.CssMainWindow().reportsMenu().click();
         lftObjects.CssMainWindow().reportsMenu().transactionReportMenu().click();
@@ -465,22 +418,12 @@ public void NavigateToTransactionReport() throws Exception {
         e.printStackTrace();
     }
 
-
     if(lftObjects.CssMainWindow().transactionReportDialog().exists()){
         reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction reportCssLogin window exist.");
     }else{
         reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Transaction reportCssLogin window doesn't exist.");
     }
 }
-
-    private int VerifyWindowExist(Window o) throws  GeneralLeanFtException{
-        int retVal = 1;
-        if (o.exists()){
-            retVal =0;
-            return retVal;
-        }
-        return retVal;
-    }
 
     public void loginCss() throws GeneralLeanFtException, InterruptedException, IOException {
 
@@ -529,7 +472,8 @@ public void NavigateToTransactionReport() throws Exception {
             }
         }
 
-public void openCMBoard(String empCode) throws GeneralLeanFtException, CloneNotSupportedException {
+public void openCMBoard(String empCode){
+    readMasterHM();
     try {
         empCode = rosaempID.trim();
         lftObjects.CssMainWindow().crewsMenu().click();
@@ -675,7 +619,7 @@ public void selectTripOnCMBoard(String tripStartDateROSA, String tripEndDateROSA
         }
     }
 
-    public void readTransactionReport(String path) throws  Exception {
+    public void readTransactionReport(String path) {
         boolean found = false;
         try {
 
@@ -742,7 +686,8 @@ public void selectTripOnCMBoard(String tripStartDateROSA, String tripEndDateROSA
 
 
         if( lftObjects.CssMainWindow().frameTrimDetails().exists()){
-            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Trip Details window has appeared and trip details found. "+training);
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Trip Details window has appeared and trip details found. "+training.stream().map(Object::toString)
+                    .collect(Collectors.joining(", ")));
         }else{
             reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "Trip Details window didn't appeared.");
         }

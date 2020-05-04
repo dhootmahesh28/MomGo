@@ -1,4 +1,4 @@
-package com.swacorp.crew.tests.wrappers;
+package com.swacorp.crew.pages.common;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.TestObject;
@@ -6,9 +6,9 @@ import org.apache.log4j.Logger;
 import com.swacorp.crew.genericwrappers.editor.IGenericMethods;
 
 
-public interface  GenericMethods extends IGenericMethods {
+public interface LeanftGenericMethods extends IGenericMethods {
 
-    public static final Logger log = Logger.getLogger(GenericMethods.class);
+    public static final Logger log = Logger.getLogger(LeanftGenericMethods.class);
 
     @Override
     default boolean VerifyObjectExist(TestObject o, boolean existance) {

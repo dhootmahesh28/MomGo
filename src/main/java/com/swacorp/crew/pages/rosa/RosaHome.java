@@ -1,7 +1,7 @@
 package com.swacorp.crew.pages.rosa;
 
 import com.swacorp.crew.pages.common.BasePage;
-import com.swacorp.crew.pages.common.CommonFormats;
+import com.swacorp.crew.pages.constants.CommonFormats;
 import com.swacorp.crew.utils.DateUtil;
 import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
@@ -117,7 +117,9 @@ public class RosaHome extends BasePage {
         String xpathCategory;
         try {
             xpathCategory = xpathForDropdowns.replace("PLACEHOLDER", dropHeader);
+            waitForElement(By.xpath(xpathCategory));
             getDriver().findElement(By.xpath(xpathCategory)).click();
+            waitForElement(By.xpath(xpathDropdownvalue.replace("PLACEHOLDER",dropValue)));
             getDriver().findElement(By.xpath(xpathDropdownvalue.replace("PLACEHOLDER",dropValue))).click();
             report.reportSelenium("Pass", "Selected: "+dropHeader+" - "+dropValue);
 
@@ -130,7 +132,7 @@ public class RosaHome extends BasePage {
         }
     }
 
-    public RosaSolutionQueue createPTOSolutionRequest(String Category, String Cycle, String Aircraft, String Event, String Month, String Bidline, String CoreConditional) throws Exception{
+    public RosaSolutionQueue createPTOSolutionRequest(String Category, String Cycle, String Aircraft, String Event, String Month, String Bidline, String CoreConditional){
         DateUtil du = new DateUtil();
 
         String xpathCoreConditional = "//*[contains(text(),'PLACEHOLDER')]/preceding-sibling::*[position()=1]";

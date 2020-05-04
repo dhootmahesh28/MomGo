@@ -5,9 +5,9 @@ import com.swacorp.crew.utils.ReportStatus;
 import org.apache.log4j.Logger;
 import com.swacorp.crew.pages.constants.MessageConstants;
 
-public interface IButton<T extends com.hp.lft.sdk.winforms.Button> {
+public interface IWinformButton<T extends com.hp.lft.sdk.winforms.Button> {
 
-    public static final Logger LOGGER = Logger.getLogger(IEditor.class);
+    public static final Logger LOGGER = Logger.getLogger(IWinformEditor.class);
 
     default void btnClick(T obj) throws GeneralLeanFtException {
         try {

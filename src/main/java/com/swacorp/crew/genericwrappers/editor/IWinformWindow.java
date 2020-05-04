@@ -3,9 +3,9 @@ package com.swacorp.crew.genericwrappers.editor;
 import com.hp.lft.sdk.GeneralLeanFtException;
 import org.apache.log4j.Logger;
 
-public interface IWindow<T extends com.hp.lft.sdk.winforms.Window> {
+public interface IWinformWindow<T extends com.hp.lft.sdk.winforms.Window> {
 
-     final Logger logger = Logger.getLogger(IWindow.class);
+     final Logger logger = Logger.getLogger(IWinformWindow.class);
 
     default void  CloseWindowIfExist(T obj, int timeout) throws GeneralLeanFtException {
         try {

@@ -5,8 +5,8 @@ import com.swacorp.crew.pages.constants.MessageConstants;
 import org.apache.log4j.Logger;
 import com.hp.lft.sdk.winforms.EditField;
 
-public interface IEditor<T extends EditField> {
-    Logger log = Logger.getLogger(IEditor.class);
+public interface IWinformEditor<T extends EditField> {
+    Logger log = Logger.getLogger(IWinformEditor.class);
 
     default void  setTextInEditBox(T obj, String data) throws GeneralLeanFtException {
         try {

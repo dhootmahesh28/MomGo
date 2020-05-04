@@ -1,4 +1,4 @@
-package com.swacorp.crew.interfaces;
+package com.swacorp.crew.genericwrappers.editor;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.TestObject;

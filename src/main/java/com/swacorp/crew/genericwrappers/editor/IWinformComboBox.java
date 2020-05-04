@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 public interface IWinformComboBox<T extends com.hp.lft.sdk.winforms.ComboBox> {
 
     ReportUtil report = new ReportUtil();
-    Logger logger = Logger.getLogger(IEditor.class);
+    Logger logger = Logger.getLogger(IWinformEditor.class);
     String objectType = "Type of object: ";
     String SuccessfullyClicked = "btnClick successful: ";
     String ClickUnsuccessful = "btnClick unsuccessful ";

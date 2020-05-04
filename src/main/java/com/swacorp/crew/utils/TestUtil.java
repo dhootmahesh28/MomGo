@@ -4,7 +4,7 @@ import com.aventstack.extentreports.ExtentTest;
 import io.appium.java_client.windows.WindowsDriver;
 import org.openqa.selenium.WebDriver;
 
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -20,6 +20,16 @@ public class TestUtil {
     public static ConcurrentHashMap<String, Boolean> dynamicBooleanDataMap = new ConcurrentHashMap();
     public static ConcurrentHashMap<String, Double> dynamicDoubleDataMap = new ConcurrentHashMap();
     public static ConcurrentHashMap<String, Integer> dynamicIntegerDataMap = new ConcurrentHashMap();
+    public static Map<String, Map<String, ArrayList<String[]>>> rosaMasterHM = new LinkedHashMap<String, Map<String, ArrayList<String[]>>>();
+
+    public static Map<String, Map<String, ArrayList<String[]>>> getRosaMasterHM() {
+        return rosaMasterHM;
+    }
+
+    public static void setRosaMasterHM(Map<String, Map<String, ArrayList<String[]>>> rosaMasterHM) {
+        TestUtil.rosaMasterHM = rosaMasterHM;
+    }
+
 
     public void setDynamicData(String varName, String value) {
         Long id = Thread.currentThread().getId();

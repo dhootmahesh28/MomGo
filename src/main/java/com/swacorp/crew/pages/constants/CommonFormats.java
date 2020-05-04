@@ -1,4 +1,4 @@
-package com.swacorp.crew.pages.common;
+package com.swacorp.crew.pages.constants;
 
 public class CommonFormats {
 
