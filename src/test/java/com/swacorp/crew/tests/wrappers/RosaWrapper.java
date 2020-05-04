@@ -1,39 +1,27 @@
 package com.swacorp.crew.tests.wrappers;
 
-import com.swacorp.crew.pages.css.CssHome;
+import com.swacorp.crew.pages.constants.ApplicationConstantsRosa;
 import com.swacorp.crew.pages.rosa.RosaHome;
 import com.swacorp.crew.pages.rosa.RosaSolutionQueue;
 import com.swacorp.crew.pages.constants.EnumRosa;
 import com.swacorp.crew.pages.rosa.RosaLogin;
-import com.swacorp.crew.pages.sasi.SasiLogin;
+import com.swacorp.crew.utils.TestUtil;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-public class WrapperPTOWorkflow {
-    RosaLogin rosa;
+public class RosaWrapper extends TestUtil {
+    RosaLogin rosaLogin;
     RosaSolutionQueue rosaSolutioQueue;
-    CssHome css;
-    Map<String, Map<String, ArrayList<String[]>>> masterHM;
 
+    public RosaWrapper(){
+        rosaLogin = new RosaLogin();
+        rosaSolutioQueue = new RosaSolutionQueue();
+     }
 
-    public Map<String, Map<String, ArrayList<String[]>>> getMasterHM(){
-        return masterHM;
-    }
-
-    public void setMasterHM(){
-        masterHM = rosaSolutioQueue.getHM();
-    }
-    public WrapperPTOWorkflow(RosaLogin ros, RosaSolutionQueue solq, CssHome cssMainPage ){
-        rosa = ros;
-        rosaSolutioQueue = solq;
-        css = cssMainPage;
-    }
-
-    public CssHome E2EFlow_RosaPTOMODIFIED() throws Exception{
-        //setScenarioName("TC_01_ROSA Test");
-        rosa = new RosaLogin();
-        RosaHome rosahome = rosa.loginRosa();
+    public void E2EFlow_RosaPTOMODIFIED() throws InterruptedException {
+        rosaLogin = new RosaLogin();
+        RosaHome rosahome = rosaLogin.loginRosa();
         rosahome.VerifyHomePageAppear();
         rosahome.clickAndVerifyPilotTrainingOptimizer();
         rosahome.verifyConditionalRadioButtonExist();
@@ -42,25 +30,18 @@ public class WrapperPTOWorkflow {
         // TRiM BCAT 2020"
         //"TRiM Initial 2020 - Kari"
         //rosaSolutioQueue = rosahome.createPTOSolutionRequest("Recurrent", "AQP 12 Month","737 All","OQS 2020 CQT","May 2020","Hard Line","");
-        rosaSolutioQueue = rosahome.createPTOSolutionRequest(EnumRosa.Category.RECURRENT.getValue(), EnumRosa.Cycle.TWELVEMONTHS.getValue(),EnumRosa.Aircraft.ALL737.getValue(),"OQS 2020 CQT","May 2020",EnumRosa.Bidline.HARDLINE.getValue(),"");
+        rosaSolutioQueue = rosahome.createPTOSolutionRequest(EnumRosa.Category.RECURRENT.getValue(), EnumRosa.Cycle.TWELVEMONTHS.getValue(),EnumRosa.Aircraft.ALL737.getValue(), ApplicationConstantsRosa.ROSA_PTO_EVENT,ApplicationConstantsRosa.ROSA_PTO_TIME,EnumRosa.Bidline.HARDLINE.getValue(),"");
         rosaSolutioQueue.checkDuplicateRequestExist();
         rosaSolutioQueue.veryfySolutionQueueExists();
-        rosaSolutioQueue.selectFilterOption("Committed");
+        rosaSolutioQueue.selectFilterOption(ApplicationConstantsRosa.ROSA_PTO_QUEUE_FILTER_COMMITTED);
         rosaSolutioQueue.readSolutionQueueDetails();
-        rosaSolutioQueue.readHM();
-        //rosaSolutioQueue.StatusPollingOfPTORequest(EnumRosa.Category.RECURRENT.getValue(), EnumRosa.Cycle.TWELVEMONTHS.getValue(),EnumRosa.Aircraft.ALL737.getValue(),"OQS 2020 CQT","May 2020",EnumRosa.Bidline.HARDLINE.getValue(),"","04Apr2020 10:03");
-        //rosaSolutioQueue.readHM();
-        css  = rosaSolutioQueue.NavigateToCSSWithMasterDS();
-        return css;
-    }
-    public SasiLogin navigateToSasi() throws Exception{
-        return rosaSolutioQueue.NavigateToSasiWithMasterDS();
     }
 
-    public CssHome E2EFlow_RosaPTO() throws Exception{
+
+    public void E2EFlow_RosaPTO() throws Exception{
         //setScenarioName("TC_01_ROSA Test");
-        rosa = new RosaLogin();
-        RosaHome rosahome = rosa.loginRosa();
+        rosaLogin = new RosaLogin();
+        RosaHome rosahome = rosaLogin.loginRosa();
         rosahome.VerifyHomePageAppear();
         rosahome.clickAndVerifyPilotTrainingOptimizer();
         rosahome.verifyConditionalRadioButtonExist();
@@ -71,7 +52,7 @@ public class WrapperPTOWorkflow {
         rosaSolutioQueue.veryfySolutionQueueExists();
         rosaSolutioQueue.StatusPollingOfPTORequest(EnumRosa.Category.RECURRENT.getValue(), EnumRosa.Cycle.TWELVEMONTHS.getValue(),EnumRosa.Aircraft.ALL737.getValue(),"OQS 2020 CQT","May 2020",EnumRosa.Bidline.HARDLINE.getValue(),"","04Apr2020 10:03");
         rosaSolutioQueue.readHM();
-        css  = rosaSolutioQueue.NavigateToCSSWithMasterDS();
-        return css;
+        //css  = rosaSolutioQueue.NavigateToCSSWithMasterDS();
+        //return css;
     }
 }

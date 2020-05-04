@@ -1,17 +1,25 @@
 package com.swacorp.crew.tests.oqs;
 
+import com.hp.lft.sdk.winforms.EditField;
+import com.swacorp.crew.pages.css.CssLogin;
+import com.swacorp.crew.pages.trim.TrimLogin;
 import com.swacorp.crew.tests.dataprovider.TestDataProvider;
 import com.swacorp.crew.utils.TestManager;
-import com.swacorp.crew.test.wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim;
+import com.swacorp.crew.tests.wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim;
 import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Created by x257093 on 03-Jan-2020.
  */
 
 // TC181510_181551_181552_
-public class TC181506 extends TestManager {
+public class TC181506 extends TestManager implements java.io.Serializable {
     private final Logger LOGGER = Logger.getLogger(TC181506.class);
     Add_Crew_Member_In_OQS_Verify_In_Trim wrapper;
 /*    LoginPage_am trimLoginPage ;

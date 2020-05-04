@@ -6,7 +6,7 @@ public class RosaTestDataProvider {
 
     @DataProvider(name = "TC166198")
     public static Object[][] TC166198() {
-        return new Object[][]{{"Committed","ON"}};
+        return new Object[][]{{"Committed","ON", "OQS 2020 CQT"}};
     }
 
     @DataProvider(name = "TC167609")

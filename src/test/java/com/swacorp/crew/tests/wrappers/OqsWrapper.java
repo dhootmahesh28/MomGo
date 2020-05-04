@@ -23,8 +23,6 @@ public class OqsWrapper extends TestUtil {
         oqsHomePage = new OqsHome();
     }
 
-
-
     public void addCrewmember(String[] testData, boolean createFreshCrew, boolean applyEnterpriseMode){
         //Login to OQS
         oqsLoginPage.loginOQS(applyEnterpriseMode);
@@ -46,9 +44,6 @@ public class OqsWrapper extends TestUtil {
         empNr = oqsHomePage.addCrewMember(testData, false); // False because we are adding duplicate emp
         oqsHomePage.VerifyCrewAddedSuccessfully(false);
     }
-
-    //addNewPositionInOQSVerifyInTrimOQS
-    //addNewPositionInOQSVerifyInTrimOQSTRIM
 
     public void editPositionToCreateCA(){
         oqsHomePage.EditPosition();

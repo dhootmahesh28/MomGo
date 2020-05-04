@@ -6,7 +6,7 @@ import com.swacorp.crew.utils.TestManager;
 import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
 
-import com.swacorp.crew.test.wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim;
+import com.swacorp.crew.tests.wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim;
 
 /**
  * Created by x257093 on 03-Jan-2020.

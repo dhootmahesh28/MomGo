@@ -1,10 +1,9 @@
 package com.swacorp.crew.tests.oqs;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
-import com.swacorp.crew.test.wrappers.OqsWrapper;
-import com.swacorp.crew.test.wrappers.TrimWrapper;
+import com.swacorp.crew.tests.wrappers.OqsWrapper;
+import com.swacorp.crew.tests.wrappers.TrimWrapper;
 import com.swacorp.crew.tests.dataprovider.TestDataProvider;
-import com.swacorp.crew.test.wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim;
 import com.swacorp.crew.utils.TestManager;
 import org.apache.log4j.Logger;
 import org.testng.annotations.Test;

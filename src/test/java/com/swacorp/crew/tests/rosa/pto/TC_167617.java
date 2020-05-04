@@ -2,32 +2,36 @@ package com.swacorp.crew.tests.rosa.pto;
 
 import com.swacorp.crew.pages.css.CssHome;
 import com.swacorp.crew.tests.dataprovider.RosaTestDataProvider;
+import com.swacorp.crew.tests.wrappers.CssWrapper;
 import com.swacorp.crew.utils.TestManager;
 import com.swacorp.crew.pages.rosa.RosaLogin;
 import com.swacorp.crew.pages.rosa.RosaSolutionQueue;
-import com.swacorp.crew.test.wrappers.WrapperPTOWorkflow;
+import com.swacorp.crew.tests.wrappers.RosaWrapper;
 import org.testng.annotations.Test;
 
 public class TC_167617 extends TestManager {
-    RosaLogin rosa;
-    RosaSolutionQueue rosaSolutioQueue;
-    CssHome css;
-    WrapperPTOWorkflow ptowrapper = new WrapperPTOWorkflow(rosa, rosaSolutioQueue, css);
+    RosaWrapper rosaWrapper;
+    CssWrapper cssWrapper;
+
+    TC_167617(){
+        rosaWrapper = new RosaWrapper();
+        cssWrapper = new CssWrapper();
+    }
 
     @Test(groups = {"167617","rosa_e2e"}, priority=3, dataProvider = "TC167617", dataProviderClass = RosaTestDataProvider.class)
     public void TC167609_TransactionReprtValidation(String[] testData) throws Exception{
         setScenarioName("TC167617_FO Validate that transaction report for Training Trip is displayed with the transactions with the same transgroupseqnumber and new function and reason code");
-        css = ptowrapper.E2EFlow_RosaPTOMODIFIED();
-        css.loginCss();
-        css.openCMBoard("");
-        css.selectTripOnCMBoard("","","", false, false, false);
-        css.rightClickCMBoardAndSelectMenu(testData[1]);
-        css.validateTransactioReportFile();
+        rosaWrapper.E2EFlow_RosaPTOMODIFIED();
+        cssWrapper.loginCss();
+        cssWrapper.openCMBoard("");
+        cssWrapper.selectTripOnCMBoard("","","", false, false, false);
+        cssWrapper.rightClickCMBoardAndSelectMenu(testData[1]);
+        cssWrapper.validateTransactioReportFile();
 
-        css.readTransactionReport("C:\\Users\\x257093\\AppData\\Local\\Temp\\JasperRptTemp");
+        cssWrapper.readTransactionReport("C:\\Users\\x257093\\AppData\\Local\\Temp\\JasperRptTemp");
         //css.ValidatePdfContentAfterReadingTransactionReport("TRNGCQT,ING");
-        css.ValidatePdfContentAfterReadingTransactionReport(testData[3]);
-        css.ValidatePdfContentAfterReadingTransactionReport(testData[4]);
+        cssWrapper.ValidatePdfContentAfterReadingTransactionReport(testData[3]);
+        cssWrapper.ValidatePdfContentAfterReadingTransactionReport(testData[4]);
         }
 
 /*

@@ -3,17 +3,20 @@ package com.swacorp.crew.tests.rosa.pto;
 import com.swacorp.crew.pages.css.CssHome;
 import com.swacorp.crew.tests.dataprovider.RosaTestDataProvider;
 import com.swacorp.crew.pages.rosa.RosaSolutionQueue;
+import com.swacorp.crew.tests.wrappers.CssWrapper;
 import com.swacorp.crew.utils.TestManager;
 import com.swacorp.crew.pages.rosa.RosaLogin;
-import com.swacorp.crew.test.wrappers.WrapperPTOWorkflow;
+import com.swacorp.crew.tests.wrappers.RosaWrapper;
 import org.testng.annotations.Test;
 
 public class TC_167612 extends TestManager {
-    RosaLogin rosa;
-    RosaSolutionQueue rosaSolutioQueue;
-    CssHome css;
-    WrapperPTOWorkflow ptowrapper = new WrapperPTOWorkflow(rosa, rosaSolutioQueue, css);
+    RosaWrapper rosaWrapper;
+    CssWrapper cssWrapper;
 
+    TC_167612(){
+        rosaWrapper = new RosaWrapper();
+        cssWrapper = new CssWrapper();
+    }
         //  IN PROGRESS
     @Test(groups = {"167612","rosa_e2e"}, priority=3, dataProvider = "TC167617", dataProviderClass = RosaTestDataProvider.class)
     public void TC167612_TransactionReprtValidation(String[] testData) throws Exception{
@@ -21,15 +24,15 @@ public class TC_167612 extends TestManager {
         /*E2EFlow_RosaPTO();
         Thread.sleep(1000);
         Css css  = rosaSolutioQueue.NavigateToCSSForValidation();*/
-        css = ptowrapper.E2EFlow_RosaPTOMODIFIED();
-        css.loginCss();
-        css.openCMBoard("");
-        css.selectTripOnCMBoard("","","", false, false, false);
-        css.rightClickCMBoardAndSelectMenu("Transactions");
+        rosaWrapper.E2EFlow_RosaPTOMODIFIED();
+        cssWrapper.loginCss();
+        cssWrapper.openCMBoard("");
+        cssWrapper.selectTripOnCMBoard("","","", false, false, false);
+        cssWrapper.rightClickCMBoardAndSelectMenu("Transactions");
         //*css.validateTransactioReportFile();
         //Css css = new Css();
-        css.readTransactionReport("C:\\Users\\x257093\\AppData\\Local\\Temp\\JasperRptTemp");
-        css.ValidatePdfContentAfterReadingTransactionReport("TRNGCQT,ING");
+        cssWrapper.readTransactionReport("C:\\Users\\x257093\\AppData\\Local\\Temp\\JasperRptTemp");
+        cssWrapper.ValidatePdfContentAfterReadingTransactionReport("TRNGCQT,ING");
     }
 
 /*

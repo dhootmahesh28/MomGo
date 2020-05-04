@@ -1,7 +1,7 @@
 package com.swacorp.crew.tests.wrappers;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
-import com.swacorp.crew.pages.common.ApplicationConstants;
+import com.swacorp.crew.pages.constants.ApplicationConstantsTrim;
 import com.swacorp.crew.pages.trim.TrimHome;
 import com.swacorp.crew.pages.trim.TrimLogin;
 import com.swacorp.crew.utils.EnvironmentConstants;
@@ -34,7 +34,7 @@ public class TrimWrapper extends TestUtil {
     public void employeeSearch(boolean visibility, boolean verifyActivechkbox) throws GeneralLeanFtException{
         trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
         trimLoginPage.verifyLoginSuccessful(true);
-        trimHomePageAM.NavigateMenu(ApplicationConstants.SELECT_EMPLOYEE_MENU);
+        trimHomePageAM.NavigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
         empNr = getDynamicData("EmpNumber");
         trimHomePageAM.SearchEmployeesDetails(empNr, verifyActivechkbox);
         trimHomePageAM.ValidateSearchResults(visibility );
@@ -46,7 +46,7 @@ public class TrimWrapper extends TestUtil {
      * method return: void*/
     public void selectEquipmentAndPrimaryStatus(String equipments, String primaryStatus) throws GeneralLeanFtException{
         trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
-        trimHomePageAM.NavigateMenu(ApplicationConstants.SELECT_EMPLOYEE_MENU);
+        trimHomePageAM.NavigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
         trimHomePageAM.SelectEquipmentAndPrimaryStatus(empNr, equipments, primaryStatus);
     }
 }
