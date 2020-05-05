@@ -96,6 +96,7 @@ public class TestManager extends DriverSource {
 
     @AfterMethod(alwaysRun = true)
     public void tearDown(ITestResult result) throws Exception {
+        String screenshotPath;
         System.out.println("TEAR DOWN ::");
         ExtentTest test = getExtentTest();
         String failureReason = "";
@@ -104,7 +105,11 @@ public class TestManager extends DriverSource {
             if (result.getStatus() == ITestResult.FAILURE) {
                 status =FAILED;
                 failureReason = result.getThrowable().getMessage();
-                String screenshotPath = ext.takeScreenshot(getDriver(), result.getName());
+                if(result.getThrowable().getStackTrace()[1].toString().contains("LeanFT")){
+                    screenshotPath =ReportUtil.failedTestPath;
+                }else {
+                    screenshotPath = ext.takeScreenshot(getDriver(), result.getName());
+                }
                 test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() +
                         " Test case FAILED due to below issues:", ExtentColor.RED));
                 test.fail(result.getThrowable());

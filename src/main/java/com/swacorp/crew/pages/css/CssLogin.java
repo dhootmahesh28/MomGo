@@ -86,14 +86,14 @@ public class CssLogin extends WinBasePage{
             if (lftObjects.CssMainWindow().exists()){
                 reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Login to CSS is successful.");
             }else{
-                reportCssLogin.report("FAIL", "CSS login is failed");
+                reportCssLogin.reportLeanFT(lftObjects.loginDialog(), "Fail", "CSS login is failed");
             }
         }else{
             if (lftObjects.CssMainWindow().exists()){
                 String cssMAinWindowTitleInitial = lftObjects.CssMainWindow().getTitle();
-                reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(),"PASS", "CSS is already logged in.");
+                reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(),"Info", "CSS is already logged in.");
             }else{
-                reportCssLogin.report("FAIL", "CSS is open but failed to identify the main window.");
+                reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "CSS is open but failed to identify the main window.");
             }
         }
     }

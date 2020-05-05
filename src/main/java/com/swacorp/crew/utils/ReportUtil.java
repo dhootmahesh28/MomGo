@@ -22,6 +22,7 @@ public class ReportUtil {
     public final static Logger LOGGER = Logger.getLogger(ReportUtil.class);
     public ExtentTest extentTest;
     public ExtentAppend extentAppend = new ExtentAppend();
+    public static String failedTestPath;
 
     public void reportLeanFT(com.hp.lft.sdk.java.Window window, String status, String message){
 
@@ -42,6 +43,8 @@ public class ReportUtil {
                 }
                 else {
                     String screenshotPath = captureLeanFTScreenshot(window, "FAIL_" + basePage.randomString(5) + "_");
+                    System.out.println("screenshotPath >>:"+screenshotPath);
+                    failedTestPath = screenshotPath;
                     extentTest.log(Status.FAIL, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
                     Assert.fail(message, new Throwable());
                 }
