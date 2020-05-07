@@ -21,54 +21,10 @@ public class CssLogin extends WinBasePage{
     ArrayList<String[]> training = new ArrayList<>();
     ArrayList<String[]>  triptopull = new ArrayList<>();
 
-    public CssLogin(Map<String, Map<String, ArrayList<String[]>>> masterHMrosa) {
-        this();
-        masterHM = masterHMrosa;
-        loggerCssLogin.info("CssLogin called with MasterHM constructor..");
-    }
-
     public CssLogin()  {
         lftObjects = super.cssObjectRepo;
     }
 
-    public void loginCss(String userName, String password, String cssPath) throws GeneralLeanFtException, IOException {
-        int cssLaunched = 0;
-        try{
-            new ProcessBuilder("cmd", "/c", cssPath).start();
-            cssLaunched = 1;
-        }catch(Exception e){
-               reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(), "Fail","Path not found: "+cssPath);
-            return;
-        }
-
-        if (cssLaunched == 1){
-            try{
-                if (!isCssAlradyLogedIn()) {
-                    WaitEditorTillVisible(lftObjects.loginDialog().userNameEditor(), EnumWaitConstants.WaitDuration.TEN.status());
-                    lftObjects.loginDialog().userNameEditor().setText(userName);
-                    lftObjects.loginDialog().passwordEditor().setText(password);
-                    lftObjects.loginDialog().loginButton().click();
-                    WaitForJavaWindowTillVisible(lftObjects.CssMainWindow(), EnumWaitConstants.WaitDuration.TEN.status());
-                    if (lftObjects.CssMainWindow().exists()){
-                        reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Login to CSS is successful.");
-                    }else{
-                        reportCssLogin.report("FAIL", "CSS login is failed");
-                    }
-                }else{
-                    if (lftObjects.CssMainWindow().exists()){
-                        String cssMainWindowTitleInitial = lftObjects.CssMainWindow().getTitle();
-                        loggerCssLogin.info("CSS main window title: "+cssMainWindowTitleInitial);
-                        reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(),"PASS", "CSS is already logged in for userId: "+userName);
-                    }else{
-                        reportCssLogin.report("FAIL", "CSS is open but failed to identify the main window.");
-                    }
-                }
-
-            }catch(Exception e){
-                reportCssLogin.report("FAIL", "Failed to login to CSS. UserID: " +userName+", Error: "+e.getMessage());
-            }
-        }
-    }
     public void loginCss() throws GeneralLeanFtException, IOException {
 
         if (!isCssAlradyLogedIn()) {
@@ -91,7 +47,7 @@ public class CssLogin extends WinBasePage{
         }else{
             if (lftObjects.CssMainWindow().exists()){
                 String cssMAinWindowTitleInitial = lftObjects.CssMainWindow().getTitle();
-                reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(),"Info", "CSS is already logged in.");
+                reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(),"Info", "CSS is already logged in. Application title: "+cssMAinWindowTitleInitial);
             }else{
                 reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "CSS is open but failed to identify the main window.");
             }

@@ -33,12 +33,14 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
     public void addCrewmember(String[] testData, boolean createFreshCrew, boolean applyEnterpriseMode){
         //Login to OQS
         oqsLoginPage.loginOQS(applyEnterpriseMode);
+        getDriver().switchTo().frame("compArea");
+        oqsHomePage.addTrainingEvent("MANEUVERS OBSERVATION", false);
         LOGGER.info("Login done...");
         //Add Crew Member
         empNr = oqsHomePage.addCrewMember(testData, createFreshCrew);
 
         //Verify that Crew member is successfully added.
-        oqsHomePage.VerifyCrewAddedSuccessfully(true);
+        oqsHomePage.verifyCrewAddedSuccessfully(true);
     }
     public void wrapperMethod(String[] testData, boolean visibility, boolean verifyActivechkbox, boolean createFreshCrew) throws GeneralLeanFtException {
         //Login to OQS
@@ -48,7 +50,7 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         empNr = oqsHomePage.addCrewMember(testData, createFreshCrew);
 
         //Verify that Crew member is successfully added.
-        oqsHomePage.VerifyCrewAddedSuccessfully(true);
+        oqsHomePage.verifyCrewAddedSuccessfully(true);
 
         ////Login to Trim
         trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
@@ -73,7 +75,7 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
     }
 
     public void expandTreeNodeAndValidate(String node, String subNode, boolean visibility) throws GeneralLeanFtException {
-           trimHomePageAM.validateTreeNode(empNr, node, subNode, visibility);
+          // trimHomePageAM.validateTreeNode(empNr, node, subNode, visibility);
     }
 
     public void wrapperMethodToAddDuplicateEmployeeNrOQS(String[] testData, boolean visibility, boolean verifyActivechkbox) throws GeneralLeanFtException{
@@ -82,7 +84,7 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         empNr = oqsHomePage.addCrewMember(testData, false); // False because we are adding duplicate emp
 
         //Verify that Crew member is successfully added.
-        oqsHomePage.VerifyCrewAddedSuccessfully(false);
+        oqsHomePage.verifyCrewAddedSuccessfully(false);
 
         ////Login to Trim
         trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
@@ -111,10 +113,10 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
 
 
         //Verify that Crew member is successfully added.
-        oqsHomePage.VerifyCrewAddedSuccessfully(true);
+        oqsHomePage.verifyCrewAddedSuccessfully(true);
 
 
-        oqsHomePage.EditPosition();
+        oqsHomePage.editPosition();
 
         //Login to Trim
         trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
@@ -153,7 +155,7 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
     }
 
     public void editPositionToCreateCA(){
-        oqsHomePage.EditPosition();
+        oqsHomePage.editPosition();
     }
 
     public void addPosition(String position) {
@@ -162,20 +164,20 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
     }
 
     public void selectTrainingEventCategory(String event) {
-        oqsHomePage.LoadTrainingEventCategory(event);
+        oqsHomePage.loadTrainingEventCategory(event);
     }
 
     public void selectTrainingEvent(String eventCategory, String events, boolean enterpriseMode){
-        oqsHomePage.LoadTrainingEventCategory(eventCategory);
+        oqsHomePage.loadTrainingEventCategory(eventCategory);
         ArrayList<String> allEvents=new ArrayList();
 
         allEvents.addAll(Arrays.asList(events.split(",")));
 
         for(String event: allEvents){
 
-            oqsHomePage.AddTrainingEvent(event, enterpriseMode);
+            oqsHomePage.addTrainingEvent(event, enterpriseMode);
         }
-        oqsHomePage.HandlePopup("OK");
+        oqsHomePage.handlePopup("OK");
     }
 
     public void deleteEvent(String s) {

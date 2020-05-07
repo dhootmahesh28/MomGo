@@ -25,9 +25,10 @@ public class TrimWrapper extends TestUtil {
         trimHomePageAM.selectMenuFromBottomMenu("^D",dropdownValue);
     }
 
-    public void expandTreeNodeAndValidate(String node, String subNode, boolean visibility) throws GeneralLeanFtException {
+    public void expandTreeNodeAndValidate(String node, String subNode, String firstName, boolean visibility) throws GeneralLeanFtException {
         empNr = getDynamicData("EmpNumber");
-        trimHomePageAM.validateTreeNode(empNr, node, subNode, visibility);
+        //empNr = "9717";
+        trimHomePageAM.validateTreeNode(empNr,firstName, node, subNode, visibility);
     }
 
     //wrapperMethodToAddDuplicateEmployeeNrOQSTRIM

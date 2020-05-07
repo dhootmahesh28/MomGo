@@ -11,14 +11,11 @@ import java.awt.event.KeyEvent;
 
 public class OqsLogin extends BasePage {
 
-    private final Logger LOGGER = Logger.getLogger(OqsLogin.class);
+    private final Logger loggerOqsLogin = Logger.getLogger(OqsLogin.class);
     ReportUtil report = new ReportUtil();
-    //private final By USERID_LINK = By.xpath("//*[@class='yui-dt0-col-employeeId yui-dt-col-employeeId yui-dt-sortable yui-dt-first']//*[@class='yui-dt-liner' and text()='" + EnvironmentConstants.OQSLOGINUSER + "']");
-    private final By USERID_LINK = By.xpath("//*[text()='ROSA']");
-    //private final By USERID_LINK = By.ByCssSelector("#yui-rec87 > td.yui-dt0-col-employeeId.yui-dt-col-employeeId.yui-dt-sortable.yui-dt-first > div");
-    private final By SEARCH_BUTTON = By.xpath("//*[@id='crewmemberSearchButtonId']");
-
-    public String oqsUrl;
+    private final By xpathUserIdLink = By.xpath("//*[text()='ROSA']");
+    private final By xpathSearchButton = By.xpath("//*[@id='crewmemberSearchButtonId']");
+    private String oqsUrl;
 
 
     public void setCompatibilityMode() throws InterruptedException, AWTException {
@@ -50,43 +47,38 @@ public class OqsLogin extends BasePage {
     public void loginOQS(boolean applyEnterpriseMode) {
         try {
             getDriver().manage().window().maximize();
-            System.out.println("Waiting for enterprise mode...");
-
             oqsUrl = EnvironmentConstants.OQSURL;
             getDriver().get(oqsUrl);
 
 
-            waitUntilElementClickable(USERID_LINK);
-            waitForElement(USERID_LINK);
+            waitUntilElementClickable(xpathUserIdLink);
+            waitForElement(xpathUserIdLink);
 
-            if (isElementVisible(USERID_LINK)) {
-                report.reportSelenium("INFO", "Navigation to OQS application is successful. URL: "+oqsUrl);
+            if (isElementVisible(xpathUserIdLink)) {
+                report.reportSelenium("INFO", "Navigation to OQS application is successful. URL: " + oqsUrl);
             } else {
-                report.report("ERROR", "Failed to navigate to OQS application URL: "+oqsUrl);
+                report.report("ERROR", "Failed to navigate to OQS application URL: " + oqsUrl);
             }
 
-            buttonClick(USERID_LINK);
-            if(applyEnterpriseMode) {
-                report.reportSelenium("INFO", "Enterprise mode: "+applyEnterpriseMode);
+            buttonClick(xpathUserIdLink);
+            if (applyEnterpriseMode) {
+                report.reportSelenium("INFO", "Enterprise mode: " + applyEnterpriseMode);
                 setCompatibilityMode();
 
             } else {
-                report.reportSelenium("INFO", "Enterprise mode: "+applyEnterpriseMode);
+                report.reportSelenium("INFO", "Enterprise mode: " + applyEnterpriseMode);
             }
 
-            if (isElementVisible(SEARCH_BUTTON)) {
-                LOGGER.info("Search Button exists on Loginpage..");
+            if (isElementVisible(xpathSearchButton)) {
+                loggerOqsLogin.info("Search Button exists on Loginpage..");
                 report.reportSelenium("INFO", "User: " + EnvironmentConstants.OQSLOGINUSER + " logged in to OQS application");
             } else {
                 report.report("ERROR", "User: " + EnvironmentConstants.OQSLOGINUSER + " failed to login to OQS application");
-                LOGGER.info("Search Button NOT exists on Loginpage..");
+                loggerOqsLogin.info("Search Button NOT exists on Loginpage..");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void VerifyLoginSuccessful(boolean status){
-
-    }
 }

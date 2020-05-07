@@ -1,6 +1,5 @@
 package com.swacorp.crew.tests.rosa.pto;
 
-import com.swacorp.crew.pages.css.CssHome;
 import com.swacorp.crew.tests.dataprovider.RosaTestDataProvider;
 import com.swacorp.crew.tests.wrappers.CssWrapper;
 import com.swacorp.crew.utils.TestManager;
@@ -29,7 +28,7 @@ public class TC_167617 extends TestManager {
         cssWrapper.validateTransactioReportFile();
 
         cssWrapper.readTransactionReport("C:\\Users\\x257093\\AppData\\Local\\Temp\\JasperRptTemp");
-        //css.ValidatePdfContentAfterReadingTransactionReport("TRNGCQT,ING");
+        //css.validatePdfContentAfterReadingTransactionReport("TRNGCQT,ING");
         cssWrapper.ValidatePdfContentAfterReadingTransactionReport(testData[3]);
         cssWrapper.ValidatePdfContentAfterReadingTransactionReport(testData[4]);
         }
@@ -49,7 +48,7 @@ public class TC_167617 extends TestManager {
         *//*css.validateTransactioReportFile();
         //Css css = new Css();
         css.readTransactionReport("C:\\Users\\x257093\\AppData\\Local\\Temp\\JasperRptTemp");
-        css.ValidatePdfContentAfterReadingTransactionReport("TRNGCQT,ING");*//*
+        css.validatePdfContentAfterReadingTransactionReport("TRNGCQT,ING");*//*
 
     }
 
@@ -65,7 +64,7 @@ public class TC_167617 extends TestManager {
         css.loginCss();
         css.openCMBoard("");
         css.selectTripOnCMBoard("","","", false, false, false);
-        css.NavigateToOT();
+        css.navigateToOT();
         css.selectOTfilters("DEN, DAL, Domestic, 2017");
         css.readOTTripDetails();
         *//*css.rightClickCMBoardAndSelectMenu("Transactions");
@@ -73,7 +72,7 @@ public class TC_167617 extends TestManager {
 
         //Css css = new Css();
         css.readTransactionReport("C:\\Users\\x257093\\AppData\\Local\\Temp\\JasperRptTemp");
-        css.ValidatePdfContentAfterReadingTransactionReport("TRNGCQT,ING");*//*
+        css.validatePdfContentAfterReadingTransactionReport("TRNGCQT,ING");*//*
     }
 
     *//*In Progress*//*

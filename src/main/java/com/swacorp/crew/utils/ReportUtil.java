@@ -83,6 +83,7 @@ public class ReportUtil {
                 }
                 else {
                     String screenshotPath = captureLeanFTScreenshot(window, "FAIL_" + basePage.randomString(5) + "_");
+                    failedTestPath = screenshotPath;
                     extentTest.log(Status.FAIL, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
                     Assert.fail(message, new Throwable());
                 }

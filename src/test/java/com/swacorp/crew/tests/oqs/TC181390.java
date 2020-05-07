@@ -31,6 +31,7 @@ public class TC181390 extends TestManager {
 
         boolean applyenterpriseMode = false;
         String domicile = testData[3];
+        String firstName = testData[4];
         String schdPlannerDropdownValue = testData[16];
         String oqsTrainingEventType = testData[17];
         String event = testData[18];
@@ -61,6 +62,6 @@ public class TC181390 extends TestManager {
 
         wrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
 
-        wrapper.expandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, false);
+        //wrapper.expandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, firstName,false);
     }
 }

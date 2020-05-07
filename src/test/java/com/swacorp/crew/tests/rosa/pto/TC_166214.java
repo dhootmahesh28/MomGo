@@ -1,7 +1,6 @@
 package com.swacorp.crew.tests.rosa.pto;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
-import com.swacorp.crew.pages.css.CssHome;
 import com.swacorp.crew.tests.dataprovider.RosaTestDataProvider;
 import com.swacorp.crew.tests.wrappers.CssWrapper;
 import com.swacorp.crew.utils.TestManager;
@@ -34,7 +33,7 @@ public class TC_166214 extends TestManager {
         cssWrapper.loginCss();
         cssWrapper.NavigateToOT();
         cssWrapper.selectOTfilters("DEN,Captain, Domestic");
-        cssWrapper.readOTTripDetails();
+        //cssWrapper.readOTTripDetails();
     }
 }
 

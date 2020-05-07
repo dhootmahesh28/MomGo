@@ -16,16 +16,8 @@ import java.util.List;
 public class CssOpenTime extends WinBasePage{
 
     ReportUtil reportCssHome = new ReportUtil();
-    private final Logger LOGGER = Logger.getLogger(CssOpenTime.class);
+    private final Logger loggerCssOpenTime = Logger.getLogger(CssOpenTime.class);
     ObjectRepoCSS lftObjects =null;
-    public HashMap<String, String> pgMap = new HashMap<>();
-
-    private boolean searchFound;
-    private String cssMAinWindowTitleInitial;
-    private String cssMainWindowTitle;
-    private String cmBoardTitle;
-    boolean searchTripsOnCMBoard = true;
-    boolean found = false;
     Map<String, Map<String, ArrayList<String[]>>> masterHM = new LinkedHashMap<>();
     String rosaempID;
     ArrayList<String[]> training = new ArrayList<>();
@@ -36,30 +28,26 @@ public class CssOpenTime extends WinBasePage{
         lftObjects = super.cssObjectRepo;
     }
 
-    public void readOTTripDetails() {
+    public void readOTTripDetails() throws  GeneralLeanFtException, CloneNotSupportedException {
         try {
             UiObject x = lftObjects.CssMainWindow().crewBoardPieceUiObject();
             x.highlight();
 
-            //ReadDataFromTripDetails
+            //readDataFromTripDetails
             UiObjectDescription allUIObj = new UiObjectDescription.Builder()
                     .nativeClass("com.swacorp.css.screens.crewboard.CrewBoardPiece").build();
             UiObject[] allObj = lftObjects.CssMainWindow().findChildren(UiObject.class, allUIObj);
 
             Object startDate;
-            Object EndDate;
+            Object endDate;
             for (int index = allObj.length - 1; index > 0; index--) {
-                System.out.println("OT index: " + index);
                 UiObject tripDetails = allObj[index];
                 tripDetails.highlight();
-
                 startDate = allObj[index].getNativeObject().invokeMethod("getStartDate", DynamicObjectProxy.class).invokeMethod("getCalendarDate", DynamicObjectProxy.class).invokeMethod("toString", DynamicObjectProxy.class);
-                EndDate = allObj[index].getNativeObject().invokeMethod("getEndDate", DynamicObjectProxy.class).invokeMethod("getCalendarDate", DynamicObjectProxy.class).invokeMethod("toString", DynamicObjectProxy.class);
-                System.out.println("startDate.toString()" + startDate.toString());
-                System.out.println("EndDate.toString()" + EndDate.toString());
-                if (startDate.toString().contains("2020-03-10") & EndDate.toString().contains("2020-03-15")) {
+                endDate = allObj[index].getNativeObject().invokeMethod("getEndDate", DynamicObjectProxy.class).invokeMethod("getCalendarDate", DynamicObjectProxy.class).invokeMethod("toString", DynamicObjectProxy.class);
+                if (startDate.toString().contains("2020-03-10") && endDate.toString().contains("2020-03-15")) {
                     tripDetails.doubleClick();
-                    if (SearchTheCorrectTripFromOT("", "")) {
+                    if (searchTheCorrectTripFromOT("", "")) {
                         break;
                     }
                 }
@@ -67,35 +55,39 @@ public class CssOpenTime extends WinBasePage{
             if (lftObjects.CssMainWindow().openTimeInternalFrame().exists()) {
                 lftObjects.CssMainWindow().openTimeInternalFrame().close();
             }
-        }catch(Exception e){
+        }catch(GeneralLeanFtException e){
             reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Error occured while reading trip details "+e.getMessage());
+            throw new GeneralLeanFtException("Error occured while reading trip details "+e.getMessage());
+        }catch(CloneNotSupportedException ex){
+            loggerCssOpenTime.error(ex.getMessage());
+            throw new CloneNotSupportedException("Error while search the trip details on CM board."+ex.getLocalizedMessage());
         }
-
     }
 
-    public boolean SearchTheCorrectTripFromOT(String startdate, String enddate) throws CloneNotSupportedException, GeneralLeanFtException{
-        found = false;
-
-        System.out.println("-------- ");
-        Set<String> rowData = null;
-        HashMap<Integer, HashMap<Integer, String[]>> tripDetalsFromTripDeatilsWindow = new HashMap<Integer, HashMap<Integer, String[]>>();
-        int rows;
+    public boolean searchTheCorrectTripFromOT(String startDate, String endDate) throws CloneNotSupportedException, GeneralLeanFtException {
         boolean found = false;
-        HashMap<Integer, String[]> tripDetalsPerRow = new HashMap<Integer, String[]>();
-        int tables = 0;
-
         TableDescription tblDesc = new TableDescription.Builder()
                 .nativeClass("com.swacorp.css.screens.trip.TripDetailsTable").build();
 
-        Table[] allTables = lftObjects.CssMainWindow().frameTrimDetails().findChildren(Table.class, tblDesc);
-        LOGGER.info(" All Tables: " + allTables.length);
+        Table[] allTables;
+        allTables = lftObjects.CssMainWindow().frameTrimDetails().findChildren(Table.class, tblDesc);
 
-        String startDate = allTables[allTables.length-1].getRows().get(0).getCells().get(0).getValue().toString().split(",")[125];
-        String endDate = "";
-        try{
-             endDate = allTables[allTables.length-1].getRows().get(0).getCells().get(0).getValue().toString().split(",")[2173];
-        }catch(Exception e){
+        loggerCssOpenTime.info(" All Tables: " + allTables.length);
 
+        if (startDate.isEmpty()) {
+            try {
+                startDate = allTables[allTables.length - 1].getRows().get(0).getCells().get(0).getValue().toString().split(",")[125];
+            }  catch (Exception e) {
+                throw new GeneralLeanFtException(e.getMessage(), e);
+            }
+        }
+
+        if(endDate.isEmpty()) {
+            try {
+                endDate = allTables[allTables.length - 1].getRows().get(0).getCells().get(0).getValue().toString().split(",")[2173];
+            } catch (Exception e) {
+                throw new GeneralLeanFtException(e.getMessage(), e);
+            }
         }
 
         if (endDate.length()>0){
@@ -112,25 +104,20 @@ public class CssOpenTime extends WinBasePage{
                 tbl2.highlight();
                 String assignment = allrows.get(i).getCells().get(1).getValue().toString();
                 String position = allrows.get(i).getCells().get(2).getValue().toString();
-                try {
-                    if (assignment.contains("Unassigned") & position.contains(ApplicationConstantsCss.CSS_POSITION_CA)) {
 
-                        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Position unassigned for " + position);
-                        break;
-                    } else {
-                        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "fail", "Position NOT unassigned for " + position);
-                    }
-                }catch(Exception e){
-
+                if (assignment.contains("Unassigned") && position.contains(ApplicationConstantsCss.CSS_POSITION_CA)) {
+                    reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Position unassigned for " + position);
+                    break;
+                } else {
+                    reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "fail", "Position NOT unassigned for " + position);
                 }
             }
         }
-
         lftObjects.CssMainWindow().frameTrimDetails().close();
         return found;
     }
 
-    public void selectOTfilters(String filter){
+    public void selectOTfilters(String filter) throws GeneralLeanFtException {
         readMasterHM();
         try {
             if(!(filter.equalsIgnoreCase(""))) {
@@ -157,33 +144,35 @@ public class CssOpenTime extends WinBasePage{
             }else{
                 reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "info", "Filter selection data is empty.");
             }
-        }catch(Exception e){
-            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "fail", "error while selecting filters: "+filter);
+        } catch (Exception e) {
+            throw new GeneralLeanFtException(e.getMessage(), e);
         }
 
     }
 
-    public void NavigateToOT()  {
+    public void navigateToOT() throws GeneralLeanFtException {
 
         try {
             lftObjects.CssMainWindow().openTimeMenu().click();
             reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"pass", "Successfully clicked on the OT menue.");
             lftObjects.CssMainWindow().openTimeMenu().viewOpenTimeMenu().click();
-        }catch(Exception e){
-            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"fail", "Error occured in selecting the OT FROM menu bar."+e.getMessage());
+
+            if (lftObjects.CssMainWindow().openTimeInternalFrame().fromEditor().exists()){
+                reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"pass", "OT window has appeared.");
+            }else {
+                reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "fail", "OT window didn't appear.");
+            }
+
+        } catch (Exception e) {
+            loggerCssOpenTime.error("Error :"+e.getMessage());
+            throw new GeneralLeanFtException("Error while navigating to OT");
          }
 
-         try{
-             if (lftObjects.CssMainWindow().openTimeInternalFrame().fromEditor().exists()){
-                 reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"pass", "OT window has appeared.");
-             }
-         }catch(Exception e){
-             reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"fail", "OT window didn't appear."+e.getMessage());
-         }
 
     }
 
     private void readMasterHM(){
+        int i=1;
         try{
             if((rosaempID == null)){
                 masterHM = TestUtil.getRosaMasterHM();
@@ -193,14 +182,15 @@ public class CssOpenTime extends WinBasePage{
 
                     for (Map.Entry<String, Map<String, ArrayList<String[]>>> lstEmpIds : masterHM.entrySet()) {
                         rosaempID = lstEmpIds.getKey();
-                        Map<String, ArrayList<String[]>> detailEachEmpId = lstEmpIds.getValue();
+                        Map<String, ArrayList<String[]>> keyEmpId = lstEmpIds.getValue();
+                        training = keyEmpId.get("trng");
+                        triptopull = keyEmpId.get("triptopull");
 
-                        for (Map.Entry<String, ArrayList<String[]>> entry2 : detailEachEmpId.entrySet()) {
-                            Map<String, ArrayList<String[]>> keyEmpId = lstEmpIds.getValue();
-                            training = keyEmpId.get("trng");
-                            triptopull = keyEmpId.get("triptopull");
+
+                        if (Integer.compare(i,ApplicationConstantsCss.NUMBER_OF_EMPLOYEE)==1) {
+                            break;
                         }
-                        break;
+                        i++;
                     }
                     if ((rosaempID == null)) {
                         reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "Error occured while reading trip details from ROSA in CSS page. rosaempID is null.");
@@ -211,10 +201,10 @@ public class CssOpenTime extends WinBasePage{
             }
         }catch(Exception e){
             reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Error occured while reading trip details from ROSA in CSS page."+e.getMessage());
+            throw e;
         }
 
     }
-
 
 }
 

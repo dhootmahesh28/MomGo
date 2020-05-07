@@ -12,15 +12,16 @@ import com.swacorp.crew.sharedrepository.tsr.ObjectRepoTRiM;
 import com.swacorp.crew.utils.ReportUtil;
 import org.apache.log4j.Logger;
 import com.swacorp.crew.utils.ReportStatus;
+import com.swacorp.crew.pages.constants.WaitConstants;
 
 import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.swacorp.crew.pages.constants.ApplicationConstantsTrim;
 
 public class TrimHome extends WinBasePage {
     ReportUtil report = new ReportUtil();
-    private final Logger LOGGER = Logger.getLogger(TrimHome.class);
     ObjectRepoTRiM lftObjects = null;
     public HashMap<String, String> pgMap = new HashMap<>();
     private String empNumberFromApp = "";
@@ -32,87 +33,63 @@ public class TrimHome extends WinBasePage {
         return pgMap.get(key);
     }
 
-    public void selectFromDropdown() {
-        ComboBox x = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().cbSubFilterComboBox();
-    }
-
     public void selectMenuFromBottomMenu(String menu, String drpValue) throws GeneralLeanFtException {
-        TreeView x = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().tvTreeView();
-
-        x.highlight();
-        NavigateMenu(menu);
-
-        selectValue(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), lftObjects.tRiMTrainingResourceManagerSouthwestWindow().cbSubFilterComboBox(), drpValue);
-
-
+        try {
+            TreeView treeView = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().tvTreeView();
+            NavigateMenu(menu);
+            selectValue(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), lftObjects.tRiMTrainingResourceManagerSouthwestWindow().cbSubFilterComboBox(), drpValue);
+        }catch(GeneralLeanFtException e){
+            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "fail", "Error occured while selecting dropdown value: "+drpValue);
+        }
     }
-
-    //Window winFindEmployee = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
     public TrimHome() {
         lftObjects = super.trimObjectRepo;
     }
 
 
-    public void validateTreeNode(String empNr, String node, String partialNode, boolean validation) throws GeneralLeanFtException {
+    public void validateTreeNode(String empNr, String firstName, String node, String partialNode, boolean validation) throws GeneralLeanFtException {
         boolean found = false;
         boolean partialNodeFound = false;
+        String tempNode=new String();
         TreeView schdPlannerTreeView = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().tvTreeView();
         try {
-
-            schdPlannerTreeView.highlight();
+            if(schdPlannerTreeView.exists(WaitConstants.FIVE_SECOND_LFT)){
+                schdPlannerTreeView.highlight();
+            }
+            Thread.sleep(5000);
+            schdPlannerTreeView.activateNode(node.split(";")[0]);
             schdPlannerTreeView.activateNode(node);
-            Thread.sleep(2000);
-
             List<TreeViewNode> allVisibleNodes = schdPlannerTreeView.getVisibleNodes();
-
-
             for (int i = 0; i <= allVisibleNodes.size() - 1; i++) {
-                //for (int i = allVisibleNodes.size() - 1; i >= 0; i++) {
-                String tempNode = allVisibleNodes.get(i).getText();
+                tempNode = allVisibleNodes.get(i).getText();
                 if (tempNode.contains(partialNode)) {
                     partialNodeFound = true;
-                    //x.activateNode("737;TRN;First Officer (Hard Line: 49 / Blank Line: 0 / Do Not Assign: 0)");
                     schdPlannerTreeView.activateNode(node + ";" + tempNode);
-                    Thread.sleep(5000);
-                    List<TreeViewNode> subNodes = schdPlannerTreeView.getVisibleNodes();
-
-
-                    //System.out.println("sunNodes.size():"+subNodes.size());
-                    for (int j = 0; j <= subNodes.size() - 1; j++) {
-
-                        //System.out.println(subNodes.get(j).getText());
-                        if (subNodes.get(j).getText().contains(empNr)) {
-
-                            found = true;
-                            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "info", "Visibility for employeeID node '" + empNr + "' is '" + found + "' in the Tree view path : '" + node + ";" + tempNode + ";" + subNodes.get(j).getText() + "'");
-                            break;
-                        }
-                    }
-                    schdPlannerTreeView.activateNode(node + ";" + tempNode);
+                    String innerNode = empNr+ " "+firstName.toUpperCase()+",   (_"+ApplicationConstantsTrim.TRIM_PLACEHOLDER_INITIAL_AUTOMATION2+")  "+ApplicationConstantsTrim.TRIM_DUE_MONTH;
+                    schdPlannerTreeView.activateNode(node + ";" + tempNode+";"+innerNode);
+                    found = true;
+                    report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "info", "Visibility for employeeID node '" + empNr + "' is '" + found + "' in the Tree view path : '" + node + ";" + tempNode+";"+innerNode+ "'");
+                    schdPlannerTreeView.activateNode(node + ";" + tempNode+";"+innerNode);
                 }
-
                 if (partialNodeFound) {
                     break;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
+        }finally{
+            if (found & validation) {
+                report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "pass", "Visibility of the employeeID node '" + empNr + "' is '" + found + "' in the Tree view.Expected '" + validation + "'.");
+            } else if ((!found) & (!validation)) {
+                report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "pass", "Visibility of the employeeID node '" + empNr + "' is '" + found + "' in the Tree view.Expected '" + validation + "'.");
+            } else {
+                report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "fail", "Visibility of the employeeID node '" + empNr + "' is '" + found + "' in the Tree view. Expected '" + validation + "'.");
+            }
+            schdPlannerTreeView.activateNode(node + ";" + tempNode);
             schdPlannerTreeView.activateNode(node);
             schdPlannerTreeView.activateNode(node.split(";")[0]);
         }
-
-
-        if (found & validation) {
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "pass", "Visibility of the employeeID node '" + empNr + "' is '" + found + "' in the Tree view.Expected '" + validation + "'.");
-        } else if ((!found) & (!validation)) {
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "pass", "Visibility of the employeeID node '" + empNr + "' is '" + found + "' in the Tree view.Expected '" + validation + "'.");
-        } else {
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "fail", "Visibility of the employeeID node '" + empNr + "' is '" + found + "' in the Tree view. Expected '" + validation + "'.");
-        }
-
         lftObjects.tRiMTrainingResourceManagerSouthwestWindow().minimize();
-
     }
 
     public int NavigateMenu(String NavigationString) throws GeneralLeanFtException {

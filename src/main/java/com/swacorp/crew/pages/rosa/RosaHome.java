@@ -17,19 +17,19 @@ public class RosaHome extends BasePage {
     ReportUtil report = new ReportUtil();
     String currentSystemDate;
 
-    private final By LOGIN_PAGE_TXT = By.xpath("//h2[text()='Request Optimizer Solution Application']");
-    private final By PILOT_TRAINING_BTN = By.xpath("//button[@id='button-1']");
-    private final By PILOT_TRAINING_OPTIMIZER_TXT = By.xpath("//h2[text()='Pilot Training Optimizer']");
-    private final By CONDITIONAL_RADIO_BTN = By.xpath("//*[text()='Conditional']");
-    private final By CONDITIONAL_CORE_RADIO_BTN = By.xpath("//*[text()='Core']");
-    private final By START_BTN = By.xpath("//*[@id='startButton']");
-    private final By RESET_BTN = By.xpath("//*[text()='Reset']");
-    private final By EVENT_DROP = By.xpath("/html/body/app-root/div[2]/div/div/app-pilot-training-request/div[2]/div[1]/div[2]/cl-dropdown/div/div/div[2]");
-    private final By BID_LINE_DR0P = By.xpath("//*[@class='cl-icon--dark-midnight cl-icon cl-icon-chevron-down']");
-    private final By HARD_LINE_DROP_DOWN_VALUE = By.xpath("//*[text()=' Hard Line ']");
-    private final By CONDITIONAL_RADIO = By.xpath("//input[@class='cl-radio__input']");
-    private final By START_SUBMIT_BTN = By.xpath("//*[text()='Start']");
-    private final By PTO_QUEUE_BTN = By.xpath("(//*[text()='Queue'])[1]");
+    private static final By LOGIN_PAGE_TXT = By.xpath("//h2[text()='Request Optimizer Solution Application']");
+    private static final By PILOT_TRAINING_BTN = By.xpath("//button[@id='button-1']");
+    private static final By PILOT_TRAINING_OPTIMIZER_TXT = By.xpath("//h2[text()='Pilot Training Optimizer']");
+    private static final By CONDITIONAL_RADIO_BTN = By.xpath("//*[text()='Conditional']");
+    private static final By CONDITIONAL_CORE_RADIO_BTN = By.xpath("//*[text()='Core']");
+    private static final By START_BTN = By.xpath("//*[@id='startButton']");
+    private static final By RESET_BTN = By.xpath("//*[text()='Reset']");
+    private static final By EVENT_DROP = By.xpath("/html/body/app-root/div[2]/div/div/app-pilot-training-request/div[2]/div[1]/div[2]/cl-dropdown/div/div/div[2]");
+    private static final By BID_LINE_DR0P = By.xpath("//*[@class='cl-icon--dark-midnight cl-icon cl-icon-chevron-down']");
+    private static final By HARD_LINE_DROP_DOWN_VALUE = By.xpath("//*[text()=' Hard Line ']");
+    private static final By CONDITIONAL_RADIO = By.xpath("//input[@class='cl-radio__input']");
+    private static final By START_SUBMIT_BTN = By.xpath("//*[text()='Start']");
+    private static final By PTO_QUEUE_BTN = By.xpath("(//*[text()='Queue'])[1]");
 
     private final String DROP_VALUE = "//*[contains(text(),'PLACEHOLDER')]";
 

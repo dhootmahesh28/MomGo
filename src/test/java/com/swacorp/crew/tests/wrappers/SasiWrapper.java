@@ -1,7 +1,6 @@
 package com.swacorp.crew.tests.wrappers;
 
 import com.swacorp.crew.pages.constants.EnumRosa;
-import com.swacorp.crew.pages.css.CssHome;
 import com.swacorp.crew.pages.rosa.RosaHome;
 import com.swacorp.crew.pages.rosa.RosaLogin;
 import com.swacorp.crew.pages.rosa.RosaSolutionQueue;

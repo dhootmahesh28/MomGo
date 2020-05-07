@@ -1,6 +1,5 @@
 package com.swacorp.crew.tests.rosa.pto;
 
-import com.swacorp.crew.pages.css.CssHome;
 import com.swacorp.crew.pages.rosa.RosaLogin;
 import com.swacorp.crew.pages.rosa.RosaSolutionQueue;
 import com.swacorp.crew.tests.wrappers.RosaWrapper;

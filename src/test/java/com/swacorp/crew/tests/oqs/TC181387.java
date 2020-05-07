@@ -22,6 +22,7 @@ public class TC181387 extends TestManager {
         setScenarioName("TC181387_OQS_RK-TRiM-FO-Add_Flight_Training_event_under_Initial_to_an_FO");
         boolean applyenterpriseMode = false;
         String domicile = testData[3];
+        String firstName = testData[4];
         String schdPlannerDropdownValue = testData[16];
         String oqsTrainingEventType = testData[17];
         String event = testData[18];
@@ -33,15 +34,15 @@ public class TC181387 extends TestManager {
         loggTc.info("Starting the execution..");
         oqsWrapper.addCrewmember(testData, true, applyenterpriseMode);
         trimWrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
-        trimWrapper.expandTreeNodeAndValidate(equipment+";"+domicile, partialNodetextTrimSchedTV, true);
+        trimWrapper.expandTreeNodeAndValidate(equipment+";"+domicile, partialNodetextTrimSchedTV, firstName,true);
         oqsWrapper.selectTrainingEventCategory(oqsTrainingEventType);
         oqsWrapper.selectTrainingEvent(oqsTrainingEventType, event, applyenterpriseMode);
         trimWrapper.selectEquipmentAndPrimaryStatus(equipment,primaryStatusTrimEmpDetailsWnd);
         trimWrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
-        trimWrapper.expandTreeNodeAndValidate(equipment+";"+domicile, partialNodetextTrimSchedTV, true);
+        trimWrapper.expandTreeNodeAndValidate(equipment+";"+domicile, partialNodetextTrimSchedTV,firstName, true);
         oqsWrapper.deleteEvent(event);
         trimWrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerRandomDropdownValueToRefreshTVData);
         trimWrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
-        trimWrapper.expandTreeNodeAndValidate(equipment+";"+domicile, partialNodetextTrimSchedTV, false);
+        trimWrapper.expandTreeNodeAndValidate(equipment+";"+domicile, partialNodetextTrimSchedTV,firstName, false);
     }
 }

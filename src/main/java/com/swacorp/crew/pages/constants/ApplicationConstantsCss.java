@@ -9,4 +9,6 @@ public final class ApplicationConstantsCss {
     public static final String CSS_POSITION_CA = "CA";
     public static final String CSS_OT_TRIP_START_DATE = "10Mar20";
     public static final String CSS_OT_TRIP_END_DATE = "14Mar20";
+    public static final int NUMBER_OF_EMPLOYEE = 1;
+
 }

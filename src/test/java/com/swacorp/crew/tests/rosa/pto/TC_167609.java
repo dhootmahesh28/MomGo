@@ -1,6 +1,5 @@
 package com.swacorp.crew.tests.rosa.pto;
 
-import com.swacorp.crew.pages.css.CssHome;
 import com.swacorp.crew.tests.dataprovider.RosaTestDataProvider;
 import com.swacorp.crew.tests.wrappers.CssWrapper;
 import com.swacorp.crew.utils.TestManager;
@@ -30,9 +29,9 @@ public class TC_167609 extends TestManager {
         cssWrapper.buildLogString(2, EnumCssTransactionReport.Function.LOGINCRW.getValue(), EnumCssTransactionReport.Reason.LGN.getValue());
 
         /*css.readTransactionReport("C:\\Users\\x257093\\AppData\\Local\\Temp\\JasperRptTemp");
-        css.ValidatePdfContentAfterReadingTransactionReport(testData[3]);
-        css.ValidatePdfContentAfterReadingTransactionReport(testData[4]);
-        css.ValidatePdfContentAfterReadingTransactionReportHasEmployeeId(testData[4]);
+        css.validatePdfContentAfterReadingTransactionReport(testData[3]);
+        css.validatePdfContentAfterReadingTransactionReport(testData[4]);
+        css.validatePdfContentAfterReadingTransactionReportHasEmployeeId(testData[4]);
         css.resetReportTab(testData[2]);*/
     }
 }

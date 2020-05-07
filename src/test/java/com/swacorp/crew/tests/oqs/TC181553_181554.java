@@ -43,7 +43,7 @@ public class TC181553_181554 extends TestManager {
         setScenarioName("TC181554_TC11 OQS RK TRiM CA End a CA position and add new FO position to the CM to OQS RK and verify in TRiM");
         wrapper.addNewPositionInOQSVerifyInTrim(testData, true);
 
-        oqsHomePage.EditPosition();
+        oqsHomePage.editPosition();
 
         //Login to Trim
         trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);

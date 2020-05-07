@@ -27,9 +27,6 @@ public class RosaWrapper extends TestUtil {
         rosahome.verifyConditionalRadioButtonExist();
         rosahome.verifyCoreRadioButtonExist();
         rosahome.verifyStartAndResetButtonExist();
-        // TRiM BCAT 2020"
-        //"TRiM Initial 2020 - Kari"
-        //rosaSolutioQueue = rosahome.createPTOSolutionRequest("Recurrent", "AQP 12 Month","737 All","OQS 2020 CQT","May 2020","Hard Line","");
         rosaSolutioQueue = rosahome.createPTOSolutionRequest(EnumRosa.Category.RECURRENT.getValue(), EnumRosa.Cycle.TWELVEMONTHS.getValue(),EnumRosa.Aircraft.ALL737.getValue(), ApplicationConstantsRosa.ROSA_PTO_EVENT,ApplicationConstantsRosa.ROSA_PTO_TIME,EnumRosa.Bidline.HARDLINE.getValue(),"");
         rosaSolutioQueue.checkDuplicateRequestExist();
         rosaSolutioQueue.veryfySolutionQueueExists();

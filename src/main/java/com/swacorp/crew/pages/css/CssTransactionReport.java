@@ -3,27 +3,21 @@ package com.swacorp.crew.pages.css;
 import com.hp.lft.sdk.CheckedState;
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.Keyboard;
-import com.hp.lft.sdk.MouseButton;
-import com.hp.lft.sdk.internal.DynamicObjectProxy;
 import com.hp.lft.sdk.java.*;
 import com.swacorp.crew.pages.common.WinBasePage;
-import com.swacorp.crew.pages.constants.EnumWaitConstants;
+import com.swacorp.crew.pages.constants.ApplicationConstantsCss;
 import com.swacorp.crew.sharedrepository.tsr.ObjectRepoCSS;
 import com.swacorp.crew.utils.*;
 import org.apache.log4j.Logger;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CssTransactionReport extends WinBasePage{
 
     ReportUtil reportCssHome = new ReportUtil();
-    private final Logger LOGGER = Logger.getLogger(CssTransactionReport.class);
+    private final Logger loggerTranReport = Logger.getLogger(CssTransactionReport.class);
     ObjectRepoCSS lftObjects =null;
     ArrayList<String> pdfContentAfterReadingTransactionReport;
     String tripStartDate;
@@ -35,10 +29,11 @@ public class CssTransactionReport extends WinBasePage{
 
     public CssTransactionReport()  {
         lftObjects = super.cssObjectRepo;
-        LOGGER.info("CssTransactionReport invoked..");
+        loggerTranReport.info("CssTransactionReport invoked..");
     }
 
     private void readMasterHM(){
+        int i=1;
         try{
             if((rosaempID == null)){
                 masterHM = TestUtil.getRosaMasterHM();
@@ -48,14 +43,15 @@ public class CssTransactionReport extends WinBasePage{
 
                     for (Map.Entry<String, Map<String, ArrayList<String[]>>> lstEmpIds : masterHM.entrySet()) {
                         rosaempID = lstEmpIds.getKey();
-                        Map<String, ArrayList<String[]>> detailEachEmpId = lstEmpIds.getValue();
+                        Map<String, ArrayList<String[]>> keyEmpId = lstEmpIds.getValue();
+                        training = keyEmpId.get("trng");
+                        triptopull = keyEmpId.get("triptopull");
 
-                        for (Map.Entry<String, ArrayList<String[]>> entry2 : detailEachEmpId.entrySet()) {
-                            Map<String, ArrayList<String[]>> keyEmpId = lstEmpIds.getValue();
-                            training = keyEmpId.get("trng");
-                            triptopull = keyEmpId.get("triptopull");
+
+                        if (Integer.compare(i, ApplicationConstantsCss.NUMBER_OF_EMPLOYEE)==1) {
+                            break;
                         }
-                        break;
+                        i++;
                     }
                     if ((rosaempID == null)) {
                         reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "Error occured while reading trip details from ROSA in CSS page. rosaempID is null.");
@@ -66,6 +62,7 @@ public class CssTransactionReport extends WinBasePage{
             }
         }catch(Exception e){
             reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Error occured while reading trip details from ROSA in CSS page."+e.getMessage());
+            throw e;
         }
 
     }
@@ -91,17 +88,14 @@ public class CssTransactionReport extends WinBasePage{
 
         String[] line3Data = {"Log In from 107.2.235.122;Macintosh","Log In from 107.2.235.122;Macintosh"};
 
-        ArrayList<String> blocks = new ArrayList<>();
-
         String reportContent = "";
-        reportContent = lftObjects.CssMainWindow().transactionReportInternalFrame().report().getVisibleText().toString();
+        reportContent = lftObjects.CssMainWindow().transactionReportInternalFrame().report().getVisibleText();
 
         for (int i=0; i <= blockSize-1; i++){
             String line1 = user[i]+space+function[i]+space+reason[i]+space+logMessage[i];
             String line2 = line2Data[i]+" "+rosaempID;
-            String line3 = line3Data[i];
 
-            if (reportContent.contains(line1) & reportContent.contains(line2)){
+            if (reportContent.contains(line1) && reportContent.contains(line2)){
                 reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction reportCssLogin contains: "+line1+ '\n' + line2 );
             }
         }
@@ -109,7 +103,7 @@ public class CssTransactionReport extends WinBasePage{
         lftObjects.CssMainWindow().transactionReportInternalFrame().close();
     }
 
-    private void CheckIfUnchecked(CheckBox chk) throws GeneralLeanFtException {
+    private void checkIfUnchecked(CheckBox chk) throws GeneralLeanFtException {
         if(chk.getState().toString().equalsIgnoreCase("UNCHECKED")){
             chk.click();
         }else{
@@ -121,7 +115,7 @@ public class CssTransactionReport extends WinBasePage{
         boolean reasonFound = false;
 
         CheckBox crewMwmbwr = lftObjects.CssMainWindow().transactionReportDialog().crewMemberCheckBox();
-        CheckIfUnchecked(crewMwmbwr);
+        checkIfUnchecked(crewMwmbwr);
 
         Keyboard.pressKey(Keyboard.Keys.TAB);
         Keyboard.sendString(rosaempID);
@@ -160,7 +154,7 @@ public class CssTransactionReport extends WinBasePage{
             e.printStackTrace();
         }
 
-        ValidateFunctionList(functionDropdownList);
+        validateFunctionList(functionDropdownList);
 
         tripStartDate = training.get(0)[0];
         tripEndDate = training.get(6)[0];
@@ -175,11 +169,9 @@ public class CssTransactionReport extends WinBasePage{
         Keyboard.sendString(tripEndDate);
 
         lftObjects.CssMainWindow().transactionReportDialog().runReportButton().click();
-        System.out.println("tripStartDate: "+tripStartDate);
-        System.out.println("tripEndDate: "+tripEndDate);
     }
 
-    public void ValidateFunctionList(String functionName) throws  GeneralLeanFtException{
+    public void validateFunctionList(String functionName) throws  GeneralLeanFtException{
         lftObjects.CssMainWindow().transactionReportDialog().functionsCheckBox().click();
         Keyboard.pressKey(Keyboard.Keys.TAB);
         Keyboard.pressKey(Keyboard.Keys.DOWN);
@@ -190,8 +182,6 @@ public class CssTransactionReport extends WinBasePage{
 
         edt.highlight();
         List<ListItem> dropdownValTemp;
-        boolean found = false;
-        boolean notFound = false;
         String prevItem = "";
 
         Keyboard.pressKey(Keyboard.Keys.PAGE_UP);
@@ -202,35 +192,32 @@ public class CssTransactionReport extends WinBasePage{
         Keyboard.pressKey(Keyboard.Keys.PAGE_UP);
         Keyboard.pressKey(Keyboard.Keys.PAGE_UP);
 
+        boolean dropValueFound = false;
         do
         {
             dropdownValTemp = edt.getSelectedItems();
             String eachDropdownValue = dropdownValTemp.get(0).getText().trim();
             if(eachDropdownValue.equalsIgnoreCase(functionName)){
-                found = true;
+                dropValueFound = true;
                 reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Function dropdown list contains the given item: "+functionName);
                 Keyboard.pressKey(Keyboard.Keys.ENTER);
-                break;
+               // break;
             }
-
-            System.out.println("eachDropdownValue: "+eachDropdownValue);
-            System.out.println("prevItem: "+prevItem);
-
             if (eachDropdownValue.equalsIgnoreCase(prevItem)){
                 break;
             }
             Keyboard.pressKey(Keyboard.Keys.DOWN);
             prevItem = eachDropdownValue;
         }
-        while (!found );
-        if (!found){
+        while (!dropValueFound );
+        if (!dropValueFound){
             reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Function dropdown list does not contains the given item: "+functionName);
         }else{
             reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"info", "Function dropdown list is selected with function: "+functionName);
         }
     }
 
-    public void NavigateToTransactionReport() throws GeneralLeanFtException {
+    public void navigateToTransactionReport() throws GeneralLeanFtException {
         readMasterHM();
         try {
             lftObjects.CssMainWindow().reportsMenu().click();
@@ -238,7 +225,6 @@ public class CssTransactionReport extends WinBasePage{
             Thread.sleep(4000);
 
         }catch(Exception e){
-            //reportCssLogin.reportCssLogin("fail","Transaction reportCssLogin window didnt open.");
             e.printStackTrace();
         }
 
@@ -250,7 +236,6 @@ public class CssTransactionReport extends WinBasePage{
     }
 
     public void readTransactionReport(String path) {
-        boolean found = false;
         try {
 
             File newpath = new  FileUtil().getTheNewestFile(path, "pdf");
@@ -265,6 +250,40 @@ public class CssTransactionReport extends WinBasePage{
             reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "fail","Failed to read Transaction reportCssLogin in pdf format." );
         }
     }
+
+
+    public void validatePdfContentAfterReadingTransactionReportHasEmployeeId(String searchTxt) throws  GeneralLeanFtException{
+        searchTxt = searchTxt+rosaempID;
+        validatePdfContentAfterReadingTransactionReport(searchTxt);
+    }
+
+
+    public void validatePdfContentAfterReadingTransactionReport(String searchTxt) throws  GeneralLeanFtException{
+        int count=0;
+        String[] arrsearchTxt = searchTxt.split(",");
+
+        for (String str:pdfContentAfterReadingTransactionReport){
+            for (String eachSarchTxt: arrsearchTxt){
+                if (str.contains(eachSarchTxt)){
+                    count++;
+                }
+            }
+        }
+
+        int trngSize = training.size()+1;
+        int searchOccurance = count/(arrsearchTxt.length);
+
+        if (Integer.compare(trngSize,searchOccurance)==1)
+
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "The given search text is found in reportCssLogin.");
+        else{
+            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "fail","The given search text is NOT found in reportCssLogin. " );
+        }
+        if (lftObjects.CssMainWindow().transactionReportInternalFrame().exists()) {
+            lftObjects.CssMainWindow().transactionReportInternalFrame().close();
+        }
+    }
+
 }
 
 

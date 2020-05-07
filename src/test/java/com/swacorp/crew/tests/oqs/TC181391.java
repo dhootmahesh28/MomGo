@@ -15,11 +15,7 @@ import org.testng.annotations.Test;
 public class TC181391 extends TestManager {
     private final Logger LOGGER = Logger.getLogger(TC181391.class);
     Add_Crew_Member_In_OQS_Verify_In_Trim wrapper;
-/*    LoginPage_am trimLoginPage ;
-    TrimHomePageAM trimHomePageAM;
-    OQSLoginPage oqsLoginPage ;
-    HomePage oqsHomePage;s
-*/
+
     TC181391(){
         wrapper =new  Add_Crew_Member_In_OQS_Verify_In_Trim();
     }

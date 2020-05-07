@@ -31,7 +31,7 @@ public class OqsWrapper extends TestUtil {
         empNr = oqsHomePage.addCrewMember(testData, createFreshCrew);
 
         //Verify that Crew member is successfully added.
-        oqsHomePage.VerifyCrewAddedSuccessfully(true);
+        oqsHomePage.verifyCrewAddedSuccessfully(true);
     }
 
     //wrapperMethodOQS  > addCrewmember
@@ -42,11 +42,11 @@ public class OqsWrapper extends TestUtil {
     //wrapperMethodToAddDuplicateEmployeeNrOQSTRIM
     public void wrapperMethodToAddDuplicateEmployeeNrOQSOQS(String[] testData) throws GeneralLeanFtException{
         empNr = oqsHomePage.addCrewMember(testData, false); // False because we are adding duplicate emp
-        oqsHomePage.VerifyCrewAddedSuccessfully(false);
+        oqsHomePage.verifyCrewAddedSuccessfully(false);
     }
 
     public void editPositionToCreateCA(){
-        oqsHomePage.EditPosition();
+        oqsHomePage.editPosition();
     }
 
     public void addPosition(String position) {
@@ -55,20 +55,20 @@ public class OqsWrapper extends TestUtil {
     }
 
     public void selectTrainingEventCategory(String event) {
-        oqsHomePage.LoadTrainingEventCategory(event);
+        oqsHomePage.loadTrainingEventCategory(event);
     }
 
     public void selectTrainingEvent(String eventCategory, String events, boolean enterpriseMode){
-        oqsHomePage.LoadTrainingEventCategory(eventCategory);
+        oqsHomePage.loadTrainingEventCategory(eventCategory);
         ArrayList<String> allEvents=new ArrayList();
 
         allEvents.addAll(Arrays.asList(events.split(",")));
 
         for(String event: allEvents){
 
-            oqsHomePage.AddTrainingEvent(event, enterpriseMode);
+            oqsHomePage.addTrainingEvent(event, enterpriseMode);
         }
-        oqsHomePage.HandlePopup("OK");
+        oqsHomePage.handlePopup("OK");
     }
 
     public void deleteEvent(String s) {
