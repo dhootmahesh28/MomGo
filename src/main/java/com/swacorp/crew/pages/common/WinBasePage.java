@@ -1,7 +1,9 @@
 package com.swacorp.crew.pages.common;
 
 
+import com.hp.lft.sdk.Desktop;
 import com.hp.lft.sdk.GeneralLeanFtException;
+import com.hp.lft.sdk.RegExpProperty;
 import com.hp.lft.sdk.TestObject;
 import com.hp.lft.sdk.winforms.*;
 import com.swacorp.crew.genericwrappers.editor.*;
@@ -14,8 +16,8 @@ import com.swacorp.crew.utils.*;
 public class WinBasePage implements IWinformEditor,IWinformComboBox,LeanftGenericMethods, IWinformButton, IWinformWindow, IJavaEditor, IJavaWindow, IJavaButton {
 
     ReportUtil report = new ReportUtil();
-    public final static Logger loggerWinBasePage = Logger.getLogger(WinBasePage.class);
-    private final int TIMEOUT_SS = 60;
+    public static final Logger loggerWinBasePage = Logger.getLogger(WinBasePage.class);
+    private static final int TIMEOUT_SS = 60;
     public static Window homeWindow;
     public ObjectRepoTRiM trimObjectRepo = null;
     public ObjectRepoCSS cssObjectRepo = null;
@@ -26,7 +28,7 @@ public class WinBasePage implements IWinformEditor,IWinformComboBox,LeanftGeneri
             try {
                 cssObjectRepo = new ObjectRepoCSS();
             } catch (GeneralLeanFtException e) {
-                e.printStackTrace();
+                loggerWinBasePage.error(e);
             }
         }
         if(trimObjectRepo == null){
@@ -34,7 +36,7 @@ public class WinBasePage implements IWinformEditor,IWinformComboBox,LeanftGeneri
             try {
                 trimObjectRepo = new ObjectRepoTRiM();
             } catch (GeneralLeanFtException e) {
-                e.printStackTrace();
+                loggerWinBasePage.error(e);
             }
         }
     }
@@ -69,5 +71,13 @@ public class WinBasePage implements IWinformEditor,IWinformComboBox,LeanftGeneri
     public String getDynamicData(String varName) {
         Long id = Thread.currentThread().getId();
         return TestUtil.dynamicDataMap.get(varName + "-" + id);
+    }
+
+    public void activateBrowser(String title) throws GeneralLeanFtException {
+        Window rosaWindow = Desktop.describe(Window.class, new WindowDescription.Builder()
+                .childWindow(false)
+                .ownedWindow(false)
+                .text(new RegExpProperty(title + ".*")).build());
+        rosaWindow.activate();
     }
 }

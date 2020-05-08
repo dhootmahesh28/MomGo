@@ -1,25 +1,23 @@
 package com.swacorp.crew.pages.rosa;
 
-//import com.swacorp.crew.pages.css.CssHome;
 import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.pages.constants.CommonFormats;
 import com.swacorp.crew.utils.*;
-import com.swacorp.crew.pages.sasi.SasiLogin;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.text.ParseException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.interactions.Actions;
 
 public class RosaSolutionQueue extends BasePage {
 
-    private final Logger LOGGER = Logger.getLogger(RosaSolutionQueue.class);
+    private static final Logger LOGGER = Logger.getLogger(RosaSolutionQueue.class);
     ReportUtil report = new ReportUtil();
     HashMap<Integer, String[]> hm = new HashMap<>();
-    //LinkedHashMap<String, LinkedHashMap<String, ArrayList<String[]>>> masterHM = new LinkedHashMap<>();
     public static Map<String, Map<String, ArrayList<String[]>>> masterHM = new LinkedHashMap<String, Map<String, ArrayList<String[]>>>();
     String timeOfCreatingRequest;
 
@@ -30,29 +28,112 @@ public class RosaSolutionQueue extends BasePage {
         timeOfCreatingRequest = currentDate;
     }
 
-    private final By SOLUTION_QUEUE_TITLE = By.xpath("//h2[@class='pilot-queue__title']");
-    private final By VIEW_QUEUE_PAGE = By.xpath("//div[text()='View Queue page']");
-    private final By VIEW_LINK = By.xpath("(//a[text()='View'])[2]");
-    private final By SOLUTION_DETAILS_FIRSTLINK = By.xpath("/html/body/app-root/div[2]/div/div/app-solution-details/div[2]/cl-tabs/div[2]/cl-tab[1]/div/pto-solution-details-table/cl-data-table/cl-data-table-panel[1]/cl-data-table-panel-header/div/cl-data-table-row/cl-data-table-column[2]\n");
-    private final By EMPLOYEE_ID = By.xpath("/html/body/app-root/div[2]/div/div/app-solution-details/div[2]/cl-tabs/div[2]/cl-tab[1]/div/pto-solution-details-table/cl-data-table/cl-data-table-panel/cl-data-table-panel-header/div/cl-data-table-row/cl-data-table-column[2]/div");
-    private final By DATA_DIV = By.xpath("(//div[@class='trip-details__content-block']/div[@class='trip-details__content-block'])[1]/div[1]/div[@class='grid__row']/div[1]/div");
-    private final By FILTER_BUTTON = By.xpath("//*[text()=' Filter ']");
-    private final By FILTER_STATUS = By.xpath("//*[text()=' Status ']");
-    private final String STATUS_COMMITTED = "//*[text()='PLACEHOLDER']";
-    private final By APPLY_BTN = By.xpath("//*[text()=' Apply ']");
-    private final By PDF_DOWNLOAD_BUTTON = By.xpath("(//div[@class ='dot-menu' ])[1]");
-    private final By DOWNLOAD_BUTTON = By.xpath("//button[text() ='Download' ]");
-    private final By ALL_DETAILS = By.xpath("//*[@class='solution-details-table__row'][1]//div[@class = 'cl-data-table-column-item']");
+    private static final By SOLUTION_QUEUE_TITLE = By.xpath("//h2[@class='pilot-queue__title']");
+    private static final By VIEW_QUEUE_PAGE = By.xpath("//div[text()='View Queue page']");
+    private static final By VIEW_LINK = By.xpath("(//a[text()='View'])[2]");
+    private static final By FIRST_VIEW_LINK = By.xpath("(//a[text()='View'])[1]");
+    private static final By SOLUTION_DETAILS_FIRSTLINK = By.xpath("/html/body/app-root/div[2]/div/div/app-solution-details/div[2]/cl-tabs/div[2]/cl-tab[1]/div/pto-solution-details-table/cl-data-table/cl-data-table-panel[1]/cl-data-table-panel-header/div/cl-data-table-row/cl-data-table-column[2]\n");
+    private static final By EMPLOYEE_ID = By.xpath("/html/body/app-root/div[2]/div/div/app-solution-details/div[2]/cl-tabs/div[2]/cl-tab[1]/div/pto-solution-details-table/cl-data-table/cl-data-table-panel/cl-data-table-panel-header/div/cl-data-table-row/cl-data-table-column[2]/div");
+    private static final By DATA_DIV = By.xpath("(//div[@class='trip-details__content-block']/div[@class='trip-details__content-block'])[1]/div[1]/div[@class='grid__row']/div[1]/div");
+    private static final By FILTER_BUTTON = By.xpath("//*[text()=' Filter ']");
+    private static final By FILTER_EVENT = By.xpath("//*[text()=' Event ']");
+    private static final By FILTER_BID_PERIOD = By.xpath("//*[text()=' Bid Period ']");
+    private static final By FILTER_BID_LINE = By.xpath("//*[text()=' Bid Line ']");
+    private static final By FILTER_STATUS = By.xpath("//*[text()=' Status ']");
+    private static final String REPLACE_TXT = "PLACEHOLDER";
+    private static final String STATUS_COMMITTED = "//*[text()='PLACEHOLDER']";
+    private static final By COMMIT_BUTTON = By.xpath("//*[text()='Commit']");
+    private static final String FILTER_OPTIONS = "//*[text()='PLACEHOLDER']";
+    private static final By YES_COMMIT_BUTTON = By.xpath("//*[text()=' Yes, Commit ']");
+    private static final By APPLY_BTN = By.xpath("//*[text()=' Apply ']");
+    private static final By PDF_DOWNLOAD_BUTTON = By.xpath("(//div[@class ='dot-menu' ])[1]");
+    private static final By DOWNLOAD_BUTTON = By.xpath("//button[text() ='Download' ]");
+    private static final By ALL_DETAILS = By.xpath("//*[@class='solution-details-table__row'][1]//div[@class = 'cl-data-table-column-item']");
 
     ArrayList<String> training = null;
     ArrayList<String> TripToPull = null;
     ArrayList<String> empID= null;
     String employeeID;
 
-    String[] intermediateStatus = {"Queued", "Ingest Reviewed"};
+    /*String[] intermediateStatus = {"Queued", "Ingest Reviewed"};
     String[] failedStatus = {"Request Failure", "Ingest Failure"};
-    String[] passedStatus = {"Committed"};
+    String[] passedStatus = {"Committed"};*/
 
+    String[] intermediateStatus = {"Pending Review"};
+    String[] failedStatus = {"Request Failure"};
+    String[] passedStatus = {"Committed", "Ingest Failure"};
+
+    public void processPTORequest(String event, String month, String bidLine) throws InterruptedException, ParseException {
+        waitForSolutionStatus(event, month, bidLine, 15, intermediateStatus, failedStatus);
+        buttonClick(FIRST_VIEW_LINK);
+        buttonClick(COMMIT_BUTTON);
+        buttonClick(YES_COMMIT_BUTTON);
+        waitForSolutionStatus(event, month, bidLine, 15, passedStatus, failedStatus);
+        try {
+            readSolutionQueueDetails();
+        } catch (Exception e) {
+            report.reportSelenium("Fail", "Trip to pull or training data does not exist in the solution.");
+            LOGGER.error(e);
+        }
+    }
+
+    public void waitForSolutionStatus(String event, String month, String bidLine, Integer maxWaitInMinutes, String[] passedStatus, String[] failedStatus) throws InterruptedException, ParseException {
+        long startTime = System.currentTimeMillis();
+        long endTime = startTime +(1000 * 60 * maxWaitInMinutes);
+        String xpathSingleElementsInRow = "(//*[@style = 'justify-content: space-between;'])[2]/*/div"; //First row is table header
+        Boolean statusFound = false;
+        String status = null;
+        while(System.currentTimeMillis() < endTime) {
+            applyFilter(event, month, bidLine);
+            List<WebElement> rowElms = getDriver().findElements(By.xpath(xpathSingleElementsInRow));
+            String queueEvent = (rowElms.get(0)).getText();
+            String queueBidPeriod = (rowElms.get(1)).getText();
+            String queueBidLine = (rowElms.get(2)).getText();
+            if (queueEvent.equalsIgnoreCase(event) & queueBidPeriod.equalsIgnoreCase(month) & queueBidLine.equalsIgnoreCase(bidLine)) {
+                status = getDriver().findElement(By.xpath(xpathSingleElementsInRow + "//p")).getText();
+                if (Arrays.asList(passedStatus).contains(status)) {
+                    statusFound = true;
+                    break;
+                } else if (Arrays.asList(failedStatus).contains(status)) {
+                    report.reportSelenium("Fail", "The request has reached to a failed status: "+ status);
+                    break;
+                } else {
+                    getDriver().navigate().refresh();
+                    Thread.sleep(20000);
+                }
+            }
+        }
+        if (statusFound) {
+            long timeElapsed = System.currentTimeMillis() - startTime;
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(timeElapsed);
+            if (minutes <= 0) {
+                long seconds = TimeUnit.MILLISECONDS.toSeconds(timeElapsed);
+                report.reportSelenium("pass", "The request status changed to : "+ status +" in "+ seconds +" seconds.");
+            }
+        }else{
+            report.reportSelenium("error", "Status change failed, script waited for "+ maxWaitInMinutes +" minutes. Expected status : '"+ String.join("/",passedStatus) +"' but Actual status is : "+ status);
+        }
+    }
+
+    public void applyFilter(String event, String bidPeriod, String bidLine) throws InterruptedException {
+        try {
+            buttonClick(FILTER_BUTTON);
+            buttonClick(FILTER_EVENT);
+            buttonClick(By.xpath(FILTER_OPTIONS.replace(REPLACE_TXT, event)));
+            report.reportSelenium("pass", "Filter option applied with Event as "+ event);
+            buttonClick(FILTER_BID_PERIOD);
+            buttonClick(By.xpath(FILTER_OPTIONS.replace(REPLACE_TXT, bidPeriod)));
+            report.reportSelenium("pass", "Filter option applied with Bid Period as "+ bidPeriod);
+            buttonClick(FILTER_BID_LINE);
+            buttonClick(By.xpath(FILTER_OPTIONS.replace(REPLACE_TXT, bidLine)));
+            report.reportSelenium("pass", "Filter option applied with Bid Line as "+ bidLine);
+            buttonClick(APPLY_BTN);
+            report.reportSelenium("pass", "Filter options successfully applied");
+        }catch(Exception e){
+            report.reportSelenium("fail", "Failed to apply filter options.");
+            LOGGER.error(e);
+        }
+    }
 
     public void StatusPollingOfPTORequest(String Category, String Cycle, String Aircraft, String Event, String Month, String Bidline, String CoreConditional, String RequestCreationTime) throws InterruptedException, ParseException {
         String xpathAllRowsFromSolutionQueue = "(//*[@style = 'justify-content: space-between;'])"; //11 rows including the header.
@@ -99,7 +180,7 @@ public class RosaSolutionQueue extends BasePage {
                             readSolutionQueueDetails();
                         } catch (Exception e) {
                             report.reportSelenium("Fail", "Trip to pull or training data does not exist in the solution.");
-                            e.printStackTrace();
+                            LOGGER.error(e);
                         }
             break;
                     }
@@ -156,11 +237,10 @@ public class RosaSolutionQueue extends BasePage {
         String triptopull = "(//div[@class='trip-details__content-block']/div[@class='trip-details__content-block'])[PLACEHOLDER1]/div[PLACEHOLDER2]//div[@class = 'grid__column-8/12']/div";
         int x = 1;
         int rowIndx = 0;
-        waitForElement(VIEW_LINK);
+        waitForElement(FIRST_VIEW_LINK);
         ArrayList<String> list = new ArrayList<>();
-        //Thread.sleep(5000);
-        if (isElementPresent(VIEW_LINK)) {
-            buttonClickIfExist(VIEW_LINK);
+        if (isElementPresent(FIRST_VIEW_LINK)) {
+            buttonClickIfExist(FIRST_VIEW_LINK);
         }
         Thread.sleep(6000);
         List<WebElement> listCrewIdRows = getDriver().findElements(ALL_DETAILS);
@@ -283,19 +363,19 @@ public class RosaSolutionQueue extends BasePage {
 }
 
 
-    public void selectFilterOption(String Filter) throws InterruptedException {
+    public void selectFilterOption(String filter) throws InterruptedException {
 
         try {
             waitUntilElementClickable(FILTER_BUTTON);
             waitForElement(FILTER_BUTTON);
             buttonClick(FILTER_BUTTON);
             buttonClickIfExist(FILTER_STATUS);
-            //buttonClickIfExist(STATUS_COMMITTED);
-            buttonClickIfExist(By.xpath(STATUS_COMMITTED.replace("PLACEHOLDER",Filter )));
+            buttonClickIfExist(By.xpath(STATUS_COMMITTED.replace("PLACEHOLDER",filter )));
             buttonClickIfExist(APPLY_BTN);
             report.reportSelenium("pass", "Filter button clicked successful .");
         }catch(Exception e){
             report.reportSelenium("fail", "Navigation failed.");
+            LOGGER.error(e);
         }
 
     }
