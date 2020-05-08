@@ -4,6 +4,7 @@ import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.pages.constants.CommonFormats;
 import com.swacorp.crew.utils.DateUtil;
 import com.swacorp.crew.utils.ReportUtil;
+import com.swacorp.crew.utils.TestUtil;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,9 +12,11 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static jdk.nashorn.internal.objects.NativeRegExp.test;
+
 public class RosaHome extends BasePage {
 
-    private final Logger LOGGER = Logger.getLogger(RosaHome.class);
+    private static final Logger LOGGER = Logger.getLogger(RosaHome.class);
     ReportUtil report = new ReportUtil();
     String currentSystemDate;
 
@@ -27,11 +30,11 @@ public class RosaHome extends BasePage {
     private static final By EVENT_DROP = By.xpath("/html/body/app-root/div[2]/div/div/app-pilot-training-request/div[2]/div[1]/div[2]/cl-dropdown/div/div/div[2]");
     private static final By BID_LINE_DR0P = By.xpath("//*[@class='cl-icon--dark-midnight cl-icon cl-icon-chevron-down']");
     private static final By HARD_LINE_DROP_DOWN_VALUE = By.xpath("//*[text()=' Hard Line ']");
-    private static final By CONDITIONAL_RADIO = By.xpath("//input[@class='cl-radio__input']");
     private static final By START_SUBMIT_BTN = By.xpath("//*[text()='Start']");
     private static final By PTO_QUEUE_BTN = By.xpath("(//*[text()='Queue'])[1]");
 
-    private final String DROP_VALUE = "//*[contains(text(),'PLACEHOLDER')]";
+    private static final String REPLACE_TXT = "PLACEHOLDER";
+    private static final String DROP_VALUE = "//*[contains(text(),'"+ REPLACE_TXT + "')]";
 
     public void VerifyHomePageAppear() {
         waitForElement(LOGIN_PAGE_TXT);
@@ -73,10 +76,8 @@ public class RosaHome extends BasePage {
         btn.get(1).click();
         if (isElementVisible(PILOT_TRAINING_OPTIMIZER_TXT)){
             report.reportSelenium("Pass", "Training Optimizer page appeared.");
-            //printConsole("Training Optimizer page appeared");
         }else{
             report.reportSelenium("Fail", "Training Optimizer page NOT appeared.");
-            //printConsole("Training Optimizer page NOT appeared");
         }
     }
 
@@ -110,54 +111,90 @@ public class RosaHome extends BasePage {
         }
     }
 
-    public void test(String dropHeader, String dropValue){
-        String xpathForDropdowns = "//*[contains(text(),'PLACEHOLDER')]/following-sibling::*[position()=1]";
-        String xpathDropdownvalue = "//*[contains(text(),'PLACEHOLDER')]";
-
-        String xpathCategory;
+    public void selectFromDropDown(String dropHeader, String dropValue){
+        String xpathForDropdown = DROP_VALUE.replace(REPLACE_TXT, dropHeader);
+        String xpathForDropdownValue = DROP_VALUE.replace(REPLACE_TXT, dropValue);
+        Boolean valueSelected = false;
         try {
-            xpathCategory = xpathForDropdowns.replace("PLACEHOLDER", dropHeader);
-            waitForElement(By.xpath(xpathCategory));
-            getDriver().findElement(By.xpath(xpathCategory)).click();
-            waitForElement(By.xpath(xpathDropdownvalue.replace("PLACEHOLDER",dropValue)));
-            getDriver().findElement(By.xpath(xpathDropdownvalue.replace("PLACEHOLDER",dropValue))).click();
-            report.reportSelenium("Pass", "Selected: "+dropHeader+" - "+dropValue);
+            for (int i = 0; i < 3; i++) {   // Different drop down value is selected some times
+                getDriver().findElement(By.xpath(xpathForDropdown)).click();
+                Thread.sleep(1000);
+                waitUntilDomLoad();
+                getDriver().findElement(By.xpath(xpathForDropdown)).findElement(By.xpath(xpathForDropdownValue)).click();
 
+                if (getDriver().findElement(By.xpath(xpathForDropdown)).findElement(By.xpath(xpathForDropdownValue)).getText().equalsIgnoreCase(dropValue)) {
+                    valueSelected = true;
+                    break;
+                }
+            }
+            if (valueSelected) {
+                report.reportSelenium("Pass", "Selected: " + dropHeader + " - " + dropValue);
+            }else{
+                report.reportSelenium("Fail", "Failed to select the value : "+ dropValue + " from the drop down : "+ dropHeader);
+            }
         }catch(Exception e){
-            /*getDriver().findElement(By.xpath("//*[text()='Please Select...'][1]")).click();
-            getDriver().findElement(By.xpath("(//ul//li[1])[1]")).click();*/
-
             report.reportSelenium("Fail", "Failed to select: "+dropHeader+" - "+dropValue);
-            e.printStackTrace();
+            LOGGER.error(e);
         }
     }
 
-    public RosaSolutionQueue createPTOSolutionRequest(String Category, String Cycle, String Aircraft, String Event, String Month, String Bidline, String CoreConditional){
+    public void selectMonthYear(String dropHeader, String monthYear) throws Exception{
+        Boolean blnDropValueFound = false;
+        DateUtil dateUtil = new DateUtil();
+        String month = monthYear.split(" ")[0];
+        String year = monthYear.split(" ")[1];
+        if (month.length() == 3) {
+            monthYear = TestUtil.short2LongMonthMap.get(month) +" "+ year;
+        }
+        String dateFrom = dateUtil.getCurrentDate(CommonFormats.DAY_MONTHNAME_YEAR);
+        String dateTo = dateUtil.getCurrentDay() +"-"+ month.substring(0, 3) +"-"+ year;
+        long monthsDiff = dateUtil.getMonthDiff(dateFrom, dateTo, CommonFormats.DAY_MONTHNAME_YEAR);
+        if (monthsDiff <= 0) {
+            if (dateUtil.changeLocalDate((int) monthsDiff-1)) {
+                report.reportSelenium("Pass", "System date changed to : " + dateTo);
+                for (int i = 0; i <= 60; ++i) {  //Dropdown value not reflecting with one time browser refresh.
+                    Thread.sleep(2000);
+                    getDriver().navigate().refresh();
+                    if (isElementPresent(By.xpath("//*[contains(text(),'"+ monthYear +"')]"))) {
+                        blnDropValueFound = true;
+                        break;
+                    }
+                }
+                if (!blnDropValueFound) {
+                    report.reportSelenium("error", "Drop value: "+ monthYear +" not listed with system date change");
+                }
+            }else{
+                report.reportSelenium("fail", "Fail to change System date to : "+ dateTo);
+            }
+        }
+        selectFromDropDown(dropHeader, monthYear);
+    }
+
+    public RosaSolutionQueue createPTOSolutionRequest(String category, String cycle, String aircraft, String event, String month, String bidLine, String coreConditional) throws Exception {
         DateUtil du = new DateUtil();
 
         String xpathCoreConditional = "//*[contains(text(),'PLACEHOLDER')]/preceding-sibling::*[position()=1]";
         String xpathCategory;
 
-
-        test("CATEGORY",Category);
-        test("CYCLE",Cycle);
-        test("AIRCRAFT",Aircraft);
-        test("EVENT",Event);
-        test("MONTH",Month);
-        test("BID LINE",Bidline);
+        selectMonthYear("MONTH / YEAR", month);
+        selectFromDropDown("CATEGORY",category);
+        selectFromDropDown("CYCLE",cycle);
+        selectFromDropDown("AIRCRAFT",aircraft);
+        selectFromDropDown("EVENT",event);
+        selectFromDropDown("BID LINE",bidLine);
 
         try {
-            if(!CoreConditional.isEmpty()) {
-                xpathCategory = xpathCoreConditional.replace("PLACEHOLDER", CoreConditional);
+            if(!coreConditional.isEmpty()) {
+                xpathCategory = xpathCoreConditional.replace(REPLACE_TXT, coreConditional);
                 getDriver().findElement(By.xpath(xpathCategory)).click();
-                report.reportSelenium("Pass", "Selected: "+CoreConditional);
+                report.reportSelenium("Pass", "Selected: "+coreConditional);
             }else{
                 report.reportSelenium("Info", "Not Selected");
             }
 
         }catch(Exception e){
-            report.reportSelenium("Fail", "Failed to select: "+CoreConditional);
-            e.printStackTrace();
+            report.reportSelenium("Fail", "Failed to select: "+coreConditional);
+            LOGGER.error(e);
         }
 
         currentSystemDate = du.getCurrentDate(CommonFormats.ROSA_FORMAT);
@@ -167,23 +204,22 @@ public class RosaHome extends BasePage {
     }
 
 
-    public RosaSolutionQueue selectFromDropDown(String Event) throws Exception{
+    public RosaSolutionQueue selectFromDropDown(String event) throws Exception{
 
         try {
             buttonClick(EVENT_DROP);
-            String newXpathLocator = DROP_VALUE.replace("PLACEHOLDER",Event );
+            String newXpathLocator = DROP_VALUE.replace(REPLACE_TXT,event );
             printConsole("newXpathLocator: "+newXpathLocator);
             //*[contains(text(),Event)]
             WebElement element = getDriver().findElement(By.xpath(newXpathLocator));
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
-            //buttonClick(getDriver().findElement(By.xpath(newXpathLocator)));
             element.click();
             getDriver().findElements(BID_LINE_DR0P).get(2).click();
             buttonClick(HARD_LINE_DROP_DOWN_VALUE);
             buttonClick(START_SUBMIT_BTN);
             return new RosaSolutionQueue();
         }catch(Exception e){
-            e.printStackTrace();
+            LOGGER.error(e);
         }
         return null;
     }
@@ -196,6 +232,7 @@ public class RosaHome extends BasePage {
         }
         catch(Exception e){
             report.reportSelenium("Fail", "Failed to navigate to PTO queus.");
+            LOGGER.error(e);
             return null;
             }
     }

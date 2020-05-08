@@ -129,9 +129,10 @@ public class BasePage extends  TestUtil {
 
     public void enterText(By locator, String text) {
         loggerBasePage.info("Before enterText::" + locator + ", with text::" + text);
-        WebElement webElementEnter = waitForElement(locator);
+        //WebElement webElementEnter = waitForElement(locator);
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        js.executeScript("arguments[0].value='" + text + "'", webElementEnter);
+        //js.executeScript("arguments[0].value='" + text + "'", webElementEnter);
+        js.executeScript("arguments[0].value='" + text + "'", getDriver().findElement(locator));
         loggerBasePage.info("After enterText::" + locator + ", with text::" + text);
     }
 

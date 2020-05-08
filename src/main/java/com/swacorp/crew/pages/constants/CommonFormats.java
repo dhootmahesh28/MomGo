@@ -13,6 +13,7 @@ public class CommonFormats {
     public static final String HOURS_MIN="HH:mm";
     public static final String YEAR_MON_DAY_HRS_SECS="yyyy_MM_dd_HH_mm_ss";
     public static final String MM_DD_YYYY = "MM/dd/yyyy";
+    public static final String MM_DD_YY = "MM-dd-yy";
     public static final String DD_MMM_YY= "dd-MMM-yy";
     public static final String GLUI_TIMEFORMAT = "uuuuddMM-hhmmss-SSS";
     public static final String GLUI_TIMEFORMAT_MONTH_DAY_YEAR = "MM-dd-yyyy";
