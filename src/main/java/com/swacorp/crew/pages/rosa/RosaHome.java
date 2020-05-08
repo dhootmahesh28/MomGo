@@ -36,19 +36,19 @@ public class RosaHome extends BasePage {
     private static final String REPLACE_TXT = "PLACEHOLDER";
     private static final String DROP_VALUE = "//*[contains(text(),'"+ REPLACE_TXT + "')]";
 
-    public void VerifyHomePageAppear() {
+    public void verifyHomePageAppear() {
         waitForElement(LOGIN_PAGE_TXT);
         if (isElementVisible(LOGIN_PAGE_TXT)){
             report.reportSelenium("Pass", "Home page visible successfully.");
-            printConsole("VerifyHomePageAppear passed");
+            printConsole("verifyHomePageAppear passed");
 
         }else {
             report.reportSelenium("fail", "Home page NOT visible.");
-            printConsole("VerifyHomePageAppear failed");
+            printConsole("verifyHomePageAppear failed");
         }
     }
 
-    public void VerifyElementAppear(String locator) {
+    public void verifyElementAppear(String locator) {
 
         waitForElement(getWebElement(locator));
         if (isElementVisible(getWebElement(locator))){
@@ -149,25 +149,30 @@ public class RosaHome extends BasePage {
         String dateFrom = dateUtil.getCurrentDate(CommonFormats.DAY_MONTHNAME_YEAR);
         String dateTo = dateUtil.getCurrentDay() +"-"+ month.substring(0, 3) +"-"+ year;
         long monthsDiff = dateUtil.getMonthDiff(dateFrom, dateTo, CommonFormats.DAY_MONTHNAME_YEAR);
-        if (monthsDiff <= 0) {
-            if (dateUtil.changeLocalDate((int) monthsDiff-1)) {
-                report.reportSelenium("Pass", "System date changed to : " + dateTo);
-                for (int i = 0; i <= 60; ++i) {  //Dropdown value not reflecting with one time browser refresh.
-                    Thread.sleep(2000);
-                    getDriver().navigate().refresh();
-                    if (isElementPresent(By.xpath("//*[contains(text(),'"+ monthYear +"')]"))) {
-                        blnDropValueFound = true;
-                        break;
+        try {
+            if (monthsDiff <= 0) {
+                if (dateUtil.changeLocalDate((int) monthsDiff-1)) {
+                    report.reportSelenium("Pass", "System date changed to : " + dateTo);
+                    for (int i = 0; i <= 60; ++i) {  //Dropdown value not reflecting with one time browser refresh.
+                        Thread.sleep(2000);
+                        getDriver().navigate().refresh();
+                        if (isElementPresent(By.xpath("//*[contains(text(),'"+ monthYear +"')]"))) {
+                            blnDropValueFound = true;
+                            break;
+                        }
                     }
+                    if (!blnDropValueFound) {
+                        report.reportSelenium("error", "Drop value: "+ monthYear +" not listed with system date change");
+                    }
+                }else{
+                    report.reportSelenium("fail", "Fail to change System date to : "+ dateTo);
                 }
-                if (!blnDropValueFound) {
-                    report.reportSelenium("error", "Drop value: "+ monthYear +" not listed with system date change");
-                }
-            }else{
-                report.reportSelenium("fail", "Fail to change System date to : "+ dateTo);
             }
+            selectFromDropDown(dropHeader, monthYear);
+        }catch(Exception e){
+            report.reportSelenium("Fail", "Error occurred while selecting Month Year from drop down.");
+            LOGGER.error(e);
         }
-        selectFromDropDown(dropHeader, monthYear);
     }
 
     public RosaSolutionQueue createPTOSolutionRequest(String category, String cycle, String aircraft, String event, String month, String bidLine, String coreConditional) throws Exception {
@@ -204,7 +209,7 @@ public class RosaHome extends BasePage {
     }
 
 
-    public RosaSolutionQueue selectFromDropDown(String event) throws Exception{
+    public RosaSolutionQueue selectFromDropDown(String event) {
 
         try {
             buttonClick(EVENT_DROP);

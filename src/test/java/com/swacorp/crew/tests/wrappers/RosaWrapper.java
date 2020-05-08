@@ -18,7 +18,7 @@ public class RosaWrapper extends TestUtil {
     public void E2EFlow_RosaPTOMODIFIED() throws Exception {
         rosaLogin = new RosaLogin();
         RosaHome rosahome = rosaLogin.loginRosa();
-        rosahome.VerifyHomePageAppear();
+        rosahome.verifyHomePageAppear();
         rosahome.clickAndVerifyPilotTrainingOptimizer();
         rosahome.verifyConditionalRadioButtonExist();
         rosahome.verifyCoreRadioButtonExist();
@@ -35,7 +35,7 @@ public class RosaWrapper extends TestUtil {
         //setScenarioName("TC_01_ROSA Test");
         rosaLogin = new RosaLogin();
         RosaHome rosahome = rosaLogin.loginRosa();
-        rosahome.VerifyHomePageAppear();
+        rosahome.verifyHomePageAppear();
         rosahome.clickAndVerifyPilotTrainingOptimizer();
         rosahome.verifyConditionalRadioButtonExist();
         rosahome.verifyCoreRadioButtonExist();

@@ -22,7 +22,7 @@ public class TC181464_Crew_19119_TC08_OQS_RK_TRiM_Validate_Solution_details_scre
         setScenarioName("TC_01_ROSA Test");
         rosa = new RosaLogin();
         RosaHome rosahome = rosa.loginRosa();
-        rosahome.VerifyHomePageAppear();
+        rosahome.verifyHomePageAppear();
         rosahome.clickAndVerifyPilotTrainingOptimizer();
         rosahome.verifyConditionalRadioButtonExist();
         rosahome.verifyCoreRadioButtonExist();

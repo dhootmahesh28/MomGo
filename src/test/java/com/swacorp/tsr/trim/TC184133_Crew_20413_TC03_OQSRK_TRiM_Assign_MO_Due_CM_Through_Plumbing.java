@@ -37,7 +37,7 @@ public class TC184133_Crew_20413_TC03_OQSRK_TRiM_Assign_MO_Due_CM_Through_Plumbi
 
             RosaLogin rosa = new RosaLogin();
             RosaHome rosahome = rosa.loginRosa();
-            rosahome.VerifyHomePageAppear();
+            rosahome.verifyHomePageAppear();
             rosahome.clickAndVerifyPilotTrainingOptimizer();
 
 
