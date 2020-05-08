@@ -551,6 +551,29 @@
                                     <property name="ObjectName" type="string" isRegExp="false">templateDataGrid</property>
                                 </properties>
                             </identification>
+                            <children>
+                                <object type="EditField" technology="WinForms">
+                                    <name>txtCellEditor</name>
+                                    <codeName>swfEditEditField</codeName>
+                                    <description></description>
+                                    <identification>
+                                        <properties>
+                                            <property name="FullType" type="string" isRegExp="false">System.Windows.Forms.DataGridViewTextBoxEditingControl</property>
+                                        </properties>
+                                    </identification>
+                                </object>
+                                <object type="ComboBox" technology="WinForms">
+                                    <name>cboTemplate</name>
+                                    <codeName>swfComboBox</codeName>
+                                    <description></description>
+                                    <identification>
+                                        <properties>
+                                            <property name="FullType" type="string" isRegExp="false">System.Windows.Forms.DataGridViewComboBoxEditingControl</property>
+                                            <property name="ObjectName" type="string" isRegExp="false"></property>
+                                        </properties>
+                                    </identification>
+                                </object>
+                            </children>
                         </object>
                         <object type="TabControl" technology="WinForms">
                             <name>tabPopulate</name>

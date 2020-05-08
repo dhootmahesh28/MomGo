@@ -20,4 +20,9 @@ public final class ApplicationConstantsTrim {
     public static final String TRIM_PLACEHOLDER_INITIAL_AUTOMATION2 = "Placeholder - Initial_AUTOMATION2";
     public static final String TRIM_DUE_MONTH = "Due: May 20";
 
+    //*AUTO POPULATE*/
+    public static final String TRIM_TEMPLATE_COLUMN_CA = "# of CAs";
+    public static final String TRIM_TEMPLATE_COLUMN_FO = "# of FOs";
+    public static final String TRIM_TAB_LAUNCH = "Launch";
+    public static final Integer TBL_FIRST_ROW_INDEX = 0;
 }

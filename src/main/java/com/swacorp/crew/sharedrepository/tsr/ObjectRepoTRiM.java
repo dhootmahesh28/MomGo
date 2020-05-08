@@ -1657,11 +1657,15 @@ public class ObjectRepoTRiM extends AppModelBase {		private loginToSouthwestWind
 	{
 
 		
-								public templateDataGridTable(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+			private swfEditEditField swfEditEditField;
+	private swfComboBox swfComboBox;
+						public templateDataGridTable(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
 		{
 			super(parent, applicationModel);
 
-			
+					swfEditEditField = new swfEditEditField(this, applicationModel);
+		swfComboBox = new swfComboBox(this, applicationModel);
+
 			setDisplayName("templateDataGrid");
 		}
 
@@ -1676,8 +1680,62 @@ public class ObjectRepoTRiM extends AppModelBase {		private loginToSouthwestWind
 			return description;
 		}
 
+				public swfEditEditField swfEditEditField() { return swfEditEditField; }
+		public swfComboBox swfComboBox() { return swfComboBox; }
+		
+			public class swfEditEditField extends WinFormsEditFieldNodeBase
+	{
+
+		
+								public swfEditEditField(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("txtCellEditor");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.winforms.EditFieldDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.winforms.EditFieldDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.winforms.EditFieldDescription.Builder().fullType("System.Windows.Forms.DataGridViewTextBoxEditingControl").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
 				
 			}
+
+	public class swfComboBox extends WinFormsComboBoxNodeBase
+	{
+
+		
+								public swfComboBox(TestObject parent, AppModelBase applicationModel) throws GeneralLeanFtException
+		{
+			super(parent, applicationModel);
+
+			
+			setDisplayName("cboTemplate");
+		}
+
+		@Override
+		protected com.hp.lft.sdk.winforms.ComboBoxDescription createDescription() throws GeneralLeanFtException{
+			com.hp.lft.sdk.winforms.ComboBoxDescription description = null; 
+			try{
+				description = new com.hp.lft.sdk.winforms.ComboBoxDescription.Builder().fullType("System.Windows.Forms.DataGridViewComboBoxEditingControl").objectName("").build();
+			}catch(Exception e){
+				throw new GeneralLeanFtException(e.getMessage(), e);
+			}
+			return description;
+		}
+
+				
+			}
+
+	}
 
 	public class tabPopulateTabControl extends WinFormsTabControlNodeBase
 	{

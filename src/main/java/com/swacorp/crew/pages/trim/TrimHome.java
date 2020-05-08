@@ -1,11 +1,8 @@
 package com.swacorp.crew.pages.trim;
 
 import com.hp.lft.sdk.*;
-import com.hp.lft.sdk.stdwin.Dialog;
-import com.hp.lft.sdk.stdwin.Static;
 import com.hp.lft.sdk.winforms.*;
 import com.hp.lft.sdk.winforms.Button;
-import com.hp.lft.sdk.winforms.Label;
 import com.hp.lft.sdk.winforms.Window;
 import com.swacorp.crew.pages.common.WinBasePage;
 import com.swacorp.crew.sharedrepository.tsr.ObjectRepoTRiM;
@@ -18,11 +15,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.swacorp.crew.pages.constants.ApplicationConstantsTrim;
+import org.apache.log4j.Level;
 
 public class TrimHome extends WinBasePage {
     ReportUtil reportTrimHome = new ReportUtil();
     ObjectRepoTRiM lftObjects = null;
-    public Map<String, String> pgMap = new HashMap<>();
+    public static final Map<String, String> pgMap = new HashMap<>();
     private String empNumberFromApp = "";
     private String fldFirstNameFromApp = "";
     private boolean searchFound;
@@ -38,14 +36,14 @@ public class TrimHome extends WinBasePage {
         }catch(GeneralLeanFtException e){
             reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "fail", "Error occured while selecting dropdown value: "+drpValue);
             loggerWinBasePage.error(e);
-        }catch (InterruptedException e) {
-            loggerWinBasePage.error(e);
+        }catch(InterruptedException e) {
+            loggerWinBasePage.log(Level.WARN, "Interrupted!", e);
+            Thread.currentThread().interrupt();
         }
     }
     public TrimHome() {
         lftObjects = super.trimObjectRepo;
     }
-
 
     public void validateTreeNode(String empNr, String firstName, String node, String partialNode, boolean validation) throws GeneralLeanFtException {
         String is = "' is '";
@@ -115,7 +113,7 @@ public class TrimHome extends WinBasePage {
         } catch (Exception e) {
             loggerWinBasePage.error(e);
         }
-        if (returnInt == 0) {
+        if (returnInt <= 0) {
             reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "pass", "Menu navigation is successful: "+navigationString);
         } else {
             reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "fail", "Failed to navigate the menu.");
@@ -140,16 +138,10 @@ public class TrimHome extends WinBasePage {
             highlight(winFindEmployee);
             setTextInEditBox(fldEmpSearch, empNumber);
             verifyNoDuplicate(empNumber);
-            try {
-                btnClick(btnShowEmpDetails);
-                if(verifyActive) {
-                    verifyActive();
-                }
-            }catch(Exception e){
-                reportTrimHome.report("Fail","Error occured while clicking on button. - btnShowEmpDetails");
-                loggerWinBasePage.error(e);
+            btnClick(btnShowEmpDetails);
+            if(verifyActive) {
+                verifyActive();
             }
-
             if (highlight(winFindEmployeeSearch)) {
                 empNumberFromApp = fldEmpNumber.getText();
                 fldFirstNameFromApp = fldFirstName.getText();
@@ -208,92 +200,6 @@ public class TrimHome extends WinBasePage {
         }
         return retVal;
     }
-
-
-    public int addEmployeeRequirement(String empNumbers, String requirementName) throws  GeneralLeanFtException {
-        int retVal = 1;
-        ReportStatus.reset();
-        String requirementsCreatedMsg = empNumbers.split(",").length + " Requirement(s) Created. No Errors.";
-        Window winAddEmpRequirement = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().addEmployeeRequirementWindow();
-        Editor txtEmployeeNumbersEditor = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().addEmployeeRequirementWindow().txtEmployeeNumbersEditor();
-        ComboBox cboRequirementIDComboBox = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().addEmployeeRequirementWindow().cboRequirementIDComboBox();
-        Button addRequirementToDuePilotListButton = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().addEmployeeRequirementWindow().addRequirementToDuePilotListButton();
-        Dialog finishedDialog = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().finishedDialog();
-        com.hp.lft.sdk.stdwin.Button oKButton = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().finishedDialog().oKButton();
-        Static requirementSCreatedNoErrorsStatic = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().finishedDialog().requirementSCreatedNoErrorsStatic();
-
-        try {
-            highlight(winAddEmpRequirement);
-            txtEmployeeNumbersEditor.sendKeys(empNumbers);
-            cboRequirementIDComboBox.select(requirementName);
-            btnClick(addRequirementToDuePilotListButton);
-            if (highlight(finishedDialog)) {
-                if (verifyObjectExist(requirementSCreatedNoErrorsStatic, true)) {
-                    if (requirementSCreatedNoErrorsStatic.getText().replace("\r\n", " ").equalsIgnoreCase(requirementsCreatedMsg)){
-                        reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Expected message displayed: " + requirementsCreatedMsg);
-                        retVal = 0;
-                    }else{
-                        reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Failed to verify the requirements created message. Expected: "+ requirementsCreatedMsg +" Actual: "+ requirementSCreatedNoErrorsStatic.getText());
-                    }
-                }else{
-                    reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Expected message not displayed on Finished dialog: "+ requirementsCreatedMsg);
-                }
-                oKButton.click();
-            }
-        }catch( Exception  e){
-            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occurred while adding employee(s) to the requirement on Add Employee Requirement window of Trim pplication.");
-            loggerWinBasePage.error(e);
-        }
-        return retVal;
-    }
-
-    public int autoPopulate(String equipment, String requirementName) throws  GeneralLeanFtException {
-        int retVal = 1;
-        ReportStatus.reset();
-        Window autoPopulateWindow = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().autoPopulateWindow();
-        ComboBox cboEquipComboBox = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().autoPopulateWindow().cboEquipComboBox();
-        Table templateDataGridTable = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().autoPopulateWindow().templateDataGridTable();
-        ComboBox swfComboBox = templateDataGridTable.describe(ComboBox.class, new ComboBoxDescription.Builder()
-                .fullType("System.Windows.Forms.DataGridViewComboBoxEditingControl")
-                .objectName("").build());
-        EditField swfEditEditField = templateDataGridTable.describe(EditField.class, new EditFieldDescription.Builder()
-                .fullType("System.Windows.Forms.DataGridViewTextBoxEditingControl")
-                .objectName("").build());
-        TabControl tabPopulateTabControl = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().autoPopulateWindow().tabPopulateTabControl();
-        Button startButton = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().autoPopulateWindow().startButton();
-        Window progressWindow = lftObjects.progressWindow();
-        Label populateCompleteLabel = lftObjects.progressWindow().populateCompleteLabel();
-
-        try {
-            highlight(autoPopulateWindow);
-            autoPopulateWindow.maximize();
-            cboEquipComboBox.select(equipment);
-            templateDataGridTable.getCustomGrid().getXtraGrid().activateCell(0, "Template");
-            templateDataGridTable.getCustomGrid().getXtraGrid().activateCell(0, "Template");
-            swfComboBox.select(requirementName);
-            templateDataGridTable.getCustomGrid().getXtraGrid().selectCell(0, "# of CAs");
-            templateDataGridTable.getCustomGrid().getXtraGrid().activateCell(0, "# of CAs");
-            swfEditEditField.setText("10");
-            templateDataGridTable.getCustomGrid().getXtraGrid().selectCell(0, "# of FOs");
-            templateDataGridTable.getCustomGrid().getXtraGrid().activateCell(0, "# of FOs");
-            swfEditEditField.setText("10");
-            tabPopulateTabControl.select("Launch");
-            startButton.click();
-            if (populateCompleteLabel.exists(150)){
-                reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Auto populate is complete.");
-                progressWindow.close();
-                retVal = 0;
-            }else{
-                reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Failed to complete the Auto Populate.");
-            }
-            autoPopulateWindow.close();
-        }catch( Exception  e){
-            loggerWinBasePage.error(e);
-            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occurred while performing Auto Populate on Auto Populate window of Trim pplication.");
-        }
-        return retVal;
-    }
-
 
    public void validateSearchResults(Map<String, String> runtimeData , String[] testData){
         if (empNumberFromApp.equalsIgnoreCase(runtimeData.get("CrewEmployeeNumber"))){
