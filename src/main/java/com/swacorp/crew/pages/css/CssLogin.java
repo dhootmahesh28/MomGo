@@ -30,14 +30,14 @@ public class CssLogin extends WinBasePage{
         if (!isCssAlradyLogedIn()) {
             new ProcessBuilder("cmd", "/c", EnvironmentConstants.CSSPATH).start();
 
-            WaitEditorTillVisible(lftObjects.loginDialog().userNameEditor(), EnumWaitConstants.WaitDuration.TEN.status());
+            waitEditorTillVisible(lftObjects.loginDialog().userNameEditor(), EnumWaitConstants.WaitDuration.TEN.status());
 
             lftObjects.loginDialog().userNameEditor().setText(EnvironmentConstants.CSSUSERID);
 
             lftObjects.loginDialog().passwordEditor().setText(EnvironmentConstants.CSSPASSWORD);
             lftObjects.loginDialog().loginButton().click();
 
-            WaitForJavaWindowTillVisible(lftObjects.CssMainWindow(), EnumWaitConstants.WaitDuration.TEN.status());
+            waitForJavaWindowTillVisible(lftObjects.CssMainWindow(), EnumWaitConstants.WaitDuration.TEN.status());
 
             if (lftObjects.CssMainWindow().exists()){
                 reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Login to CSS is successful.");

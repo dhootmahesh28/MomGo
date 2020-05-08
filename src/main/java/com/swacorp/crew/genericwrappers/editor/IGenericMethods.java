@@ -5,10 +5,10 @@ import com.hp.lft.sdk.TestObject;
 
 public interface IGenericMethods {
 
-    public boolean VerifyObjectExist(TestObject o, boolean existance);
-    public boolean VerifyObjectExist(TestObject o);
-    public boolean VerifyObjectDisplayed(TestObject o, boolean existance);
-    public boolean WaitProperty(TestObject o,int timeOut, String timeUnit );
-    public boolean WaitProperty(TestObject o,String propName, String propValue, int timeOut ) throws GeneralLeanFtException, InterruptedException;
-    public boolean Highlight(TestObject o);
+    public boolean verifyObjectExist(TestObject o, boolean existance);
+    public boolean verifyObjectExist(TestObject o);
+    public boolean verifyObjectDisplayed(TestObject o, boolean existance);
+    public boolean waitProperty(TestObject o, int timeOut, String timeUnit );
+    public boolean waitProperty(TestObject o, String propName, String propValue, int timeOut ) throws GeneralLeanFtException, InterruptedException;
+    public boolean highlight(TestObject o);
 }

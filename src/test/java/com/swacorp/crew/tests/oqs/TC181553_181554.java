@@ -35,7 +35,7 @@ public class TC181553_181554 extends TestManager {
     public void TC181553_OQS_RK_TRiM_FO_End_an_FO_position_and_add_new_FO_position_to_the_CM_to_OQS_RK_and_verify_in_TRiM (String[] testData) throws Exception {
         setScenarioName("TC181553_TC10 OQS RK TRiM FO End an FO position and add new FO position to the CM to OQS RK and verify in TRiM");
         wrapper.addNewPositionInOQSVerifyInTrim(testData, true);
-        trimHomePageAM.MinimizeMainWindow();
+        trimHomePageAM.minimizeMainWindow();
     }
 
     @Test(priority=9, groups = {"181554", "14477", "000", "regression"}, dataProvider = "TC181554", dataProviderClass = TestDataProvider.class)
@@ -49,15 +49,15 @@ public class TC181553_181554 extends TestManager {
         trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
 
         //Navigate Main Menu on Trim
-        trimHomePageAM.NavigateMenu("^E-->^F");
+        trimHomePageAM.navigateMenu("^E-->^F");
 
         //Search the employee details in Trim.
-        trimHomePageAM.SearchEmployeesDetails(oqsHomePage.getEmployeeNumber(), true);
+        trimHomePageAM.searchEmployeesDetails(oqsHomePage.getEmployeeNumber(), true);
 
         //Verify that the details are not visible in Trim
-        trimHomePageAM.ValidateSearchResults(false );
+        trimHomePageAM.validateSearchResults(false );
 
-        trimHomePageAM.MinimizeMainWindow();
+        trimHomePageAM.minimizeMainWindow();
 
 
         oqsHomePage.addPosition("CAPTAIN-737 All");
@@ -67,14 +67,14 @@ public class TC181553_181554 extends TestManager {
 
 
         //Navigate Main Menu on Trim
-        trimHomePageAM.NavigateMenu("^E-->^F");
+        trimHomePageAM.navigateMenu("^E-->^F");
 
         //Search the employee details in Trim.
-        trimHomePageAM.SearchEmployeesDetails(oqsHomePage.getEmployeeNumber(), true);
+        trimHomePageAM.searchEmployeesDetails(oqsHomePage.getEmployeeNumber(), true);
 
         //Verify that the details are not visible in Trim
-        trimHomePageAM.ValidateSearchResults(false );
+        trimHomePageAM.validateSearchResults(false );
 
-        trimHomePageAM.MinimizeMainWindow();
+        trimHomePageAM.minimizeMainWindow();
     }
 }

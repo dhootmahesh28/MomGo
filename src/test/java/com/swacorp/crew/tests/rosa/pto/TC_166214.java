@@ -22,7 +22,7 @@ public class TC_166214 extends TestManager {
     //  IN PROGRESS
     //*TODO: Validation is pending from the OT Trip details.*//
     @Test(groups = {"166214","rosa_e2e","demo"}, priority=2, dataProvider = "TC167614", dataProviderClass = RosaTestDataProvider.class)
-    public void TC171389_171391_FO_Validate_in_OT_that_domestic_trip_was_pulled_after_ingest_process(String[] testData) throws InterruptedException, GeneralLeanFtException, IOException {
+    public void TC171389_171391_FO_Validate_in_OT_that_domestic_trip_was_pulled_after_ingest_process(String[] testData) throws Exception {
         setScenarioName("TC171389_171391_FO_Validate_in_OT_that_domestic_trip_was_pulled_after_ingest_process");
         /*E2EFlow_RosaPTO();
         Thread.sleep(1000);

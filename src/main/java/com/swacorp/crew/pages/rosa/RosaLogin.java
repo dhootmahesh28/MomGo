@@ -10,10 +10,9 @@ public class RosaLogin extends BasePage {
 
     private final Logger LOGGER = Logger.getLogger(RosaLogin.class);
     ReportUtil report = new ReportUtil();
-    private final By USERID_EDT = By.xpath("//input[@name='username']");
-    private final By PASSWORD_EDT = By.xpath("//input[@name='password']");
-    private final By SUBMIT_BTN = By.xpath("//input[@name='submit']");
-    private final By LOGIN_PAGE_TXT = By.xpath("//h2[text()='Request Optimizer Solution Application']");
+    private static final By USERID_EDT = By.xpath("//input[@name='username']");
+    private static final By PASSWORD_EDT = By.xpath("//input[@name='password']");
+    private static final By SUBMIT_BTN = By.xpath("//input[@name='submit']");
 
 
     public RosaHome loginRosa() {

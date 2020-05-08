@@ -38,8 +38,7 @@ public class BasePage extends  TestUtil {
     }
 
     public WebElement waitForElement(final By byElement) {
-
-        WebElement element;
+        WebElement element = null;
         try {
             loggerBasePage.info("BeforeWaitForElement::" + byElement);
             waitUntilDomLoad();
@@ -47,7 +46,7 @@ public class BasePage extends  TestUtil {
             element = getDriver().findElement(byElement);
         } catch (WebDriverException e) {
             loggerBasePage.info("Exception in waitForElement::" + byElement);
-            throw new WebDriverException(e.getMessage());
+            loggerBasePage.error(e);
         }
         loggerBasePage.info("AfterWaitForElement::" + byElement);
         return element;
@@ -77,7 +76,7 @@ public class BasePage extends  TestUtil {
             webDriverFluentWait().until(ExpectedConditions.elementToBeClickable(locator));
         } catch (Exception e) {
             loggerBasePage.info("Exception in buttonClick ::" + locator);
-            loggerBasePage.error(e.getMessage());
+            loggerBasePage.error(e);
         }
         WebElement elm = waitForElement(locator);
         scrollToElement(elm);
@@ -91,10 +90,10 @@ public class BasePage extends  TestUtil {
             webDriverFluentWait().until(ExpectedConditions.elementToBeClickable(locator));
         } catch (Exception e) {
             loggerBasePage.info("Exception in buttonClick ::" + locator);
-            loggerBasePage.error(e.getMessage());
+            loggerBasePage.error(e);
         }
         List<WebElement> elm = getDriver().findElements(locator);
-        if (elm.size() > 0) {
+        if (!elm.isEmpty()) {
             scrollToElement(elm.get(0));
             elm.get(0).click();
             loggerBasePage.info("After buttonClick::" + locator);
@@ -102,7 +101,6 @@ public class BasePage extends  TestUtil {
     }
 
     public boolean isElementPresent(By locator) {
-        WebElement element;
         try {
             loggerBasePage.info("Before isElementPresent::" + locator);
             waitUntilDomLoad();
@@ -112,6 +110,7 @@ public class BasePage extends  TestUtil {
 
         } catch (Exception e) {
             loggerBasePage.info("Exception isElementPresent::" + locator);
+            loggerBasePage.error(e);
             return false;
         }
     }
@@ -123,6 +122,7 @@ public class BasePage extends  TestUtil {
             return true;
         } catch (Exception e) {
             loggerBasePage.info("Exception isElementPresent::" + locator);
+            loggerBasePage.error(e);
             return false;
         }
     }
@@ -172,11 +172,11 @@ public class BasePage extends  TestUtil {
 
     public String randomString(int len) {
         loggerBasePage.info("Before randomString with length::" + len);
-        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        String ab = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         SecureRandom rnd = new SecureRandom();
         StringBuilder sb = new StringBuilder(len);
         for (int i = 0; i < len; i++) {
-            sb.append(AB.charAt(rnd.nextInt(AB.length())));
+            sb.append(ab.charAt(rnd.nextInt(ab.length())));
         }
         loggerBasePage.info("After randomString with length::" + len);
         return sb.toString();
@@ -193,6 +193,7 @@ public class BasePage extends  TestUtil {
                         .executeScript("return jQuery.active") == 0);
             } catch (Exception e) {
                 jQueryLoad = webDriver -> (true);
+                loggerBasePage.error(e);
             }
             fluentWait.until(jQueryLoad);
         }
@@ -201,7 +202,7 @@ public class BasePage extends  TestUtil {
                     .executeScript("return document.readyState").toString().equals("complete"));
             fluentWait.until(docLoad);
         }catch (Exception e){
-            e.printStackTrace();
+            loggerBasePage.error(e);
         }
         loggerBasePage.info("Dom load completed");
     }
@@ -227,26 +228,23 @@ public class BasePage extends  TestUtil {
                 .ignoring(NoSuchElementException.class, NoSuchFrameException.class);
     }
 
-    public static ArrayList<String> getProperty(String fileLocation, String property){
-        ArrayList<String> obj=new ArrayList<String>();
+    public static List<String> getProperty(String fileLocation, String property){
         FileInputStream fileInput = null;
         try {
             fileInput = new FileInputStream(new File(System.getProperty("user.dir")+"/src/test/resources/testData/rolebasedtestdata/"+fileLocation+".properties"));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            loggerBasePage.error(e);
         }
         Properties prop = new Properties();
         try {
             prop.load(fileInput);
         } catch (IOException e) {
-            e.printStackTrace();
+            loggerBasePage.error(e);
         }
         String propertyData= (prop.getProperty(property));
-        String properties[]=propertyData.split(",");
-        for(String i:properties){
-            obj.add(i);
-        }
-        return obj;
+        String[] properties=propertyData.split(",");
+
+        return Arrays.asList(properties);
     }
 
 

@@ -5,9 +5,9 @@ import org.apache.log4j.Logger;
 
 public interface IJavaButton<T extends com.hp.lft.sdk.java.Button> {
 
-     final Logger log = Logger.getLogger(IJavaButton.class);
+    static final Logger log = Logger.getLogger(IJavaButton.class);
 
-    default void  WaitForButtonToVisible(T obj, int timeout) throws GeneralLeanFtException {
+    default void waitForButtonToVisible(T obj, int timeout) throws GeneralLeanFtException {
         long t=0;
         try {
             do {
@@ -15,7 +15,7 @@ public interface IJavaButton<T extends com.hp.lft.sdk.java.Button> {
                 t++;
             }while((!obj.exists()) && t < timeout);
         }catch(Exception e){
-              e.printStackTrace();
+            log.error("Error in waitForButtonToVisible: "+e);
         }
 
     }

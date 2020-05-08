@@ -19,17 +19,17 @@ public class TC184133_Crew_20413_TC03_OQSRK_TRiM_Assign_MO_Due_CM_Through_Plumbi
             loginpage.loginTRiM("","");
 
             TrimHome trimHomePageAM = new TrimHome();
-            trimHomePageAM.NavigateMenu("^p");
+            trimHomePageAM.navigateMenu("^p");
 
             String schedPeriod = "Apr2020";
             String empNumbers = "81144,133761,91732,85928";
             String requirementName = "CQT 2020 - Automation";
             String equipment = "737";
 
-            trimHomePageAM.NavigateMenu("^m-->^A");
-            trimHomePageAM.AddEmployeeRequirement(empNumbers, equipment +" "+ requirementName);
-            trimHomePageAM.NavigateMenu("^T-->^P");
-            trimHomePageAM.AutoPopulate("737", requirementName);
+            trimHomePageAM.navigateMenu("^m-->^A");
+            trimHomePageAM.addEmployeeRequirement(empNumbers, equipment +" "+ requirementName);
+            trimHomePageAM.navigateMenu("^T-->^P");
+            trimHomePageAM.autoPopulate("737", requirementName);
 
             RosaLogin rosa = new RosaLogin();
             RosaHome rosahome = rosa.loginRosa();
@@ -40,8 +40,8 @@ public class TC184133_Crew_20413_TC03_OQSRK_TRiM_Assign_MO_Due_CM_Through_Plumbi
             //String monthYear = rosahome.getMonthYear();
             //if monthYear
 
-            //trimHomePageAM.NavigateMenu("^E-->^F");
-            //trimHomePageAM.VerifyEmployeeSchedule("81144", "MO", "5");*/
+            //trimHomePageAM.navigateMenu("^E-->^F");
+            //trimHomePageAM.verifyEmployeeSchedule("81144", "MO", "5");*/
             //DateUtil dateUtil = new DateUtil();
             //dateUtil.changeLocalDate(-1);
 

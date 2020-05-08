@@ -34,7 +34,6 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         //Login to OQS
         oqsLoginPage.loginOQS(applyEnterpriseMode);
         getDriver().switchTo().frame("compArea");
-        oqsHomePage.addTrainingEvent("MANEUVERS OBSERVATION", false);
         LOGGER.info("Login done...");
         //Add Crew Member
         empNr = oqsHomePage.addCrewMember(testData, createFreshCrew);
@@ -56,15 +55,19 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
 
         //Navigate Main Menu on Trim
-        trimHomePageAM.NavigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
+        try {
+            trimHomePageAM.navigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //Search the employee details in Trim.
-        trimHomePageAM.SearchEmployeesDetails(empNr, verifyActivechkbox);
+        trimHomePageAM.searchEmployeesDetails(empNr, verifyActivechkbox);
 
         //Verify that the details are not visible in Trim
-        trimHomePageAM.ValidateSearchResults(visibility );
+        trimHomePageAM.validateSearchResults(visibility );
 
-        trimHomePageAM.MinimizeMainWindow();
+        trimHomePageAM.minimizeMainWindow();
 
     }
 
@@ -93,15 +96,19 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         trimLoginPage.verifyLoginSuccessful(true);
 
         //Navigate Main Menu on Trim
-        trimHomePageAM.NavigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
+        try {
+            trimHomePageAM.navigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //Search the employee details in Trim.
-        trimHomePageAM.SearchEmployeesDetails(oqsHomePage.getEmployeeNumber(), verifyActivechkbox);
+        trimHomePageAM.searchEmployeesDetails(oqsHomePage.getEmployeeNumber(), verifyActivechkbox);
 
         //Verify that the details are not visible in Trim
-        trimHomePageAM.ValidateSearchResults(visibility );
+        trimHomePageAM.validateSearchResults(visibility );
 
-        trimHomePageAM.MinimizeMainWindow();
+        trimHomePageAM.minimizeMainWindow();
     }
 
     public void addNewPositionInOQSVerifyInTrim(String[] testData, boolean visibility) throws GeneralLeanFtException {
@@ -125,15 +132,19 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         trimLoginPage.verifyLoginSuccessful(true);
 
         //Navigate Main Menu on Trim
-        trimHomePageAM.NavigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
+        try {
+            trimHomePageAM.navigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //Search the employee details in Trim.
-        trimHomePageAM.SearchEmployeesDetails(empNr, false);
+        trimHomePageAM.searchEmployeesDetails(empNr, false);
 
         //Verify that the details are not visible in Trim
-        trimHomePageAM.ValidateSearchResults(visibility );
+        trimHomePageAM.validateSearchResults(visibility );
 
-        trimHomePageAM.MinimizeMainWindow();
+        trimHomePageAM.minimizeMainWindow();
 
         ////Login to Trim
         trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
@@ -142,15 +153,19 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         trimLoginPage.verifyLoginSuccessful(true);
 
         //Navigate Main Menu on Trim
-        trimHomePageAM.NavigateMenu("^E-->^F");
+        try {
+            trimHomePageAM.navigateMenu("^E-->^F");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //Search the employee details in Trim.
-        trimHomePageAM.SearchEmployeesDetails(empNr, false);
+        trimHomePageAM.searchEmployeesDetails(empNr, false);
 
         //Verify that the details are not visible in Trim
-        trimHomePageAM.ValidateSearchResults(visibility );
+        trimHomePageAM.validateSearchResults(visibility );
 
-        trimHomePageAM.MinimizeMainWindow();
+        trimHomePageAM.minimizeMainWindow();
 
     }
 
@@ -191,8 +206,8 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
 
         trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
         try{
-            trimHomePageAM.NavigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
-            trimHomePageAM.SelectEquipmentAndPrimaryStatus(empNr, equipments, primaryStatus);
+            trimHomePageAM.navigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
+            trimHomePageAM.selectEquipmentAndPrimaryStatus(empNr, equipments, primaryStatus);
         }catch(Exception e){
             LOGGER.error(e.getMessage());
         }

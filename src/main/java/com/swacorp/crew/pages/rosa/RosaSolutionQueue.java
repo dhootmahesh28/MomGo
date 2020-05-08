@@ -1,7 +1,9 @@
 package com.swacorp.crew.pages.rosa;
 
 import com.swacorp.crew.pages.common.BasePage;
+import com.swacorp.crew.pages.constants.ApplicationConstantsRosa;
 import com.swacorp.crew.pages.constants.CommonFormats;
+import com.swacorp.crew.pages.constants.MessageConstants;
 import com.swacorp.crew.utils.*;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -15,10 +17,10 @@ import org.openqa.selenium.interactions.Actions;
 
 public class RosaSolutionQueue extends BasePage {
 
-    private static final Logger LOGGER = Logger.getLogger(RosaSolutionQueue.class);
+    private static final Logger loggerRosaPto = Logger.getLogger(RosaSolutionQueue.class);
     ReportUtil report = new ReportUtil();
     HashMap<Integer, String[]> hm = new HashMap<>();
-    public static Map<String, Map<String, ArrayList<String[]>>> masterHM = new LinkedHashMap<String, Map<String, ArrayList<String[]>>>();
+    public static final Map<String, Map<String, ArrayList<String[]>>> masterHM = new LinkedHashMap();
     String timeOfCreatingRequest;
 
     public RosaSolutionQueue() {
@@ -40,7 +42,6 @@ public class RosaSolutionQueue extends BasePage {
     private static final By FILTER_BID_PERIOD = By.xpath("//*[text()=' Bid Period ']");
     private static final By FILTER_BID_LINE = By.xpath("//*[text()=' Bid Line ']");
     private static final By FILTER_STATUS = By.xpath("//*[text()=' Status ']");
-    private static final String REPLACE_TXT = "PLACEHOLDER";
     private static final String STATUS_COMMITTED = "//*[text()='PLACEHOLDER']";
     private static final By COMMIT_BUTTON = By.xpath("//*[text()='Commit']");
     private static final String FILTER_OPTIONS = "//*[text()='PLACEHOLDER']";
@@ -51,13 +52,9 @@ public class RosaSolutionQueue extends BasePage {
     private static final By ALL_DETAILS = By.xpath("//*[@class='solution-details-table__row'][1]//div[@class = 'cl-data-table-column-item']");
 
     ArrayList<String> training = null;
-    ArrayList<String> TripToPull = null;
+    ArrayList<String> tripToPull = null;
     ArrayList<String> empID= null;
     String employeeID;
-
-    /*String[] intermediateStatus = {"Queued", "Ingest Reviewed"};
-    String[] failedStatus = {"Request Failure", "Ingest Failure"};
-    String[] passedStatus = {"Committed"};*/
 
     String[] intermediateStatus = {"Pending Review"};
     String[] failedStatus = {"Request Failure"};
@@ -73,7 +70,7 @@ public class RosaSolutionQueue extends BasePage {
             readSolutionQueueDetails();
         } catch (Exception e) {
             report.reportSelenium("Fail", "Trip to pull or training data does not exist in the solution.");
-            LOGGER.error(e);
+            loggerRosaPto.error(e);
         }
     }
 
@@ -89,7 +86,7 @@ public class RosaSolutionQueue extends BasePage {
             String queueEvent = (rowElms.get(0)).getText();
             String queueBidPeriod = (rowElms.get(1)).getText();
             String queueBidLine = (rowElms.get(2)).getText();
-            if (queueEvent.equalsIgnoreCase(event) & queueBidPeriod.equalsIgnoreCase(month) & queueBidLine.equalsIgnoreCase(bidLine)) {
+            if (queueEvent.equalsIgnoreCase(event) && queueBidPeriod.equalsIgnoreCase(month) && queueBidLine.equalsIgnoreCase(bidLine)) {
                 status = getDriver().findElement(By.xpath(xpathSingleElementsInRow + "//p")).getText();
                 if (Arrays.asList(passedStatus).contains(status)) {
                     statusFound = true;
@@ -119,39 +116,46 @@ public class RosaSolutionQueue extends BasePage {
         try {
             buttonClick(FILTER_BUTTON);
             buttonClick(FILTER_EVENT);
-            buttonClick(By.xpath(FILTER_OPTIONS.replace(REPLACE_TXT, event)));
+            buttonClick(By.xpath(FILTER_OPTIONS.replace(MessageConstants.PLACEHOLDER, event)));
             report.reportSelenium("pass", "Filter option applied with Event as "+ event);
             buttonClick(FILTER_BID_PERIOD);
-            buttonClick(By.xpath(FILTER_OPTIONS.replace(REPLACE_TXT, bidPeriod)));
+            buttonClick(By.xpath(FILTER_OPTIONS.replace(MessageConstants.PLACEHOLDER, bidPeriod)));
             report.reportSelenium("pass", "Filter option applied with Bid Period as "+ bidPeriod);
             buttonClick(FILTER_BID_LINE);
-            buttonClick(By.xpath(FILTER_OPTIONS.replace(REPLACE_TXT, bidLine)));
+            buttonClick(By.xpath(FILTER_OPTIONS.replace(MessageConstants.PLACEHOLDER, bidLine)));
             report.reportSelenium("pass", "Filter option applied with Bid Line as "+ bidLine);
             buttonClick(APPLY_BTN);
             report.reportSelenium("pass", "Filter options successfully applied");
         }catch(Exception e){
             report.reportSelenium("fail", "Failed to apply filter options.");
-            LOGGER.error(e);
+            loggerRosaPto.error(e);
         }
     }
 
-    public void StatusPollingOfPTORequest(String Category, String Cycle, String Aircraft, String Event, String Month, String Bidline, String CoreConditional, String RequestCreationTime) throws InterruptedException, ParseException {
+    public void statusPollingOfPTORequest(String category, String cycle, String aircraft, String event, String month, String bidline, String coreConditional, String requestCreationTime) throws InterruptedException, ParseException {
         String xpathAllRowsFromSolutionQueue = "(//*[@style = 'justify-content: space-between;'])"; //11 rows including the header.
-        String xpathAlltheElementsInRow = "(//*[@style = 'justify-content: space-between;'])[" + "PLACEHOLDER" + "]/*/div";
+        String xpathAlltheElementsInRow = "(//*[@style = 'justify-content: space-between;'])[" + MessageConstants.PLACEHOLDER + "]/*/div";
         String xpathSingleElementsInRow;
         List<WebElement> allRowsFromSolutionQueue = getDriver().findElements(By.xpath(xpathAllRowsFromSolutionQueue));
         int rosaOneMinutCounter = 0;
 
+        loggerRosaPto.info("category:"+category);
+        loggerRosaPto.info("cycle:"+cycle);
+        loggerRosaPto.info("aircraft:"+aircraft);
+        loggerRosaPto.info("event:"+event);
+        loggerRosaPto.info("month:"+month);
+        loggerRosaPto.info("bidline:"+bidline);
+        loggerRosaPto.info("coreConditional:"+coreConditional);
+        loggerRosaPto.info("requestCreationTime:"+requestCreationTime);
+
         for (int i = 2; i < allRowsFromSolutionQueue.size() - 1; i++) {
-            xpathSingleElementsInRow = xpathAlltheElementsInRow.replace("PLACEHOLDER", "" + i);
+            xpathSingleElementsInRow = xpathAlltheElementsInRow.replace(MessageConstants.PLACEHOLDER, "" + i);
             List<WebElement> rowElems = getDriver().findElements(By.xpath(xpathSingleElementsInRow));
             String queuEvent = (rowElems.get(0)).getText();
             String queuBidPeriod = (rowElems.get(1)).getText();
             String queuBidLine = (rowElems.get(2)).getText();
-            String queuTime = (rowElems.get(3)).getText();  //getDriver().findElement(By.xpath(xpathSingleElementsInRow.replace("PLACEHOLDER")))
-            boolean isTimeDiffWithinpermitiableRange = isTimeWithinAcceptableRange(queuTime, timeOfCreatingRequest);
 
-           if (queuEvent.equalsIgnoreCase(Event) & queuBidLine.equalsIgnoreCase(Bidline) & queuBidPeriod.equalsIgnoreCase(Month)) {
+           if (queuEvent.equalsIgnoreCase(event) && queuBidLine.equalsIgnoreCase(bidline) && queuBidPeriod.equalsIgnoreCase(month)) {
                 String xpathstatus = xpathSingleElementsInRow + "//p";
                 String status = getDriver().findElement(By.xpath(xpathstatus)).getText();
 
@@ -162,7 +166,7 @@ public class RosaSolutionQueue extends BasePage {
 
                     if (rosaOneMinutCounter < 1) {
                         //F5
-                        StatusPollingOfPTORequest(Category, Cycle, Aircraft, Event, Month, Bidline, CoreConditional, timeOfCreatingRequest);
+                        statusPollingOfPTORequest(category, cycle, aircraft, event, month, bidline, coreConditional, timeOfCreatingRequest);
                         report.reportSelenium("info", "The request is in intermediate status after " + rosaOneMinutCounter + " minutes of its creation.");
                     } else {
                         report.reportSelenium("fail", "The request is still in intermediate status even after " + rosaOneMinutCounter + " minutes.");
@@ -173,19 +177,15 @@ public class RosaSolutionQueue extends BasePage {
                     report.reportSelenium("fail", "The request has reached to a failed status: " + status);
                     break;
                 } else if (Arrays.asList(passedStatus).contains(status)) {
-                    //if (true) {
-
                         try {
 
                             readSolutionQueueDetails();
                         } catch (Exception e) {
                             report.reportSelenium("Fail", "Trip to pull or training data does not exist in the solution.");
-                            LOGGER.error(e);
+                            loggerRosaPto.error(e);
                         }
             break;
                     }
-                    // Reading of all employee done. Hence break the loopm and return
-                    //break;
                 }
             }
         }
@@ -195,23 +195,7 @@ public class RosaSolutionQueue extends BasePage {
         return masterHM;
     }
 
-    public void readHM(){
-        //masterHM
-        for (Map.Entry<String, Map<String, ArrayList<String[]>>> entry : masterHM.entrySet()){
-            String k = entry.getKey();
-            Map<String, ArrayList<String[]>> y = entry.getValue();
-
-            for (Map.Entry<String, ArrayList<String[]>> entry2 : y.entrySet()){
-                //String k2 = entry2.getValue("ss");
-                Map<String, ArrayList<String[]>> y2 = entry.getValue();
-                ArrayList<String[]> aa = y2.get("trng");
-                ArrayList<String[]>  bb = y2.get("triptopull");
-            }
-            break;
-        }
-    }
-
-    /*If the time fidderence between the system date and the one that is pickes up from t
+     /*If the time fidderence between the system date and the one that is pickes up from t
     he solution queue is more than 1 minut.
     then this is nt the right row. hence return false.ParseException
     if difference is within 1 min range then its the right row.*/
@@ -220,20 +204,16 @@ public class RosaSolutionQueue extends BasePage {
        try {
            diffSecs = new DateUtil().getTimeDiff(qTime, sysTime, CommonFormats.ROSA_FORMAT);
            diffMins = diffSecs / 60;
-           if (diffMins > 1) {
-               return false;
-           } else {
-               return true;
-           }
+           return (diffMins > 1);
        }catch(Exception e){
-            e.printStackTrace();
+           loggerRosaPto.error(e);
            return false;
            }
     }
 
     public void readSolutionQueueDetails()  {
         try{
-        String training = "(//div[@class='trip-details__content-block']/div[@class='trip-details__content-block'])[PLACEHOLDER]/div[1]/div[@class='grid__row']/div[1]/div";
+        String locatorTraining = "(//div[@class='trip-details__content-block']/div[@class='trip-details__content-block'])[PLACEHOLDER]/div[1]/div[@class='grid__row']/div[1]/div";
         String triptopull = "(//div[@class='trip-details__content-block']/div[@class='trip-details__content-block'])[PLACEHOLDER1]/div[PLACEHOLDER2]//div[@class = 'grid__column-8/12']/div";
         int x = 1;
         int rowIndx = 0;
@@ -264,7 +244,7 @@ public class RosaSolutionQueue extends BasePage {
             getDriver().findElement(By.xpath(xpathId)).click();
             report.reportSelenium("info","Reading row number: "+i);
             Thread.sleep(1000);
-            String fullxpathTraining = training.replace("PLACEHOLDER",""+(2*i+1));
+            String fullxpathTraining = locatorTraining.replace(MessageConstants.PLACEHOLDER,""+(2*i+1));
             String fullxpathTripToPullTemp = triptopull.replace("PLACEHOLDER1",""+(2*i+2));
             String fullxpathTripToPull1 = fullxpathTripToPullTemp.replace("PLACEHOLDER2",""+2);
             String fullxpathTripToPull2 = fullxpathTripToPullTemp.replace("PLACEHOLDER2",""+3);
@@ -277,7 +257,7 @@ public class RosaSolutionQueue extends BasePage {
                 List<WebElement> elements = eleTrng.findElements(By.xpath("./*"));
                 for (int j = 0; j < elements.size() - 1; j++) {
                     WebElement e = elements.get(j);
-                    list1.add(rowNumber,e.getText().toString().split("\n"));
+                    list1.add(rowNumber,e.getText().split("\n"));
                     rowNumber++;
                 }
             }
@@ -289,20 +269,20 @@ public class RosaSolutionQueue extends BasePage {
                 List<WebElement> elements = eleTrng.findElements(By.xpath("./*"));
                 for (int j = 0; j < elements.size() - 1; j++) {
                     WebElement e = elements.get(j);
-                    list2.add(rowTripToPull,e.getText().toString().split("\n"));
+                    list2.add(rowTripToPull,e.getText().split("\n"));
                     rowTripToPull++;
                 }
             }
 
             List<WebElement> ttp2 = getDriver().findElements(By.xpath(fullxpathTripToPull2));
-            if (ttp2.size() > 0){
+            if (!ttp2.isEmpty()){
                 for (int t=0; t<ttp2.size();t++ ){
                     WebElement eleTrng = ttp2.get(t);
 
                     List<WebElement> elements = eleTrng.findElements(By.xpath("./*"));
                     for (int j = 0; j < elements.size() - 1; j++) {
                         WebElement e = elements.get(j);
-                        list2.add(rowTripToPull,e.getText().toString().split("\n"));
+                        list2.add(rowTripToPull,e.getText().split("\n"));
                         rowTripToPull++;
                     }
                 }
@@ -317,50 +297,45 @@ public class RosaSolutionQueue extends BasePage {
         }
         }catch(Exception e){
             report.reportSelenium("Fail", "Error occured while reading the row.");
-            e.printStackTrace();
+            loggerRosaPto.error(e);
         }
     }
 
-    public void clickDownloadPdf(int index) throws Exception{
-        waitUntilElementClickable(PDF_DOWNLOAD_BUTTON);
-        buttonClick(PDF_DOWNLOAD_BUTTON);
-        WebElement webElement =  getDriver().findElement((PDF_DOWNLOAD_BUTTON));
-        Actions builder = new Actions( getDriver());
-        builder.moveToElement(webElement).click(webElement);
-        builder.perform();
+    public void clickDownloadPdf() {
+        try {
+            waitUntilElementClickable(PDF_DOWNLOAD_BUTTON);
+            buttonClick(PDF_DOWNLOAD_BUTTON);
+            WebElement webElement = getDriver().findElement((PDF_DOWNLOAD_BUTTON));
+            Actions builder = new Actions(getDriver());
+            builder.moveToElement(webElement).click(webElement);
+            builder.perform();
 
-        buttonClickIfExist(PDF_DOWNLOAD_BUTTON);
-        buttonClickIfExist(DOWNLOAD_BUTTON);
+            buttonClickIfExist(PDF_DOWNLOAD_BUTTON);
+            buttonClickIfExist(DOWNLOAD_BUTTON);
 
-        Thread.sleep(5000);
+            FileUtil pdf = new FileUtil();
+            String pdfFilePAth = pdf.getTheNewestFile("C:/Users/x257093/Downloads", "pdf").toString();
+            printConsole("Latest pdf file downloaded: " + pdfFilePAth);
+            printConsole("training :" + training);
 
-        FileUtil pdf = new FileUtil();
-        String pdfFilePAth = pdf.getTheNewestFile("C:/Users/x257093/Downloads","pdf").toString();
-        printConsole("Latest pdf file downloaded: "+pdfFilePAth);
-        PDFReports dfreports = new PDFReports(pdfFilePAth);
-        training = dfreports.readBetweenTags("TRAINING","TRIP TO PULL");
-        printConsole("training :"+training);
-
-        TripToPull = dfreports.readBetweenTags("TRIP TO PUL", "TRAINING");
-        printConsole("TripToPull :"+TripToPull);
-        empID = dfreports.readBetweenTags("Solutions", "TRAINING");
-        printConsole("empID :"+empID);
-        employeeID = parseEmpID(empID);
+            printConsole("tripToPull :" + tripToPull);
+            printConsole("empID :" + empID);
+            employeeID = parseEmpID(empID);
+        }catch(Exception e){
+            loggerRosaPto.error(e);
+        }
     }
 
     private String parseEmpID(ArrayList<String> empID){
-        String emp = empID.get(0).toString();
-        String employeeID = emp.substring(10,16);
+        String emp = empID.get(0);
         printConsole("employeeID: "+employeeID);
-
-    return employeeID;
+        return emp.substring(10,16);
     }
 
-    public void latestFile() throws Exception{
+    public void latestFile() {
     FileUtil pdf = new FileUtil();
     printConsole(pdf.getTheNewestFile("C:/Users/x257093/Downloads","pdf").toString());
-
-}
+    }
 
 
     public void selectFilterOption(String filter) throws InterruptedException {
@@ -370,17 +345,17 @@ public class RosaSolutionQueue extends BasePage {
             waitForElement(FILTER_BUTTON);
             buttonClick(FILTER_BUTTON);
             buttonClickIfExist(FILTER_STATUS);
-            buttonClickIfExist(By.xpath(STATUS_COMMITTED.replace("PLACEHOLDER",filter )));
+            buttonClickIfExist(By.xpath(STATUS_COMMITTED.replace(MessageConstants.PLACEHOLDER,filter )));
             buttonClickIfExist(APPLY_BTN);
             report.reportSelenium("pass", "Filter button clicked successful .");
         }catch(Exception e){
             report.reportSelenium("fail", "Navigation failed.");
-            LOGGER.error(e);
+            loggerRosaPto.error(e);
         }
 
     }
 
-    public void clickOnFirstViewlink(int position){
+    public void clickOnFirstViewlink(){
         buttonClickIfExist(VIEW_LINK);
     }
 
@@ -407,6 +382,7 @@ public class RosaSolutionQueue extends BasePage {
             }
         }catch(Exception e){
             report.reportSelenium("info", "Duplicate solution exist in the queue.");
+            loggerRosaPto.error(e);
         }
     }
 
@@ -426,7 +402,7 @@ public class RosaSolutionQueue extends BasePage {
             for (int j = 0; j < elements.size() - 1; j++) {
                 WebElement e = elements.get(j);
                 e.click();
-                arrStr[j] = e.getText().toString().replace("\n", "_");
+                arrStr[j] = e.getText().replace("\n", "_");
                 hm.put(i,arrStr);
             }
         }

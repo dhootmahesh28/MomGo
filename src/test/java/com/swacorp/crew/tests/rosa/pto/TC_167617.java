@@ -100,7 +100,7 @@ public class TC_167617 extends TestManager {
         rosaSolutioQueue = rosahome.createPTOSolutionRequest("Recurrent", "AQP 12 Month","737 All","OQS 2020 CQT","May 2020","Hard Line","");
         rosaSolutioQueue.checkDuplicateRequestExist();
         rosaSolutioQueue.veryfySolutionQueueExists();
-        rosaSolutioQueue.StatusPollingOfPTORequest("Recurrent", "OQS 2020 CQT","737 All","OQS 2020 CQT","May 2020","Hard Line","","04Apr2020 10:03");
+        rosaSolutioQueue.statusPollingOfPTORequest("Recurrent", "OQS 2020 CQT","737 All","OQS 2020 CQT","May 2020","Hard Line","","04Apr2020 10:03");
         css  = rosaSolutioQueue.NavigateToCSSForValidation();
     }*/
 

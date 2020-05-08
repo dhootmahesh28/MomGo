@@ -10,7 +10,6 @@ import com.hp.lft.sdk.winforms.Window;
 import com.swacorp.crew.pages.common.WinBasePage;
 import com.swacorp.crew.sharedrepository.tsr.ObjectRepoTRiM;
 import com.swacorp.crew.utils.ReportUtil;
-import org.apache.log4j.Logger;
 import com.swacorp.crew.utils.ReportStatus;
 import com.swacorp.crew.pages.constants.WaitConstants;
 
@@ -21,13 +20,12 @@ import java.util.Map;
 import com.swacorp.crew.pages.constants.ApplicationConstantsTrim;
 
 public class TrimHome extends WinBasePage {
-    ReportUtil report = new ReportUtil();
+    ReportUtil reportTrimHome = new ReportUtil();
     ObjectRepoTRiM lftObjects = null;
-    public HashMap<String, String> pgMap = new HashMap<>();
+    public Map<String, String> pgMap = new HashMap<>();
     private String empNumberFromApp = "";
     private String fldFirstNameFromApp = "";
     private boolean searchFound;
-    private String empNumber;
 
     public String getDynamicDataFromPage(String key) {
         return pgMap.get(key);
@@ -35,11 +33,13 @@ public class TrimHome extends WinBasePage {
 
     public void selectMenuFromBottomMenu(String menu, String drpValue) throws GeneralLeanFtException {
         try {
-            TreeView treeView = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().tvTreeView();
-            NavigateMenu(menu);
+            navigateMenu(menu);
             selectValue(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), lftObjects.tRiMTrainingResourceManagerSouthwestWindow().cbSubFilterComboBox(), drpValue);
         }catch(GeneralLeanFtException e){
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "fail", "Error occured while selecting dropdown value: "+drpValue);
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "fail", "Error occured while selecting dropdown value: "+drpValue);
+            loggerWinBasePage.error(e);
+        }catch (InterruptedException e) {
+            loggerWinBasePage.error(e);
         }
     }
     public TrimHome() {
@@ -48,9 +48,12 @@ public class TrimHome extends WinBasePage {
 
 
     public void validateTreeNode(String empNr, String firstName, String node, String partialNode, boolean validation) throws GeneralLeanFtException {
+        String is = "' is '";
+        String nodeVisibility = "Visibility of the employeeID node '";
+        String expectedVisibility = "' in the Tree view.Expected '";
         boolean found = false;
         boolean partialNodeFound = false;
-        String tempNode=new String();
+        String tempNode="";
         TreeView schdPlannerTreeView = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().tvTreeView();
         try {
             if(schdPlannerTreeView.exists(WaitConstants.FIVE_SECOND_LFT)){
@@ -68,7 +71,7 @@ public class TrimHome extends WinBasePage {
                     String innerNode = empNr+ " "+firstName.toUpperCase()+",   (_"+ApplicationConstantsTrim.TRIM_PLACEHOLDER_INITIAL_AUTOMATION2+")  "+ApplicationConstantsTrim.TRIM_DUE_MONTH;
                     schdPlannerTreeView.activateNode(node + ";" + tempNode+";"+innerNode);
                     found = true;
-                    report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "info", "Visibility for employeeID node '" + empNr + "' is '" + found + "' in the Tree view path : '" + node + ";" + tempNode+";"+innerNode+ "'");
+                    reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "info", "Visibility for employeeID node '" + empNr + is + found + "' in the Tree view path : '" + node + ";" + tempNode+";"+innerNode+ "'");
                     schdPlannerTreeView.activateNode(node + ";" + tempNode+";"+innerNode);
                 }
                 if (partialNodeFound) {
@@ -76,14 +79,14 @@ public class TrimHome extends WinBasePage {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            loggerWinBasePage.error(e);
         }finally{
-            if (found & validation) {
-                report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "pass", "Visibility of the employeeID node '" + empNr + "' is '" + found + "' in the Tree view.Expected '" + validation + "'.");
-            } else if ((!found) & (!validation)) {
-                report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "pass", "Visibility of the employeeID node '" + empNr + "' is '" + found + "' in the Tree view.Expected '" + validation + "'.");
+            if (found && validation) {
+                reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "pass", nodeVisibility + empNr + is + found + expectedVisibility + validation + "'.");
+            } else if ((!found) && (!validation)) {
+                reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "pass", nodeVisibility+ empNr + is + found + expectedVisibility + validation + "'.");
             } else {
-                report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "fail", "Visibility of the employeeID node '" + empNr + "' is '" + found + "' in the Tree view. Expected '" + validation + "'.");
+                reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "fail", nodeVisibility + empNr + is + found + expectedVisibility+ validation + "'.");
             }
             schdPlannerTreeView.activateNode(node + ";" + tempNode);
             schdPlannerTreeView.activateNode(node);
@@ -92,20 +95,17 @@ public class TrimHome extends WinBasePage {
         lftObjects.tRiMTrainingResourceManagerSouthwestWindow().minimize();
     }
 
-    public int NavigateMenu(String NavigationString) throws GeneralLeanFtException {
+    public int navigateMenu(String navigationString) throws GeneralLeanFtException, InterruptedException {
         int returnInt = 1;
         Window mainWin = lftObjects.tRiMTrainingResourceManagerSouthwestWindow();
         mainWin.activate();
         mainWin.maximize();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        Thread.sleep(2000);
 
         try {
             UiObject topMenuStrip = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().mainMenuUiObject();
-            String[] arrMenuItems = NavigationString.split("-->");
+            String[] arrMenuItems = navigationString.split("-->");
             topMenuStrip.highlight();
             for (String menuItem : arrMenuItems) {
                 topMenuStrip.sendKeys(menuItem);
@@ -113,20 +113,18 @@ public class TrimHome extends WinBasePage {
             returnInt = 0;
             return returnInt;
         } catch (Exception e) {
-            e.printStackTrace();
+            loggerWinBasePage.error(e);
         }
         if (returnInt == 0) {
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "pass", "Menu navigation is successful: "+NavigationString);
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "pass", "Menu navigation is successful: "+navigationString);
         } else {
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "fail", "Failed to navigate the menu.");
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "fail", "Failed to navigate the menu.");
         }
         return returnInt;
     }
 
-    public int SearchEmployeesDetails(String empNumber, boolean verifyActive) throws  GeneralLeanFtException {
+    public int searchEmployeesDetails(String empNumber, boolean verifyActive) throws  GeneralLeanFtException {
         int retVal = 1;
-        String empNumberFromApp;
-        String fldFirstNameFromApp;
         String lastName;
 
         ReportStatus.reset();
@@ -139,19 +137,20 @@ public class TrimHome extends WinBasePage {
         EditField fldLastName =lftObjects.tRiMTrainingResourceManagerSouthwestWindow().EmployeeDetails().txtLNameEditField();
 
         try {
-            Highlight(winFindEmployee);
+            highlight(winFindEmployee);
             setTextInEditBox(fldEmpSearch, empNumber);
-            VerifyNoDuplicate(empNumber);
+            verifyNoDuplicate(empNumber);
             try {
                 btnClick(btnShowEmpDetails);
                 if(verifyActive) {
-                    VerifyActive();
+                    verifyActive();
                 }
             }catch(Exception e){
-                report.report("Fail","Error occured while clicking on button. - btnShowEmpDetails");
+                reportTrimHome.report("Fail","Error occured while clicking on button. - btnShowEmpDetails");
+                loggerWinBasePage.error(e);
             }
 
-            if (Highlight(winFindEmployeeSearch)) {
+            if (highlight(winFindEmployeeSearch)) {
                 empNumberFromApp = fldEmpNumber.getText();
                 fldFirstNameFromApp = fldFirstName.getText();
                 lastName = fldLastName.getText();
@@ -159,25 +158,24 @@ public class TrimHome extends WinBasePage {
                 pgMap.put("TRIM_EMP_NO", empNumberFromApp);
                 pgMap.put("TRIM_EMP_FIRSTNAME", fldFirstNameFromApp);
                 retVal = 0;
-                report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "info", "Search result after clicking on Search button. EmpNumber = "+empNumberFromApp+", FirstName = "+fldFirstNameFromApp+", LastName = "+lastName);
+                reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "info", "Search result after clicking on Search button. EmpNumber = "+empNumberFromApp+", FirstName = "+fldFirstNameFromApp+", LastName = "+lastName);
                 winFindEmployeeSearch.close();
                 searchFound = true;
             }else{
                 searchFound = false;
-                report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occured while searching the employee number on Find Employee window of Trim pplication.");
+                reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Failed to search employee number on Find Employee window.");
                 retVal = 1;
             }
-            //winFindEmployeeSearch.close();
             winFindEmployee.activate();
             winFindEmployee.close();
         }catch( Exception  e){
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occured while searching the employee number on Find Employee window of Trim pplication.");
-            e.printStackTrace();
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occured in searching the employee number on Find Employee window of Trim pplication.");
+            loggerWinBasePage.error(e);
         }
         return retVal;
     }
 
-    public int VerifyEmployeeSchedule(String empNumbers, String eventCode, String eventDate) throws  GeneralLeanFtException {
+    public int verifyEmployeeSchedule(String empNumbers, String eventCode, String eventDate) throws  GeneralLeanFtException {
         int retVal = 1;
         ReportStatus.reset();
         Window findEmployeeWindow = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
@@ -187,32 +185,32 @@ public class TrimHome extends WinBasePage {
         Table dgTable = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().instructorEmployeeScheduleWindow().dgTable();
 
         try {
-            Highlight(findEmployeeWindow);
+            highlight(findEmployeeWindow);
             setTextInEditBox(txtSearchEmpNumberEditField, empNumbers);
             btnClick(showEmployeeScheduleButton);
-            if (Highlight(instructorEmployeeScheduleWindow)) {
+            if (highlight(instructorEmployeeScheduleWindow)) {
                 if (dgTable.getCustomGrid().getXtraGrid().getCell(0, eventDate).getValue().toString().equalsIgnoreCase(eventCode)) {
                     TableCell cell = dgTable.getCustomGrid().getXtraGrid().getCell(0, "5");
                     Location loc = new Location(Position.TOP_LEFT, new Point(cell.getX(), cell.getY()));
                     dgTable.mouseMove(loc);
                     Thread.sleep(5);
-                    report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Training Event : "+ eventCode +" is scheduled on the date: "+ eventDate +" for Employee: "+ empNumbers);
+                    reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Training Event : "+ eventCode +" is scheduled on the date: "+ eventDate +" for Employee: "+ empNumbers);
                 }else{
-                    report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Training Event: "+ eventCode +" not found on the date: "+ eventDate +" for Employee: "+ empNumbers);
+                    reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Training Event: "+ eventCode +" not found on the date: "+ eventDate +" for Employee: "+ empNumbers);
                 }
                 retVal = 0;
                 instructorEmployeeScheduleWindow.close();
             }
             findEmployeeWindow.close();
         }catch( Exception  e){
-            e.printStackTrace();
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occurred while validating Employee Schedule on Find Employee Schedule window of Trim application.");
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occurred while validating Employee Schedule on Find Employee Schedule window of Trim application.");
+            loggerWinBasePage.error(e);
         }
         return retVal;
     }
 
 
-    public int AddEmployeeRequirement(String empNumbers, String requirementName) throws  GeneralLeanFtException {
+    public int addEmployeeRequirement(String empNumbers, String requirementName) throws  GeneralLeanFtException {
         int retVal = 1;
         ReportStatus.reset();
         String requirementsCreatedMsg = empNumbers.split(",").length + " Requirement(s) Created. No Errors.";
@@ -225,31 +223,31 @@ public class TrimHome extends WinBasePage {
         Static requirementSCreatedNoErrorsStatic = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().finishedDialog().requirementSCreatedNoErrorsStatic();
 
         try {
-            Highlight(winAddEmpRequirement);
+            highlight(winAddEmpRequirement);
             txtEmployeeNumbersEditor.sendKeys(empNumbers);
             cboRequirementIDComboBox.select(requirementName);
             btnClick(addRequirementToDuePilotListButton);
-            if (Highlight(finishedDialog)) {
-                if (VerifyObjectExist(requirementSCreatedNoErrorsStatic, true)) {
+            if (highlight(finishedDialog)) {
+                if (verifyObjectExist(requirementSCreatedNoErrorsStatic, true)) {
                     if (requirementSCreatedNoErrorsStatic.getText().replace("\r\n", " ").equalsIgnoreCase(requirementsCreatedMsg)){
-                        report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Expected message displayed: " + requirementsCreatedMsg);
+                        reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Expected message displayed: " + requirementsCreatedMsg);
                         retVal = 0;
                     }else{
-                        report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Failed to verify the requirements created message. Expected: "+ requirementsCreatedMsg +" Actual: "+ requirementSCreatedNoErrorsStatic.getText());
+                        reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Failed to verify the requirements created message. Expected: "+ requirementsCreatedMsg +" Actual: "+ requirementSCreatedNoErrorsStatic.getText());
                     }
                 }else{
-                    report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Expected message not displayed on Finished dialog: "+ requirementsCreatedMsg);
+                    reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Expected message not displayed on Finished dialog: "+ requirementsCreatedMsg);
                 }
                 oKButton.click();
             }
         }catch( Exception  e){
-            e.printStackTrace();
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occurred while adding employee(s) to the requirement on Add Employee Requirement window of Trim pplication.");
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occurred while adding employee(s) to the requirement on Add Employee Requirement window of Trim pplication.");
+            loggerWinBasePage.error(e);
         }
         return retVal;
     }
 
-    public int AutoPopulate(String equipment, String requirementName) throws  GeneralLeanFtException {
+    public int autoPopulate(String equipment, String requirementName) throws  GeneralLeanFtException {
         int retVal = 1;
         ReportStatus.reset();
         Window autoPopulateWindow = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().autoPopulateWindow();
@@ -267,7 +265,7 @@ public class TrimHome extends WinBasePage {
         Label populateCompleteLabel = lftObjects.progressWindow().populateCompleteLabel();
 
         try {
-            Highlight(autoPopulateWindow);
+            highlight(autoPopulateWindow);
             autoPopulateWindow.maximize();
             cboEquipComboBox.select(equipment);
             templateDataGridTable.getCustomGrid().getXtraGrid().activateCell(0, "Template");
@@ -282,86 +280,83 @@ public class TrimHome extends WinBasePage {
             tabPopulateTabControl.select("Launch");
             startButton.click();
             if (populateCompleteLabel.exists(150)){
-                report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Auto populate is complete.");
+                reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Auto populate is complete.");
                 progressWindow.close();
                 retVal = 0;
             }else{
-                report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Failed to complete the Auto Populate.");
+                reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Failed to complete the Auto Populate.");
             }
             autoPopulateWindow.close();
         }catch( Exception  e){
-            e.printStackTrace();
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occurred while performing Auto Populate on Auto Populate window of Trim pplication.");
+            loggerWinBasePage.error(e);
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occurred while performing Auto Populate on Auto Populate window of Trim pplication.");
         }
         return retVal;
     }
 
-    public void CloseApplication() throws  GeneralLeanFtException {
-        flushObjects();
-    }
 
-   public void ValidateSearchResults(Map<String, String> runtimeData , String[] testData){
+   public void validateSearchResults(Map<String, String> runtimeData , String[] testData){
         if (empNumberFromApp.equalsIgnoreCase(runtimeData.get("CrewEmployeeNumber"))){
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Employee number matched.");
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Employee number matched.");
         }else{
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Employee number not matched.");
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Employee number not matched.");
         }
 
         if (fldFirstNameFromApp.equalsIgnoreCase(testData[4])){
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Employee first name matched.");
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Employee first name matched.");
         }else{
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Employee first name  not matched.");
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Employee first name  not matched.");
         }
     }
 
-    public void ValidateSearchResults(boolean status) throws GeneralLeanFtException{
+    public void validateSearchResults(boolean status) throws GeneralLeanFtException{
         String visible = status ? "visible": "not visible";
         if ((status && searchFound) || (!status && !searchFound)){
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "CREW employee details "+visible+" on Trim.");
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "CREW employee details "+visible+" on Trim.");
         }else{
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "CREW employee details not "+visible+" on Trim.");
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "CREW employee details not "+visible+" on Trim.");
         }
         flushAllChileWindowsExceptMain();
     }
 
 
 
-    public void VerifyNoDuplicate(String empNumber)  throws GeneralLeanFtException{
+    public void verifyNoDuplicate(String empNumber)  throws GeneralLeanFtException{
 
         lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
         List<ListItem> lst = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow().lstSearchListBox1().getItems();
         if (lst.size() < 2 ){ // less than 2 means no duplicate
-                report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "No duplicate record is found on search employee window for the employee: "+empNumber);
+                reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "No duplicate record is found on search employee window for the employee: "+empNumber);
         }else{
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Duplicate record found.");
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail", "Duplicate record found.");
         }
     }
 
-    public void VerifyActive() throws GeneralLeanFtException{
+    public void verifyActive() throws GeneralLeanFtException{
         CheckedState state = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().employeeWindow().activeCheckBox().getState();
         if (state.toString().equalsIgnoreCase("checked")){
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Checkbox enabled");
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Pass", "Checkbox enabled");
         }else{
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "fail", "Checkbox disabled");
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "fail", "Checkbox disabled");
         }
     }
 
 
     public void flushAllChileWindowsExceptMain() throws  GeneralLeanFtException{
-        CloseWindowIfExist(lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow(),  5);
-        CloseWindowIfExist(lftObjects.tRiMTrainingResourceManagerSouthwestWindow().employeeWindow(),  5);
+        closeWindowIfExist(lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow(),  5);
+        closeWindowIfExist(lftObjects.tRiMTrainingResourceManagerSouthwestWindow().employeeWindow(),  5);
     }
 
-    public void MinimizeMainWindow() throws  GeneralLeanFtException{
-        MinimiseWindowIfExist(lftObjects.tRiMTrainingResourceManagerSouthwestWindow());
+    public void minimizeMainWindow() throws  GeneralLeanFtException{
+        minimiseWindowIfExist(lftObjects.tRiMTrainingResourceManagerSouthwestWindow());
     }
 
-    public void MaximizeMainWindow() throws  GeneralLeanFtException{
-        MaximizeWindowIfExist(lftObjects.tRiMTrainingResourceManagerSouthwestWindow());
+    public void maximizeMainWindow() throws  GeneralLeanFtException{
+        maximizeWindowIfExist(lftObjects.tRiMTrainingResourceManagerSouthwestWindow());
     }
 
 
-    public void SelectEquipmentAndPrimaryStatus(String empNumber, String equipments, String primaryStatus) {
+    public void selectEquipmentAndPrimaryStatus(String empNumber, String equipments, String primaryStatus) {
         ComboBox cboEquipment = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().EmployeeDetails().cboPrimaryEquipIDComboBox();
         ComboBox cboStatus = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().EmployeeDetails().cboPrimaryCrewStatusIDComboBox();
 
@@ -372,23 +367,23 @@ public class TrimHome extends WinBasePage {
         Window winFindEmployeeSearch = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().EmployeeDetails();
 
         try {
-            Highlight(winFindEmployee);
+            highlight(winFindEmployee);
             setTextInEditBox(fldEmpSearch, empNumber);
             btnClick(btnShowEmpDetails);
 
-            if (Highlight(winFindEmployeeSearch)) {
+            if (highlight(winFindEmployeeSearch)) {
                 selectValue(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(),cboEquipment, equipments);
                 selectValue(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(),cboStatus, primaryStatus);
                 winFindEmployeeSearch.close();
                 searchFound = true;
             }else{
                 searchFound = false;
-                report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occured while searching the employee number on Find Employee window of Trim pplication.");
+                reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occured while searching the employee number on Find Employee window of Trim pplication.");
             }
             winFindEmployee.close();
         }catch( Exception  e){
-            report.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occured while searching the employee number on Find Employee window of Trim pplication.");
-            e.printStackTrace();
+            reportTrimHome.reportLeanFT(lftObjects.tRiMTrainingResourceManagerSouthwestWindow(), "Fail","Error occured while searching the employee number on Find Employee window of Trim pplication.");
+            loggerWinBasePage.error(e);
         }
     }
 }

@@ -1,25 +1,23 @@
 package com.swacorp.crew.utils;
 
-import org.apache.commons.io.comparator.LastModifiedFileComparator;
-import org.apache.commons.io.filefilter.WildcardFileFilter;
+import org.apache.log4j.Logger;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
-
 import java.io.File;
-import java.io.FileFilter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PDFReports {
-    ArrayList<String> pdfContentLines = new ArrayList<String>();
+    public static final  Logger logger = Logger.getLogger(PDFReports.class);
+    ArrayList<String> pdfContentLines = new ArrayList();
     String[] pdfLines;
     String[] tags = {"TRIP TO PULL", "SPLIT TRIP","ASSIGNED PORTION","OPEN TIME PORTION","OPEN TIME PORTION" };
 
-
-    public PDFReports(String pdfPath) throws Exception{
+    public PDFReports(String pdfPath){
 
 
         try (PDDocument document = PDDocument.load(new File(pdfPath))) {
@@ -37,24 +35,22 @@ public class PDFReports {
 
                 pdfLines = pdfFileInText.split("\\r?\\n");
             }
+        }catch(IOException e){
+            logger.error(e);
         }
     }
 
-    public ArrayList<String> readBetweenTags(String startTag, String endTag){
+    public List<String> readBetweenTags(String startTag, String endTag){
         int i=0;
         boolean startReading = false;
-        boolean stopReading = false;
-        for (String line : pdfLines) {
+         for (String line : pdfLines) {
             if (line.equalsIgnoreCase(endTag)){
-                stopReading = true;
                 break;
             }
-
-            if (startReading && !stopReading){
+            if (startReading){
                 pdfContentLines.add(i,line);
                 i++;
             }
-
             if (line.equalsIgnoreCase(startTag)){
                 startReading = true;
             }
@@ -62,7 +58,7 @@ public class PDFReports {
         return pdfContentLines;
     }
 
-    public ArrayList<String> readBetweenTags(String startTag, int startIndex, String endTag, int endIndex, String ignorPat, String searchPat){
+    public List<String> readBetweenTags(String startTag, int startIndex, String endTag, int endIndex, String ignorPat, String searchPat){
         int i=0;
         int countStartIndex = 0;
         int countEndIndex = 0;
@@ -73,12 +69,11 @@ public class PDFReports {
         for (String line : pdfLines) {
             Matcher ignoreMatches = ignorePattern.matcher(line);
             Matcher searchMatches = searchPattern.matcher(line);
-            if (!ignoreMatches.find() | searchMatches.find()){
+            if (!ignoreMatches.find() || searchMatches.find()){
                 if (line.equalsIgnoreCase(endTag)){
                     countEndIndex++;
 
                     if (countEndIndex == endIndex) {
-                        stopReading = true;
                         break;
                     }
                 }

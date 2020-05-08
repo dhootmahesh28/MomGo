@@ -19,7 +19,7 @@ public class CssTransactionReport extends WinBasePage{
     ReportUtil reportCssHome = new ReportUtil();
     private final Logger loggerTranReport = Logger.getLogger(CssTransactionReport.class);
     ObjectRepoCSS lftObjects =null;
-    ArrayList<String> pdfContentAfterReadingTransactionReport;
+    List<String> pdfContentAfterReadingTransactionReport;
     String tripStartDate;
     String tripEndDate;
     Map<String, Map<String, ArrayList<String[]>>> masterHM = new LinkedHashMap<>();
@@ -74,6 +74,7 @@ public class CssTransactionReport extends WinBasePage{
                 reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Transaction Report reflected.");
             }
         }catch(Exception e){
+            loggerTranReport.error(e);
         }
     }
 
@@ -82,11 +83,15 @@ public class CssTransactionReport extends WinBasePage{
         String[] user = {"",""};
         String[] function = {"LOGINCRW", "LOGINCRW"};
         String[] reason = {"LGN","LGN"};
-        String[] logMessage ={"Log In from 107.2.235.122;Macintosh", "Log In from 107.2.235.122;Macintosh"};
+        String logBody = "Log In from 107.2.235.122;Macintosh";
+        String crewId = "Crew Member Id:";
 
-        String[] line2Data = {"Crew Member Id:", "Crew Member Id:"};
+        loggerTranReport.info("value: "+value);
+        loggerTranReport.info("anEnumCssTransactionReport: "+anEnumCssTransactionReport);
 
-        String[] line3Data = {"Log In from 107.2.235.122;Macintosh","Log In from 107.2.235.122;Macintosh"};
+        String[] logMessage ={logBody, logBody};
+
+        String[] line2Data = {crewId, crewId};
 
         String reportContent = "";
         reportContent = lftObjects.CssMainWindow().transactionReportInternalFrame().report().getVisibleText();
@@ -126,7 +131,7 @@ public class CssTransactionReport extends WinBasePage{
                 reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "State of Function checkbox is disabled.");
             }
         } catch (GeneralLeanFtException e) {
-            e.printStackTrace();
+            loggerTranReport.error(e);
         }
 
         try {
@@ -151,7 +156,7 @@ public class CssTransactionReport extends WinBasePage{
                 reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Reason code not found in the drpdown: "+reason);
             }
         } catch (GeneralLeanFtException e) {
-            e.printStackTrace();
+            loggerTranReport.error(e);
         }
 
         validateFunctionList(functionDropdownList);
@@ -201,7 +206,6 @@ public class CssTransactionReport extends WinBasePage{
                 dropValueFound = true;
                 reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Pass", "Function dropdown list contains the given item: "+functionName);
                 Keyboard.pressKey(Keyboard.Keys.ENTER);
-               // break;
             }
             if (eachDropdownValue.equalsIgnoreCase(prevItem)){
                 break;
@@ -225,7 +229,7 @@ public class CssTransactionReport extends WinBasePage{
             Thread.sleep(4000);
 
         }catch(Exception e){
-            e.printStackTrace();
+           loggerTranReport.error(e);
         }
 
         if(lftObjects.CssMainWindow().transactionReportDialog().exists()){
@@ -240,7 +244,7 @@ public class CssTransactionReport extends WinBasePage{
 
             File newpath = new  FileUtil().getTheNewestFile(path, "pdf");
             PDFReports pdf = new PDFReports(newpath.getPath());
-            ArrayList<String> pdfContent = pdf.readBetweenTags("Transaction Report", "END OF REPORT");
+            List<String> pdfContent = pdf.readBetweenTags("Transaction Report", "END OF REPORT");
             pdfContentAfterReadingTransactionReport = pdfContent;
             if (!pdfContentAfterReadingTransactionReport.isEmpty()){
                 reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "pass","Transaction reportCssLogin in pdf format is read." );
@@ -248,6 +252,7 @@ public class CssTransactionReport extends WinBasePage{
 
         }catch(Exception  e){
             reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "fail","Failed to read Transaction reportCssLogin in pdf format." );
+            loggerTranReport.error(e);
         }
     }
 

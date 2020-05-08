@@ -39,7 +39,7 @@ public class TC181390 extends TestManager {
         String schdPlannerRandomDropdownValueToRefreshTVData = testData[20];
         String equipment = testData[21]; //737
         String primaryStatusTrimEmpDetailsWnd =  testData[22];
-
+/*
         wrapper.addCrewmember(testData, true, applyenterpriseMode);
 
         //wrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
@@ -62,6 +62,6 @@ public class TC181390 extends TestManager {
 
         wrapper.selectFromTrimDueEmployeeSchdPlannerDropdown(schdPlannerDropdownValue);
 
-        //wrapper.expandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, firstName,false);
+        //wrapper.expandTreeNodeAndValidate("737;"+domicile, partialNodetextTrimSchedTV, firstName,false);*/
     }
 }

@@ -11,7 +11,7 @@ public interface LeanftGenericMethods extends IGenericMethods {
     public static final Logger log = Logger.getLogger(LeanftGenericMethods.class);
 
     @Override
-    default boolean VerifyObjectExist(TestObject o, boolean existance) {
+    default boolean verifyObjectExist(TestObject o, boolean existance) {
         boolean objExist;
         try {
             objExist = o.exists() ? true: false;
@@ -25,22 +25,22 @@ public interface LeanftGenericMethods extends IGenericMethods {
     }
 
     @Override
-    default boolean VerifyObjectExist(TestObject o) {
+    default boolean verifyObjectExist(TestObject o) {
         return false;
     }
 
     @Override
-    default boolean VerifyObjectDisplayed(TestObject o, boolean existance) {
+    default boolean verifyObjectDisplayed(TestObject o, boolean existance) {
         return false;
     }
 
     @Override
-    default boolean WaitProperty(TestObject o, int timeout, String timeUnit) {
+    default boolean waitProperty(TestObject o, int timeout, String timeUnit) {
         return false;
     }
 
     @Override
-    default boolean WaitProperty(TestObject o, String propName, String propValue, int timeOut) throws GeneralLeanFtException, InterruptedException {
+    default boolean waitProperty(TestObject o, String propName, String propValue, int timeOut) throws GeneralLeanFtException, InterruptedException {
         String tempProp;
         int counter = timeOut * 60 * 1000;
         if (!o.exists() && (counter < timeOut )){
@@ -54,7 +54,7 @@ public interface LeanftGenericMethods extends IGenericMethods {
     }
 
     @Override
-    default boolean Highlight(TestObject o) {
+    default boolean highlight(TestObject o) {
         try {
                 o.highlight();
                 log.info("Object highlighted, "+o.getDisplayName());

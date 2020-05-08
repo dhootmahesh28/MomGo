@@ -32,22 +32,22 @@ public class TrimWrapper extends TestUtil {
     }
 
     //wrapperMethodToAddDuplicateEmployeeNrOQSTRIM
-    public void employeeSearch(boolean visibility, boolean verifyActivechkbox) throws GeneralLeanFtException{
+    public void employeeSearch(boolean visibility, boolean verifyActivechkbox) throws GeneralLeanFtException, InterruptedException {
         trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
         trimLoginPage.verifyLoginSuccessful(true);
-        trimHomePageAM.NavigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
+        trimHomePageAM.navigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
         empNr = getDynamicData("EmpNumber");
-        trimHomePageAM.SearchEmployeesDetails(empNr, verifyActivechkbox);
-        trimHomePageAM.ValidateSearchResults(visibility );
-        trimHomePageAM.MinimizeMainWindow();
+        trimHomePageAM.searchEmployeesDetails(empNr, verifyActivechkbox);
+        trimHomePageAM.validateSearchResults(visibility );
+        trimHomePageAM.minimizeMainWindow();
     }
 
     /**Method description: This method is used to select the equipments from Equipments dropdown and select the primaryStatus from the primary dropdown from Employee details page in Trim.
      * method call: selectEquipmentAndPrimaryStatus("737", "First Officer")
      * method return: void*/
-    public void selectEquipmentAndPrimaryStatus(String equipments, String primaryStatus) throws GeneralLeanFtException{
+    public void selectEquipmentAndPrimaryStatus(String equipments, String primaryStatus) throws GeneralLeanFtException, InterruptedException {
         trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
-        trimHomePageAM.NavigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
-        trimHomePageAM.SelectEquipmentAndPrimaryStatus(empNr, equipments, primaryStatus);
+        trimHomePageAM.navigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
+        trimHomePageAM.selectEquipmentAndPrimaryStatus(empNr, equipments, primaryStatus);
     }
 }

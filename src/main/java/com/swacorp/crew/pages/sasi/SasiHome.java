@@ -21,11 +21,11 @@ public class SasiHome extends BasePage {
     ArrayList<String[]> training = new ArrayList<>();
     ArrayList<String[]>  triptopull = new ArrayList<>();
 
-    private final By WORLD_VIEWER_PARADISE = By.xpath("//*[text()='World Viewer - Paradise']");
-    private final By SELECT_DRP = By.xpath("//select[@id='qt']");
-    private final By EMPLOYEE = By.xpath("//input[@name='attributeEmployeeID']");
-    private final By submit = By.xpath("//*[@id='submitRow']/td/input");
-    private final By firstAnchorLinq = By.xpath("//a[@title = 'click for detailed crew view'][1]");
+    private static final By WORLD_VIEWER_PARADISE = By.xpath("//*[text()='World Viewer - Paradise']");
+    private static final By SELECT_DRP = By.xpath("//select[@id='qt']");
+    private static final By EMPLOYEE = By.xpath("//input[@name='attributeEmployeeID']");
+    private static final By submit = By.xpath("//*[@id='submitRow']/td/input");
+    private static final By firstAnchorLinq = By.xpath("//a[@title = 'click for detailed crew view'][1]");
     String rosaempID;
 
     public SasiHome(Map<String, Map<String, ArrayList<String[]>>> rosaMasterHM){

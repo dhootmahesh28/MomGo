@@ -69,7 +69,7 @@ public class TrimLogin extends WinBasePage  {
             Button loginButton = lftObjects.loginToSouthwestWindow().btnLoginButton();
 
             new ProcessBuilder(EnvironmentConstants.TRiMAPPPATH).start();
-            Highlight(lftObjects.loginToSouthwestWindow());
+            highlight(lftObjects.loginToSouthwestWindow());
             setTextInEditBox(userField,user );
             setTextInEditBox(paswordField, pass);
 

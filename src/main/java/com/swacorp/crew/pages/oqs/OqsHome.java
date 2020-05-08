@@ -62,9 +62,7 @@ public class OqsHome extends BasePage {
     private static final By DELETE_EVENT = By.xpath("//*[(text()='Delete Event...')]");
     String xpathTrainingEvent = "//div[@id= 'addTrainingEvent']//div[contains(@class, 'yui-dt-liner') and text() = '"+MessageConstants.PLACEHOLDER+"']";
     private static final By Ok_BTN= By.xpath("//*[contains(text(),'Ok')]");
-    private static final String xpathDivTextGeneric = "//div[(text() = 'PLACEHOLDER')]";
-    private static final By DATE_CAL = By.id("dateCalText");
-
+    private static final String XPATH_DIV_TEXT_GENERIC = "//div[(text() = 'PLACEHOLDER')]";
 
     private boolean crewAddedSuccessfully;
     String empNum;
@@ -84,7 +82,7 @@ public class OqsHome extends BasePage {
 
         String locator;
         //div[(text() = 'FLIGHT TRAINING')]
-        locator = xpathDivTextGeneric.replace("PLACEHOLDER", trainingEvent);
+        locator = XPATH_DIV_TEXT_GENERIC.replace("PLACEHOLDER", trainingEvent);
         try{
             Thread.sleep(7000);
         }catch(Exception e){
@@ -184,7 +182,7 @@ public class OqsHome extends BasePage {
                         actions.moveToElement(getDriver().findElement(OK_BUTTON)).click().build().perform();*/
                         try {
 
-                            getDriver().findElements(By.xpath("//*[contains(text(),'OK')]")).get(2).click();
+                            getDriver().findElements(OK_BUTTON).get(2).click();
                             /*trimObjectRepo = new ObjectRepoTRiM();
                             trimObjectRepo.oQSFlightOperationsPage().compAreaFrame().webCheckBox().click();
                             Thread.sleep(5000);
@@ -307,7 +305,7 @@ public class OqsHome extends BasePage {
 
                scrollToElement(getDriver().findElement(YES_BUTTON));
                buttonClickIfExist(YES_BUTTON);
-               getDriver().findElements(By.xpath("//*[contains(text(),'OK')]")).get(2).click();
+               getDriver().findElements(OK_BUTTON).get(2).click();
 
                report.reportSelenium("Pass", "Position edited successfully to: " + position);
           }catch(Exception e){

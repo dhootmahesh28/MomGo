@@ -1,11 +1,9 @@
 package com.swacorp.crew.tests.rosa.pto;
 
+import com.swacorp.crew.pages.constants.ApplicationConstantsCss;
 import com.swacorp.crew.tests.dataprovider.RosaTestDataProvider;
 import com.swacorp.crew.tests.wrappers.CssWrapper;
 import com.swacorp.crew.utils.TestManager;
-import com.swacorp.crew.pages.constants.EnumCssTransactionReport;
-import com.swacorp.crew.pages.rosa.RosaLogin;
-import com.swacorp.crew.pages.rosa.RosaSolutionQueue;
 import com.swacorp.crew.tests.wrappers.RosaWrapper;
 import org.testng.annotations.Test;
 
@@ -24,9 +22,9 @@ public class TC_167609 extends TestManager {
         rosaWrapper.E2EFlow_RosaPTOMODIFIED();
         cssWrapper.loginCss();
         cssWrapper.NavigateToTransactionReport();
-        cssWrapper.validateTransactioTeportDialog(EnumCssTransactionReport.Function.LOGINCRW.getValue(), EnumCssTransactionReport.Reason.LGN.getValue());
+        cssWrapper.validateTransactioTeportDialog(ApplicationConstantsCss.CSS_TRAN_REPORT_FUNCTION_LOGINCRW, ApplicationConstantsCss.CSS_TRAN_REPORT_REASON_LGN);
         cssWrapper.validateTransactioReportFile();
-        cssWrapper.buildLogString(2, EnumCssTransactionReport.Function.LOGINCRW.getValue(), EnumCssTransactionReport.Reason.LGN.getValue());
+        cssWrapper.buildLogString(2, ApplicationConstantsCss.CSS_TRAN_REPORT_FUNCTION_LOGINCRW, ApplicationConstantsCss.CSS_TRAN_REPORT_REASON_LGN);
 
         /*css.readTransactionReport("C:\\Users\\x257093\\AppData\\Local\\Temp\\JasperRptTemp");
         css.validatePdfContentAfterReadingTransactionReport(testData[3]);

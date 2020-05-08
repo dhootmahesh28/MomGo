@@ -24,7 +24,7 @@ public class TC181465 extends TestManager {
 
 
     @Test(priority=1,groups = {"181465", "regression"}, dataProvider = "TC181465", dataProviderClass = TestDataProvider.class)
-    public void tc181506(String[] testData) throws GeneralLeanFtException {
+    public void tc181506(String[] testData) throws GeneralLeanFtException, InterruptedException {
         setScenarioName("TC181506_OQS_RK-TRiM-FO-Add_Flight_Training_event_under_Initial_to_an_FO");
         boolean applyenterpriseMode = true;
         String domicile = testData[3];

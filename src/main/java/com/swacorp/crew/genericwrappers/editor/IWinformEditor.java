@@ -28,7 +28,7 @@ public interface IWinformEditor<T extends EditField> {
                 t++;
             }while((!obj.isVisible()) && t < timeout);
         }catch(Exception e){
-            log.error(e.getMessage());
+            log.error(e);
         }
     }
 }
