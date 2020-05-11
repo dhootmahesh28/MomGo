@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 public interface IJavaWindow<T extends com.hp.lft.sdk.java.Window> {
 
 
-
     default void closeWindowIfExist(T obj, int timeout) throws GeneralLeanFtException {
         Logger logger = Logger.getLogger(IJavaWindow.class);
         try {

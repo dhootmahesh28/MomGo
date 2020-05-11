@@ -2,29 +2,22 @@ package com.swacorp.crew.pages.rosa;
 
 import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.pages.constants.ApplicationConstantsCss;
-import com.swacorp.crew.pages.constants.CommonFormats;
-import com.swacorp.crew.utils.DateUtil;
 import com.swacorp.crew.utils.ReportUtil;
 import com.swacorp.crew.utils.TestUtil;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class RosaDynamicData extends BasePage {
 
-    private static final Logger LOGGER = Logger.getLogger(RosaDynamicData.class);
+    private static final Logger loggerRosaDynData = Logger.getLogger(RosaDynamicData.class);
     ReportUtil report = new ReportUtil();
     String currentSystemDate;
     private static Map<String, Map<String, ArrayList<String[]>>> masterHM;
     private static ArrayList<String[]> training = new ArrayList<>();
     private static ArrayList<String[]>  triptopull = new ArrayList<>();
     private static String rosaempID;
-
 
 
     public static ArrayList<String[]> getTraining() {
@@ -69,6 +62,7 @@ public class RosaDynamicData extends BasePage {
                 }
             }
         }catch(Exception e){
+            loggerRosaDynData.error(e);
             throw e;
         }
     return retVal;
