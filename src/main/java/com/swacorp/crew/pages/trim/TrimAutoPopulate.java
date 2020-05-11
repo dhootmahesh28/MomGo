@@ -4,7 +4,6 @@ import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.winforms.*;
 import com.swacorp.crew.pages.common.WinBasePage;
 import com.swacorp.crew.sharedrepository.tsr.ObjectRepoTRiM;
-import com.swacorp.crew.utils.ReportStatus;
 import com.swacorp.crew.utils.ReportUtil;
 
 import static com.swacorp.crew.pages.constants.ApplicationConstantsTrim.*;
@@ -17,8 +16,7 @@ public class TrimAutoPopulate extends WinBasePage {
     }
     public int autoPopulate(String equipment, String requirementName, String countCAs, String countFOs) throws GeneralLeanFtException {
         int retVal = 1;
-        ReportStatus.reset();
-        Window autoPopulateWindow = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().autoPopulateWindow();
+       Window autoPopulateWindow = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().autoPopulateWindow();
         ComboBox cboEquipComboBox = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().autoPopulateWindow().cboEquipComboBox();
         TabControl tabPopulateTabControl = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().autoPopulateWindow().tabPopulateTabControl();
         Button startButton = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().autoPopulateWindow().startButton();

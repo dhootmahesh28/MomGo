@@ -8,18 +8,16 @@ import com.swacorp.crew.genericwrappers.editor.IGenericMethods;
 
 public interface LeanftGenericMethods extends IGenericMethods {
 
-    public static final Logger log = Logger.getLogger(LeanftGenericMethods.class);
+
 
     @Override
     default boolean verifyObjectExist(TestObject o, boolean existance) {
-        boolean objExist;
+        Logger log = Logger.getLogger(LeanftGenericMethods.class);
         try {
-            objExist = o.exists() ? true: false;
-
-            return (objExist && existance) ? true : false;
+            return (o.exists() && existance);
         }
         catch (Exception e){
-            log.error("Object does not exist: "+o.getDisplayName());
+            log.error("Object does not exist: "+e);
         }
         return false;
     }
@@ -41,28 +39,23 @@ public interface LeanftGenericMethods extends IGenericMethods {
 
     @Override
     default boolean waitProperty(TestObject o, String propName, String propValue, int timeOut) throws GeneralLeanFtException, InterruptedException {
-        String tempProp;
         int counter = timeOut * 60 * 1000;
         if (!o.exists() && (counter < timeOut )){
             Thread.sleep(1000);
         }
-
-        if (o.exists())
-            return true;
-        else
-            return false;
+        return o.exists();
     }
 
     @Override
     default boolean highlight(TestObject o) {
+        Logger log = Logger.getLogger(LeanftGenericMethods.class);
         try {
                 o.highlight();
                 log.info("Object highlighted, "+o.getDisplayName());
                 return true;
         }
         catch (Exception e){
-            log.error("Object does not exist: "+o.getDisplayName());
-            //e.printStackTrace();
+            log.error("Object does not exist: "+e);
             return false;
         }
 

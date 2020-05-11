@@ -1,25 +1,24 @@
 package com.swacorp.crew.pages.sasi;
 
 import com.swacorp.crew.pages.common.BasePage;
+import com.swacorp.crew.pages.rosa.RosaDynamicData;
 import com.swacorp.crew.utils.DateUtil;
 import com.swacorp.crew.utils.ReportUtil;
-import com.swacorp.crew.utils.TestUtil;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import static com.swacorp.crew.pages.rosa.RosaDynamicData.readMasterHM;
 
 public class SasiHome extends BasePage {
 
     ReportUtil report = new ReportUtil();
-    private Map<String, Map<String, ArrayList<String[]>>> masterHM;
+    private static final Logger loggerSasiHome = Logger.getLogger(SasiHome.class);
+
     ArrayList<String[]> training = new ArrayList<>();
-    ArrayList<String[]>  triptopull = new ArrayList<>();
 
     private static final By WORLD_VIEWER_PARADISE = By.xpath("//*[text()='World Viewer - Paradise']");
     private static final By SELECT_DRP = By.xpath("//select[@id='qt']");
@@ -28,47 +27,9 @@ public class SasiHome extends BasePage {
     private static final By firstAnchorLinq = By.xpath("//a[@title = 'click for detailed crew view'][1]");
     String rosaempID;
 
-    public SasiHome(Map<String, Map<String, ArrayList<String[]>>> rosaMasterHM){
-        masterHM = rosaMasterHM;
-    }
-    public SasiHome(){
-    }
-
-    private void readMasterHM(){
-        try{
-            if((rosaempID == null)){
-                masterHM = TestUtil.getRosaMasterHM();
-                if (masterHM == null){
-                    report.reportSelenium("Fail", "masterHM is null.");
-                }else {
-
-                    for (Map.Entry<String, Map<String, ArrayList<String[]>>> lstEmpIds : masterHM.entrySet()) {
-                        rosaempID = lstEmpIds.getKey();
-                        Map<String, ArrayList<String[]>> detailEachEmpId = lstEmpIds.getValue();
-
-                        for (Map.Entry<String, ArrayList<String[]>> entry2 : detailEachEmpId.entrySet()) {
-                            Map<String, ArrayList<String[]>> keyEmpId = lstEmpIds.getValue();
-                            training = keyEmpId.get("trng");
-                            triptopull = keyEmpId.get("triptopull");
-                        }
-                        break;
-                    }
-                    if ((rosaempID == null)) {
-                        report.reportSelenium("Fail", "Error occured while reading trip details from ROSA in CSS page. rosaempID is null.");
-                    } else {
-                        report.reportSelenium("info", "ROSA employee details are read in CSS. HashMap size:"+masterHM.size());
-                    }
-                }
-            }
-        }catch(Exception e){
-            report.reportSelenium("Fail", "Error occured while reading trip details from ROSA in CSS page."+e.getMessage());
-        }
-    }
-
-
     public boolean nonFlyValidate(String[] data) throws ParseException{
         String countNonFly = "//*[text()='NonflyActivities']//following-sibling::ul";
-        String Airport      = "//*[text()='NonflyActivities']//following-sibling::ul[PLACEHOLDER]//tbody//*[text()='airportID']//following-sibling::td[2]/a[1]";
+        String airport      = "//*[text()='NonflyActivities']//following-sibling::ul[PLACEHOLDER]//tbody//*[text()='airportID']//following-sibling::td[2]/a[1]";
         String startDate    = "//*[text()='NonflyActivities']//following-sibling::ul[PLACEHOLDER]//tbody//*[text()='startDateTime']//following-sibling::td[2]" ;
 
         List<WebElement> allNonflySections = getDriver().findElements(By.xpath(countNonFly));
@@ -78,13 +39,13 @@ public class SasiHome extends BasePage {
         DateUtil du = new DateUtil();
 
         for (int i=1; i <= allNonflySections.size();i++){
-            tempLocatorAirport = Airport.replace("PLACEHOLDER", ""+i);
+            tempLocatorAirport = airport.replace("PLACEHOLDER", ""+i);
             tempLocatorStartDate = startDate.replace("PLACEHOLDER", ""+i);
 
 
             List<WebElement> eles = getDriver().findElements(By.xpath(tempLocatorStartDate));
 
-            if (eles.size() > 0){
+            if (eles.isEmpty()){
                 WebElement ele = eles.get(0);
                 //If date matches go for rest of the validation
                 String startDateSASI = du.changeToSasiDateFormat(data[0]);
@@ -102,7 +63,6 @@ public class SasiHome extends BasePage {
                 }else if(i == allNonflySections.size()){
                     scrollToElement(ele);
                     report.reportSelenium("Fail", "Nonfly activity in SASI does not contain start date from ROSA "+startDateSASI);
-                    dateNotFound = false;
                 }else{
                     scrollToElement(ele);
                     report.reportSelenium("info", "Nonfly activity section '"+i+"' in SASI does not contain start date from ROSA "+startDateSASI);
@@ -115,6 +75,7 @@ public class SasiHome extends BasePage {
     }
 
     public void readNonFlyDetails() throws ParseException {
+        training = RosaDynamicData.getTraining();
         boolean proceedToNextRow = true;
         for (int j=0; j<= training.size()-1; j++){
             String[] rowData = training.get(j);
@@ -138,6 +99,7 @@ public void clickFirstLink(){
 
         }catch(Exception e){
             report.reportSelenium("Fail", "Error while clickng on the search result. ");
+            loggerSasiHome.error(e);
         }
 }
 
@@ -146,13 +108,13 @@ public void clickFirstLink(){
             Thread.sleep(5000);
             getDriver().switchTo().frame(0);
             selectOption(SELECT_DRP, "Crew ");
-            readMasterHM();
+            rosaempID = RosaDynamicData.getRosaempID();
             enterText(EMPLOYEE, rosaempID);
             report.reportSelenium("Pass", "EmployeeID is entered: "+rosaempID);
             buttonClick(submit);
         }catch(Exception e){
             report.reportSelenium("Fail", "Failed while performing the employee search ");
-            e.printStackTrace();
+            loggerSasiHome.error(e);
         }
     }
 

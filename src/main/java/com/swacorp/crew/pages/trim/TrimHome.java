@@ -7,7 +7,6 @@ import com.hp.lft.sdk.winforms.Window;
 import com.swacorp.crew.pages.common.WinBasePage;
 import com.swacorp.crew.sharedrepository.tsr.ObjectRepoTRiM;
 import com.swacorp.crew.utils.ReportUtil;
-import com.swacorp.crew.utils.ReportStatus;
 import com.swacorp.crew.pages.constants.WaitConstants;
 
 import java.awt.*;
@@ -125,7 +124,6 @@ public class TrimHome extends WinBasePage {
         int retVal = 1;
         String lastName;
 
-        ReportStatus.reset();
         Window winFindEmployee = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
         EditField fldEmpSearch = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow().txtSearchEmpNumberEditField();
         Button btnShowEmpDetails = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow().showEmployeeDetailsButton();
@@ -169,7 +167,6 @@ public class TrimHome extends WinBasePage {
 
     public int verifyEmployeeSchedule(String empNumbers, String eventCode, String eventDate) throws  GeneralLeanFtException {
         int retVal = 1;
-        ReportStatus.reset();
         Window findEmployeeWindow = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
         EditField txtSearchEmpNumberEditField = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow().txtSearchEmpNumberEditField();
         Button showEmployeeScheduleButton = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow().showEmployeeScheduleButton();
@@ -266,7 +263,6 @@ public class TrimHome extends WinBasePage {
         ComboBox cboEquipment = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().EmployeeDetails().cboPrimaryEquipIDComboBox();
         ComboBox cboStatus = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().EmployeeDetails().cboPrimaryCrewStatusIDComboBox();
 
-        ReportStatus.reset();
         Window winFindEmployee = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow();
         EditField fldEmpSearch = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow().txtSearchEmpNumberEditField();
         Button btnShowEmpDetails = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().findEmployeeWindow().showEmployeeDetailsButton();

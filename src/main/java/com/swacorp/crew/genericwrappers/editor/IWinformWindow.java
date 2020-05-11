@@ -5,9 +5,10 @@ import org.apache.log4j.Logger;
 
 public interface IWinformWindow<T extends com.hp.lft.sdk.winforms.Window> {
 
-     final Logger logger = Logger.getLogger(IWinformWindow.class);
+
 
     default void closeWindowIfExist(T obj, int timeout) throws GeneralLeanFtException {
+        Logger logger = Logger.getLogger(IWinformWindow.class);
         try {
             if (obj.exists(timeout)) {
                 obj.close();
@@ -19,6 +20,7 @@ public interface IWinformWindow<T extends com.hp.lft.sdk.winforms.Window> {
     }
 
     default void minimiseWindowIfExist(T obj) {
+        Logger logger = Logger.getLogger(IWinformWindow.class);
         try {
             if (obj.exists()) {
                 obj.minimize();
@@ -30,6 +32,7 @@ public interface IWinformWindow<T extends com.hp.lft.sdk.winforms.Window> {
     }
 
     default void maximizeWindowIfExist(T obj) {
+        Logger logger = Logger.getLogger(IWinformWindow.class);
         try {
             if (obj.exists()) {
                 obj.maximize();
@@ -41,6 +44,7 @@ public interface IWinformWindow<T extends com.hp.lft.sdk.winforms.Window> {
     }
 
     default void waitForWindowTillVisible(T obj, long timeout) {
+        Logger logger = Logger.getLogger(IWinformWindow.class);
         long t=0;
         try {
 

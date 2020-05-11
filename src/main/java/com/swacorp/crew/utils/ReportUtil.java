@@ -5,6 +5,8 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
+import com.hp.lft.sdk.TestObject;
+import com.hp.lft.sdk.TopLevelObject;
 import com.hp.lft.sdk.winforms.Window;
 import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.pages.constants.MessageConstants;
@@ -23,51 +25,21 @@ public class ReportUtil {
     public final static Logger LOGGER = Logger.getLogger(ReportUtil.class);
     public ExtentTest extentTest;
     public ExtentAppend extentAppend = new ExtentAppend();
-    public static String failedTestPath;
+    private static String failedTestPath;
     private static final String PASS = "PASS_";
     private static final String FAIL = "FAIL_";
     private static final String INFO = "INFO_";
     String msgScreenshotException = "Exception while taking screenshot : ";
 
-    public void reportLeanFT(com.hp.lft.sdk.java.Window window, String status, String message){
-        boolean retryStatus = false;
-        int retryCounter = 0;
-        int maxRetryCount = 3;
-        ExtentTest extTest = basePage.getExtentTest();
-        do {
-            try {
-                if (status.equalsIgnoreCase(MessageConstants.INFO)) {
-                    String screenshotPath = captureLeanFTScreenshot(window, FAIL + basePage.randomString(5) + "_");
-                    extTest.log(Status.INFO, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-                } else if (status.equalsIgnoreCase(MessageConstants.ERROR)) {
-                    extTest.log(Status.ERROR, MarkupHelper.createLabel(message, ExtentColor.AMBER));
-                }else if (status.equalsIgnoreCase(MessageConstants.PASSED)) {
-                    String screenshotPath = captureLeanFTScreenshot(window, PASS + basePage.randomString(5) + "_");
-                    extTest.log(Status.PASS, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-                }
-                else {
-                    String screenshotPath = captureLeanFTScreenshot(window, FAIL + basePage.randomString(5) + "_");
-                    failedTestPath = screenshotPath;
-                    extTest.log(Status.FAIL, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-                    Assert.fail(message, new Throwable());
-                }
-                retryStatus = false;
-            } catch (Exception e) {
-                e.printStackTrace();
-                retryStatus = true;
-                LOGGER.error("Exception in report method: " + e);
-                if (++retryCounter > maxRetryCount) {
-                    Assert.assertTrue(false, msgScreenshotException + e.getMessage());
-                    break;
-                }
-            }
-        } while (retryStatus);
+    public static String getFailedTestPath() {
+        return failedTestPath;
     }
 
-    //com.hp.lft.sdk.winforms.ComboBox
+    public static void setFailedTestPath(String failedTestPath) {
+        ReportUtil.failedTestPath = failedTestPath;
+    }
 
-
-    public void reportLeanFT(Window window, String status, String message){
+    public void reportLeanFT(TopLevelObject window, String status, String message){
 
         boolean retryStatus = false;
         int retryCounter = 0;
@@ -86,7 +58,7 @@ public class ReportUtil {
                 }
                 else {
                     String screenshotPath = captureLeanFTScreenshot(window, FAIL+ basePage.randomString(5) + "_");
-                    failedTestPath = screenshotPath;
+                    setFailedTestPath(failedTestPath);
                     extTest.log(Status.FAIL, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
                     Assert.fail(message, new Throwable());
                 }
@@ -155,38 +127,7 @@ public class ReportUtil {
     }
 
 
-    public String captureLeanFTScreenshot(com.hp.lft.sdk.java.Window window, String screenshotName) {
-        String destination = null;
-        String imgPath = null;
-        int maxRetryCount = 5;
-        int retryCounter = 0;
-
-        String dateName = new SimpleDateFormat("yyyyMMddhhmmssSSS").format(new Date());
-        while (retryCounter < maxRetryCount){
-            try {
-                RenderedImage img = window.getSnapshot();
-                imgPath = "LeanFTScreenshots\\" + screenshotName + dateName + ".png";
-                destination = System.getProperty("user.dir") + "\\build\\extent-reports\\" + imgPath;
-                File finalDestination = new File(destination);
-                finalDestination.getParentFile().mkdir();
-                ImageIO.write(img, "png", finalDestination);
-                LOGGER.info("Screenshot destination : " + destination);
-                return imgPath;
-            } catch (Exception e) {
-                LOGGER.error("takeScreenshot Exception : " + e);
-                if (++retryCounter > maxRetryCount) {
-                    Assert.fail(msgScreenshotException + e.getMessage());
-                    break;
-                }
-            }
-        }
-
-        LOGGER.info("Destination after exception: " + destination);
-        return imgPath;
-    }
-
-
-    public String captureLeanFTScreenshot(Window window, String screenshotName) {
+    public String captureLeanFTScreenshot(TopLevelObject window, String screenshotName) {
         String destination = null;
         String imgPath = null;
         int maxRetryCount = 5;

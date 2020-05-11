@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.hp.lft.sdk.GeneralLeanFtException;
 import com.opencsv.CSVWriter;
 import com.swacorp.crew.pages.common.BasePage;
 import org.apache.log4j.Logger;
@@ -24,7 +23,6 @@ import org.testng.annotations.BeforeSuite;
 
 import java.io.*;
 import java.util.List;
-import java.util.Properties;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -32,13 +30,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 
 // TaskManager class implements following TestNg Methods
-// @AfterMethod, @AfterClass, @AfterSuite
+// @AfterMethod, @AfterClass, @afterSuite
 public class TestManager extends DriverSource {
 
     ExtentAppend ext = new ExtentAppend();
     public ExtentReports extent = ext.getExtentInstance();
-    public final static Logger LOGGER = Logger.getLogger(TestManager.class);
-    public static Properties dataProperties;
+    public final static Logger loggerTestManager = Logger.getLogger(TestManager.class);
     BasePage basePage = new BasePage();
     ReportUtil report = new ReportUtil();
     public static String jbehavePath;
@@ -71,7 +68,7 @@ public class TestManager extends DriverSource {
                 ExtentTest extentTest = extent.createTest(scenarioName);
                 TestUtil.extentTestMap.put(parentTcKey, extentTest);
                 TestUtil.extentTestMap.put(key, extentTest);
-                LOGGER.info("----------- Execution for scenario " + scenarioName + " started ------------------");
+                loggerTestManager.info("----------- Execution for scenario " + scenarioName + " started ------------------");
                 if (!basePage.validateStringStartsWithPattern(scenarioName, "TC[0-9]+_")) {
                     report.report("error", "Scenario name '" + scenarioName + "' not started with pattern 'TC[0-9]+_'");
                 }
@@ -92,9 +89,9 @@ public class TestManager extends DriverSource {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void tearDown(ITestResult result) throws Exception {
+    public void tearDown(ITestResult result) {
         String screenshotPath;
-        LOGGER.info("TEAR DOWN ::");
+        loggerTestManager.info("TEAR DOWN ::");
         ExtentTest test = getExtentTest();
         String failureReason = "";
         String status = null;
@@ -103,7 +100,7 @@ public class TestManager extends DriverSource {
                 status =FAILED;
                 failureReason = result.getThrowable().getMessage();
                 if(result.getThrowable().getStackTrace()[1].toString().contains("LeanFT")){
-                    screenshotPath =ReportUtil.failedTestPath;
+                    screenshotPath =ReportUtil.getFailedTestPath();
                 }else {
                     screenshotPath = ext.takeScreenshot(getDriver(), result.getName());
                 }
@@ -128,6 +125,7 @@ public class TestManager extends DriverSource {
             status = FAILED;
             failureReason = e.getMessage();
             test.log(Status.FAIL, "Exception in Tear down : " + e.getMessage());
+            loggerTestManager.error(e);
         } finally {
             captureResult(test, status, failureReason);
             quitDriver();
@@ -137,7 +135,7 @@ public class TestManager extends DriverSource {
             TestUtil.extentTestMap.keySet().removeIf(k -> k.equals(parentTcKey));
             TestUtil.driverMap.keySet().removeIf(k -> k.equals(key));
         }
-        LOGGER.info("-----------Test Execution Completed & Status is "+status+"------------------");
+        loggerTestManager.info("-----------Test Execution Completed & Status is "+status+"------------------");
     }
 
     @BeforeSuite(alwaysRun = true)
@@ -146,25 +144,13 @@ public class TestManager extends DriverSource {
             Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer.exe");
             Runtime.getRuntime().exec("taskkill /F /IM iexplore.exe");
         } catch (IOException e) {
-            LOGGER.error(e);
+            loggerTestManager.error(e);
         }
         //The belo code is inherited from the LeanFt BaseTest
         try {
             suiteSetup();
         } catch (Exception e) {
-            LOGGER.error(e);
-        }
-
-        dataProperties = new Properties();
-        String dataFileName = "data.properties";
-        String dataPath = System.getProperty("user.dir") + "\\src\\test\\resources\\testData\\" + dataFileName;
-        try {
-            FileInputStream dataFile = new FileInputStream(dataPath);
-            dataProperties.load(dataFile);
-        } catch (FileNotFoundException e) {
-            Assert.assertTrue(false, e.getMessage());
-        } catch (IOException e) {
-            Assert.assertTrue(false, e.getMessage());
+            loggerTestManager.error(e);
         }
     }
 
@@ -178,16 +164,17 @@ public class TestManager extends DriverSource {
     }
 
     @AfterSuite(alwaysRun = true)
-    public void AfterSuite() throws GeneralLeanFtException{
+    public void afterSuite(){
         clearExtentTest();
     }
+
     public void clearExtentTest() {
         try {
             extent.flush();
-            dataProperties = null;
             generateCsvResult();
         } catch (Exception e) {
             Assert.fail(e.getMessage());
+            loggerTestManager.error(e);
         } finally {
             try {
                 String almIntegration = System.getProperty("uploadResultsToALM");
@@ -195,18 +182,9 @@ public class TestManager extends DriverSource {
                 ResultUploadToALM resultUploadToALM = new ResultUploadToALM();
                 resultUploadToALM.uploadResultToALM(almIntegration);
             }catch(Exception e){
-                LOGGER.error(e);
-            }finally {
-                try {
-                } catch (Exception e) {
-                    LOGGER.error(e);
-                }
+                loggerTestManager.error(e);
             }
         }
-    }
-
-    public static String getTestData(String propertyName) {
-        return dataProperties.getProperty(propertyName);
     }
 
     public void captureResult(ExtentTest test, String testStatus, String failureReason) {
@@ -221,14 +199,14 @@ public class TestManager extends DriverSource {
             for (Test childTest : childTestList) {
                 String childTestName = childTest.getName();
                 String childTestStatus = childTest.getStatus().toString();
-                String ChildTestCaseID = null;
+                String childTestCaseID = null;
                 String childTestIDName = childTestName.split("_")[0];
                 if (childTestIDName.toUpperCase().startsWith("TC")) {
-                    ChildTestCaseID = childTestIDName.substring(2).trim();
+                    childTestCaseID = childTestIDName.substring(2).trim();
                     if (childTestStatus.equalsIgnoreCase("pass")) {
-                        testResults.add(new String[]{ChildTestCaseID, childTestName, PASSED, "Individual", parentTestID, ""});
+                        testResults.add(new String[]{childTestCaseID, childTestName, PASSED, "Individual", parentTestID, ""});
                     } else {
-                        testResults.add(new String[]{ChildTestCaseID, childTestName, FAILED, "Individual", parentTestID, failureReason});
+                        testResults.add(new String[]{childTestCaseID, childTestName, FAILED, "Individual", parentTestID, failureReason});
                     }
                 }
             }
@@ -246,8 +224,8 @@ public class TestManager extends DriverSource {
             csvWriter.writeAll(testResults);
             csvWriter.close();
         } catch (IOException e) {
-            LOGGER.error(e.getSuppressed());
-            throw new Exception("Unable to create a csv file : "+e.getMessage());
+            loggerTestManager.error(e.getSuppressed());
+            throw new IOException("Unable to create a csv file : "+e);
         }
     }
 
@@ -284,6 +262,7 @@ public class TestManager extends DriverSource {
                 fileWriter.close();
             } catch (IOException e) {
                 Assert.fail("Unable to create XREF JSON file");
+                loggerTestManager.error(e);
             }
         }
     }

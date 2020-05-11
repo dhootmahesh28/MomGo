@@ -10,8 +10,6 @@ import org.apache.log4j.Logger;
 import com.hp.lft.sdk.winforms.EditField;
 import com.hp.lft.sdk.winforms.Button;
 
-import static com.swacorp.crew.utils.TestManager.dataProperties;
-
 public class TrimLogin extends WinBasePage  {
     ReportUtil reportLoginPageAM = new ReportUtil();
     private final Logger loggerLoginPage = Logger.getLogger(TrimLogin.class);
@@ -43,9 +41,10 @@ public class TrimLogin extends WinBasePage  {
                     reportLoginPageAM.reportLeanFT(lftObjects.loginToSouthwestWindow(), "fail", "Login to Trim is failed for the user name: " + user);
                     loginSuccessful = false;
                 }
+                loggerLoginPage.error(e);
             }catch(Exception e1){
                 reportLoginPageAM.reportLeanFT(mainWindow,"fail", "Login to Trim is NOT successful for the user name: "+user  );
-                loggerLoginPage.error("Trim login failed.."+e1.getMessage());
+                loggerLoginPage.error("Trim login failed.."+e1);
                 loginSuccessful = false;
                 return  null;
             }
@@ -56,12 +55,13 @@ public class TrimLogin extends WinBasePage  {
     private int loginToTrim (String user, String pass)throws  GeneralLeanFtException {
         int returnInt = 1;
         if (user.equalsIgnoreCase("")){
-            user = dataProperties.getProperty("trimUserName");
+            user = EnvironmentConstants.TRiMLOGINUSER;
+
 
         }
 
         if (pass.equalsIgnoreCase("")){
-            pass = dataProperties.getProperty("trimUserPassword");
+            pass = EnvironmentConstants.TRiMLOGINPASSWORD;
         }
         try {
             EditField userField = lftObjects.loginToSouthwestWindow().txtUserIDEditField();
@@ -86,7 +86,7 @@ public class TrimLogin extends WinBasePage  {
             }
 
         } catch (Exception e) {
-            loggerLoginPage.error(e.getMessage());
+            loggerLoginPage.error(e);
         }
         return returnInt;
     }

@@ -138,7 +138,7 @@ public class RosaHome extends BasePage {
         }
     }
 
-    public void selectMonthYear(String dropHeader, String monthYear) throws Exception{
+    public void selectMonthYear(String dropHeader, String monthYear){
         Boolean blnDropValueFound = false;
         DateUtil dateUtil = new DateUtil();
         String month = monthYear.split(" ")[0];
@@ -175,7 +175,7 @@ public class RosaHome extends BasePage {
         }
     }
 
-    public RosaSolutionQueue createPTOSolutionRequest(String category, String cycle, String aircraft, String event, String month, String bidLine, String coreConditional) throws Exception {
+    public RosaSolutionQueue createPTOSolutionRequest(String category, String cycle, String aircraft, String event, String month, String bidLine, String coreConditional) {
         DateUtil du = new DateUtil();
 
         String xpathCoreConditional = "//*[contains(text(),'PLACEHOLDER')]/preceding-sibling::*[position()=1]";

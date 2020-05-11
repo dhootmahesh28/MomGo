@@ -5,7 +5,7 @@ import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.Keyboard;
 import com.hp.lft.sdk.java.*;
 import com.swacorp.crew.pages.common.WinBasePage;
-import com.swacorp.crew.pages.constants.ApplicationConstantsCss;
+import com.swacorp.crew.pages.rosa.RosaDynamicData;
 import com.swacorp.crew.sharedrepository.tsr.ObjectRepoCSS;
 import com.swacorp.crew.utils.*;
 import org.apache.log4j.Logger;
@@ -22,7 +22,7 @@ public class CssTransactionReport extends WinBasePage{
     List<String> pdfContentAfterReadingTransactionReport;
     String tripStartDate;
     String tripEndDate;
-    Map<String, Map<String, ArrayList<String[]>>> masterHM = new LinkedHashMap<>();
+
     String rosaempID;
     ArrayList<String[]> training = new ArrayList<>();
     ArrayList<String[]>  triptopull = new ArrayList<>();
@@ -33,38 +33,9 @@ public class CssTransactionReport extends WinBasePage{
     }
 
     private void readMasterHM(){
-        int i=1;
-        try{
-            if((rosaempID == null)){
-                masterHM = TestUtil.getRosaMasterHM();
-                if (masterHM == null){
-                    reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "masterHM is null.");
-                }else {
-
-                    for (Map.Entry<String, Map<String, ArrayList<String[]>>> lstEmpIds : masterHM.entrySet()) {
-                        rosaempID = lstEmpIds.getKey();
-                        Map<String, ArrayList<String[]>> keyEmpId = lstEmpIds.getValue();
-                        training = keyEmpId.get("trng");
-                        triptopull = keyEmpId.get("triptopull");
-
-
-                        if (Integer.compare(i, ApplicationConstantsCss.NUMBER_OF_EMPLOYEE)==1) {
-                            break;
-                        }
-                        i++;
-                    }
-                    if ((rosaempID == null)) {
-                        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "Error occured while reading trip details from ROSA in CSS page. rosaempID is null.");
-                    } else {
-                        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "info", "ROSA employee details are read in CSS. HashMap size:"+masterHM.size());
-                    }
-                }
-            }
-        }catch(Exception e){
-            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Error occured while reading trip details from ROSA in CSS page."+e.getMessage());
-            throw e;
-        }
-
+        triptopull = RosaDynamicData.getTriptopull();
+        training = RosaDynamicData.getTraining();
+        rosaempID = RosaDynamicData.getRosaempID();
     }
 
     public void validateTransactioReportFile() {

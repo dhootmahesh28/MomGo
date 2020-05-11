@@ -3,7 +3,6 @@ package com.swacorp.crew.tests.oqs;
 import com.swacorp.crew.tests.dataprovider.TestDataProvider;
 import com.swacorp.crew.utils.TestManager;
 import com.swacorp.crew.tests.wrappers.Add_Crew_Member_In_OQS_Verify_In_Trim;
-import com.swacorp.crew.pages.constants.EnumWaitConstants;
 import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
 

@@ -1,10 +1,8 @@
 package com.swacorp.crew.pages.oqs;
-import com.hp.lft.sdk.GeneralLeanFtException;
 import com.swacorp.crew.pages.common.BasePage;
-import com.swacorp.crew.sharedrepository.tsr.ObjectRepoTRiM;
+import com.swacorp.crew.pages.constants.CommonConstants;
 import com.swacorp.crew.utils.ReportUtil;
 import org.openqa.selenium.By;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -17,8 +15,9 @@ import org.openqa.selenium.interactions.Actions;
 
 public class OqsHome extends BasePage {
 
+    private static final org.apache.log4j.Logger loggerOqsHome = org.apache.log4j.Logger.getLogger(OqsHome.class);
     ReportUtil report = new ReportUtil();
-    private final By MAIN_MENU_SEARCH = By.xpath("//a[text()='Recordkeeping']");
+    private static final By MAIN_MENU_SEARCH = By.xpath("//a[text()='Recordkeeping']");
     private static final By MENU_SEARCH = By.xpath("//a[@class='yuibaritemlabel yuimenuitemlabel-hassubmenu yuimenuitemlabel' and text()='Add Crewmember']");
     private static final By SUBMENU_SEARCH = By.xpath("//a[@class='yuimenuitemlabel' and text()='Add Crewmember']");
     private static final By SEARCH_TEXT = By.id("crewSearchFieldId");
@@ -35,7 +34,7 @@ public class OqsHome extends BasePage {
     private static final By EMP_NUM_TEXT = By.id("employeeNumber");
     private static final By LAST_TEXT = By.id("lastName");
     private static final By FIRST_TEXT = By.id("firstName");
-    private static final  By DOB_TEXT = By.id("dateOfBirth");
+    private static final By DOB_TEXT = By.id("dateOfBirth");
     private static final By GENDER_TEXT = By.id("gender");
     private static final By US_CITIZEN_TEXT = By.id("usCitizen");
     private static final By TYPE_TEXT = By.id("addCrewMemberCertificateType");
@@ -86,7 +85,7 @@ public class OqsHome extends BasePage {
         try{
             Thread.sleep(7000);
         }catch(Exception e){
-
+            loggerOqsHome.error(e);
         }
 
         int i = 1;
@@ -103,7 +102,7 @@ public class OqsHome extends BasePage {
             } while (getDriver().findElements(By.xpath(locator)).size() > 0);
             report.reportSelenium("Pass", "Event deleted " + trainingEvent );
         }catch(Exception e){
-
+            loggerOqsHome.error(e);
         }
 
     }
@@ -112,24 +111,20 @@ public class OqsHome extends BasePage {
 
     public void addTrainingEvent(String trainingEvent, boolean enterpriseMode) {
         //FLIGHT TRAINING
-        ObjectRepoTRiM trimObjectRepo = null;
 
         buttonClick(ADD_EVENT);
-        String xpatheVENTcHECKBOX = "/preceding::input[@type='checkbox'][1]";
+        String xpathEventCheckbox = CommonConstants.PRECEDING+"input[@type='checkbox'][1]";
         String locator;
-        String eventDate;
-        eventDate = "052020";
 
         locator = xpathTrainingEvent.replace("PLACEHOLDER", trainingEvent);
-        String xpathDateSelectTdForAnEvent = "/preceding::td[1]/following::td[3]";
-        int counter = 1;
+        String xpathDateSelectTdForAnEvent = CommonConstants.PRECEDING+"td[1]/following::td[3]";
         try {
 
             Thread.sleep(5000);
             if (getDriver().findElement(By.xpath(locator)).isDisplayed()) {
                 Thread.sleep(2000);
                 if(!enterpriseMode) {
-                    getDriver().findElement(By.xpath(locator + xpatheVENTcHECKBOX)).click();
+                    getDriver().findElement(By.xpath(locator + xpathEventCheckbox)).click();
                 }else{
                     Thread.sleep(5000);
                     WebElement ele = getDriver().findElement(By.xpath(locator ));
@@ -147,151 +142,40 @@ public class OqsHome extends BasePage {
                     rob.keyPress(KeyEvent.VK_SPACE);
                     Thread.sleep(100);
                     rob.keyRelease(KeyEvent.VK_SPACE);
-
-
                 }
                 if(trainingEvent.equalsIgnoreCase("MANEUVERS OBSERVATION")){
-                        WebElement locatorDateSelectTdForAnEvent = getDriver().findElement(By.xpath(locator + xpathDateSelectTdForAnEvent));
-                        locatorDateSelectTdForAnEvent.click();
+                    WebElement locatorDateSelectTdForAnEvent = getDriver().findElement(By.xpath(locator + xpathDateSelectTdForAnEvent));
+                    locatorDateSelectTdForAnEvent.click();
 
                     getDriver().findElement(By.id("dateCalText")).sendKeys("05/2020");
                     WebElement element = getDriver().findElement(By.xpath("//button[@class='yui-dt-default']"));
                     Actions builder = new Actions(getDriver());
                     builder.moveToElement(element).click(element);
 
-
-
                     Thread.sleep(5000);
-                        /*getDriver().switchTo().frame(0);
-                        Thread.sleep(10000);
-                        readyStateWait(getDriver().findElement(OK_BUTTON));
-                        scrollToElement(getDriver().findElement(OK_BUTTON));
-                        buttonClick(OK_BUTTON);
-                        Thread.sleep(2000);
-                        //Keyboard.pressKey(Keyboard.Keys.ENTER);
-                        getDriver().findElement(OK_BUTTON).sendKeys(Keys.ENTER);
-                        try {
-                            System.out.println("Clicking through JS");
-                            JavascriptExecutor js = (JavascriptExecutor) getDriver();
-                            js.executeScript("arguments[0].click();", getDriver().findElement(OK_BUTTON));
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }
 
-                        Actions actions = new Actions(getDriver());
-                        actions.moveToElement(getDriver().findElement(OK_BUTTON)).click().build().perform();*/
-                        try {
-
-                            getDriver().findElements(OK_BUTTON).get(2).click();
-                            /*trimObjectRepo = new ObjectRepoTRiM();
-                            trimObjectRepo.oQSFlightOperationsPage().compAreaFrame().webCheckBox().click();
-                            Thread.sleep(5000);
-                            trimObjectRepo.oQSFlightOperationsPage().compAreaFrame().webEditEditField().setValue(eventDate);*/
-                            trimObjectRepo.oQSFlightOperationsPage().compAreaFrame().oKButton().click();
-
-                           /* Keyboard.pressKey(Keyboard.Keys.TAB);
-                            Thread.sleep(2000);
-                            Keyboard.pressKey(Keyboard.Keys.ENTER);*/
-
-                            //trimObjectRepo.oQSFlightOperationsPage().compAreaFrame().oKButton().click();
-                        } catch (GeneralLeanFtException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    //Browser browser = BrowserFactory.getAllOpenBrowsers(BrowserDescription.)
-/*
-
-                    EditField webEditEditField = browser.describe(Frame.class, new FrameDescription.Builder()
-                            .name("compArea").build())
-                            .describe(EditField.class, new EditFieldDescription.Builder()
-                                    .name("WebEdit")
-                                    .tagName("INPUT")
-                                    .type("text").build());
-
-
-
-                    Button oKButton = browser.describe(Frame.class, new FrameDescription.Builder()
-                            .name("compArea").build())
-                            .describe(Button.class, new ButtonDescription.Builder()
-                                    .buttonType("submit")
-                                    .name("OK")
-                                    .tagName("BUTTON").build());
-*/
-
-
-
-/*
-                        WebElement element = getDriver().findElement(DATE_CAL);
-                        JavascriptExecutor jse = (JavascriptExecutor)getDriver();
-                        jse.executeScript("arguments[0].value='05/2020';", element);
-
-                        Keyboard.pressKey(Keyboard.Keys.ENTER);*/
-
-                        /*Actions actions = new Actions(getDriver());
-                        actions.moveToElement(getDriver().findElement(OK_BUTTON)).click().build().perform();
-
-                        try {
-                            System.out.println("Clicking through JS");
-                            JavascriptExecutor js = (JavascriptExecutor) getDriver();
-                            js.executeScript("arguments[0].click();", OK_BUTTON);
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }*/
-                        //buttonClick(OK_BUTTON);
-                        /*WebElement locatorEventDate = getDriver().findElement(By.xpath(locator + xpathDateSelectTdForAnEvent + "/div"));
-                        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-                        js.executeScript("document.getElementByXPath("+locator + xpathDateSelectTdForAnEvent + "/div"+").value='05/2020'");
-*/
-                      /*  if (locatorEventDate.getText().contains(eventDate)) {
-                            break;
-                        }
-                        counter++;*/
-                    //}while(counter <5);
+                    getDriver().findElements(OK_BUTTON).get(2).click();
 
                 }
                 report.reportSelenium("Pass", "Event selected " + trainingEvent);
             }
         }catch(Exception e){
-            e.printStackTrace();
+            loggerOqsHome.error(e);
         }
         buttonClickIfExist(Ok_BTN);
         handlePopup("ok");
     }
 
     public void selectTextThroughXpath(String textLocation){
-           String locator;
-
         try {
             By loc = By.xpath("//*[(text()='"+textLocation+"')]");
             buttonClickIfExist(loc);
         }catch(Exception e){
             report.reportSelenium("Fail", "Unable to click on  " + "//*[(text()='"+textLocation+"')]");
+            loggerOqsHome.error(e);
         }
     }
-    public void setCompatibilityMode() throws InterruptedException, AWTException {
 
-        Thread.sleep(2000);
-
-        Robot rob = new Robot();
-
-        rob.keyPress(KeyEvent.VK_ALT);
-        Thread.sleep(100);
-        rob.keyPress(KeyEvent.VK_T);
-        Thread.sleep(100);
-        rob.keyRelease(KeyEvent.VK_T);
-        Thread.sleep(100);
-        rob.keyRelease(KeyEvent.VK_ALT);
-        Thread.sleep(100);
-        rob.keyPress(KeyEvent.VK_R);
-        Thread.sleep(100);
-        rob.keyRelease(KeyEvent.VK_R);
-        rob.keyPress(KeyEvent.VK_ENTER);
-        Thread.sleep(100);
-        rob.keyRelease(KeyEvent.VK_ENTER);
-        Thread.sleep(100);
-
-    }
     public void addPosition(String position){
            try {
                report.reportSelenium("info", "Starting Add position... ");
@@ -310,6 +194,7 @@ public class OqsHome extends BasePage {
                report.reportSelenium("Pass", "Position edited successfully to: " + position);
           }catch(Exception e){
                report.reportSelenium("Fail", "Error occured while adding position to: " + position);
+               loggerOqsHome.error(e);
            }
        }
 
@@ -327,7 +212,8 @@ public class OqsHome extends BasePage {
         report.reportSelenium("Pass", "Edit position is successfully done for CA. ");
 
     }catch(Exception e){
-        report.reportSelenium("Fail", "Error occured during Edit position.");
+            report.reportSelenium("Fail", "Error occured during Edit position.");
+            loggerOqsHome.error(e);
          }
     }
 
@@ -350,7 +236,7 @@ public class OqsHome extends BasePage {
                 empNum = Integer.toString(empID);
                 enterText(SEARCH_TEXT, empNum);
                 buttonClick(SEARCH_BUTTON);
-                if (isElementPresent(NO_RECORDS_FOUND_TEXT) == true) {
+                if (isElementPresent(NO_RECORDS_FOUND_TEXT)) {
                     break;
                 }else {
                     waitByTime(10000);
@@ -364,7 +250,7 @@ public class OqsHome extends BasePage {
                         break;
                     }
             } catch (Exception e) {
-                e.printStackTrace();
+                loggerOqsHome.error(e);
                 retryStatus = true;
                 if (++retryCounter > maxRetryCount) {
                     break;
@@ -393,7 +279,7 @@ public class OqsHome extends BasePage {
             waitUntilElementClickable(SEARCH_TEXT);
             enterText(SEARCH_TEXT, empNum);
             buttonClick(SEARCH_BUTTON);
-            if (isElementPresent(NO_RECORDS_FOUND_TEXT) == true) {
+            if (isElementPresent(NO_RECORDS_FOUND_TEXT)) {
                 found = true;
             } else
                 found = false;
@@ -403,7 +289,7 @@ public class OqsHome extends BasePage {
             }else
                 report.reportSelenium("Fail", ApplicationConstantsOqs.OQS_REPORTING_CREW_MEMBER  + empNum + " not found.");
         } catch (Exception e) {
-            e.printStackTrace();
+            loggerOqsHome.error(e);
         }
     }
 
@@ -458,6 +344,7 @@ public class OqsHome extends BasePage {
                 report.reportSelenium("FAIL", "Crew Member creation with: " + empNum + " Failed");
             return 0;
         }catch(Exception e){
+            loggerOqsHome.error(e);
             return -1;
         }
     }
@@ -465,7 +352,6 @@ public class OqsHome extends BasePage {
 
     public String addCrewMember(String[] data, boolean createFreshCrew){
         int retVal = -1;
-        int crewAdded;
         testData = data;
 
         empNum = getDynamicData(ApplicationConstantsOqs.OQS_EMP_NUMBER);
@@ -480,7 +366,7 @@ public class OqsHome extends BasePage {
             addCrewMember(data[0], startDate, classYear, data[1], data[2], data[3], empNum, data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12]);
             retVal = 0;
         }catch(Exception e){
-            e.printStackTrace();
+            loggerOqsHome.error(e);
         }
         if (retVal == 0){
             crewAddedSuccessfully = true;
@@ -497,7 +383,6 @@ public class OqsHome extends BasePage {
 
     public boolean addDuplicateCrewMember(String[] data, boolean status){
         int retVal = -1;
-        int crewAdded;
         testData = data;
         empNum = getDynamicData("EmpNumber");
         try {
@@ -505,7 +390,7 @@ public class OqsHome extends BasePage {
             retVal = addCrewMember(data[0], startDate, classYear, data[1], data[2], data[3], empNum, data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12]);
 
         }catch(Exception e){
-            e.printStackTrace();
+            loggerOqsHome.error(e);
         }
 
         if (retVal == 0){
@@ -526,55 +411,6 @@ public class OqsHome extends BasePage {
         }
     }
 
-    public int addCrewMember(String empPosition, String startDate, String classYear, String classNumber, String crewNumber, String baseLocation,
-                             String empNum, String lastName, String firstName, String dateOfBirth, String gender, String usCitizenFlag, String type,
-                             String certificate, String dateIssued, String rating, boolean stat) {
-
-        getDriver().switchTo().frame("compArea");
-        selectOption(POSITION_TEXT, empPosition);
-        enterText(CLASS_YEAR_TEXT, classYear);
-        enterText(CLASS_NUM_TEXT, classNumber);
-        enterText(CREW_INDEX_TEXT, crewNumber);
-        enterText(START_DATE_TEXT, startDate);
-        selectOption(BASE_TEXT, baseLocation);
-        enterText(EMP_NUM_TEXT, empNum);
-        enterText(LAST_TEXT, lastName);
-        enterText(FIRST_TEXT, firstName);
-        enterText(DOB_TEXT, dateOfBirth);
-        selectOption(GENDER_TEXT, gender);
-        selectOption(US_CITIZEN_TEXT, usCitizenFlag);
-        waitByTime(1000);
-        if (!empPosition.equalsIgnoreCase("FAA - All All")) {
-            selectOption(TYPE_TEXT, type);
-            enterText(CERTIFICATE_TEXT, certificate);
-            enterText(ISSUED_TEXT, dateIssued);
-            selectOption(RATING_TEXT, rating);
-            report.reportSelenium("INFO", "Entered CREW details and proceeding to click on Save to CrewMember List button");
-
-        }
-        buttonClick(SAVE_TO_CREWMEMBER_LIST_BUTTON);
-        waitByTime(3000);
-
-        if (getDriver().findElements(CREW_LIST_TABLE_FIRST_ROW).size() < 1){
-            return 1;
-        }
-        buttonClick(CREW_LIST_TABLE_FIRST_ROW);
-        buttonClick(SAVE_PARTIAL_LIST_BUTTON);
-        buttonClick(OK_BUTTON);
-        report.reportSelenium("INFO", "Crew Member: " + empNum + " added to the Crewmember Import List and proceeding to click on Import button");
-        buttonClick(IMPORT_BUTTON);
-        waitUntilElementClickable(IMPORT_SUCCESS_MSG);
-        report.reportSelenium("INFO", "Class list successfully imported and proceeding to click on OK button");
-        buttonClick(OK_BUTTON);
-
-
-
-        if (verifyValueFromEditbox(EMP_NUM_ID_TEXT, empNum))
-            report.reportSelenium("INFO", "Crew Member: " + empNum + " created successfully"+stat);
-        else
-            report.reportSelenium("FAIL", "Crew Member creation with: " + empNum + " Failed");
-        return 0;
-    }
 
     public void loadTrainingEventCategory(String event) {
         try {
@@ -584,7 +420,7 @@ public class OqsHome extends BasePage {
 
             printConsole("getDriver().findElement(TRAINING_EVENT_LOADER).getText(): "+getDriver().findElement(TRAINING_EVENT_LOADER).getText());
         }catch(Exception e){
-            e.printStackTrace();
+            loggerOqsHome.error(e);
         }
     }
 

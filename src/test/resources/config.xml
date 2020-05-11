@@ -38,7 +38,7 @@
         <!-- TRiM Login User -->
         <Parameter key="trimLoginUser" value="admin"/>
         <!-- TRiM Login Password -->
-        <Parameter key="trimLoginPassword" value="5d758d6fd8ea5344ae07e5bd1a8ca8587f8196f174a2"/>
+        <Parameter key="trimLoginPassword" value="admin123"/>
 
         <Parameter key="rosaUrl" value="https://rosa-qa.swacorp.com"/>
         <Parameter key="rosaUserid" value="e56235"/>

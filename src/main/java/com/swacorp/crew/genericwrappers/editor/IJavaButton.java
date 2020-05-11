@@ -2,22 +2,22 @@ package com.swacorp.crew.genericwrappers.editor;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
 import org.apache.log4j.Logger;
+import com.hp.lft.sdk.java.Button;
 
-public interface IJavaButton<T extends com.hp.lft.sdk.java.Button> {
+public interface IJavaButton<T extends Button> {
 
-    static final Logger log = Logger.getLogger(IJavaButton.class);
+     default void waitForButtonToVisible(T obj, int timeout) throws GeneralLeanFtException {
+         Logger log = Logger.getLogger(IJavaEditor.class);
+         long t=0;
+         try {
+             do {
+                 Thread.sleep(1);
+                 t++;
+             }while((!obj.exists(1)) && t < timeout);
+         }catch(Exception e){
 
-    default void waitForButtonToVisible(T obj, int timeout) throws GeneralLeanFtException {
-        long t=0;
-        try {
-            do {
-                Thread.sleep(1);
-                t++;
-            }while((!obj.exists()) && t < timeout);
-        }catch(Exception e){
-            log.error("Error in waitForButtonToVisible: "+e);
-        }
-
+             log.error("Error in waitForButtonToVisible: "+e);
+         }
     }
 
 }

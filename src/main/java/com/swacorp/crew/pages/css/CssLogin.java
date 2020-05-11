@@ -3,7 +3,7 @@ package com.swacorp.crew.pages.css;
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.sdk.java.*;
 import com.swacorp.crew.pages.common.WinBasePage;
-import com.swacorp.crew.pages.constants.EnumWaitConstants;
+import com.swacorp.crew.pages.constants.CommonConstants;
 import com.swacorp.crew.sharedrepository.tsr.ObjectRepoCSS;
 import com.swacorp.crew.utils.EnvironmentConstants;
 import com.swacorp.crew.utils.ReportUtil;
@@ -30,14 +30,14 @@ public class CssLogin extends WinBasePage{
         if (!isCssAlradyLogedIn()) {
             new ProcessBuilder("cmd", "/c", EnvironmentConstants.CSSPATH).start();
 
-            waitEditorTillVisible(lftObjects.loginDialog().userNameEditor(), EnumWaitConstants.WaitDuration.TEN.status());
+            waitEditorTillVisible(lftObjects.loginDialog().userNameEditor(), CommonConstants.WAIT_LFT_TEN_SECS);
 
             lftObjects.loginDialog().userNameEditor().setText(EnvironmentConstants.CSSUSERID);
 
             lftObjects.loginDialog().passwordEditor().setText(EnvironmentConstants.CSSPASSWORD);
             lftObjects.loginDialog().loginButton().click();
 
-            waitForJavaWindowTillVisible(lftObjects.CssMainWindow(), EnumWaitConstants.WaitDuration.TEN.status());
+            waitForJavaWindowTillVisible(lftObjects.CssMainWindow(), CommonConstants.WAIT_LFT_TEN_SECS);
 
             if (lftObjects.CssMainWindow().exists()){
                 reportCssLogin.reportLeanFT(lftObjects.CssMainWindow(), "Pass", "Login to CSS is successful.");

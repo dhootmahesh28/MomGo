@@ -9,7 +9,6 @@ import com.hp.lft.sdk.winforms.Editor;
 import com.hp.lft.sdk.winforms.Window;
 import com.swacorp.crew.pages.common.WinBasePage;
 import com.swacorp.crew.sharedrepository.tsr.ObjectRepoTRiM;
-import com.swacorp.crew.utils.ReportStatus;
 import com.swacorp.crew.utils.ReportUtil;
 
 public class TrimAddEmployeeRequirement extends WinBasePage {
@@ -20,7 +19,6 @@ public class TrimAddEmployeeRequirement extends WinBasePage {
     }
     public int addEmployeeRequirement(String empNumbers, String requirementName) throws GeneralLeanFtException {
         int retVal = 1;
-        ReportStatus.reset();
         String requirementsCreatedMsg = empNumbers.split(",").length + " Requirement(s) Created. No Errors.";
         Window winAddEmpRequirement = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().addEmployeeRequirementWindow();
         Editor txtEmployeeNumbersEditor = lftObjects.tRiMTrainingResourceManagerSouthwestWindow().addEmployeeRequirementWindow().txtEmployeeNumbersEditor();

@@ -9,4 +9,7 @@ public final class CommonConstants {
     /**WAIT CONSTANTS*/
     public static final int WAIT_LFT_TEN_SECS = 10;
 
+    //*XPATH CONSTANTS*/
+    public static final String PRECEDING = "/preceding::";
+
 }

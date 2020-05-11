@@ -1,27 +1,25 @@
 package com.swacorp.crew.genericwrappers.editor;
 
 import com.hp.lft.sdk.GeneralLeanFtException;
+import com.swacorp.crew.pages.constants.MessageConstants;
 import org.apache.log4j.Logger;
 
 
 public interface IJavaEditor<T extends com.hp.lft.sdk.java.Editor> {
 
-     final Logger log = Logger.getLogger(IJavaEditor.class);
-     String OBJECT_TYPE = "Type of object: ";
-     String DATA_SUCCESSFULLY_SET = "Data is successfully set into: ";
-     String ERROR_OCCURED_WHILE_SETTING_DATA = "Error occured while setting data ";
-
     default void  setTextInEditBox(T obj, String data) throws GeneralLeanFtException {
+        Logger log = Logger.getLogger(IJavaEditor.class);
         try {
             obj.setText(data);
 
-            log.info(DATA_SUCCESSFULLY_SET +obj.getObjectName()+ OBJECT_TYPE +obj.getClass());
+            log.info(MessageConstants.DATA_IS_SUCCESSFULLY_SET_INTO +obj.getObjectName()+ MessageConstants.OBJECT_TYPE +obj.getClass());
         }catch(Exception e){
-            log.error(ERROR_OCCURED_WHILE_SETTING_DATA +obj.getObjectName()+ OBJECT_TYPE +obj.getClass(), e);
+            log.error(MessageConstants.ERROR_WHILE_SETTING_DATA +obj.getObjectName()+ MessageConstants.OBJECT_TYPE +obj.getClass(), e);
         }
     }
 
     default void waitEditorTillVisible(T obj, int timeout) throws GeneralLeanFtException {
+        Logger log = Logger.getLogger(IJavaEditor.class);
         long t=0;
         try {
             do {

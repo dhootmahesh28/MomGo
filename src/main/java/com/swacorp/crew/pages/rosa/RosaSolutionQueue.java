@@ -292,6 +292,7 @@ public class RosaSolutionQueue extends BasePage {
             trngHM2.put("triptopull", list2);
             masterHM.put(list.get(i),trngHM2);
             TestUtil.setRosaMasterHM(masterHM);
+            RosaDynamicData.readMasterHM();
             getDriver().findElement(By.xpath(xpathId)).click();
             Thread.sleep(4000);
         }

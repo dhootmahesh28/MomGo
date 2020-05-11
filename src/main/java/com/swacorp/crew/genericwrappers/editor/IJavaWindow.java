@@ -6,9 +6,10 @@ import org.apache.log4j.Logger;
 
 public interface IJavaWindow<T extends com.hp.lft.sdk.java.Window> {
 
-     final Logger logger = Logger.getLogger(IJavaWindow.class);
+
 
     default void closeWindowIfExist(T obj, int timeout) throws GeneralLeanFtException {
+        Logger logger = Logger.getLogger(IJavaWindow.class);
         try {
             if (obj.exists(timeout)) {
                 obj.close();
@@ -20,6 +21,7 @@ public interface IJavaWindow<T extends com.hp.lft.sdk.java.Window> {
     }
 
     default void minimiseWindowIfExist(T obj) throws GeneralLeanFtException {
+        Logger logger = Logger.getLogger(IJavaWindow.class);
         try {
             if (obj.exists()) {
                 obj.minimize();
@@ -31,6 +33,7 @@ public interface IJavaWindow<T extends com.hp.lft.sdk.java.Window> {
     }
 
     default void maximizeWindowIfExist(T obj) throws GeneralLeanFtException {
+        Logger logger = Logger.getLogger(IJavaWindow.class);
         try {
             if (obj.exists()) {
                 obj.maximize();
@@ -42,6 +45,7 @@ public interface IJavaWindow<T extends com.hp.lft.sdk.java.Window> {
     }
 
     default void waitForJavaWindowTillVisible(Window obj, int timeout) throws GeneralLeanFtException {
+        Logger logger = Logger.getLogger(IJavaWindow.class);
         long t=0;
         try {
             do {

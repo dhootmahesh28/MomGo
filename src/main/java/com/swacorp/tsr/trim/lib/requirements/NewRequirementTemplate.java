@@ -13,7 +13,6 @@ public class NewRequirementTemplate  extends WinBasePage {
     }
 
     public void createNewRequirementTemplate(String[] testData) throws GeneralLeanFtException {
-    System.out.println("createNewRequirementTemplate ...");
         lftObjects.tRiMTrainingResourceManagerSouthwestWindow().activate();
         lftObjects.tRiMTrainingResourceManagerSouthwestWindow().requirementsWindow().txtRequirementNameEditField().setText(testData[0]);
         lftObjects.tRiMTrainingResourceManagerSouthwestWindow().requirementsWindow().cboReqTypeIDComboBox().select(testData[1]);

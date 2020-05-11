@@ -6,9 +6,10 @@ import org.apache.log4j.Logger;
 import com.hp.lft.sdk.winforms.EditField;
 
 public interface IWinformEditor<T extends EditField> {
-    Logger log = Logger.getLogger(IWinformEditor.class);
+
 
     default void  setTextInEditBox(T obj, String data) throws GeneralLeanFtException {
+        Logger log = Logger.getLogger(IWinformEditor.class);
         try {
             obj.setText(data);
 
@@ -20,6 +21,7 @@ public interface IWinformEditor<T extends EditField> {
     }
 
     default void  waitEditorTillVisible(T obj,long timeout) throws GeneralLeanFtException {
+        Logger log = Logger.getLogger(IWinformEditor.class);
         long t=0;
         try {
 

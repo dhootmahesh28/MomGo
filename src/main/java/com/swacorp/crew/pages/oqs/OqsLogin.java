@@ -77,7 +77,7 @@ public class OqsLogin extends BasePage {
                 loggerOqsLogin.info("Search Button NOT exists on Loginpage..");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            loggerOqsLogin.error(e);
         }
     }
 

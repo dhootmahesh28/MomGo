@@ -18,10 +18,6 @@ public class CssOpenTime extends WinBasePage{
     ReportUtil reportCssHome = new ReportUtil();
     private final Logger loggerCssOpenTime = Logger.getLogger(CssOpenTime.class);
     ObjectRepoCSS lftObjects =null;
-    Map<String, Map<String, ArrayList<String[]>>> masterHM = new LinkedHashMap<>();
-    String rosaempID;
-    ArrayList<String[]> training = new ArrayList<>();
-    ArrayList<String[]>  triptopull = new ArrayList<>();
 
 
     public CssOpenTime()  {
@@ -57,10 +53,10 @@ public class CssOpenTime extends WinBasePage{
             }
         }catch(GeneralLeanFtException e){
             reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Error occured while reading trip details "+e.getMessage());
-            throw new GeneralLeanFtException("Error occured while reading trip details "+e.getMessage());
+            throw new GeneralLeanFtException("Error occured while reading trip details "+e);
         }catch(CloneNotSupportedException ex){
-            loggerCssOpenTime.error(ex.getMessage());
-            throw new CloneNotSupportedException("Error while search the trip details on CM board."+ex.getLocalizedMessage());
+            loggerCssOpenTime.error(ex);
+            throw new CloneNotSupportedException("Error while search the trip details on CM board."+ex);
         }
     }
 
@@ -118,7 +114,7 @@ public class CssOpenTime extends WinBasePage{
     }
 
     public void selectOTfilters(String filter) throws GeneralLeanFtException {
-        readMasterHM();
+
         try {
             if(!(filter.equalsIgnoreCase(""))) {
                 lftObjects.CssMainWindow().openTimeInternalFrame().activate();
@@ -164,45 +160,10 @@ public class CssOpenTime extends WinBasePage{
             }
 
         } catch (Exception e) {
-            loggerCssOpenTime.error("Error :"+e.getMessage());
+            loggerCssOpenTime.error("Error :"+e);
             throw new GeneralLeanFtException("Error while navigating to OT");
          }
 
-
-    }
-
-    private void readMasterHM(){
-        int i=1;
-        try{
-            if((rosaempID == null)){
-                masterHM = TestUtil.getRosaMasterHM();
-                if (masterHM == null){
-                    reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "masterHM is null.");
-                }else {
-
-                    for (Map.Entry<String, Map<String, ArrayList<String[]>>> lstEmpIds : masterHM.entrySet()) {
-                        rosaempID = lstEmpIds.getKey();
-                        Map<String, ArrayList<String[]>> keyEmpId = lstEmpIds.getValue();
-                        training = keyEmpId.get("trng");
-                        triptopull = keyEmpId.get("triptopull");
-
-
-                        if (Integer.compare(i,ApplicationConstantsCss.NUMBER_OF_EMPLOYEE)==1) {
-                            break;
-                        }
-                        i++;
-                    }
-                    if ((rosaempID == null)) {
-                        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "Fail", "Error occured while reading trip details from ROSA in CSS page. rosaempID is null.");
-                    } else {
-                        reportCssHome.reportLeanFT(lftObjects.CssMainWindow(), "info", "ROSA employee details are read in CSS. HashMap size:"+masterHM.size());
-                    }
-                }
-            }
-        }catch(Exception e){
-            reportCssHome.reportLeanFT(lftObjects.CssMainWindow(),"Fail", "Error occured while reading trip details from ROSA in CSS page."+e.getMessage());
-            throw e;
-        }
 
     }
 
