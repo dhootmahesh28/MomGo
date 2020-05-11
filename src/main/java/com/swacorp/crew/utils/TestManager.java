@@ -14,7 +14,6 @@ import com.google.gson.JsonObject;
 import com.hp.lft.sdk.GeneralLeanFtException;
 import com.opencsv.CSVWriter;
 import com.swacorp.crew.pages.common.BasePage;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -24,8 +23,6 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -48,7 +45,7 @@ public class TestManager extends DriverSource {
     public static final String JSON_FILE = "xref.json";
     public static final String FAILED =     "Failed";
     public static final String PASSED =     "Passed";
-    public static List<String[]> testResults = new CopyOnWriteArrayList<String[]>() {
+    public static final List<String[]> testResults = new CopyOnWriteArrayList<String[]>() {
         {
             add(new String[]{"TC ID", "TEST NAME", "STATUS", "TEST TYPE", "E2E TCID", "FAILURE REASON"});
         }
@@ -97,7 +94,7 @@ public class TestManager extends DriverSource {
     @AfterMethod(alwaysRun = true)
     public void tearDown(ITestResult result) throws Exception {
         String screenshotPath;
-        System.out.println("TEAR DOWN ::");
+        LOGGER.info("TEAR DOWN ::");
         ExtentTest test = getExtentTest();
         String failureReason = "";
         String status = null;
@@ -149,13 +146,13 @@ public class TestManager extends DriverSource {
             Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer.exe");
             Runtime.getRuntime().exec("taskkill /F /IM iexplore.exe");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
         //The belo code is inherited from the LeanFt BaseTest
         try {
             suiteSetup();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
 
         dataProperties = new Properties();
@@ -183,7 +180,6 @@ public class TestManager extends DriverSource {
     @AfterSuite(alwaysRun = true)
     public void AfterSuite() throws GeneralLeanFtException{
         clearExtentTest();
-        //new WinBasePage().flushObjects();
     }
     public void clearExtentTest() {
         try {
@@ -199,42 +195,18 @@ public class TestManager extends DriverSource {
                 ResultUploadToALM resultUploadToALM = new ResultUploadToALM();
                 resultUploadToALM.uploadResultToALM(almIntegration);
             }catch(Exception e){
-                e.printStackTrace();
+                LOGGER.error(e);
             }finally {
                 try {
-                    //suiteTearDown();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOGGER.error(e);
                 }
             }
-//            copyResults();
         }
     }
 
     public static String getTestData(String propertyName) {
         return dataProperties.getProperty(propertyName);
-    }
-
-    public void copyResults() {
-        String destinationDir = "";
-        try {
-            String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-            destinationDir = "//qsvmnas03/QMOAutomationTestResults/Mosaic/Release18/CertCycle7/TestNG/" + System.getProperty("includedGroups") + "/" + timeStamp + "/extent-reports";
-            File logFile = new File(System.getProperty("user.dir") + "/build/log.out");
-
-            String sourceDir = System.getProperty("user.dir") + "/build/extent-reports";
-            File destDir = new File(destinationDir);
-            File srcDir = new File(sourceDir);
-
-            FileUtils.copyFileToDirectory(logFile,destDir);
-            FileUtils.copyDirectory(srcDir, destDir);
-
-            System.out.println("Results are copied from location " + sourceDir.replace('/', '\\'));
-            System.out.println("Results are copied to location " + destinationDir.replace('/', '\\'));
-        } catch (Exception e) {
-            LOGGER.error("Exception occurred while moving results to shared drive : " + destinationDir + " with exception " + e);
-            Assert.assertTrue(false, "Exception occurred while moving results to shared drive : " + destinationDir);
-        }
     }
 
     public void captureResult(ExtentTest test, String testStatus, String failureReason) {
@@ -282,13 +254,13 @@ public class TestManager extends DriverSource {
     void createXREFJson() {
         JsonArray testCasesArray = new JsonArray();
         for (String[] testcase : testResults) {
-            if (testcase[2] == PASSED) {
+            if (testcase[2].equalsIgnoreCase(PASSED)) {
                 JsonObject testCaseObject = new JsonObject();
                 testCaseObject.addProperty("name", "CRW_" + testcase[0] + "_" + testcase[1].split("_")[1]);
                 testCaseObject.addProperty("pending", false);
                 testCaseObject.addProperty("passed", true);
                 testCasesArray.add(testCaseObject);
-            } else if(testcase[2] == FAILED){
+            } else if(testcase[2].equalsIgnoreCase(FAILED)){
                 JsonObject testCaseObject = new JsonObject();
                 testCaseObject.addProperty("name", "CRW_" + testcase[0] + "_" + testcase[1].split("_")[1]);
                 testCaseObject.addProperty("pending", false);
