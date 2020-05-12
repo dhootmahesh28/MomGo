@@ -35,7 +35,7 @@ public class TestManager extends DriverSource {
 
     ExtentAppend ext = new ExtentAppend();
     public ExtentReports extent = ext.getExtentInstance();
-    public final static Logger loggerTestManager = Logger.getLogger(TestManager.class);
+    public static final Logger loggerTestManager = Logger.getLogger(TestManager.class);
     BasePage basePage = new BasePage();
     ReportUtil report = new ReportUtil();
     public static String jbehavePath;

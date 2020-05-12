@@ -12,15 +12,15 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class TestUtil {
 
-    public static ConcurrentHashMap<Long, WebDriver> driverMap = new ConcurrentHashMap();
-    public static ConcurrentHashMap<Long, WindowsDriver> desktopDriverMap = new ConcurrentHashMap();
-    public static ConcurrentHashMap<Long, ExtentTest> extentTestMap = new ConcurrentHashMap();
-    public static ConcurrentHashMap<String, String> dynamicDataMap = new ConcurrentHashMap();
-    public static ConcurrentHashMap<String, List<String>> dynamicDataArrayMap = new ConcurrentHashMap();
-    public static ConcurrentHashMap<String, Boolean> dynamicBooleanDataMap = new ConcurrentHashMap();
-    public static ConcurrentHashMap<String, Double> dynamicDoubleDataMap = new ConcurrentHashMap();
-    public static ConcurrentHashMap<String, Integer> dynamicIntegerDataMap = new ConcurrentHashMap();
-    public static ConcurrentHashMap<String, String> short2LongMonthMap = new ConcurrentHashMap();
+    public static final ConcurrentHashMap<Long, WebDriver> driverMap = new ConcurrentHashMap();
+    public static final ConcurrentHashMap<Long, WindowsDriver> desktopDriverMap = new ConcurrentHashMap();
+    public static final ConcurrentHashMap<Long, ExtentTest> extentTestMap = new ConcurrentHashMap();
+    public static final ConcurrentHashMap<String, String> dynamicDataMap = new ConcurrentHashMap();
+    public static final ConcurrentHashMap<String, List<String>> dynamicDataArrayMap = new ConcurrentHashMap();
+    public static final ConcurrentHashMap<String, Boolean> dynamicBooleanDataMap = new ConcurrentHashMap();
+    public static final ConcurrentHashMap<String, Double> dynamicDoubleDataMap = new ConcurrentHashMap();
+    public static final ConcurrentHashMap<String, Integer> dynamicIntegerDataMap = new ConcurrentHashMap();
+    public static final ConcurrentHashMap<String, String> short2LongMonthMap = new ConcurrentHashMap();
     static {
         short2LongMonthMap.put("Jan", "Janurary");
         short2LongMonthMap.put("Feb", "February");

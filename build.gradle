@@ -128,6 +128,7 @@ sonarqube {
         systemProperty "ALMCycleId", System.getProperty("ALMCycleId")
         systemProperty "ALMProject", System.getProperty("ALMProject")
         systemProperty "ALMDomain", System.getProperty("ALMDomain")
+        systemProperty "SchedPeriod", System.getProperty("SchedPeriod")
         systemProperty "xrefDirectory", xrefDirectory
         useTestNG() {
 

@@ -1,4 +1,4 @@
-package com.swacorp.tsr.trim;
+package com.swacorp.crew.tests.trim;
 
 import com.swacorp.crew.pages.trim.TrimAddEmployeeRequirement;
 import com.swacorp.crew.pages.trim.TrimAutoPopulate;

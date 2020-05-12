@@ -250,11 +250,11 @@ public class TrimHome extends WinBasePage {
         closeWindowIfExist(lftObjects.tRiMTrainingResourceManagerSouthwestWindow().employeeWindow(),  5);
     }
 
-    public void minimizeMainWindow() throws  GeneralLeanFtException{
+    public void minimizeMainWindow() {
         minimiseWindowIfExist(lftObjects.tRiMTrainingResourceManagerSouthwestWindow());
     }
 
-    public void maximizeMainWindow() throws  GeneralLeanFtException{
+    public void maximizeMainWindow() {
         maximizeWindowIfExist(lftObjects.tRiMTrainingResourceManagerSouthwestWindow());
     }
 

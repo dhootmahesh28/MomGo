@@ -5,7 +5,6 @@ import com.hp.lft.sdk.Keyboard;
 import com.hp.lft.sdk.MouseButton;
 import com.hp.lft.sdk.java.*;
 import com.swacorp.crew.pages.common.WinBasePage;
-import com.swacorp.crew.pages.constants.ApplicationConstantsCss;
 import com.swacorp.crew.pages.rosa.RosaDynamicData;
 import com.swacorp.crew.sharedrepository.tsr.ObjectRepoCSS;
 import com.swacorp.crew.utils.*;
@@ -21,7 +20,7 @@ public class CssCrewMemberBoard extends WinBasePage{
 
     ReportUtil reportCssHome = new ReportUtil();
     private final Logger loggerCMBoard = Logger.getLogger(CssCrewMemberBoard.class);
-    ObjectRepoCSS lftObjects =null;
+    ObjectRepoCSS lftObjects = null;
     boolean searchTripsOnCMBoard = true;
     boolean found = false;
     HashMap<Integer, String[]> detailFromROSA = new HashMap();

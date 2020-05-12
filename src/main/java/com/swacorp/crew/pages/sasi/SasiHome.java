@@ -27,7 +27,7 @@ public class SasiHome extends BasePage {
     private static final By firstAnchorLinq = By.xpath("//a[@title = 'click for detailed crew view'][1]");
     String rosaempID;
 
-    public boolean nonFlyValidate(String[] data) throws ParseException{
+    public boolean nonFlyValidate(String[] data) {
         String countNonFly = "//*[text()='NonflyActivities']//following-sibling::ul";
         String airport      = "//*[text()='NonflyActivities']//following-sibling::ul[PLACEHOLDER]//tbody//*[text()='airportID']//following-sibling::td[2]/a[1]";
         String startDate    = "//*[text()='NonflyActivities']//following-sibling::ul[PLACEHOLDER]//tbody//*[text()='startDateTime']//following-sibling::td[2]" ;

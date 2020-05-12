@@ -191,11 +191,8 @@ public class TestDataProvider {
     @DataProvider(name = "TC184133")
     public static Object[][] TC184133() {
         return new Object[][]{{
-                "Apr2020",
                 "81144,133761,91732,85928",
                 "CQT 2020 - Automation",
-                "description automation",
-                "737",
                 "10",
                 "10"
         }};

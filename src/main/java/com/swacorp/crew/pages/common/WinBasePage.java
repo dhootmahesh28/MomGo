@@ -18,7 +18,6 @@ public class WinBasePage implements IWinformEditor,IWinformComboBox,LeanftGeneri
     ReportUtil report = new ReportUtil();
     public static final Logger loggerWinBasePage = Logger.getLogger(WinBasePage.class);
     private static final int TIMEOUT_SS = 60;
-    public static Window homeWindow;
     public ObjectRepoTRiM trimObjectRepo = null;
     public ObjectRepoCSS cssObjectRepo = null;
 
@@ -31,7 +30,7 @@ public class WinBasePage implements IWinformEditor,IWinformComboBox,LeanftGeneri
                 loggerWinBasePage.error(e);
             }
         }
-        if(trimObjectRepo == null){
+        if (trimObjectRepo == null) {
             loggerWinBasePage.info("Initializing 'CSS Application Model' wrapper instances..");
             try {
                 trimObjectRepo = new ObjectRepoTRiM();
@@ -44,16 +43,6 @@ public class WinBasePage implements IWinformEditor,IWinformComboBox,LeanftGeneri
     public void flushObjects() throws  GeneralLeanFtException{
         if (trimObjectRepo.tRiMTrainingResourceManagerSouthwestWindow().exists()) {
             trimObjectRepo.tRiMTrainingResourceManagerSouthwestWindow().close();
-        }
-    }
-
-    public void isWindowExist(Window window, String title) throws GeneralLeanFtException {
-
-        if(window.exists(TIMEOUT_SS)) {
-            report.reportLeanFT(homeWindow, "pass", window.getWindowTitleRegExp() + " Window Displayed");
-        }
-        else{
-            report.reportNonWeb("error",title + " Window does not exist");
         }
     }
 

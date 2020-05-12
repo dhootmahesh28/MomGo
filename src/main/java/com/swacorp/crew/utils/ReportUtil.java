@@ -5,9 +5,7 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.hp.lft.sdk.TestObject;
 import com.hp.lft.sdk.TopLevelObject;
-import com.hp.lft.sdk.winforms.Window;
 import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.pages.constants.MessageConstants;
 import org.apache.log4j.Logger;
@@ -22,7 +20,7 @@ import java.util.Date;
 
 public class ReportUtil {
     BasePage basePage = new BasePage();
-    public final static Logger LOGGER = Logger.getLogger(ReportUtil.class);
+    public static final Logger LOGGER = Logger.getLogger(ReportUtil.class);
     public ExtentTest extentTest;
     public ExtentAppend extentAppend = new ExtentAppend();
     private static String failedTestPath;

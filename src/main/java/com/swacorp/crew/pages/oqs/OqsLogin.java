@@ -15,8 +15,6 @@ public class OqsLogin extends BasePage {
     ReportUtil report = new ReportUtil();
     private final By xpathUserIdLink = By.xpath("//*[text()='ROSA']");
     private final By xpathSearchButton = By.xpath("//*[@id='crewmemberSearchButtonId']");
-    private String oqsUrl;
-
 
     public void setCompatibilityMode() throws InterruptedException, AWTException {
 
@@ -45,12 +43,10 @@ public class OqsLogin extends BasePage {
     }
 
     public void loginOQS(boolean applyEnterpriseMode) {
+        String oqsUrl = EnvironmentConstants.OQSURL;
         try {
             getDriver().manage().window().maximize();
-            oqsUrl = EnvironmentConstants.OQSURL;
             getDriver().get(oqsUrl);
-
-
             waitUntilElementClickable(xpathUserIdLink);
             waitForElement(xpathUserIdLink);
 
