@@ -5,8 +5,9 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.hp.lft.sdk.winforms.Window;
+import com.hp.lft.sdk.TopLevelObject;
 import com.swacorp.crew.pages.common.BasePage;
+import com.swacorp.crew.pages.constants.MessageConstants;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
@@ -19,39 +20,52 @@ import java.util.Date;
 
 public class ReportUtil {
     BasePage basePage = new BasePage();
-    public final static Logger LOGGER = Logger.getLogger(ReportUtil.class);
+    public static final Logger LOGGER = Logger.getLogger(ReportUtil.class);
     public ExtentTest extentTest;
     public ExtentAppend extentAppend = new ExtentAppend();
+    private static String failedTestPath;
+    private static final String PASS = "PASS_";
+    private static final String FAIL = "FAIL_";
+    private static final String INFO = "INFO_";
+    String msgScreenshotException = "Exception while taking screenshot : ";
 
-    public void reportLeanFT(Window window, String status, String message){
+    public static String getFailedTestPath() {
+        return failedTestPath;
+    }
+
+    public static void setFailedTestPath(String failedTestPath) {
+        ReportUtil.failedTestPath = failedTestPath;
+    }
+
+    public void reportLeanFT(TopLevelObject window, String status, String message){
 
         boolean retryStatus = false;
         int retryCounter = 0;
         int maxRetryCount = 3;
-        ExtentTest extentTest = basePage.getExtentTest();
+        ExtentTest extTest = basePage.getExtentTest();
         do {
             try {
-                if (status.equalsIgnoreCase("info")) {
-                    String screenshotPath = captureLeanFTScreenshot(window, "INFO_" + basePage.randomString(5) + "_");
-                    extentTest.log(Status.INFO, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-                } else if (status.equalsIgnoreCase("error")) {
-                    extentTest.log(Status.ERROR, MarkupHelper.createLabel(message, ExtentColor.AMBER));
-                }else if (status.equalsIgnoreCase("pass")) {
-                    String screenshotPath = captureLeanFTScreenshot(window, "PASS_" + basePage.randomString(5) + "_");
-                    extentTest.log(Status.PASS, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+                if (status.equalsIgnoreCase(MessageConstants.INFO)) {
+                    String screenshotPath = captureLeanFTScreenshot(window, INFO + basePage.randomString(5) + "_");
+                    extTest.log(Status.INFO, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+                } else if (status.equalsIgnoreCase(MessageConstants.ERROR)) {
+                    extTest.log(Status.ERROR, MarkupHelper.createLabel(message, ExtentColor.AMBER));
+                }else if (status.equalsIgnoreCase(MessageConstants.PASSED)) {
+                    String screenshotPath = captureLeanFTScreenshot(window, PASS+ basePage.randomString(5) + "_");
+                    extTest.log(Status.PASS, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
                 }
                 else {
-                    String screenshotPath = captureLeanFTScreenshot(window, "FAIL_" + basePage.randomString(5) + "_");
-                    extentTest.log(Status.FAIL, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+                    String screenshotPath = captureLeanFTScreenshot(window, FAIL+ basePage.randomString(5) + "_");
+                    setFailedTestPath(failedTestPath);
+                    extTest.log(Status.FAIL, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
                     Assert.fail(message, new Throwable());
                 }
                 retryStatus = false;
             } catch (Exception e) {
-                e.printStackTrace();
                 retryStatus = true;
-                LOGGER.error("Report method exception : " + e.getMessage());
+                LOGGER.error("Report method exception : " + e);
                 if (++retryCounter > maxRetryCount) {
-                    Assert.assertTrue(false, "Exception while taking screenshot : " + e.getMessage());
+                    Assert.assertTrue(false, msgScreenshotException + e.getMessage());
                     break;
                 }
             }
@@ -66,28 +80,27 @@ public class ReportUtil {
         extentTest = getExtentTest();
         do {
             try {
-                if (status.equalsIgnoreCase("info")) {
-                    String screenshotPath = extentAppend.takeScreenshot(basePage.getDriver(), "INFO_" + basePage.randomString(5) + "_");
+                if (status.equalsIgnoreCase(MessageConstants.INFO)) {
+                    String screenshotPath = extentAppend.takeScreenshot(basePage.getDriver(), INFO + basePage.randomString(5) + "_");
                     extentTest.log(Status.INFO, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-                } else if (status.equalsIgnoreCase("error")) {
+                } else if (status.equalsIgnoreCase(MessageConstants.ERROR)) {
                     extentTest.log(Status.ERROR, MarkupHelper.createLabel(message, ExtentColor.AMBER));
                     Assert.fail(message, new Throwable());
-                }else if (status.equalsIgnoreCase("pass")) {
-                    String screenshotPath = extentAppend.takeScreenshot(basePage.getDriver(), "PASS_" + basePage.randomString(5) + "_");
+                }else if (status.equalsIgnoreCase(MessageConstants.PASSED)) {
+                    String screenshotPath = extentAppend.takeScreenshot(basePage.getDriver(), PASS + basePage.randomString(5) + "_");
                     extentTest.log(Status.PASS, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
                 }
                 else {
-                    String screenshotPath = extentAppend.takeScreenshot(basePage.getDriver(), "FAIL_" + basePage.randomString(5) + "_");
+                    String screenshotPath = extentAppend.takeScreenshot(basePage.getDriver(), FAIL + basePage.randomString(5) + "_");
                     extentTest.log(Status.FAIL, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
                     softAssert.fail(message, new Throwable());
                 }
                 retryStatus = false;
             } catch (Exception e) {
-                e.printStackTrace();
                 retryStatus = true;
-                LOGGER.error("Report method exception : " + e.getMessage());
+                LOGGER.error("Report method exception : " + e);
                 if (++retryCounter > maxRetryCount) {
-                    Assert.assertTrue(false, "Exception while taking screenshot : " + e.getMessage());
+                    Assert.assertTrue(false, msgScreenshotException + e.getMessage());
                     break;
                 }
             }
@@ -96,22 +109,23 @@ public class ReportUtil {
 
     public void report(String status, String message){
 
-        ExtentTest extentTest = basePage.getExtentTest();
+        ExtentTest extTest = basePage.getExtentTest();
         if (status.equalsIgnoreCase("info")) {
-            extentTest.log(Status.INFO, message);
+            extTest.log(Status.INFO, message);
         } else if (status.equalsIgnoreCase("error")) {
-            extentTest.log(Status.ERROR, MarkupHelper.createLabel(message, ExtentColor.AMBER));
+            extTest.log(Status.ERROR, MarkupHelper.createLabel(message, ExtentColor.AMBER));
         }else if (status.equalsIgnoreCase("pass")) {
-            extentTest.log(Status.PASS, message);
+            extTest.log(Status.PASS, message);
         }
         else {
-            extentTest.log(Status.FAIL, message);
+            extTest.log(Status.FAIL, message);
             Assert.fail(message, new Throwable());
         }
 
     }
 
-    public String captureLeanFTScreenshot(Window window, String screenshotName) {
+
+    public String captureLeanFTScreenshot(TopLevelObject window, String screenshotName) {
         String destination = null;
         String imgPath = null;
         int maxRetryCount = 5;
@@ -129,9 +143,9 @@ public class ReportUtil {
                 LOGGER.info("Screenshot destination : " + destination);
                 return imgPath;
             } catch (Exception e) {
-                LOGGER.error("takeScreenshot Exception : " + e.getMessage());
+                LOGGER.error("takeScreenshot Exception : " + e);
                 if (++retryCounter > maxRetryCount) {
-                    Assert.fail("Exception while taking screenshot : " + e.getMessage());
+                    Assert.fail(msgScreenshotException + e.getMessage());
                     break;
                 }
             }
@@ -152,7 +166,7 @@ public class ReportUtil {
         int maxRetryCount = 3;
         extentTest = getExtentTest();
         do {
-            String screenshotPath = extentAppend.nonWebAppScreenshot("INFO_" + basePage.randomString(5) + "_");
+            String screenshotPath = extentAppend.nonWebAppScreenshot(INFO + basePage.randomString(5) + "_");
             try {
                 if (status.equalsIgnoreCase("info")) {
                     extentTest.log(Status.INFO, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
@@ -165,9 +179,9 @@ public class ReportUtil {
                 retryStatus = false;
             } catch (Exception e) {
                 retryStatus = true;
-                LOGGER.error("Report non web method exception : " + e.getMessage());
+                LOGGER.error("Report non web method exception : " + e);
                 if (++retryCounter > maxRetryCount) {
-                    Assert.assertTrue(false, "Exception while taking screenshot : " + e.getMessage());
+                    Assert.assertTrue(false, msgScreenshotException + e.getMessage());
                     break;
                 }
             }

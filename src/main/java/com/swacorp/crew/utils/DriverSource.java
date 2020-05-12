@@ -1,8 +1,6 @@
 package com.swacorp.crew.utils;
 
-import com.hp.lft.sdk.GeneralLeanFtException;
 import com.hp.lft.unittesting.TestNgUnitTestBase;
-import com.swacorp.crew.sharedrepository.tsr.MainObjectRepoTrim;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -13,78 +11,63 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import com.swacorp.crew.genericwrappers.editor.Editor;
-import com.swacorp.crew.genericwrappers.editor.Button;
-import com.swacorp.crew.wrappers.GenericMethods;
+import com.swacorp.crew.genericwrappers.editor.IWinformEditor;
+import com.swacorp.crew.genericwrappers.editor.IWinformButton;
+import com.swacorp.crew.pages.common.LeanftGenericMethods;
 /**
  * Created by x219949 on 8/14/2018.
  */
-public class DriverSource extends TestNgUnitTestBase {
+public class DriverSource extends TestNgUnitTestBase implements LeanftGenericMethods {
 
-    private final int SET_IMPLICIT_TIMEOUT_MS = 500;
-    private final int SET_SCRIPT_TIMEOUT_SS = 60;
-    private final int SET_PAGE_TIMEOUT_SS = 600;
-    public final static Logger LOGGER = Logger.getLogger(DriverSource.class);
-    private String UserDir;
-    protected MainObjectRepoTrim or = null;
-    protected Editor edt = null;
-    protected Button btn = null;
-    protected GenericMethods genericMethods = null;
-    private boolean initialized = false;
+    private static final int SET_IMPLICIT_TIMEOUT_MS = 500;
+    private static final int SET_SCRIPT_TIMEOUT_SS = 60;
+    private static final int SET_PAGE_TIMEOUT_SS = 600;
+    public static final Logger LOGGER = Logger.getLogger(DriverSource.class);
+    private final String userDir = System.getProperty("user.dir");
 
-    {
-        if(!initialized){
-            edt = new Editor();
-            btn = new Button();
-            genericMethods = new GenericMethods();
-            try {
-                or = new MainObjectRepoTrim();
-            } catch (GeneralLeanFtException e) {
-                e.printStackTrace();
-            }
-            initialized = true;
-        }
-    }
-    
+    protected IWinformEditor edt = null;
+    protected IWinformButton btn = null;
+
     @BeforeMethod(alwaysRun = true)
+    public void initTest(){
+        newDriver();
+    }
+
     public void newDriver() {
         WebDriver driver = null;
         int retryCounter = 0;
         int maxRetryCount = 5;
         String browser = System.getProperty("browser");
-        UserDir = System.getProperty("user.dir");
         do {
             try {
                 if(browser.equalsIgnoreCase("chrome")){
-                    System.setProperty("webdriver.chrome.driver",  UserDir+ "\\src\\main\\resources\\drivers\\chromedriver.exe");
+                    System.setProperty("webdriver.chrome.driver",  userDir+ "\\src\\main\\resources\\drivers\\chromedriver.exe");
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--start-maximized");
-                    options.addArguments("--start-fullscreen");
                     options.addArguments("--disable-extensions");
                     options.addArguments("--test-type");
-                    //options.addArguments("-incognito");
+                    options.addArguments("-incognito");
+                    options.addArguments("--disable-web-security");
+                    options.addArguments("--allow-running-insecure-content");
+
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
-                    capabilities.setCapability("chrome.binary", UserDir + "\\src\\drivers\\chromedriver.exe");
-                    capabilities.setCapability("screen-resolution","1280x1024");
+                    capabilities.setCapability("chrome.binary", userDir + "\\src\\drivers\\chromedriver.exe");
                     capabilities.setCapability(ChromeOptions.CAPABILITY, options);
                     driver = new ChromeDriver(capabilities);
                 }else {
-                    //  if (System.getProperty("os.name").contains("Windows 7"))
-                    System.setProperty("webdriver.ie.driver", UserDir + "\\src\\main\\resources\\drivers\\IEDriverServer.exe");
-                    //  else
-                    //    System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\drivers\\IEDriverServer64.exe");
+                    System.setProperty("webdriver.ie.driver", userDir + "\\src\\main\\resources\\drivers\\IEDriverServer64.exe");
                     InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
+                    internetExplorerOptions.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, "");
                     internetExplorerOptions.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
                     internetExplorerOptions.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-                    internetExplorerOptions.setCapability("requireWindowFocus", true);
+                    internetExplorerOptions.setCapability("nativeEvents", false);
                     driver = new InternetExplorerDriver(internetExplorerOptions);
                     driver.manage().window().maximize();
                 }
@@ -95,8 +78,8 @@ public class DriverSource extends TestNgUnitTestBase {
                 Long threadId = Thread.currentThread().getId();
                 TestUtil.driverMap.put(threadId, driver);
                 break;
-            } catch (WebDriverException e) {
-                LOGGER.error("Webdriver exception : " + e.getMessage());
+            } catch(WebDriverException e) {
+                LOGGER.error("WebDriver Exception"+ e);
                 if (driver != null)
                     driver.quit();
                 if (++retryCounter > maxRetryCount) {
@@ -105,9 +88,6 @@ public class DriverSource extends TestNgUnitTestBase {
                 }
             }
         } while (true);
-
-        //Initialize testdata
-        //initializeTestData("testdata.csv");
     }
 
     public void quitDriver() {
@@ -128,7 +108,6 @@ public class DriverSource extends TestNgUnitTestBase {
     public WebDriver getDriver() {
         Long key = Thread.currentThread().getId();
         return TestUtil.driverMap.get(key);
-        //return null;
     }
 
     @Override
@@ -141,15 +120,15 @@ public class DriverSource extends TestNgUnitTestBase {
         return "LEAN FT";
     }
 
-    private  HashMap<String, HashMap<Integer, HashMap<String, String>>> initializeTestData(String dataFile) {
+    private HashMap<String, HashMap<Integer, HashMap<String, String>>> initializeTestData(String dataFile) {
 
-        TestDataReader TestDataReader = new TestDataReader();
+        TestDataReader testDataReader = new TestDataReader();
         List<String[]> strings = null;
         try {
-            strings = TestDataReader.readFile(UserDir+"\\src\\test\\TestData\\"+dataFile);
+            strings = testDataReader.readFile(userDir+"\\src\\test\\TestData\\"+dataFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
-        return TestDataReader.readTestDataMaster(strings);
+        return testDataReader.readTestDataMaster(strings);
     }
 }
