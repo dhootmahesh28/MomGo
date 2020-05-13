@@ -34,12 +34,6 @@ public class OqsWrapper extends TestUtil {
         oqsHomePage.verifyCrewAddedSuccessfully(true);
     }
 
-    //wrapperMethodOQS  > addCrewmember
-
-
-//wrapperMethodToAddDuplicateEmployeeNrOQS
-    //wrapperMethodToAddDuplicateEmployeeNrOQSOQS
-    //wrapperMethodToAddDuplicateEmployeeNrOQSTRIM
     public void wrapperMethodToAddDuplicateEmployeeNrOQSOQS(String[] testData) throws GeneralLeanFtException{
         empNr = oqsHomePage.addCrewMember(testData, false); // False because we are adding duplicate emp
         oqsHomePage.verifyCrewAddedSuccessfully(false);

@@ -60,5 +60,4 @@ public class ResultUploadToALM {
     private static void setAlmCycleId(String data){
         ProjectProperties.almCycleId = data;
     }
-
 }
