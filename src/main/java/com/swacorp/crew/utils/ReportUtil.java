@@ -56,7 +56,7 @@ public class ReportUtil {
                 }
                 else {
                     String screenshotPath = captureLeanFTScreenshot(window, FAIL+ basePage.randomString(5) + "_");
-                    setFailedTestPath(failedTestPath);
+                    setFailedTestPath(screenshotPath);
                     extTest.log(Status.FAIL, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
                     Assert.fail(message, new Throwable());
                 }
