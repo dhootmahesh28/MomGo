@@ -21,8 +21,8 @@ import java.util.Date;
 public class ReportUtil {
     BasePage basePage = new BasePage();
     public static final Logger LOGGER = Logger.getLogger(ReportUtil.class);
-    public ExtentTest extentTest;
-    public ExtentAppend extentAppend = new ExtentAppend();
+    ExtentTest extentTest;
+    ExtentAppend extentAppend = new ExtentAppend();
     private static String failedTestPath;
     private static final String PASS = "PASS_";
     private static final String FAIL = "FAIL_";

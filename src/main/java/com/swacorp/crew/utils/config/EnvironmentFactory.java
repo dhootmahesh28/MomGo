@@ -20,7 +20,7 @@ public class EnvironmentFactory {
     }
     private static Map<String, Map<String, String>> configMap = new HashMap<String, Map<String, String>>();
     static {
-        XMLStreamReader xsr = null;
+        XMLStreamReader xsr1 = null;
         InputStream paramInputStream = null;
         try {
             configMap.clear();
@@ -32,15 +32,14 @@ public class EnvironmentFactory {
             xif.setProperty(XMLInputFactory.SUPPORT_DTD, false);
             paramInputStream = EnvironmentFactory.class.getClassLoader()
                     .getResourceAsStream("config.xml");
-            xsr = xif.createXMLStreamReader(paramInputStream);
+            xsr1 = xif.createXMLStreamReader(paramInputStream);
 
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             Environments adaptedWrapper = (Environments) unmarshaller
-                    .unmarshal(xsr);
+                    .unmarshal(xsr1);
             List<Environment> envs = adaptedWrapper.getEnvironments();
 
             for (Environment env : envs) {
-
                 if (env != null) {
 
                     Set<Parameter> keyNValues = env.getParam();
@@ -49,7 +48,7 @@ public class EnvironmentFactory {
 
                     if (CollectionUtils.isNotEmpty(keyNValues)) {
 
-                        map = new HashMap<String, String>();
+                        map = new HashMap();
 
                         for (Parameter parameter : keyNValues) {
 
@@ -72,10 +71,10 @@ public class EnvironmentFactory {
         } catch (Exception e) {
             LOGGER.error(e);
         } finally {
-            if (xsr != null || paramInputStream != null) {
+            if (xsr1 != null || paramInputStream != null) {
                 try {
-                    if (xsr != null) {
-                        xsr.close();
+                    if (xsr1 != null) {
+                        xsr1.close();
                     }
 
                     if (paramInputStream != null) {

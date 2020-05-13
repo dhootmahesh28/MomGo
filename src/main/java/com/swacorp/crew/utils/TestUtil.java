@@ -35,7 +35,7 @@ public class TestUtil {
         short2LongMonthMap.put("Nov", "November");
         short2LongMonthMap.put("Dec", "December");
     }
-    public static Map<String, Map<String, ArrayList<String[]>>> rosaMasterHM = new LinkedHashMap<String, Map<String, ArrayList<String[]>>>();
+    static Map<String, Map<String, ArrayList<String[]>>> rosaMasterHM = new LinkedHashMap<String, Map<String, ArrayList<String[]>>>();
 
     public static Map<String, Map<String, ArrayList<String[]>>> getRosaMasterHM() {
         return rosaMasterHM;
