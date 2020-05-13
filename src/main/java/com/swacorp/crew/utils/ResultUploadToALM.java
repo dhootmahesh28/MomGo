@@ -17,10 +17,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ResultUploadToALM {
-    private Connection connection;
     private DBConnector dbConnector;
-    private String dbPassword;
-    private DBQueryImplementation dbQueryImplementation;
     public static final Logger LOGGER = Logger.getLogger(ResultUploadToALM.class);
 
     public ResultUploadToALM() {
@@ -40,6 +37,9 @@ public class ResultUploadToALM {
     }
 
     public void uploadResults() {
+        Connection connection;
+        String dbPassword;
+        DBQueryImplementation dbQueryImplementation;
         try {
             ProjectProperties.load();
             dbPassword = DecryptPlainPassword.plainPassword(ProjectProperties.dbPassKey, ProjectProperties.dbEncryptedPassword);
@@ -47,7 +47,7 @@ public class ResultUploadToALM {
             dbQueryImplementation = new DBQueryImplementation(connection);
             String[] cycleID = ProjectProperties.almCycleId.split(",");
             for (int i = 0; i < cycleID.length; i++) {
-                ProjectProperties.almCycleId = cycleID[i];
+                setAlmCycleId(cycleID[i]);
                 dbQueryImplementation.uploadJBehaveResultsToDB();
             }
         } catch (ParseException | ClassNotFoundException | NoSuchAlgorithmException | BadPaddingException | InvalidKeyException | SQLException | NoSuchPaddingException | IOException | IllegalBlockSizeException e) {
@@ -55,6 +55,10 @@ public class ResultUploadToALM {
         } finally {
             dbConnector.close();
         }
+    }
+
+    private static void setAlmCycleId(String data){
+        ProjectProperties.almCycleId = data;
     }
 
 }
