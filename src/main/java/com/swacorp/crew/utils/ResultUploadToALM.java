@@ -4,6 +4,7 @@ import com.swacorp.decryptpassword.DecryptPlainPassword;
 import com.swacorp.util.dbutil.DBConnector;
 import com.swacorp.util.dbutil.DBQueryImplementation;
 import com.swacorp.util.properties.ProjectProperties;
+import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
 
 import javax.crypto.BadPaddingException;
@@ -20,20 +21,21 @@ public class ResultUploadToALM {
     private DBConnector dbConnector;
     private String dbPassword;
     private DBQueryImplementation dbQueryImplementation;
+    public static final Logger LOGGER = Logger.getLogger(ResultUploadToALM.class);
 
     public ResultUploadToALM() {
         dbConnector = new DBConnector();
     }
 
     public void uploadResultToALM(String uploadResultstoDB) {
-        System.out.println("::::::Ready to upload Test Results to ALM::::::");
+        LOGGER.info("::::::Ready to upload Test Results to ALM::::::");
         ResultUploadToALM resultUploadToALM = new ResultUploadToALM();
         if (uploadResultstoDB != null && ("Yes".equalsIgnoreCase(uploadResultstoDB) || "True".equalsIgnoreCase(uploadResultstoDB))) {
             if (System.getProperty("ALMCycleId") != null) {
                 resultUploadToALM.uploadResults();
-                System.out.println("::::::Test Results uploaded to ALM::::::");
+                LOGGER.info("::::::Test Results uploaded to ALM::::::");
             } else
-                System.err.println("Enter ALMCycle ID to update the automation run results in the respective ALM cycle");
+                LOGGER.error("Enter ALMCycle ID to update the automation run results in the respective ALM cycle");
         }
     }
 
@@ -48,24 +50,8 @@ public class ResultUploadToALM {
                 ProjectProperties.almCycleId = cycleID[i];
                 dbQueryImplementation.uploadJBehaveResultsToDB();
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
+        } catch (ParseException | ClassNotFoundException | NoSuchAlgorithmException | BadPaddingException | InvalidKeyException | SQLException | NoSuchPaddingException | IOException | IllegalBlockSizeException e) {
+            LOGGER.error(e);
         } finally {
             dbConnector.close();
         }

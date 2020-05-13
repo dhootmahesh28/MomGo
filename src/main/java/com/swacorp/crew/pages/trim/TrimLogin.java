@@ -55,20 +55,20 @@ public class TrimLogin extends WinBasePage  {
     private int loginToTrim (String user, String pass)throws  GeneralLeanFtException {
         int returnInt = 1;
         if (user.equalsIgnoreCase("")){
-            user = EnvironmentConstants.TRiMLOGINUSER;
+            user = EnvironmentConstants.TRIMLOGINUSER;
 
 
         }
 
         if (pass.equalsIgnoreCase("")){
-            pass = EnvironmentConstants.TRiMLOGINPASSWORD;
+            pass = EnvironmentConstants.TRIMLOGINPASSWORD;
         }
         try {
             EditField userField = lftObjects.loginToSouthwestWindow().txtUserIDEditField();
             EditField paswordField = lftObjects.loginToSouthwestWindow().txtPasswordEditField();
             Button loginButton = lftObjects.loginToSouthwestWindow().btnLoginButton();
 
-            new ProcessBuilder(EnvironmentConstants.TRiMAPPPATH).start();
+            new ProcessBuilder(EnvironmentConstants.TRIMAPPPATH).start();
             highlight(lftObjects.loginToSouthwestWindow());
             setTextInEditBox(userField,user );
             setTextInEditBox(paswordField, pass);

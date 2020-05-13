@@ -21,7 +21,7 @@ public class TrimWrapper extends TestUtil {
     }
 
     public void selectFromTrimDueEmployeeSchdPlannerDropdown(String dropdownValue) throws GeneralLeanFtException{
-        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
+        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRIMLOGINUSER, EnvironmentConstants.TRIMLOGINPASSWORD);
         trimHomePageAM.selectMenuFromBottomMenu("^D",dropdownValue);
     }
 
@@ -33,7 +33,7 @@ public class TrimWrapper extends TestUtil {
 
     //wrapperMethodToAddDuplicateEmployeeNrOQSTRIM
     public void employeeSearch(boolean visibility, boolean verifyActivechkbox) throws GeneralLeanFtException, InterruptedException {
-        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
+        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRIMLOGINUSER, EnvironmentConstants.TRIMLOGINPASSWORD);
         trimLoginPage.verifyLoginSuccessful(true);
         trimHomePageAM.navigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
         empNr = getDynamicData("EmpNumber");
@@ -46,7 +46,7 @@ public class TrimWrapper extends TestUtil {
      * method call: selectEquipmentAndPrimaryStatus("737", "First Officer")
      * method return: void*/
     public void selectEquipmentAndPrimaryStatus(String equipments, String primaryStatus) throws GeneralLeanFtException, InterruptedException {
-        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
+        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRIMLOGINUSER, EnvironmentConstants.TRIMLOGINPASSWORD);
         trimHomePageAM.navigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
         trimHomePageAM.selectEquipmentAndPrimaryStatus(empNr, equipments, primaryStatus);
     }

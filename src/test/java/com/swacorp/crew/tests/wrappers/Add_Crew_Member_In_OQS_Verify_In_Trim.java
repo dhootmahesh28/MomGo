@@ -52,7 +52,7 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         oqsHomePage.verifyCrewAddedSuccessfully(true);
 
         ////Login to Trim
-        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
+        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRIMLOGINUSER, EnvironmentConstants.TRIMLOGINPASSWORD);
 
         //Navigate Main Menu on Trim
         try {
@@ -73,7 +73,7 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
 
     public void selectFromTrimDueEmployeeSchdPlannerDropdown(String dropdownValue) throws GeneralLeanFtException{
         ////Login to Trim
-        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
+        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRIMLOGINUSER, EnvironmentConstants.TRIMLOGINPASSWORD);
         trimHomePageAM.selectMenuFromBottomMenu("^D",dropdownValue);
     }
 
@@ -90,7 +90,7 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         oqsHomePage.verifyCrewAddedSuccessfully(false);
 
         ////Login to Trim
-        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
+        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRIMLOGINUSER, EnvironmentConstants.TRIMLOGINPASSWORD);
 
         //Verify login is successful.
         trimLoginPage.verifyLoginSuccessful(true);
@@ -126,7 +126,7 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         oqsHomePage.editPosition();
 
         //Login to Trim
-        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
+        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRIMLOGINUSER, EnvironmentConstants.TRIMLOGINPASSWORD);
 
         //Verify login is successful.
         trimLoginPage.verifyLoginSuccessful(true);
@@ -147,7 +147,7 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
         trimHomePageAM.minimizeMainWindow();
 
         ////Login to Trim
-        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
+        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRIMLOGINUSER, EnvironmentConstants.TRIMLOGINPASSWORD);
 
         //Verify login is successful.
         trimLoginPage.verifyLoginSuccessful(true);
@@ -204,7 +204,7 @@ public class Add_Crew_Member_In_OQS_Verify_In_Trim extends TestManager {
      * method return: void*/
     public void selectEquipmentAndPrimaryStatus(String equipments, String primaryStatus) throws GeneralLeanFtException{
 
-        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
+        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRIMLOGINUSER, EnvironmentConstants.TRIMLOGINPASSWORD);
         try{
             trimHomePageAM.navigateMenu(ApplicationConstantsTrim.SELECT_EMPLOYEE_MENU);
             trimHomePageAM.selectEquipmentAndPrimaryStatus(empNr, equipments, primaryStatus);
