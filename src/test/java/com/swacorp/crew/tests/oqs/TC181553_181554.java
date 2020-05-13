@@ -46,7 +46,7 @@ public class TC181553_181554 extends TestManager {
         oqsHomePage.editPosition();
 
         //Login to Trim
-        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
+        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRIMLOGINUSER, EnvironmentConstants.TRIMLOGINPASSWORD);
 
         //Navigate Main Menu on Trim
         trimHomePageAM.navigateMenu("^E-->^F");
@@ -63,7 +63,7 @@ public class TC181553_181554 extends TestManager {
         oqsHomePage.addPosition("CAPTAIN-737 All");
 
         ////Login to Trim
-        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRiMLOGINUSER, EnvironmentConstants.TRiMLOGINPASSWORD);
+        trimHomePageAM = trimLoginPage.loginTRiM(EnvironmentConstants.TRIMLOGINUSER, EnvironmentConstants.TRIMLOGINPASSWORD);
 
 
         //Navigate Main Menu on Trim

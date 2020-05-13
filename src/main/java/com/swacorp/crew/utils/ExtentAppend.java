@@ -32,28 +32,26 @@ public class ExtentAppend {
     private static ExtentReports extent;
     private static ExtentHtmlReporter htmlReports;
     private static String extentReportPropertyFile = "src\\test\\resources\\";
-    public final Logger LOGGER = Logger.getLogger(ExtentAppend.class);
+    public static final Logger LOGGER = Logger.getLogger(ExtentAppend.class);
+    public static final String USER_DIR = System.getProperty("user.dir");
 
     public static ExtentReports getExtentInstance() {
         if (extent == null) {
             try {
                 extent = createInstance("extentreport");
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error(e);
             }
         }
         return extent;
 
     }
 
-    public static ExtentReports createInstance(String propname) throws Exception {
+    public static ExtentReports createInstance(String propName) {
         Properties prop = new Properties();
-        InputStream input = null;
-        try {
-            input = new FileInputStream(extentReportPropertyFile + propname + ".properties");
+        try (InputStream input = new FileInputStream(extentReportPropertyFile + propName + ".properties")) {
             // load a properties file
             prop.load(input);
-
             // get the property value and print it out
             String reportpath = prop.getProperty("reportpath");
             String reporttitle = prop.getProperty("reporttitle");
@@ -79,15 +77,7 @@ public class ExtentAppend {
             htmlReports.config().setCSS(cssToHideText);
             extent.setSystemInfo("Environment", environment);
         } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            LOGGER.error(ex);
         }
         return extent;
     }
@@ -102,13 +92,13 @@ public class ExtentAppend {
             File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             try {
                 imgPath = "TestsScreenshots\\" + screenshotName + dateName + ".png";
-                destination = System.getProperty("user.dir") + "\\build\\extent-reports\\" + imgPath;
+                destination = USER_DIR + "\\build\\extent-reports\\" + imgPath;
                 File finalDestination = new File(destination);
                 FileUtils.copyFile(source, finalDestination);
                 LOGGER.info("Screenshot destination : " + destination);
                 return imgPath;
             } catch (IOException e) {
-                LOGGER.error("takeScreenshot Exception : " + e.getMessage());
+                LOGGER.error("takeScreenshot Exception : " + e);
                 if (++retryCounter > maxRetryCount) {
                     Assert.assertTrue(false, "Exception while taking screenshot : " + e.getMessage());
                     break;
@@ -129,7 +119,7 @@ public class ExtentAppend {
         do {
             String dateName = new SimpleDateFormat("yyyyMMddhhmmssSSS").format(new Date());
             imageFileName = screenshotName + dateName + ".png";
-            String directory = System.getProperty("user.dir") + "\\build\\extent-reports\\" + imageFolderName;
+            String directory = USER_DIR + "\\build\\extent-reports\\" + imageFolderName;
             File file = new File(directory);
             if (!file.isDirectory())
                 file.mkdirs();
@@ -141,6 +131,7 @@ public class ExtentAppend {
                 ImageIO.write(bi, "png", destFile);
                 return imageFolderName + "\\" + imageFileName;
             } catch (Exception e) {
+                LOGGER.error(e);
                 retryStatus = true;
                 if (++retryCounter > maxRetryCount) {
                     Assert.assertTrue(false, "Exception while taking screenshot for non web application : " + e.getMessage());
@@ -155,12 +146,13 @@ public class ExtentAppend {
     public static void copyLogoDirectory(){
         String destinationDir = "";
         try {
-            String sourceDir = System.getProperty("user.dir") + "/config/logos";
-            destinationDir = System.getProperty("user.dir") + "/build/extent-reports/logos";
+            String sourceDir = USER_DIR + "/config/logos";
+            destinationDir = USER_DIR + "/build/extent-reports/logos";
             File destDir = new File(destinationDir);
             File srcDir = new File(sourceDir);
             FileUtils.copyDirectory(srcDir, destDir);
         }catch(Exception e){
+            LOGGER.error(e);
             Assert.assertTrue(false, "Exception occurred while moving logos to drive : "+destinationDir);
         }
     }

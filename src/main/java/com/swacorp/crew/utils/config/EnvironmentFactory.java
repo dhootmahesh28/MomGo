@@ -1,8 +1,7 @@
 package com.swacorp.crew.utils.config;
 
-
 import org.apache.commons.collections4.CollectionUtils;
-
+import org.apache.log4j.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLInputFactory;
@@ -12,14 +11,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
-//import org.apache.log4j.Logger;
+
 
 public class EnvironmentFactory {
 
-    //private static Logger log = Logger.getLogger(EnvironmentFactory.class);
-
+    public static final Logger LOGGER = Logger.getLogger(EnvironmentFactory.class);
+    private EnvironmentFactory() {
+    }
     private static Map<String, Map<String, String>> configMap = new HashMap<String, Map<String, String>>();
-
     static {
         XMLStreamReader xsr = null;
         InputStream paramInputStream = null;
@@ -65,16 +64,13 @@ public class EnvironmentFactory {
                     Object obj = configMap.put(env.getName(), map);
 
                     if (obj != null) {
-                        throw new Exception(
-                                "Duplicate environment name in metadata file");
+                        LOGGER.error("Duplicate environment name in metadata file");
                     }
-
                 }
-
             }
 
         } catch (Exception e) {
-            //log.error("Unable to convert environemt.xml to environemnt", e);
+            LOGGER.error(e);
         } finally {
             if (xsr != null || paramInputStream != null) {
                 try {
@@ -85,9 +81,8 @@ public class EnvironmentFactory {
                     if (paramInputStream != null) {
                         paramInputStream.close();
                     }
-                } catch (XMLStreamException e) {
-                    //log.error("Unable to close stream reader", e);
-                } catch (IOException e) {
+                } catch (XMLStreamException | IOException e) {
+                    LOGGER.error(e);
                 }
             }
         }
@@ -99,7 +94,6 @@ public class EnvironmentFactory {
         String env = System.getProperty("test.env");
         Map<String, String> sp = configMap.get(env);
         if (sp == null) {
-//            throw new Exception("Not valid environment");
             assert false;
             return null;
         } else {
@@ -107,21 +101,16 @@ public class EnvironmentFactory {
         }
     }
 
-    public static void reinit(){
+    public static void reinit() {
         configMap.clear();
         XMLStreamReader xsr = null;
-        InputStream paramInputStream = null;
-        try {
+        try (InputStream paramInputStream = new FileInputStream(System.getProperty("user.dir") + "\\src\\test\\resources\\config.xml")) {
             JAXBContext jc = JAXBContext.newInstance(Environments.class);
-
             XMLInputFactory xif = XMLInputFactory.newInstance();
             xif.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES,
                     false);
             xif.setProperty(XMLInputFactory.SUPPORT_DTD, false);
-            //paramInputStream = EnvironmentFactory.class.getClassLoader()
-            //        .getResourceAsStream(System.getProperty("user.dir") + "\\src\\test\\resources\\configtmp.xml");
-            paramInputStream = new FileInputStream(System.getProperty("user.dir") + "\\src\\test\\resources\\config.xml");
-                    xsr = xif.createXMLStreamReader(paramInputStream);
+            xsr = xif.createXMLStreamReader(paramInputStream);
 
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             Environments adaptedWrapper = (Environments) unmarshaller
@@ -143,7 +132,9 @@ public class EnvironmentFactory {
                         for (Parameter parameter : keyNValues) {
 
                             if (parameter != null) {
-                                if (parameter.getKey().contains("configSpecialistUserID")) {System.out.println("Reinit Printing===" + parameter.getKey() + "_" + parameter.getValue());}
+                                if (parameter.getKey().contains("configSpecialistUserID")) {
+                                    LOGGER.info("Reinit Printing===" + parameter.getKey() + "_" + parameter.getValue());
+                                }
                                 map.put(parameter.getKey(),
                                         parameter.getValue());
                             }
@@ -153,33 +144,12 @@ public class EnvironmentFactory {
                     Object obj = configMap.put(env.getName(), map);
 
                     if (obj != null) {
-                        throw new Exception(
-                                "Duplicate environment name in metadata file");
+                        LOGGER.info("Duplicate environment name in metadata file");
                     }
-
                 }
-
             }
-
         } catch (Exception e) {
-            //log.error("Unable to convert environemt.xml to environemnt", e);
-        } finally {
-            if (xsr != null || paramInputStream != null) {
-                try {
-                    if (xsr != null) {
-                        xsr.close();
-                    }
-
-                    if (paramInputStream != null) {
-                        paramInputStream.close();
-                    }
-                } catch (XMLStreamException e) {
-                    //log.error("Unable to close stream reader", e);
-                } catch (IOException e) {
-                }
-            }
+            LOGGER.error(e);
         }
-
     }
-
 }

@@ -9,10 +9,10 @@ import javax.xml.bind.annotation.XmlType;
 public class Parameter {
 
     private String key;
-
     private String value;
 
     public Parameter() {
+        // default implementation ignored
     }
 
     @XmlAttribute(name = "key")
