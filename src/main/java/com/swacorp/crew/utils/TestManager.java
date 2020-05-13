@@ -34,19 +34,18 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class TestManager extends DriverSource {
 
     ExtentAppend ext = new ExtentAppend();
-    public ExtentReports extent = ext.getExtentInstance();
+    ExtentReports extent = ExtentAppend.getExtentInstance();
     public static final Logger loggerTestManager = Logger.getLogger(TestManager.class);
     BasePage basePage = new BasePage();
     ReportUtil report = new ReportUtil();
-    public static String jbehavePath;
+    String jbehavePath;
     public static final String JSON_FILE = "xref.json";
     public static final String FAILED =     "Failed";
     public static final String PASSED =     "Passed";
-    public static final List<String[]> testResults = new CopyOnWriteArrayList<String[]>() {
-        {
-            add(new String[]{"TC ID", "TEST NAME", "STATUS", "TEST TYPE", "E2E TCID", "FAILURE REASON"});
-        }
-    };
+    public static final List<String[]> testResults = new CopyOnWriteArrayList();
+    static {
+        testResults.add(new String[]{"TC ID", "TEST NAME", "STATUS", "TEST TYPE", "E2E TCID", "FAILURE REASON"});
+    }
 
 
     public ExtentTest getExtentTest() {
@@ -218,13 +217,13 @@ public class TestManager extends DriverSource {
         }
     }
 
-    public void generateCsvResult() throws Exception {
+    public void generateCsvResult() throws IOException {
         try {
             CSVWriter csvWriter = new CSVWriter(new FileWriter("build\\extent-reports\\result.csv"));
             csvWriter.writeAll(testResults);
             csvWriter.close();
         } catch (IOException e) {
-            loggerTestManager.error(e.getSuppressed());
+            loggerTestManager.error(e);
             throw new IOException("Unable to create a csv file : "+e);
         }
     }

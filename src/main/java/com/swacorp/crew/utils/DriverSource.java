@@ -119,16 +119,4 @@ public class DriverSource extends TestNgUnitTestBase implements LeanftGenericMet
     protected String getTestName() {
         return "LEAN FT";
     }
-
-    private HashMap<String, HashMap<Integer, HashMap<String, String>>> initializeTestData(String dataFile) {
-
-        TestDataReader testDataReader = new TestDataReader();
-        List<String[]> strings = null;
-        try {
-            strings = testDataReader.readFile(userDir+"\\src\\test\\TestData\\"+dataFile);
-        } catch (IOException e) {
-            LOGGER.error(e);
-        }
-        return testDataReader.readTestDataMaster(strings);
-    }
 }
