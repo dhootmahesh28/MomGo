@@ -34,18 +34,18 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class TestManager extends DriverSource {
 
     ExtentAppend ext = new ExtentAppend();
-    public ExtentReports extent = ExtentAppend.getExtentInstance();
+    ExtentReports extent = ExtentAppend.getExtentInstance();
     public static final Logger loggerTestManager = Logger.getLogger(TestManager.class);
     BasePage basePage = new BasePage();
     ReportUtil report = new ReportUtil();
-    public String jbehavePath;
+    String jbehavePath;
     public static final String JSON_FILE = "xref.json";
     public static final String FAILED =     "Failed";
     public static final String PASSED =     "Passed";
     public static final List<String[]> testResults = new CopyOnWriteArrayList();
     static {
         testResults.add(new String[]{"TC ID", "TEST NAME", "STATUS", "TEST TYPE", "E2E TCID", "FAILURE REASON"});
-            }
+    }
 
 
     public ExtentTest getExtentTest() {

@@ -17,7 +17,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ResultUploadToALM {
-
     private DBConnector dbConnector;
     public static final Logger LOGGER = Logger.getLogger(ResultUploadToALM.class);
 
