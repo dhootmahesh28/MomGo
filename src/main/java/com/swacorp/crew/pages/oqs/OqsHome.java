@@ -82,11 +82,6 @@ public class OqsHome extends BasePage {
         String locator;
         //div[(text() = 'FLIGHT TRAINING')]
         locator = XPATH_DIV_TEXT_GENERIC.replace("PLACEHOLDER", trainingEvent);
-        try{
-            Thread.sleep(7000);
-        }catch(Exception e){
-            loggerOqsHome.error(e);
-        }
 
         int i = 1;
         try {
@@ -123,7 +118,7 @@ public class OqsHome extends BasePage {
             Thread.sleep(5000);
             if (getDriver().findElement(By.xpath(locator)).isDisplayed()) {
                 Thread.sleep(2000);
-                if(!enterpriseMode) {
+             if(!enterpriseMode) {
                     getDriver().findElement(By.xpath(locator + xpathEventCheckbox)).click();
                 }else{
                     Thread.sleep(5000);
@@ -152,9 +147,20 @@ public class OqsHome extends BasePage {
                     Actions builder = new Actions(getDriver());
                     builder.moveToElement(element).click(element);
 
-                    Thread.sleep(5000);
-
-                    getDriver().findElements(OK_BUTTON).get(2).click();
+                    builder.moveToElement(getDriver().findElement(Ok_BTN)).click(getDriver().findElement(Ok_BTN));
+                    Robot rob = new Robot();
+                    rob.keyPress(KeyEvent.VK_ENTER);
+                    Thread.sleep(100);
+                    rob.keyRelease(KeyEvent.VK_ENTER);
+                    if(enterpriseMode){
+                        getDriver().findElements(OK_BUTTON).get(2).click();
+                        getDriver().findElements(OK_BUTTON).get(2).click();
+                        getDriver().findElements(OK_BUTTON).get(2).click();
+                    }else{
+                        waitForElement(Ok_BTN);
+                        buttonClickIfExist(Ok_BTN);
+                        handlePopup("ok");
+                    }
 
                 }
                 report.reportSelenium("Pass", "Event selected " + trainingEvent);
@@ -162,13 +168,12 @@ public class OqsHome extends BasePage {
         }catch(Exception e){
             loggerOqsHome.error(e);
         }
-        buttonClickIfExist(Ok_BTN);
-        handlePopup("ok");
     }
 
     public void selectTextThroughXpath(String textLocation){
         try {
             By loc = By.xpath("//*[(text()='"+textLocation+"')]");
+            scrollToElement(getDriver().findElement(loc));
             buttonClickIfExist(loc);
         }catch(Exception e){
             report.reportSelenium("Fail", "Unable to click on  " + "//*[(text()='"+textLocation+"')]");
@@ -190,6 +195,7 @@ public class OqsHome extends BasePage {
                scrollToElement(getDriver().findElement(YES_BUTTON));
                buttonClickIfExist(YES_BUTTON);
                getDriver().findElements(OK_BUTTON).get(2).click();
+               handlePopup("ok");
 
                report.reportSelenium("Pass", "Position edited successfully to: " + position);
           }catch(Exception e){
@@ -337,6 +343,7 @@ public class OqsHome extends BasePage {
 
             report.reportSelenium("INFO", "Class list successfully imported and proceeding to click on OK button");
             buttonClick(OK_BUTTON);
+            handlePopup("ok");
 
             if (verifyValueFromEditbox(EMP_NUM_ID_TEXT, empNum))
                 report.reportSelenium("INFO", ApplicationConstantsOqs.OQS_REPORTING_CREW_MEMBER  + empNum + ApplicationConstantsOqs.OQS_REPORTING_CREW_MEMBER_CREATED);

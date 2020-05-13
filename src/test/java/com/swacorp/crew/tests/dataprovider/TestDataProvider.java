@@ -42,7 +42,7 @@ public class TestDataProvider {
         return new Object[][]{
                 {
                         "FIRST OFFICER - 737 All"
-                        ,"22"
+                        ,"25"
                         , "1"
                         , "TRN"
                         ,"Larry"
@@ -57,11 +57,11 @@ public class TestDataProvider {
                         , "Updated message."
                         , "Add message."
                         , "FIRST OFFICER-717 ALL" //15
-                        , "737 :_Placeholder - CQT " //16. Select in Trim sched Planner dropdown
+                        , "737 :_Placeholder - Initial_AUTOMATION2" //16. Select in Trim sched Planner dropdown
                         , "Recurrent" //17. OQS Training event Type
                         , "MANEUVERS OBSERVATION" //18. Event in OQS
                         , "First Officer" //19. PartialNode in Trim schedule Planing TreeView
-                        , "737 :_Placeholder - Initial_AUTOMATION2" //20. select this to refresh the tree
+                        , "737 :_Placeholder - CQT" //20. select this to refresh the tree  737 :_Placeholder - CQT
                         , "737" //21 Equipment
                         , "737 - First Officer"}
         };
@@ -71,7 +71,7 @@ public class TestDataProvider {
         return new Object[][]{
                 {
                         "FIRST OFFICER - 737 All"
-                        ,"23"
+                        ,"25"
                         , "1"
                         , "TRN"
                         ,"Larry"
@@ -86,11 +86,11 @@ public class TestDataProvider {
                         , "Updated message."
                         , "Add message."
                         , "FIRST OFFICER-717 ALL" //15
-                        , "737 :_Placeholder - CQT " //16. Select in Trim sched Planner dropdown
+                        , "737 :_Placeholder - Initial_AUTOMATION2" //16. Select in Trim sched Planner dropdown
                         , "Recurrent" //17. OQS Training event Type
                         , "MANEUVERS OBSERVATION" //18. Event in OQS
                         , "First Officer" //19. PartialNode in Trim schedule Planing TreeView
-                        , "737 :_Placeholder - Initial_AUTOMATION2" //20. select this to refresh the tree
+                        , "737 :_Placeholder - CQT" //20. select this to refresh the tree
                         , "737" //21 Equipment
                         , "737 - First Officer"}
         };
