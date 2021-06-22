@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: io.rest-assured:xml-path:4.1.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Software/gradle-6.6.1-all/gradle-6.6.1/caches/modules-2/files-2.1/io.rest-assured/xml-path/4.1.2/f83ae38acab4d641250177c5ef5e70ab143989b8/xml-path-4.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../qmo-crew-automation/.gradle/caches/modules-2/files-2.1/io.rest-assured/xml-path/4.1.2/f83ae38acab4d641250177c5ef5e70ab143989b8/xml-path-4.1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Software/gradle-6.6.1-all/gradle-6.6.1/caches/modules-2/files-2.1/io.rest-assured/xml-path/4.1.2/1e834c177e582faf930024a1ed7f19c90a9dff38/xml-path-4.1.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../qmo-crew-automation/.gradle/caches/modules-2/files-2.1/io.rest-assured/xml-path/4.1.2/1e834c177e582faf930024a1ed7f19c90a9dff38/xml-path-4.1.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

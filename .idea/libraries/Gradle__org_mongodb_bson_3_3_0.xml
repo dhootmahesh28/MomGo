@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: org.mongodb:bson:3.3.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Software/gradle-6.6.1-all/gradle-6.6.1/caches/modules-2/files-2.1/org.mongodb/bson/3.3.0/d57b1626e7007a93deb12b2b607e85f6822bf060/bson-3.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../qmo-crew-automation/.gradle/caches/modules-2/files-2.1/org.mongodb/bson/3.3.0/d57b1626e7007a93deb12b2b607e85f6822bf060/bson-3.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Software/gradle-6.6.1-all/gradle-6.6.1/caches/modules-2/files-2.1/org.mongodb/bson/3.3.0/ba02e06324615e53709e981350056749e61c83b7/bson-3.3.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../qmo-crew-automation/.gradle/caches/modules-2/files-2.1/org.mongodb/bson/3.3.0/ba02e06324615e53709e981350056749e61c83b7/bson-3.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

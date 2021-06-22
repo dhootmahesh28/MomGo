@@ -91,6 +91,7 @@ public class EnvironmentFactory {
     public static final String getConfigValue(String key) /*throws Exception */{
 
         String env = System.getProperty("test.env");
+
         Map<String, String> sp = configMap.get(env);
         if (sp == null) {
             assert false;

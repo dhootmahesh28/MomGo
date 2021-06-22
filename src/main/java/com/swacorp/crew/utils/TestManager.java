@@ -4,8 +4,6 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.model.Test;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -13,6 +11,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.opencsv.CSVWriter;
 import com.swacorp.crew.pages.common.BasePage;
+import com.swacorp.crew.pages.constants.AsapConstants;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -103,14 +103,16 @@ public class TestManager extends DriverSource {
                 }else {
                     screenshotPath = ext.takeScreenshot(getDriver(), result.getName());
                 }
-                test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() +
-                        " Test case FAILED due to below issues:", ExtentColor.RED));
-                test.fail(result.getThrowable());
-                test.log(Status.FAIL, "Snapshot when exception occur: ",
+                test.fail(basePage.setFontColor(result.getName() + " Test case FAILED due to issue : " + failureReason, "red"));
+
+                loggerTestManager.info(result.getThrowable());
+                test.log(Status.FAIL, basePage.setFontColor("Snapshot when exception occur: ", "black"),
                         MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+                test.fail(FAILED);
             } else if (result.getStatus() == ITestResult.SUCCESS) {
                 status = PASSED;
                 test.pass(PASSED);
+                loggerTestManager.info("Test case passed");
             } else if (result.getStatus() == ITestResult.SKIP) {
                 status = "Skipped";
                 failureReason = result.getThrowable().getMessage();
@@ -142,13 +144,11 @@ public class TestManager extends DriverSource {
         try {
             Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer.exe");
             Runtime.getRuntime().exec("taskkill /F /IM iexplore.exe");
+            File file = new File(AsapConstants.DOWNLOAD_PATH);
+            if(file.isDirectory())
+                FileUtils.cleanDirectory(file);
+            file.mkdirs();
         } catch (IOException e) {
-            loggerTestManager.error(e);
-        }
-        //The belo code is inherited from the LeanFt BaseTest
-        try {
-            suiteSetup();
-        } catch (Exception e) {
             loggerTestManager.error(e);
         }
     }
@@ -178,8 +178,6 @@ public class TestManager extends DriverSource {
             try {
                 String almIntegration = System.getProperty("uploadResultsToALM");
                 createXREFJson();
-                ResultUploadToALM resultUploadToALM = new ResultUploadToALM();
-                resultUploadToALM.uploadResultToALM(almIntegration);
             }catch(Exception e){
                 loggerTestManager.error(e);
             }

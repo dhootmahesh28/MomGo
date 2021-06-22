@@ -23,16 +23,18 @@ apply plugin: 'eclipse'
 apply plugin: 'groovy'
 apply plugin: 'java'
 
+/*tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+        events "started", "skipped", "passed", "failed"
+        showStandardStreams true
+    }
+}*/
+
 group 'qmo-crew-automation'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
-
-//include ':app', ":ApplicationModel"
-//project(':ApplicationModel').projectDir = new File(settingsDir, '../TrimAppModel/appmodels/com/objects/lft/ApplicationModel')
-
-//include ':Dependency'
-//project(':Dependency').projectDir = new File(settingsDir, '../TrimAppModel/appmodels/com/objects/lft/AppModel')
 
 sourceSets {
     main {
@@ -45,17 +47,18 @@ sourceSets {
 repositories {
     mavenCentral()
     mavenLocal()
-    //flatDir {dirs 'C:\\Program Files (x86)\\HPE\\Unified Functional Testing\\SDK\\Java\\'}
     jcenter()
-    maven {url "https://nexus-tools.swacorp.com/MX/content/repositories/public/"}
-    flatDir {dirs 'C:\\LeanFTJars'}
+    //maven {url "https://nexus-tools.swacorp.com/MX/content/repositories/public/"}
+    //maven {url "https://cloud.experitest.com/repo/"}
+    maven {url "https://nexus-tools.swacorp.com/repository/releases/"}
 }
 
 dependencies {
-    //compile files('lib/com.hp.lft.common.jar', 'lib/com.hp.lft.report.jar', 'lib/com.hp.lft.reportbuilder-standalone.jar', 'lib/com.hp.lft.sdk-javadoc.jar', 'lib/com.hp.lft.unittesting.jar', 'lib/com.hp.lft.verifications.jar', 'lib/com.hp.lft.sdk-standalone.jar')
     compile group: 'junit', name: 'junit', version: '4.12'
     testImplementation 'org.hamcrest:hamcrest:2.2'
     compile group: 'org.testng', name: 'testng', version: '6.14.3'
+    //compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+    //compile group: 'com.experitest', name: 'seetest-client', version: "20.10"
     compile group: 'com.aventstack', name: 'extentreports', version: '3.1.5'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.6.0'
     compile group: 'io.appium', name: 'java-client', version: '5.0.0-BETA6'
@@ -63,34 +66,18 @@ dependencies {
         exclude(module: 'selenium-java')
     }
     compile group: 'com.google.guava', name: 'guava', version: '17.0'
-    compile group: 'com.swacorp.qmo', name: 'qmo-alm-restconnector', version: '1.0.10'
-    compile group: 'com.swacorp.qmo', name: 'qmo-cyberark-connector', version: '1.0.9'
+    //compile group: 'com.swacorp.qmo', name: 'qmo-alm-restconnector', version: '1.0.10'
+    //compile group: 'com.swacorp.qmo', name: 'qmo-cyberark-connector', version: '1.0.9'
     compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
     compile group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
     compile group: 'com.opencsv', name: 'opencsv', version: '4.6'
     compile group: 'io.rest-assured', name: 'rest-assured', version: '4.1.2'
-
-    //implementation 'io.appium:java-client:5.0.0-BETA6'
-/*    compile group: 'com.hp.lft', name: 'com.hp.lft.sdk', version: '14.3.0'
-    compile group: 'com.hp.lft', name: 'com.hp.lft.report', version: '14.3.0'
-    compile group: 'com.hp.lft', name: 'com.hp.lft.unittesting', version: '14.3.0'
-    compile group: 'com.hp.lft', name: 'com.hp.lft.verifications', version: '14.3.0'*/
-//    compile 'org.robotframework:robotframework-maven-plugin:1.5.1'
-
-
-
-    compile group: 'com.hp.lft', name: 'com.hp.lft.sdk', version: '14.3.0'
-    compile group: 'com.hp.lft', name: 'com.hp.lft.report', version: '14.3.0'
-    compile group: 'com.hp.lft', name: 'com.hp.lft.unittesting', version: '14.3.0'
-    compile group: 'com.hp.lft', name: 'com.hp.lft.verifications', version: '14.3.0'
-// https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox
     compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.19'
+    // https://mvnrepository.com/artifact/com.microsoft.edge/msedge-selenium-tools-java
+    compile group: 'com.microsoft.edge', name: 'msedge-selenium-tools-java', version: '3.141.0'
 
 
-/*    compile files("C:/Program Files (x86)/HPE/Unified Functional Testing/SDK/Java/com.hp.lft.unittesting.jar")
-    compile files("C:/Program Files (x86)/HPE/Unified Functional Testing/SDK/Java/com.hp.lft.verifications.jar")
-    compile files("C:/Program Files (x86)/HPE/Unified Functional Testing/SDK/Java/com.hp.lft.report.jar")*/
 }
 
 //Sonarqube task to scan the project
@@ -121,6 +108,7 @@ sonarqube {
     def xrefDirectory = System.getProperty("user.dir") + "\\target\\jbehave\\view\\"
     test {
         systemProperty 'test.env', System.getProperty('test.env')
+        systemProperty "role", System.getProperty("role")
         systemProperty 'browser', System.getProperty('browser')
         systemProperty "includedGroups", System.getProperty("includedGroups")
         systemProperty "excludedGroups", System.getProperty("excludedGroups")
@@ -153,7 +141,7 @@ sonarqube {
         //Disable the default groovy html reports since ReportNG is being used
         reports.html.enabled = true
 
-        ignoreFailures = true
+        ignoreFailures = false
     }
 
     clean.doLast {

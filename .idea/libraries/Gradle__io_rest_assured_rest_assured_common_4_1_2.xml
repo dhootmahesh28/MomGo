@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: io.rest-assured:rest-assured-common:4.1.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Software/gradle-6.6.1-all/gradle-6.6.1/caches/modules-2/files-2.1/io.rest-assured/rest-assured-common/4.1.2/7e52da2aeb18d9b177bb4fcd9afa6ae9b1ed22c7/rest-assured-common-4.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../qmo-crew-automation/.gradle/caches/modules-2/files-2.1/io.rest-assured/rest-assured-common/4.1.2/7e52da2aeb18d9b177bb4fcd9afa6ae9b1ed22c7/rest-assured-common-4.1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Software/gradle-6.6.1-all/gradle-6.6.1/caches/modules-2/files-2.1/io.rest-assured/rest-assured-common/4.1.2/2ae025b75ae0da90e082724ae0c2a1cefa01d680/rest-assured-common-4.1.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../qmo-crew-automation/.gradle/caches/modules-2/files-2.1/io.rest-assured/rest-assured-common/4.1.2/2ae025b75ae0da90e082724ae0c2a1cefa01d680/rest-assured-common-4.1.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

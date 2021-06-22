@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="issues">
+    <option name="index">
+      <map>
+        <entry key="/a.dummy">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/fragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/swacorp/crew/pages/GoMOM/GoMOM.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/swacorp/crew/pages/asap/SwaLifeASAPReport.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/swacorp/crew/pages/asap/SwaLifeDPASAPReport.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/swacorp/crew/pages/asap/SwaLifeHome.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/swacorp/crew/pages/asap/SwaLifeLogin.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/swacorp/crew/pages/asap/SwaLifeManagerReport.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/swacorp/crew/pages/common/BasePage.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/swacorp/crew/pages/common/CommonUtils.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/swacorp/crew/pages/constants/GoMomConstants.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/swacorp/crew/utils/EnvironmentConstants.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/GoMom/GoMOM_190556_Validate_GoMom_Report_screens_with_fields_and_submit_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/GoMom/GoMOM_190561_Validate_Special_Customer_Forms_Unaccompanied_Minors_screen_and_fields_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/GoMom/GoMOM_190562_Validate_Special_Customer_Forms_Medical_Emergency_screen_and_fields_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/GoMom/GoMOM_190567_Validate_Unruly_Customer_Additional_Contact_Information_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/GoMom/GoMOM_190569_Validate_Unruly_Customer_Contact_Information_for_Customer_who_may_have_been_injured_by_unruly_Customer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/GoMom/GoMOM_190569_Validate_Unruly_Customer_Contact_Information_for_Customer_who_may_have_been_injured_by_unruly_Customer_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/GoMom/GoMom_190552_Validate_Deleting_Incomplete_GoMom_Report_And_Delete_Button_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/GoMom/GoMom_190570_Admin_MOM_Administration_Validations.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/GoMom/GoMom_190570_Admin_MOM_Administration_Validations_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/GoMom/ME_Draft.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/GoMom/delete.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/DP_Manager_Flow_ERT_Decision_Autoclose_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/DP_Manager_Flow_ERT_Decision_No_Furthur_Action_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/DP_User_Able_Delete_Incomplete_Report_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/DP_User_Create_And_Submit_Report_With_Flight_Specific_No_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/DP_User_Create_And_Submit_Report_With_Flight_Specific_Yes_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/DP_User_able_to_Edit_and_Submit_Incomplete_report_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/FO_Manager_Flow_ERT_Decision_AutoClose_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/FO_Manager_Flow_ERT_Decision_Declined_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/FO_Manager_Flow_ERT_Decision_FAA_Administrative_Action_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/FO_Manager_Flow_ERT_Decision_Hold_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/FO_Manager_Flow_ERT_Decision_Not_Yet_Reviewed_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/FO_User_Delete_Incomplete_Report_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/FO_User_Edit_and_Submit_Incomplete_Report_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/FO_User_Submit_ASAP_Report_Using_Click_Here_Flight_Hyperlink_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/FO_User_Submit_ASAP_Report_Using_Click_Here_No_Flight_Associated_Hyperlink_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/FO_User_Submit_ASAP_Report_Using_Flight_Hyperlink_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/IF_Manager_Flow_ERT_Decision_Not_Yet_Reviewed_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/IF_Manager_Flow_ERT_Decision_Rejected_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/IF_User_Edit_and_Delete_Incomplete_Report_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/IF_User_Submit_ASAP_Report_Using_Click_Here_Flight_Hyperlink_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/IF_User_Submit_ASAP_Report_Using_Click_Here_No_Flight_Associated_Hyperlink_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/IF_User_Submit_ASAP_Report_Using_Flight_Hyperlink_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/MX_Manager_Flow_ERT_Decision_Declined_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/MX_Manager_Flow_ERT_Decision_No_furthur_Action_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/MX_User_Edit_and_Submit_Incomplete_Report_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/MX_User_Submit_ASAP_Report_Using_No_Radio_Button_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/MX_User_Submit_ASAP_Report_Using_Without_Radio_Button_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/com/swacorp/crew/tests/asap/MX_User_Submit_ASAP_Report_Using_Yes_Radio_Button_Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/resources/config.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

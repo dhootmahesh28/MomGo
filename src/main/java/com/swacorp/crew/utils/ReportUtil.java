@@ -5,18 +5,11 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.hp.lft.sdk.TopLevelObject;
 import com.swacorp.crew.pages.common.BasePage;
 import com.swacorp.crew.pages.constants.MessageConstants;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
-
-import javax.imageio.ImageIO;
-import java.awt.image.RenderedImage;
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ReportUtil {
     BasePage basePage = new BasePage();
@@ -37,41 +30,6 @@ public class ReportUtil {
         ReportUtil.failedTestPath = failedTestPath;
     }
 
-    public void reportLeanFT(TopLevelObject window, String status, String message){
-
-        boolean retryStatus = false;
-        int retryCounter = 0;
-        int maxRetryCount = 3;
-        ExtentTest extTest = basePage.getExtentTest();
-        do {
-            try {
-                if (status.equalsIgnoreCase(MessageConstants.INFO)) {
-                    String screenshotPath = captureLeanFTScreenshot(window, INFO + basePage.randomString(5) + "_");
-                    extTest.log(Status.INFO, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-                } else if (status.equalsIgnoreCase(MessageConstants.ERROR)) {
-                    extTest.log(Status.ERROR, MarkupHelper.createLabel(message, ExtentColor.AMBER));
-                }else if (status.equalsIgnoreCase(MessageConstants.PASSED)) {
-                    String screenshotPath = captureLeanFTScreenshot(window, PASS+ basePage.randomString(5) + "_");
-                    extTest.log(Status.PASS, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-                }
-                else {
-                    String screenshotPath = captureLeanFTScreenshot(window, FAIL+ basePage.randomString(5) + "_");
-                    setFailedTestPath(screenshotPath);
-                    extTest.log(Status.FAIL, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-                    Assert.fail(message, new Throwable());
-                }
-                retryStatus = false;
-            } catch (Exception e) {
-                retryStatus = true;
-                LOGGER.error("Report method exception : " + e);
-                if (++retryCounter > maxRetryCount) {
-                    Assert.assertTrue(false, msgScreenshotException + e.getMessage());
-                    break;
-                }
-            }
-        } while (retryStatus);
-    }
-
     public void reportSelenium(String status, String message) {
         SoftAssert softAssert = new SoftAssert();
         boolean retryStatus = false;
@@ -81,19 +39,25 @@ public class ReportUtil {
         do {
             try {
                 if (status.equalsIgnoreCase(MessageConstants.INFO)) {
+                    message = basePage.setFontColor(message, "black");
                     String screenshotPath = extentAppend.takeScreenshot(basePage.getDriver(), INFO + basePage.randomString(5) + "_");
                     extentTest.log(Status.INFO, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
                 } else if (status.equalsIgnoreCase(MessageConstants.ERROR)) {
+                    message = basePage.setFontColor(message, "red");
                     extentTest.log(Status.ERROR, MarkupHelper.createLabel(message, ExtentColor.AMBER));
-                    Assert.fail(message, new Throwable());
+                    softAssert.fail(message, new Throwable());
+                    softAssert.assertAll();
                 }else if (status.equalsIgnoreCase(MessageConstants.PASSED)) {
+                    message = basePage.setFontColor(message, "green");
                     String screenshotPath = extentAppend.takeScreenshot(basePage.getDriver(), PASS + basePage.randomString(5) + "_");
                     extentTest.log(Status.PASS, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
                 }
                 else {
+                    message = basePage.setFontColor(message, "red");
                     String screenshotPath = extentAppend.takeScreenshot(basePage.getDriver(), FAIL + basePage.randomString(5) + "_");
                     extentTest.log(Status.FAIL, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
                     softAssert.fail(message, new Throwable());
+                    softAssert.assertAll();
                 }
                 retryStatus = false;
             } catch (Exception e) {
@@ -122,37 +86,6 @@ public class ReportUtil {
             Assert.fail(message, new Throwable());
         }
 
-    }
-
-
-    public String captureLeanFTScreenshot(TopLevelObject window, String screenshotName) {
-        String destination = null;
-        String imgPath = null;
-        int maxRetryCount = 5;
-        int retryCounter = 0;
-
-        String dateName = new SimpleDateFormat("yyyyMMddhhmmssSSS").format(new Date());
-        while (retryCounter < maxRetryCount){
-            try {
-                RenderedImage img = window.getSnapshot();
-                imgPath = "LeanFTScreenshots\\" + screenshotName + dateName + ".png";
-                destination = System.getProperty("user.dir") + "\\build\\extent-reports\\" + imgPath;
-                File finalDestination = new File(destination);
-                finalDestination.getParentFile().mkdir();
-                ImageIO.write(img, "png", finalDestination);
-                LOGGER.info("Screenshot destination : " + destination);
-                return imgPath;
-            } catch (Exception e) {
-                LOGGER.error("takeScreenshot Exception : " + e);
-                if (++retryCounter > maxRetryCount) {
-                    Assert.fail(msgScreenshotException + e.getMessage());
-                    break;
-                }
-            }
-        }
-
-        LOGGER.info("Destination after exception: " + destination);
-        return imgPath;
     }
 
     public ExtentTest getExtentTest() {

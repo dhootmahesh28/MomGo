@@ -2,55 +2,123 @@
 
 <Environments>
 
+    <Environment name="DEV2">
+        <Parameter key="fssrURL" value="https://southwestairlinesafety.my.salesforce.com/"/>
+        <Parameter key="fssrLoginUser" value="anup.pandit@wnco.com"/>
+        <Parameter key="fssrPassword" value="Acp#2135"/>
+    </Environment>
     <Environment name="DEV">
+        <Parameter key="fssrURL" value="https://southwestairlinesafety--dev.lightning.force.com/"/>
+        <Parameter key="fssrLoginUser" value="anup.pandit@wnco.com.dev"/>
+        <Parameter key="fssrPassword" value="Acp@2135"/>
+    </Environment>
 
-        <!-- OQS Url -->
-        <Parameter key="oqsUrl" value="https://xldcrewt03.swacorp.com:13003/oqs-record-keeping-ui/login.do?dept=01"/>
-        <!-- OQS Login User-->
-        <Parameter key="oqsLoginUser" value="72451"/>
+    <Environment name="QA-FO">
+        <Parameter key="swalifeURL" value="https://swalifeqa.com/"/>
+        <Parameter key="swaLifeUser" value="e91083"/>
+        <Parameter key="swaLifeManager" value="e97729"/>
+        <Parameter key="swaLifePassword" value="1Sat1111"/>
+        <Parameter key="swaLifeManagerUID" value="ut"/>
+        <Parameter key="swaLifeManagerPassword" value="demo"/>
+        <Parameter key="asapReportLinkPath" value="wps/portal/swalife/mywork/flightops/forms/asap2"/>
+        <Parameter key="asapManagerReportLinkPath" value="wps/portal/swalife/mywork/flightops/forms/asap/manager"/>
+    </Environment>
+    <Environment name="DEV-FO">
+        <Parameter key="swalifeURL" value="https://www.swalifedev.com/wps/myportal/swalife/mywork/flightops/forms/asap2"/>
+        <Parameter key="swaLifeUser" value="e91083"/>
+        <Parameter key="swaLifeManager" value="e97729"/>
+        <Parameter key="swaLifePassword" value="1Dev1111"/>
+        <Parameter key="swaLifeManagerUID" value="ut"/>
+        <Parameter key="swaLifeManagerPassword" value="demo"/>
+        <Parameter key="asapReportLinkPath" value=""/>
+        <Parameter key="asapManagerReportLinkPath" value="wps/portal/swalife/mywork/flightops/forms/asap/manager"/>
+    </Environment>
 
-        <!-- TRiM Application Path -->
-        <Parameter key="trimAppPath" value="C:\Program Files (x86)\North Orca\TRiM\TRiM.exe"/>
-        <!-- TRiM Login User -->
-        <Parameter key="trimLoginUser" value="admin"/>
-        <!-- TRiM Login Password -->
-        <Parameter key="trimLoginPassword" value="5d758d6fd8ea5344ae07e5bd1a8ca8587f8196f174a2"/>
+    <Environment name="QA-IF">
+        <Parameter key="swalifeURL" value="https://swalifeqa.com/"/>
+        <Parameter key="swaLifeUser" value="e11343"/>
+        <Parameter key="swaLifeManager" value="e131308"/>
+        <Parameter key="swaLifePassword" value="1Sat1111"/>
+        <Parameter key="swaLifeManagerUID" value="ut"/>
+        <Parameter key="swaLifeManagerPassword" value="demo"/>
+        <Parameter key="asapReportLinkPath" value="/wps/portal/swalife/mywork/inflight/crewtools/asap/launchasap"/>
+        <Parameter key="asapManagerReportLinkPath" value="wps/portal/swalife/mywork/flightops/forms/asap/manager"/>
+    </Environment>
 
-        <Parameter key="rosaUrl" value="https://apmlogin.cis.qa.swacorp.com/swa_login.htm"/>
-        <Parameter key="rosaUserid" value="e56235"/>
-        <Parameter key="rosaPassword" value="1Sat1111"/>
+    <Environment name="QA-MX">
+        <Parameter key="swalifeURL" value="https://swalifeqa.com/"/>
+        <Parameter key="swaLifeUser" value="e22574"/>
+        <Parameter key="swaLifeManager" value="e85016"/>
+        <Parameter key="swaLifePassword" value="1Sat1111"/>
+        <Parameter key="swaLifeManagerUID" value="ut"/>
+        <Parameter key="swaLifeManagerPassword" value="demo"/>
+        <Parameter key="asapReportLinkPath" value="/wps/portal/swalife/mywork/inflight/crewtools/asap/launchasap"/>
+        <Parameter key="asapManagerReportLinkPath" value="wps/portal/swalife/mywork/flightops/forms/asap/manager"/>
+    </Environment>
 
-        <Parameter key="cssPath" value="C:\\Users\\x257093\\Desktop\\CSSPLT DEV12\\CSSPLT-DEV12.lnk"/>
-        <Parameter key="cssWindowTitle" value="(PLT)CSS Client 21 dev12 - Super User - Default Desktop"/>
-        <Parameter key="cssUserid" value="super"/>
-        <Parameter key="cssPassword" value="test"/>
+    <Environment name="QA-DP">
+        <Parameter key="swalifeURL" value="https://swalifeqa.com/"/>
+        <Parameter key="swaLifeUser" value="e97009"/>
+        <Parameter key="swaLifeManager" value="e49042"/>
+        <Parameter key="swaLifePassword" value="1Sat1111"/>
+        <Parameter key="swaLifeManagerUID" value="ut"/>
+        <Parameter key="swaLifeManagerPassword" value="demo"/>
+        <Parameter key="asapReportLinkPath" value=""/>
+        <Parameter key="asapManagerReportLinkPath" value=""/>
+    </Environment>
+
+    <Environment name="QA-GoMOM">
+        <Parameter key="swalifeURL1" value="https://www14.swalifeqa.com/SwaGoMomEarWeb/momModule/retrieveSearchReportsAction.do?eipUseHeaders=Y"/>
+        <Parameter key="swalifeURL" value="https://www14.swalifeqa.com/SwaGoMomEarWeb/momModule/enterIncompleteReportsAction.do?eipUseHeaders=Y"/>
+        <Parameter key="GoMOMUser" value="x220626"/>
+        <Parameter key="GoMOMAdmin" value="x220626"/>
+        <Parameter key="swaLifePassword" value="1Sat1111"/>
 
     </Environment>
-    <Environment name="QA">
 
-        <!-- OQS Url -->
-        <Parameter key="oqsUrl" value="https://xlqcrewt03.swacorp.com:13003/oqs-record-keeping-ui/login.do?dept=01"/>
-        <!-- OQS Login User-->
-        <Parameter key="oqsLoginUser" value="72451"/>
 
-        <!-- TRiM Application Path -->
-        <Parameter key="trimAppPath" value="C:\Program Files (x86)\North Orca\TRiM\TRiM.exe"/>
-        <!-- TRiM Login User -->
-        <Parameter key="trimLoginUser" value="admin"/>
-        <!-- TRiM Login Password -->
-        <Parameter key="trimLoginPassword" value="admin123"/>
+    <Environment name="QA1-FO">
 
-        <Parameter key="rosaUrl" value="https://rosa-qa.swacorp.com"/>
-        <Parameter key="rosaUserid" value="e56235"/>
-        <Parameter key="rosaPassword" value="1Sat1111"/>
+        <Parameter key="asapFOUserID" value="e91083"/>
+        <Parameter key="asapFOManagerID" value="e91083"/>
+        <Parameter key="asapFOManagerIDSecondary" value="ut"/>
+        <Parameter key="asapFOManagerPWDSecondary" value="demo"/>
+        <Parameter key="asapFOUSERurl" value="https://www.swalifeqa.com/wps/myportal/!ut/p/a0/04_Sj9CPykssy0xPLMnMz0vMAfGjzOIDHL2NPAwtjLzdQw2dDAJNDSy8_IycPMKMTfULsh0VASiphAw!/"/>
+        <Parameter key="asapFOManegerurl" value="https://asap.swalifeqa.com/ASAP-FO/FO-Manager/login.aspx"/>
+        <Parameter key="swaLifePassword" value="1Sat1111"/>
+    </Environment>
 
-        <!--<Parameter key="cssPath" value="C:\CSSPLT SAT02\CSSPLT-AOS SAT02.lnk"/>-->
-        <Parameter key="cssPath" value="C:\Users\x257093\Desktop\CSSPLT SAT - Copy\CSSPLT-SAT.lnk"/>
-        <Parameter key="cssWindowTitle" value="(PLT)CSS Client 36 sat - Super User - Default Desktop"/>
-        <Parameter key="cssUserid" value="e117340"/>
-        <Parameter key="cssPassword" value="1Sat1111"/>
+    <Environment name="QA1-IF">
 
-        <Parameter key="sasiUrl" value="http://xlqsky01:12216/sasi/sasi-paradise.html"/>
+        <Parameter key="asapIFUserID" value="e11343"/>
+        <Parameter key="asapIFManagerID" value="e131308"/>
+        <Parameter key="asapIFManagerIDSecondary" value="ut"/>
+        <Parameter key="asapIFManagerPWDSecondary" value="demo"/>
+        <Parameter key="asapIFUSERurl" value="https://www.swalifeqa.com/wps/myportal/!ut/p/a0/04_Sj9CPykssy0xPLMnMz0vMAfGjzOIDHL2NPAwtjLwNAgMNDAItw5ydfEL8jZyNDfQLsh0VAbOI8Ss!/"/>
+        <Parameter key="asapIFManegerurl" value="https://asap.swalifeqa.com/ASAP-IF/IF-Manager/login.aspx"/>
+        <Parameter key="swaLifePassword" value="1Sat1111"/>
+    </Environment>
+
+    <Environment name="QA1-DP">
+
+        <Parameter key="asapDPUserID" value="e97009"/>
+        <Parameter key="asapDPManagerID" value=" e49042"/>
+        <Parameter key="asapDPManagerIDSecondary" value="ut"/>
+        <Parameter key="asapDPManagerPWDSecondary" value="demo"/>
+        <Parameter key="asapDPUSERurl" value="https://asap.swalifeqa.com/ASAP-DP/DP-User/"/>
+        <Parameter key="asapDPManegerurl" value="https://asap.swalifeqa.com/ASAP-DP/DP-Manager"/>
+        <Parameter key="swaLifePassword" value="1Sat1111"/>
+    </Environment>
+
+    <Environment name="QA1-MX">
+
+        <Parameter key="asapMXUserID" value="e22574"/>
+        <Parameter key="asapMXManagerID" value="e85016"/>
+        <Parameter key="asapMXManagerIDSecondary" value="ut"/>
+        <Parameter key="asapMXManagerPWDSecondary" value="demo"/>
+        <Parameter key="asapMXUSERurl" value="https://asap.swalifeqa.com/ASAP-MX/MX-User/"/>
+        <Parameter key="asapMXManegerurl" value="https://asap.swalifeqa.com/ASAP-MX/MX-Manager"/>
+        <Parameter key="swaLifePassword" value="1Sat1111"/>
     </Environment>
 
 </Environments>

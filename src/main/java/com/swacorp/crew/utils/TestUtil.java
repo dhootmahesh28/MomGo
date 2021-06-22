@@ -13,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class TestUtil {
 
     public static final ConcurrentHashMap<Long, WebDriver> driverMap = new ConcurrentHashMap();
-    public static final ConcurrentHashMap<Long, WindowsDriver> desktopDriverMap = new ConcurrentHashMap();
     public static final ConcurrentHashMap<Long, ExtentTest> extentTestMap = new ConcurrentHashMap();
     public static final ConcurrentHashMap<String, String> dynamicDataMap = new ConcurrentHashMap();
     public static final ConcurrentHashMap<String, List<String>> dynamicDataArrayMap = new ConcurrentHashMap();
@@ -35,16 +34,6 @@ public class TestUtil {
         short2LongMonthMap.put("Nov", "November");
         short2LongMonthMap.put("Dec", "December");
     }
-    static Map<String, Map<String, ArrayList<String[]>>> rosaMasterHM = new LinkedHashMap<String, Map<String, ArrayList<String[]>>>();
-
-    public static Map<String, Map<String, ArrayList<String[]>>> getRosaMasterHM() {
-        return rosaMasterHM;
-    }
-
-    public static void setRosaMasterHM(Map<String, Map<String, ArrayList<String[]>>> rosaMasterHM) {
-        TestUtil.rosaMasterHM = rosaMasterHM;
-    }
-
 
     public void setDynamicData(String varName, String value) {
         Long id = Thread.currentThread().getId();

@@ -4,6 +4,7 @@ import com.swacorp.crew.pages.constants.CommonFormats;
 import org.apache.log4j.Logger;
 
 import java.io.FileWriter;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -110,6 +111,13 @@ public class DateUtil {
     public long getMonthDiff(String fromDate, String toDate, String datePattern) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(datePattern);
         return ChronoUnit.MONTHS.between(LocalDate.parse(fromDate, formatter), LocalDate.parse(toDate, formatter));
+    }
+
+    public String formatDate(String strDate, String strActualFormat, String strReqFormat) throws ParseException {
+        DateFormat format1 = new SimpleDateFormat(strActualFormat);
+        Date dtDate = format1.parse(strDate);
+        DateFormat format2 = new SimpleDateFormat(strReqFormat);
+        return format2.format(dtDate);
     }
 
 }

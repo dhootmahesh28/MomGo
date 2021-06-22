@@ -44,7 +44,6 @@ public class ExtentAppend {
             }
         }
         return extent;
-
     }
 
     public static ExtentReports createInstance(String propName) {
@@ -56,10 +55,15 @@ public class ExtentAppend {
             String reportpath = prop.getProperty("reportpath");
             String reporttitle = prop.getProperty("reporttitle");
             String environment = System.getProperty("test.env");
-            String reportName = prop.getProperty("reportname");
+            String role = System.getProperty("role");
+            if(!role.equalsIgnoreCase("") && !environment.contains("-" + role)){
+                environment = environment + "-" + role;
+                System.setProperty("test.env", environment);
+            }
+            String reportName = prop.getProperty("reportheading") + " " + prop.getProperty("reportname");
             copyLogoDirectory();
 
-            String htmlReportName = "<img src='logos/SwaLogo.png' alt='swaLogo' style='height:100%;width=auto;float:left;padding-right:40px;'/> <span class='label blue darken-3' hspace='35' style='font-size: 130%'>"+reportName+"</span> <span class='label blue darken-3' style='font-size: 100%'>ENV : "+environment+"</span> <img src='logos/MosaicLogo.png' alt='mosaicLogo' style='height:100%;width=auto;float:right;' />";
+            String htmlReportName = "<img src='logos/SwaLogo.png' alt='swaLogo' style='height:100%;width=auto;float:left;padding-right:40px;'/> <span class='label blue darken-3' hspace='35' style='font-size: 130%'>"+reportName+"</span> <span class='label blue darken-3' style='font-size: 100%'>ENV : "+environment+"</span> <img src='logos/SafetyAppLogo.png' alt='safetyLogo' style='height:100%;width=auto;float:right;' />";
             String cssToHideText = "a.brand-logo {display : none;}\n" +
                     "#nav-mobile > li:nth-child(2) > a > span {display : none;}";
 

@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.microsoft.edge:msedge-selenium-tools-java:3.141.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Software/gradle-6.6.1-all/gradle-6.6.1/caches/modules-2/files-2.1/com.microsoft.edge/msedge-selenium-tools-java/3.141.0/9661563afd3ff0e956e7b71ebfbf25fff736e8f4/msedge-selenium-tools-java-3.141.0.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.microsoft.edge/msedge-selenium-tools-java/3.141.0/9661563afd3ff0e956e7b71ebfbf25fff736e8f4/msedge-selenium-tools-java-3.141.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../qmo-crew-automation/.gradle/caches/modules-2/files-2.1/com.microsoft.edge/msedge-selenium-tools-java/3.141.0/9661563afd3ff0e956e7b71ebfbf25fff736e8f4/msedge-selenium-tools-java-3.141.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Software/gradle-6.6.1-all/gradle-6.6.1/caches/modules-2/files-2.1/com.microsoft.edge/msedge-selenium-tools-java/3.141.0/65b4ec2e5c14edfb449e367a3c5ccc685b8d706b/msedge-selenium-tools-java-3.141.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.microsoft.edge/msedge-selenium-tools-java/3.141.0/65b4ec2e5c14edfb449e367a3c5ccc685b8d706b/msedge-selenium-tools-java-3.141.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../qmo-crew-automation/.gradle/caches/modules-2/files-2.1/com.microsoft.edge/msedge-selenium-tools-java/3.141.0/65b4ec2e5c14edfb449e367a3c5ccc685b8d706b/msedge-selenium-tools-java-3.141.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

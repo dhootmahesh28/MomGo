@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: io.rest-assured:rest-assured:4.1.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Software/gradle-6.6.1-all/gradle-6.6.1/caches/modules-2/files-2.1/io.rest-assured/rest-assured/4.1.2/3b4c1e07ab4c82c93c856faabf844f973af8f856/rest-assured-4.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../qmo-crew-automation/.gradle/caches/modules-2/files-2.1/io.rest-assured/rest-assured/4.1.2/3b4c1e07ab4c82c93c856faabf844f973af8f856/rest-assured-4.1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Software/gradle-6.6.1-all/gradle-6.6.1/caches/modules-2/files-2.1/io.rest-assured/rest-assured/4.1.2/2ca0ee9995d7de20c0e3ee6cf5916208ad29fcb9/rest-assured-4.1.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../qmo-crew-automation/.gradle/caches/modules-2/files-2.1/io.rest-assured/rest-assured/4.1.2/2ca0ee9995d7de20c0e3ee6cf5916208ad29fcb9/rest-assured-4.1.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
